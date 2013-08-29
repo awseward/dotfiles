@@ -16,6 +16,6 @@ if [ -f /usr/share/git/completion/git-completion.bash ]; then
     source /usr/share/git/completion/git-completion.bash
 fi
 
-if [ -f source /usr/share/git/git-prompt.sh ]; then
-    source source /usr/share/git/git-prompt.sh
+if [ -f /usr/share/git/git-prompt.sh ]; then
+    source /usr/share/git/git-prompt.sh
 fi
