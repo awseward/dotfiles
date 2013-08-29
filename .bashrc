@@ -109,6 +109,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -f ~/.bash_additions ]; then
-    source ~/.bash_additions
+if [ -f ~/.bash_additions.bash ]; then
+    source ~/.bash_additions.bash
 fi
