@@ -38,4 +38,5 @@ if [ -z "$check_bash_aliases" ]; then
 fi
 
 # source bashrc
-source ~/.bashrc
+cd $HOME
+exec bash
