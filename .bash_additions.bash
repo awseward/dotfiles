@@ -19,3 +19,12 @@ fi
 if [ -f /usr/share/git/git-prompt.sh ]; then
     source /usr/share/git/git-prompt.sh
 fi
+
+### ude
+if [ -f ~/.bash_functions.bash ]; then
+    source ~/.bash_functions.bash
+fi
+
+if [ -f ~/.git-completion.bash ]; then
+    source ~/.git-completion.bash
+fi
