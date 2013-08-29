@@ -3,6 +3,7 @@ export EDITOR='emacs -nw'
 export PATH=$PATH:$HOME/bin
 export capones_dir=$HOME/public_html/cap
 export procore_dir=$HOME/procore
+export current_project_dir=$HOME
 #export PULSE_SERVER=192.168.1.5
 
 export PS1='[\[\e[35m\]\H\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\] \[$(get_gbranch_colorcode)\]$(gbranch_warn_master)\[\e[0m\]]\$ '
@@ -31,8 +32,6 @@ if [ "$(hostname)" = "developer.andrew" ]; then
     export current_project_dir=$procore_dir
 fi
 
-if [ $current_project_dir ]; then
-    if [ -d $current_project_dir ]; then
-        cd $current_project_dir
-    fi
+if [ -d "$current_project_dir" ]; then
+    cd $current_project_dir
 fi
