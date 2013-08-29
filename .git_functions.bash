@@ -77,3 +77,26 @@ git-delete-branch () { # also stolen from grb...
         fi
     fi
 }
+
+### OLD SMELLY ONES
+# LET'S WORK ON GETTING RID OF THESE...
+gbranch () {
+    echo -ne "$(__git_ps1 | sed 's/\ *[()]//g')"
+}
+
+gbranch_warn_master () {
+    current_branch=$(gbranch)
+    [ "$current_branch" == "master" ] && current_branch='CAUTION: '$curr\
+ent_branch
+    echo $current_branch
+}
+
+get_gbranch_colorcode () {
+    color_code=""
+    [ "$(gbranch)" == "master" ] && \
+        color_code=';5;41'
+    [ "$(git diff --name-only 2>/dev/null)" ] && \
+        color_code=";33"$color_code
+    [ "$color_code" ] && \
+        echo -e '\e[1'$color_code'm'
+}
