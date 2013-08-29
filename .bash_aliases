@@ -45,4 +45,4 @@ alias val='valgriend'
 
 ### misc/temporary/pointless
 alias ran='cat /dev/urandom | tr -dc A-Za-z0-9 | fold -w 30 | head -1'
-alias cap='cd $caponesdir'
+alias cap='cd $capones_dir'
