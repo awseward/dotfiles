@@ -5,6 +5,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(column-number-mode t)
+ '(completions-format (quote vertical))
  '(indent-tabs-mode nil)
  '(standard-indent 2)
  '(vc-display-status t)
