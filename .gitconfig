@@ -1,7 +1,6 @@
 [user]
 	name = Andrew Seward
 	email = awswrd@gmail.com
-
 [alias]
         st = status
         ci = commit
