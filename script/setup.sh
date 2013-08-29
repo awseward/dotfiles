@@ -12,19 +12,22 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi"
 
-# create the symlinks, mo
+# start doing stuff
+
+echo -e "\nCreating symlinks in $HOME\n"
+
 for file in "${dotfiles[@]}"; do
-    echo "File: $file"
+    echo "  File: $file"
     # do we need to back up?
     existing=$HOME/$file
     if [ -f $existing ]; then
-        echo -n "  backup: "
+        echo -n "    backup: "
         if [ ! -d $backup_dir ]; then
             mkdir "$backup_dir"
         fi
         mv -v $existing $backup_dir/$file
     fi
-    echo -n "  link: "
+    echo -n "    link: "
     ln -sv $dotfiles_dir/$file $HOME/$file
 done
 
@@ -41,5 +44,4 @@ if [ -z "$check_bash_additions" ]; then
 fi
 
 # source bashrc
-cd $HOME
 echo -e "\nSetup complete: 'source ~/.bashrc' to reset...\n"
