@@ -32,5 +32,7 @@ if [ "$(hostname)" = "developer.andrew" ]; then
 fi
 
 if [ $current_project_dir ]; then
-    cd $current_project_dir
+    if [ -d $current_project_dir ]; then
+        cd $current_project_dir
+    fi
 fi
