@@ -32,6 +32,5 @@
         untracked = cyan
 [core]
 	editor = emacs
-	autocrlf = true
 [diff]
 	algorithm = patience
