@@ -1,17 +1,19 @@
 ### system
+alias c='cd $current_project_dir'
+alias cp='cp -v'
 alias df='df -h'
+alias du='du -h'
 alias g='fgrep -Irisn --color=auto'
 alias e='grep -Irisn --color=auto'
 alias in='hostname -i'
-alias mv='mv -i'
+alias j='jobs'
+alias kj='kill -9 $(jobs -p) 2> /dev/null; jobs'
+alias ln='ln -v'
+alias mkdir='mkdir -v'
+alias mv='mv -iv'
 alias p='ps -a'
-alias p4d='cd $p4ddir'
-alias pro='cd ~/procore/'
 alias reload='source ~/.bashrc'
 alias rm='rm -v'
-alias mv='mv -v'
-alias mkdir='mkdir -v'
-alias cp='cp -v'
 
 ### emacs
 alias em='emacs'
@@ -25,6 +27,7 @@ alias gm='git checkout master; git fetch origin && git pull'
 alias gp='git-push'
 
 ### rails/postgres
+alias kr='killall ruby 2> /dev/null'
 alias mailcatcher="mailcatcher --ip $(in)"
 alias psql='psql -U postgres procore_development'
 alias worker="rake resque:work QUEUE=* &"
@@ -37,7 +40,7 @@ alias off='sudo shutdown -h now && exit'
 
 ### make
 alias m='make clean && make'
-alias c='make clean'
+alias mc='make clean'
 
 ### valgrind
 alias valgrind='valgrind --leak-check=yes '

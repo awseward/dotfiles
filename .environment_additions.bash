@@ -11,7 +11,7 @@ export PS1='[\[\e[35m\]\H\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\] \[$(get_gbranch_color
 if [ "$(hostname)" = "asus-small-debian" ]; then
     # PS1='[\[\e[1;32m\]\@\[\e[0m\] \[\e[35m\]\H\[\e[0m\] \[\e[1;34m\]\W\[\e[0m\] \[$(get_gbranch_colorcode)\]$(gbranch_warn_master)\[\e[0m\]]\$ '
     # PS1='[\[\e[35m\]\H\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\] \[$(get_gbranch_colorcode)\]$(gbranch_warn_master)\[\e[0m\]]\$ '
-    cd $capones_dir
+    export current_project_dir=$capones_dir
 fi
 
 ### pi
@@ -20,7 +20,7 @@ if [ "$(hostname)" = "pi" ]; then
     # PS1=$PS1'\e[36;40m$(__git_ps1 " (%s)")\n\e[m\$ ' # simple but it keeps appending...
     # PS1='['$PS1'\[\e[36m\] \[$(get_gbranch_colorcode)\]$(gbranch)\[\e[36;40m\]\[\e[m\]]\$ '
     # PS1='[\[\e[1;32m\]\@\[\e[0m\] \[\e[35m\]\H\[\e[0m\] \[\e[1;34m\]\W\[\e[0m\] \[$(get_gbranch_colorcode)\]$(gbranch_warn_master)\[\e[0m\]]\$ '
-    cd $capones_dir
+    export current_project_dir=$capones_dir
 fi
 
 ### ude
@@ -28,5 +28,9 @@ if [ "$(hostname)" = "developer.andrew" ]; then
     # PS1='[\[\e[1;32m\]\@\[\e[0m\] \[\e[35m\]\H\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\] \[$(get_gbranch_colorcode)\]$(gbranch_with_warning)\[\e[0m\]]\$ '
     # PS1='\[\e[1;35m\]\u\[\e[0m\]@\[\e[32m\]\H\[\e[0m\]:\[\e[1;34m\]\w\[\e[0m\] \[$(get_gbranch_colorcode)\]$(gbranch_with_warning)\[\e[0m\]\$ '
     export PATH=$PATH:$HOME/.rvm/bin # can't remember why this is here, but there was a reason
-    cd $procore_dir
+    export current_project_dir=$procore_dir
+fi
+
+if [ $current_project_dir ]; then
+    cd $current_project_dir
 fi
