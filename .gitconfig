@@ -1,10 +1,38 @@
 [user]
 	name = Andrew Seward
 	email = awswrd@gmail.com
+
 [alias]
-	st = status
-	co = checkout
+        st = status
+        ci = commit
+        co = checkout
+        br = branch
+        m = !git fetch origin && git checkout master && git pull
+        cl = clean -df
+        di = diff --name-only
+      	create = "!git_create $1"
+        devmerge = "!merge_master_into_dev_and_staging"
 [color]
-	ui = true
+        branch = auto
+        diff = auto
+        interactive = auto
+        status = auto
+        ui = auto
+[color "branch"]
+        current = yellow reverse
+        local = yellow
+        remote = green
+[color "diff"]
+        meta = yellow bold
+        frag = magenta bold
+        old = red bold
+        new = green bold
+[color "status"]
+        added = yellow
+        changed = green
+        untracked = cyan
 [core]
-	autocrlf = input
+	editor = emacs
+	autocrlf = true
+[diff]
+	algorithm = patience
