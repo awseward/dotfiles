@@ -14,16 +14,17 @@ fi"
 
 # create the symlinks, mo
 for file in "${dotfiles[@]}"; do
+    echo "File: $file"
     # do we need to back up?
     existing=$HOME/$file
     if [ -f $existing ]; then
+        echo -n "  backup: "
         if [ ! -d $backup_dir ]; then
-            mkdir -v "$backup_dir"
+            mkdir "$backup_dir"
         fi
-
-        echo "$existing already exists"
         mv -v $existing $backup_dir/$file
     fi
+    echo -n "  link: "
     ln -sv $dotfiles_dir/$file $HOME/$file
 done
 
@@ -41,4 +42,4 @@ fi
 
 # source bashrc
 cd $HOME
-exec bash
+echo -e "\nSetup complete: 'source ~/.bashrc' to reset...\n"
