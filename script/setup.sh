@@ -7,6 +7,10 @@ source_additions="\n\n### Inserted from ~/.dotfiles/script/setup.sh
 if [ -f ~/.bash_additions.bash ]; then
     source ~/.bash_additions.bash
 fi\n"
+alias_additions="\n\n### Inserted from ~/.dotfiles/script/setup.sh
+if [ -f ~/.bash_aliases ]; then
+    source ~/.bash_aliases
+fi\n"
 
 # create a backup directory
 mkdir -v $backup_dir
@@ -22,4 +26,16 @@ for file in "${dotfiles[@]}"; do
 done
 
 # include the bash_additions file in bashrc
-echo -e "$source_additions" >> $HOME/.bashrc
+check_bash_additions=$(fgrep "bash_additions" $HOME/.bashrc)
+if [ -z "$check_bash_additions" ]; then
+    echo -e "$source_additions" >> $HOME/.bashrc
+fi
+
+# make sure the bashrc source ~/.bash_aliases
+check_bash_aliases=$(fgrep ".bash_aliases" $HOME/.bashrc)
+if [ -z "$check_bash_aliases" ]; then
+    echo -e "$alias_additions" >> $HOME/.bashrc
+fi
+
+# source bashrc
+source ~/.bashrc
