@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dotfiles_dir=$(pwd)
-backup_dir="$HOME/.dotfiles_backup.$(date +%Y-%m-%d)"
+backup_dir="$HOME/.dotfiles_backup.$(date +%Y-%m-%d_%X)"
 dotfiles=( $(ls -A --ignore="hosts" --ignore="script" --ignore=".git" --ignore=".ssh" $dotfiles_dir) )
 source_additions="\n\n### Inserted from ~/.dotfiles/script/setup.sh
 if [ -f ~/.bash_additions.bash ]; then
@@ -12,13 +12,15 @@ if [ -f ~/.bash_aliases ]; then
     source ~/.bash_aliases
 fi\n"
 
-# create a backup directory
-mkdir -v $backup_dir
-
 # create the symlinks, mo
 for file in "${dotfiles[@]}"; do
+    # do we need to back up?
     existing=$HOME/$file
     if [ -f $existing ]; then
+        if [ ! -d $backup_dir ]; then
+            mkdir -v $backup_dir
+        fi
+
         echo "$existing already exists"
         mv -v $existing $backup_dir/$file
     fi
