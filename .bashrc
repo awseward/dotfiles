@@ -109,36 +109,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# git stuff...
-source /etc/bash_completion.d/git
-#source ~/.git-prompt.sh
-
-function gbranch () {
-    echo -ne "$(__git_ps1 | sed 's/\ *[()]//g')"
-}
-
-function gbranch_warn_master () {
-    current_branch=$(gbranch)
-    [ "$current_branch" == "master" ] && current_branch='CAUTION: '$current_branch
-    echo $current_branch
-}
-
-function get_gbranch_colorcode () {
-    color_code=""
-    [ "$(gbranch)" == "master" ] && \
-        color_code=';5;41'
-    [ "$(git diff --name-only 2>/dev/null)" ] && \
-        color_code=";33"$color_code
-    [ "$color_code" ] && \
-        echo -e '\e[1'$color_code'm'
-}
-
-if [ -f ~/.git_functions.bash ]; then
-    source ~/.git_functions.bash
+if [ -f ~/.bash_additions ]; then
+    source ~/.bash_additions
 fi
-    
-PATH=$PATH:~/bin/
-#PS1='[\[\e[1;32m\]\@\[\e[0m\] \[\e[35m\]\H\[\e[0m\] \[\e[1;34m\]\W\[\e[0m\] \[$(get_gbranch_colorcode)\]$(gbranch_warn_master)\[\e[0m\]]\$ '
-PS1='[\[\e[35m\]\H\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\] \[$(get_gbranch_colorcode)\]$(gbranch_warn_master)\[\e[0m\]]\$ '
-export EDITOR='emacs'
-caponesdir=~/public_html/cap
