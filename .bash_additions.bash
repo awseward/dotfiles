@@ -1,3 +1,4 @@
+### asus-small-debian
 if [ -f /etc/bash_completion.d/git ]; then
     source /etc/bash_completion.d/git
 fi
@@ -8,4 +9,13 @@ fi
 
 if [ -f ~/.environment_additions.bash ]; then
     source ~/.environment_additions.bash
+fi
+
+### pi
+if [ -f /usr/share/git/completion/git-completion.bash ]; then
+    source /usr/share/git/completion/git-completion.bash
+fi
+
+if [ -f source /usr/share/git/git-prompt.sh ]; then
+    source source /usr/share/git/git-prompt.sh
 fi
