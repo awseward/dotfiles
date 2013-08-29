@@ -14,8 +14,6 @@ alias mkdir='mkdir -v'
 alias cp='cp -v'
 
 ### emacs
-#alias em='emacsclient -a "" -t'
-#alias emacs='emacsclient -a "" -t'
 alias em='emacs'
 alias emacs='emacs -nw'
 
@@ -27,9 +25,9 @@ alias gm='git checkout master; git fetch origin && git pull'
 alias gp='git-push'
 
 ### rails/postgres
-#alias mailcatcher="mailcatcher --ip $(in)"
-#alias psql='psql -U postgres procore_development'
-#alias worker="rake resque:work QUEUE=* &"
+alias mailcatcher="mailcatcher --ip $(in)"
+alias psql='psql -U postgres procore_development'
+alias worker="rake resque:work QUEUE=* &"
 
 ### asus-small two-finger middle click
 alias midclick='synclient TapButton2=2; synclient TapButton3=3'
