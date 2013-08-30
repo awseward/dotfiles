@@ -140,7 +140,8 @@ git-commits-behind () {
 }
 
 git-merge-master-into-all () {
-    branches=( $(git branch | sed 's/\(\ *\|*\|master\)//g') )
+    local starting_branch=$(git-branch)
+    local branches=( $(git branch | sed 's/\(\ *\|*\|master\)//g') )
     git-pull-changes master
     for branch in "${branches[@]}"; do
         echo -e "\e[36m$(git checkout $branch 2>&1)\e[0m"
@@ -154,4 +155,7 @@ git-merge-master-into-all () {
             git-push
         fi
     done
+    if [ $(git-branch) != $starting_branch ]; then
+        git checkout $starting_branch
+    fi
 }
