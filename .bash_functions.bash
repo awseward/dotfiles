@@ -13,9 +13,7 @@ push-dotfile-changes() {
     message="$1"
     if [ -d "$dotfiles_dir" ]; then
         cd $dotfiles_dir
-        git-commit-all $message
+        git-commit-all "$message"
         git-push
     fi
 }
-
-# just a test
