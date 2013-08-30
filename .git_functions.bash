@@ -1,19 +1,3 @@
-### OLD SMELLY ONES
-# LET'S WORK ON GETTING RID OF THESE...
-
-git-branch-colorcode () {
-    color_code=""
-    isMaster && color_code=';4'
-    isDiff && color_code=";33"$color_code
-    if [ "$color_code" ]; then
-        color_code="\e[1"$color_code"m"
-    fi
-    echo -e $color_code
-}
-
-
-### begin normal ones
-
 isGit() {
     git rev-parse 2> /dev/null && return 0
     return 1
@@ -32,6 +16,17 @@ isDiff() {
 git-branch() {
     __git_ps1 | sed -e 's/^.(\(.*\))$/\1/'
 }
+
+git-branch-colorcode () {
+    color_code=""
+    isMaster && color_code=';4'
+    isDiff && color_code=";33"$color_code
+    if [ "$color_code" ]; then
+        color_code="\e[1"$color_code"m"
+    fi
+    echo -e $color_code
+}
+
 
 origin-url-base () {
     if isGit; then
