@@ -112,7 +112,6 @@ git-latest-commit-hash () {
 git-latest-commit () {
     commit=commit
     if [[ "$(git remote -v | grep -m1 'origin')" = *bitbucket* ]]; then
-        echo "BITBUCKET"
         commit="$commit"s
     fi
     echo "$(origin-url-base)/$commit/$(git-latest-commit-hash)"
