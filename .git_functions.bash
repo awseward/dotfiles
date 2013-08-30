@@ -156,6 +156,6 @@ git-merge-master-into-all () {
         fi
     done
     if [ $(git-branch) != $starting_branch ]; then
-        git checkout $starting_branch
+        echo -e "\e[36m$(git checkout $starting_branch 2>&1)\e[0m"
     fi
 }
