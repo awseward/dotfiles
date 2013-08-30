@@ -128,6 +128,23 @@ git-last-n-commit-hashes () {
     git log --pretty=format:"%h" -n $1
 }
 
-git-commits-ahead() {
+git-commits-ahead () {
     git rev-list --count HEAD ^origin/$(git-branch)
+}
+
+git-merge-master-into-all () {
+    branches=( $(git branch | sed 's/\(\ *\|*\|master\)//g') )
+    git-pull-changes master
+    for branch in "${branches[@]}"; do
+        echo -e "\e[36m$(git checkout $branch 2>&1)\e[0m"
+        local needs_master=$(git branch --no-merge | grep "master")
+
+        if [ "$needs_master" ]; then
+            git merge master
+        fi
+
+        if [ $(git-commits-ahead) -ne 0 ]; then
+            git-push
+        fi
+    done
 }

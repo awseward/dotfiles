@@ -23,7 +23,7 @@ alias emacs='emacs -nw'
 alias gb='git-branch'
 alias ghc='git-compare'
 alias ghh='origin-url-base'
-alias gm='git checkout master; git fetch origin && git pull'
+alias gm='git-pull-changes master'
 alias gp='git-push'
 
 ### rails/postgres
