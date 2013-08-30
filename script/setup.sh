@@ -14,10 +14,10 @@ fi"
 
 # start doing stuff
 
-echo -e "\nCreating symlinks in $HOME\n"
+echo -e "\nCreating symlinks in \e[34m$HOME\e[0m\n"
 
 for file in "${dotfiles[@]}"; do
-    echo "  File: $file"
+    echo -e "  \e[4mFile\e[0m: \e[36m$file\e[0m"
     # do we need to back up?
     existing=$HOME/$file
     if [ -f $existing ]; then
@@ -25,10 +25,10 @@ for file in "${dotfiles[@]}"; do
         if [ ! -d $backup_dir ]; then
             mkdir "$backup_dir"
         fi
-        mv -v $existing $backup_dir/$file
+        echo -e "\e[33m$(mv -v $existing $backup_dir/$file)\e[0m"
     fi
     echo -n "    link: "
-    ln -sv $dotfiles_dir/$file $HOME/$file
+    echo -e "\e[32m$(ln -sv $dotfiles_dir/$file $HOME/$file)\e[0m"
 done
 
 # make sure the bashrc source ~/.bash_aliases
@@ -44,4 +44,6 @@ if [ -z "$check_bash_additions" ]; then
 fi
 
 # source bashrc
-echo -e "\nSetup complete: 'source ~/.bashrc' to reset...\n"
+alias reload="source ~/.bashrc"
+echo -e "\nSetup complete"
+echo -e "Run \e[44msource ~/.bashrc\e[0m to reload environment...\n"
