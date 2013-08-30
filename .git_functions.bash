@@ -72,10 +72,13 @@ git-push () {
 
 git-pull-changes () {
     if isGit; then
-        if [ $1 ]; then
+        if [ $1 ] && [ "$1" != $(git-branch) ]; then
             git checkout $1
         fi
-        git fetch origin && git pull
+        git fetch origin
+        if [ $(git-commits-behind) -ne 0 ]; then
+            git pull
+        fi
     fi
 }
 
@@ -130,6 +133,10 @@ git-last-n-commit-hashes () {
 
 git-commits-ahead () {
     git rev-list --count HEAD ^origin/$(git-branch)
+}
+
+git-commits-behind () {
+    git rev-list --count origin/$(git-branch) ^HEAD
 }
 
 git-merge-master-into-all () {
