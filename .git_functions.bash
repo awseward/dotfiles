@@ -107,3 +107,4 @@ get_gbranch_colorcode () {
     [ "$color_code" ] && \
         echo -e '\e[1'$color_code'm'
 }
+
