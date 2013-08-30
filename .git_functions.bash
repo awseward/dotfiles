@@ -66,9 +66,7 @@ git-push () {
             echo -e "\e[31mNo commits to push...\e[0m"
             echo -e "\n\e[4mLatest Commit\e[0m\n$(git-last-n-commits 1)"
         fi
-        if [ ! $(isMaster) ]; then
-            echo -e "\n\e[4mDiff\e[0m\n$(git-compare)"
-        fi
+        isMaster || echo -e "\n\e[4mDiff\e[0m\n$(git-compare)"
     fi
 }
 
