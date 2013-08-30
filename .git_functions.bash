@@ -78,6 +78,12 @@ git-delete-branch () { # also stolen from grb...
     fi
 }
 
+git-comit-all () {
+    if isGit; then
+        git commit -am "commit-all: $1"
+    fi
+}
+
 ### OLD SMELLY ONES
 # LET'S WORK ON GETTING RID OF THESE...
 gbranch () {
