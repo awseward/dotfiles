@@ -63,8 +63,9 @@ git-compare () {
 
 git-push () {
     if isGit; then
-        ahead=$(git status | grep -i 'your branch is ahead')
-        if [ "$ahead" ]; then
+#        ahead=$(git status | grep -i 'your branch is ahead')
+#        if [ "$ahead" ]; then
+        if [ $(git-commits-ahead) -ne 0 ]; then
             git push origin HEAD
         else
             echo "No commits to push..."
@@ -125,4 +126,8 @@ git-latest-commit () {
         commit="$commit"s
     fi
     echo "$(origin-url-base)/$commit/$(git-latest-commit-hash)"
+}
+
+git-commits-ahead() {
+    git rev-list --count HEAD ^origin/$(git-branch)
 }
