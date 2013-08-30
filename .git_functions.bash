@@ -66,7 +66,8 @@ git-push () {
         ahead=$(git-commits-ahead)
         if [ $ahead -ne 0 ]; then
             git push origin HEAD
-            echo -e "\n\n\n\nCommits in this push:\n\n"
+            echo -e "\n"
+            echo -e "Commits in this push:"
             git-last-n-commits $ahead
         else
             echo "No commits to push..."
