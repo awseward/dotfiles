@@ -66,13 +66,13 @@ git-push () {
         ahead=$(git-commits-ahead)
         if [ $ahead -ne 0 ]; then
             git push origin HEAD
-            echo -e "\nCommits in this push:\n"
+            echo -e "\nCommits in this push:"
             git-last-n-commits $ahead
         else
             echo "No commits to push..."
-            echo "Latest: $(git-last-n-commits 1)"
+            echo -e "\nLatest: $(git-last-n-commits 1)"
         fi
-        echo "Diff URL: $(git-compare)"
+        echo -e "\nDiff URL: $(git-compare)\n"
     fi
 }
 
