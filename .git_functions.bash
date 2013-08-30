@@ -57,7 +57,9 @@ git-pull-changes () {
 }
 
 git-pull-master () {
-    git pull origin master
+    if isGit; then
+        git pull origin master
+    fi
 }
 
 git-create-branch () { # stolen from grb...
