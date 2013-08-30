@@ -3,7 +3,9 @@ export EDITOR='emacs -nw'
 export PATH=$PATH:$HOME/bin
 export capones_dir=$HOME/public_html/cap
 export procore_dir=$HOME/procore
+export dotfiles_dir=$HOME/.dotfiles
 export current_project_dir=$HOME
+
 #export PULSE_SERVER=192.168.1.5
 
 export PS1='[\[\e[35m\]\H\[\e[0m\] \[\e[1;34m\]\w\[\e[0m\] \[$(get_gbranch_colorcode)\]$(gbranch_warn_master)\[\e[0m\]]\$ '
