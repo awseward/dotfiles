@@ -78,7 +78,7 @@ git-delete-branch () { # also stolen from grb...
     fi
 }
 
-git-comit-all () {
+git-commit-all () {
     if isGit; then
         git commit -am "commit-all: $1"
     fi
