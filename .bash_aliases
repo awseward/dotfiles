@@ -1,5 +1,5 @@
 ### system
-alias c='cd $current_project_dir'
+alias c='cd $init_dir'
 alias cp='cp -v'
 alias df='df -h'
 alias du='du -h'

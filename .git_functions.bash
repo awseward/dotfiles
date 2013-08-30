@@ -1,14 +1,14 @@
 ### OLD SMELLY ONES
 # LET'S WORK ON GETTING RID OF THESE...
 
-get_gbranch_colorcode () {
+git-branch-colorcode () {
     color_code=""
-    [ "$(git-branch)" == "master" ] && \
-        color_code=';5;41'
-    [ "$(git diff --name-only 2>/dev/null)" ] && \
-        color_code=";33"$color_code
-    [ "$color_code" ] && \
-        echo -e '\e[1'$color_code'm'
+    isMaster && color_code=';4'
+    isDiff && color_code=";33"$color_code
+    if [ "$color_code" ]; then
+        color_code="\e[1"$color_code"m"
+    fi
+    echo -e $color_code
 }
 
 
@@ -19,8 +19,18 @@ isGit() {
     return 1
 }
 
+isMaster() {
+    [ "$(git-branch)" = "master" ] && return 0
+    return 1
+}
+
+isDiff() {
+    [ "$(git diff --name-only 2>/dev/null)" ] && return 0
+    return 1
+}
+
 git-branch() {
-    echo "$(__git_ps1 | sed -e 's/\ *[()]//g')"
+    __git_ps1 | sed -e 's/^.(\(.*\))$/\1/'
 }
 
 origin-url-base () {
