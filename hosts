@@ -1,11 +1,5 @@
-#
-# /etc/hosts: static lookup table for host names
-#
-
-#<ip-address>	<hostname.domain.org>	<hostname>
-127.0.0.1	localhost.localdomain	localhost
-::1		localhost.localdomain	localhost
-
-# End of file
-
-192.168.1.3	pi.local
+192.168.1.2 printer
+192.168.1.3 pi
+192.168.1.4 mmk-macbook
+192.168.1.5 asus-small
+192.168.1.6 asus-large
