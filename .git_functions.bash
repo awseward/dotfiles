@@ -115,17 +115,23 @@ git-commit-all () { # takes arguments...
     fi
 }
 
-git-latest-commit-hash () {
-    # git log | head -n1 | sed -e 's/[a-z]*\ //'
-    git log | head -n1 | sed -e 's/[a-z]*\ // ; s/\(.\{7\}\).*/\1/'
-}
-
-git-latest-commit () {
+git-last-n-commits () {
     commit=commit
     if [[ "$(git remote -v | grep -m1 'origin')" = *bitbucket* ]]; then
         commit="$commit"s
     fi
-    echo "$(origin-url-base)/$commit/$(git-latest-commit-hash)"
+
+    #set -f
+    local IFS='
+'
+    array=( $(git log --pretty=format:"%h (%ar)" -n $1) )
+    for thing in "${array[@]}"; do
+        echo "$(origin-url-base)/$commit/$thing"
+    done
+}
+
+git-last-n-commit-hashes () {
+    git log --pretty=format:"%h" -n $1
 }
 
 git-commits-ahead() {
