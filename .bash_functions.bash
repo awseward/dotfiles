@@ -11,6 +11,7 @@ pull-dotfile-changes() {
 
 push-dotfile-changes() {
     message="$@"
+    echo "$message"
     if [ -d "$dotfiles_dir" ]; then
         cd $dotfiles_dir
         git-commit-all "$message"
