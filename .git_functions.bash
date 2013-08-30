@@ -27,7 +27,6 @@ git-branch-colorcode () {
     echo -e $color_code
 }
 
-
 origin-url-base () {
     if isGit; then
         url=$(git remote -v | grep -m1 origin)
@@ -61,7 +60,7 @@ git-push () {
         ahead=$(git-commits-ahead)
         if [ $ahead -ne 0 ]; then
             git push origin HEAD
-            echo -e "\nCommits in this push:"
+            echo -e "\n\e[4mCommits in this push:\e[0m"
             git-last-n-commits $ahead
         else
             echo "No commits to push..."
