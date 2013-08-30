@@ -63,14 +63,15 @@ git-compare () {
 
 git-push () {
     if isGit; then
-#        ahead=$(git status | grep -i 'your branch is ahead')
-#        if [ "$ahead" ]; then
-        if [ $(git-commits-ahead) -ne 0 ]; then
+        ahead=$(git-commits-ahead)
+        if [ $ahead -ne 0 ]; then
             git push origin HEAD
+            echo "Commits in this push: "
+            git-last-n-commits $ahead
         else
             echo "No commits to push..."
         fi
-        echo "Latest: $(git-latest-commit)"
+        echo "Latest: $(git-last-n-commits 1)"
         echo "Diff URL: $(git-compare)"
     fi
 }
