@@ -17,5 +17,3 @@ push-dotfile-changes() {
         git-push
     fi
 }
-
-# dammit
