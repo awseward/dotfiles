@@ -12,6 +12,7 @@
         mine = !git branch -a | grep -isn --color "[^remotes/origin]dev/as_"
         pop = stash apply stash@{0}
         info = !clear && git status && git stash list
+        local = branch -l
 [color]
         branch = auto
         diff = auto
