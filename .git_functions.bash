@@ -79,7 +79,7 @@ git-delete-branch () { # also stolen from grb...
 }
 
 git-commit-all () {
-    message="$1"
+    message="$@"
     echo "git-commit-all message: $message"
     if isGit; then
         git commit -am "commit-all: $message"

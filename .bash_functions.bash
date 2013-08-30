@@ -10,8 +10,7 @@ pull-dotfile-changes() {
 }
 
 push-dotfile-changes() {
-    message="$1"
-    echo "push-dotfile-changes $@"
+    message="$@"
     if [ -d "$dotfiles_dir" ]; then
         cd $dotfiles_dir
         git-commit-all "$message"
