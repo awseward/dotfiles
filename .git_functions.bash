@@ -122,7 +122,6 @@ git-last-n-commits () {
         commit="$commit"s
     fi
 
-    #set -f
     local IFS='
 '
     array=( $(git log --pretty=format:"%h (%ar)" -n $1) )
