@@ -60,13 +60,15 @@ git-push () {
         ahead=$(git-commits-ahead)
         if [ $ahead -ne 0 ]; then
             git push origin HEAD
-            echo -e "\n\e[4mCommits in this push:\e[0m"
+            echo -e "\n\e[4mCommits in this push\e[0m"
             git-last-n-commits $ahead
         else
             echo "No commits to push..."
-            echo -e "\nLatest: $(git-last-n-commits 1)"
+            echo -e "\nLatest Commit: $(git-last-n-commits 1)"
         fi
-        echo -e "\nDiff URL: $(git-compare)\n"
+        if [ ! isMaster ]; then
+            echo -e "\n\e[4mDiff URL\e[0m\n $(git-compare)"
+        fi
     fi
 }
 
