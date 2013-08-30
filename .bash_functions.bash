@@ -17,3 +17,11 @@ push-dotfile-changes() {
         git-push
     fi
 }
+
+pi-status () {
+    ssh andrew@pi '~/public_html/cap/script/check_site_status.sh'
+}
+
+pi-pull () {
+    ssh andrew@pi '~/public_html/cap/script/pull_site_changes.sh'
+}
