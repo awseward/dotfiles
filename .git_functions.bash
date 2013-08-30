@@ -1,3 +1,30 @@
+### OLD SMELLY ONES
+# LET'S WORK ON GETTING RID OF THESE...
+
+gbranch () {
+    echo -ne "$(__git_ps1 | sed 's/\ *[()]//g')"
+}
+
+gbranch_warn_master () {
+    current_branch=$(gbranch)
+    [ "$current_branch" == "master" ] && current_branch='CAUTION: '$curr\
+ent_branch
+    echo $current_branch
+}
+
+get_gbranch_colorcode () {
+    color_code=""
+    [ "$(gbranch)" == "master" ] && \
+        color_code=';5;41'
+    [ "$(git diff --name-only 2>/dev/null)" ] && \
+        color_code=";33"$color_code
+    [ "$color_code" ] && \
+        echo -e '\e[1'$color_code'm'
+}
+
+
+### begin normal ones
+
 isGit() {
     git rev-parse 2> /dev/null && return 0
     return 1
@@ -43,6 +70,7 @@ git-push () {
         else
             echo "No commits to push..."
         fi
+        echo "Latest: $(git-latest-commit)"
         echo "Diff URL: $(git-compare)"
     fi
 }
@@ -80,32 +108,23 @@ git-delete-branch () { # also stolen from grb...
     fi
 }
 
-git-commit-all () {
+git-commit-all () { # takes arguments...
     message="$@"
     if isGit; then
         git commit -am "commit-all: $message"
     fi
 }
 
-### OLD SMELLY ONES
-# LET'S WORK ON GETTING RID OF THESE...
-gbranch () {
-    echo -ne "$(__git_ps1 | sed 's/\ *[()]//g')"
+git-latest-commit-hash () {
+    # git log | head -n1 | sed -e 's/[a-z]*\ //'
+    git log | head -n1 | sed -e 's/[a-z]*\ // ; s/\(.\{7\}\).*/\1/'
 }
 
-gbranch_warn_master () {
-    current_branch=$(gbranch)
-    [ "$current_branch" == "master" ] && current_branch='CAUTION: '$curr\
-ent_branch
-    echo $current_branch
-}
-
-get_gbranch_colorcode () {
-    color_code=""
-    [ "$(gbranch)" == "master" ] && \
-        color_code=';5;41'
-    [ "$(git diff --name-only 2>/dev/null)" ] && \
-        color_code=";33"$color_code
-    [ "$color_code" ] && \
-        echo -e '\e[1'$color_code'm'
+git-latest-commit () {
+    commit=commit
+    if [[ "$(git remote -v | grep -m1 'origin')" = *bitbucket* ]]; then
+        echo "BITBUCKET"
+        commit="$commit"s
+    fi
+    echo "$(origin-url-base)/$commit/$(git-latest-commit-hash)"
 }
