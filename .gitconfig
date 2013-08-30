@@ -6,11 +6,12 @@
         ci = commit
         co = checkout
         br = branch
-        m = !git fetch origin && git checkout master && git pull
         cl = clean -df
         di = diff --name-only
-      	create = "!git_create $1"
-        devmerge = "!merge_master_into_dev_and_staging"
+        sub = !git submodule update --init --recursive
+        mine = !git branch -a | grep -isn --color "[^remotes/origin]dev/as_"
+        pop = stash apply stash@{0}
+        info = !clear && git status && git stash list
 [color]
         branch = auto
         diff = auto
