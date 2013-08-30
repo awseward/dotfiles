@@ -44,6 +44,5 @@ if [ -z "$check_bash_additions" ]; then
 fi
 
 # source bashrc
-alias reload="source ~/.bashrc"
 echo -e "\nSetup complete"
 echo -e "Run \e[44msource ~/.bashrc\e[0m to reload environment...\n"
