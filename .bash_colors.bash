@@ -1,5 +1,5 @@
 colorcode () {
-    echo "\[\e["$1"m\]"
+    echo "\e["$1"m"
 }
 
 # formats

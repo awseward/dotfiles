@@ -18,15 +18,13 @@ git-branch() {
 }
 
 git-branch-colorcode () {
-    if isGit; then
-        color_code=""
-        isMaster && color_code="${underline}$color_code"
-        isDiff && color_code="${bold}${yellow}$color_code"
-        #if [ "$color_code" ]; then
-        #    color_code="\e[1"$color_code"m"
-        #fi
-        echo "$color_code"
-    fi
+    local color_code=""
+    isMaster && color_code="${underline}$color_code"
+    isDiff && color_code="${bold}${yellow}$color_code"
+    #if [ "$color_code" ]; then
+    #    color_code="\e[1"$color_code"m"
+    #fi
+    echo -e "$color_code"
 }
 
 origin-url-base () {

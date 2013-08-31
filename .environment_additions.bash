@@ -7,9 +7,11 @@ export dotfiles_dir=$HOME/.dotfiles
 export init_dir=$HOME # set to home as a fallback
 
 #export PULSE_SERVER=192.168.1.5
-source ~/.bash_colors.bash
-
-export PS1="[${green}\u${clear}@${purple}\H${clear} ${bold}${cyan}\w${clear} $(git-branch)]\$ "
+thing="[${green}\u${clear}@${purple}\H${clear} ${bold}${cyan}\w${clear}"
+#export PS1='$(echo -e "[${green}\u${clear}@${purple}\H${clear} ${bold}${cyan}\w${clear} $(git-branch-colorcode)$(git-branch)${clear}]\$ ")'
+#export PS1='[${green}\u${clear}@${purple}\H${clear} ${bold}${cyan}\w${clear} $(git-branch-colorcode)$(git-branch)${clear}]\$ '
+export PS1="$thing "'$(git-branch-colorcode)$(git-branch)'"${clear}]\$ "
+#export PS1='[\u@\H$ \w $(git-branch)]\$ '
 
 ### asus-small-debian
 if [ "$(hostname)" = "asus-small-debian" ]; then
