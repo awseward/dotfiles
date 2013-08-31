@@ -37,11 +37,11 @@ origin-url-base () {
 }
 
 github-compare () {
-    echo -e "\e[34m$(origin-url-base)/compare/$(git-branch)\e[0m"
+    echo -e "$blue$(origin-url-base)/compare/$(git-branch)$clear"
 }
 
 bitbucket-compare () {
-    echo -e "\e[34m$(github-compare)\e[34m..master\e[0m"
+    echo -e "$blue$(github-compare)$blue..master$clear"
 }
 
 git-compare () {
@@ -59,20 +59,20 @@ git-push () {
         ahead=$(git-commits-ahead)
         if [ $ahead -ne 0 ]; then
             git push origin HEAD
-            echo -e "\n\e[4mCommits in this push\e[0m"
+            echo -e "\n${underline}Commits in this push$clear"
             git-last-n-commits $ahead
         else
-            echo -e "\e[31mNo commits to push...\e[0m"
-            echo -e "\n\e[4mLatest Commit\e[0m\n$(git-last-n-commits 1)\n"
+            echo -e "${red}No commits to push...$clear"
+            echo -e "\n${underline}Latest Commit${clear}\n$(git-last-n-commits 1)\n"
         fi
-        isMaster || echo -e "\n\e[4mDiff\e[0m\n$(git-compare)\n"
+        isMaster || echo -e "\n${underline}Diff${clear}\n$(git-compare)\n"
     fi
 }
 
 git-pull-changes () {
     if isGit; then
         if [ $1 ] && [ "$1" != $(git-branch) ]; then
-            echo -e "\e[36m$(git checkout $1 2>&1)\e[0m"
+            echo -e "$cyan$(git checkout $1 2>&1)$clear"
         fi
         git fetch origin
         if [ $(git-commits-behind) -ne 0 ]; then
@@ -91,7 +91,7 @@ git-create-branch () { # stolen from grb...
     git push origin $(git-branch):refs/heads/$1
     git fetch origin
     git branch --track $1 origin/$1
-    echo -e "\e[36m$(git checkout $1 2>&1)\e[0m"
+    echo -e "$cyan$(git checkout $1 2>&1)$clear"
 }
 
 git-delete-branch () { # also stolen from grb...
@@ -99,7 +99,7 @@ git-delete-branch () { # also stolen from grb...
     if isGit; then
         if [ "$branch_to_delete" != "master" ]; then
             git push origin ":$branch_to_delete"
-            echo -e "\e[36m$(git checkout master 2>&1)\e[0m"
+            echo -e "$cyan$(git checkout master 2>&1)$clear"
             git branch -D $branch_to_delete
         fi
     fi
@@ -120,9 +120,9 @@ git-last-n-commits () {
 
     local IFS='
 '
-    array=( $(git log --pretty=format:"%h \e[0m\e[33m(%ar)\e[0m" -n $1) )
+    array=( $(git log --pretty=format:"%h $clear$yellow(%ar)$clear" -n $1) )
     for thing in "${array[@]}"; do
-        echo -e "\e[34m$(origin-url-base)/$commit/$thing"
+        echo -e "$blue$(origin-url-base)/$commit/$thing"
     done
 }
 
@@ -143,7 +143,7 @@ git-merge-master-into-all () {
     local branches=( $(git branch | sed 's/\(\ *\|*\|master\)//g') )
     git-pull-changes master
     for branch in "${branches[@]}"; do
-        echo -e "\e[36m$(git checkout $branch 2>&1)\e[0m"
+        echo -e "$cyan$(git checkout $branch 2>&1)$clear"
         local needs_master=$(git branch --no-merge | grep "master")
 
         if [ "$needs_master" ]; then
@@ -155,6 +155,6 @@ git-merge-master-into-all () {
         fi
     done
     if [ $(git-branch) != $starting_branch ]; then
-        echo -e "\e[36m$(git checkout $starting_branch 2>&1)\e[0m"
+        echo -e "$cyan$(git checkout $starting_branch 2>&1)$clear"
     fi
 }
