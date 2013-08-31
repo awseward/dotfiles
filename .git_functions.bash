@@ -24,7 +24,7 @@ git-branch-colorcode () {
         local color_code=""
         isMaster && color_code=$underline$color_code
         isDiff && color_code=$bold$yellow$color_code
-        echo $color_code
+        echo -e "$color_code"
     fi
 }
 
