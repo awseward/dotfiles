@@ -6,14 +6,7 @@ export procore_dir=$HOME/procore
 export dotfiles_dir=$HOME/.dotfiles
 export init_dir=$HOME # set to home as a fallback
 
-#export PULSE_SERVER=192.168.1.5
-#thing='[${green}\u${clear}@${purple}\H${clear} ${bold}${cyan}\w${clear}'
-#export PS1='$(echo -e "[${green}\u${clear}@${purple}\H${clear} ${bold}${cyan}\w${clear} $(git-branch-colorcode)$(git-branch)${clear}]\$ ")'
-#export PS1='[${green}\u${clear}@${purple}\H${clear} ${bold}${cyan}\w${clear} $(git-branch-colorcode)$(git-branch)${clear}]\$ '
-#export PS1="$thing "'$(git-branch-colorcode)$(git-branch)'"${clear}]\$ "
-#export PS1='[\u@\H$ \w $(git-branch)]\$ '
-
-export PS1="$escaped_bold$escaped_green\u$escaped_clear$escaped_bold@$escaped_clear$escaped_purple\H$escaped_clear $escaped_bold$escaped_cyan\w$escaped_clear "'\[$(git-branch-colorcode)\]$(git-branch)'"$escaped_clear\$ "
+export PS1="$escaped_bold$escaped_green\u$escaped_clear$escaped_bold@$escaped_clear$escaped_purple\H$escaped_clear $escaped_bold$escaped_blue\w$escaped_clear "'\[$(git-branch-colorcode)\]$(git-branch)'"$escaped_clear\$ "
 
 ### asus-small-debian
 if [ "$(hostname)" = "asus-small-debian" ]; then
