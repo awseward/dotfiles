@@ -6,7 +6,7 @@ export procore_dir=$HOME/procore
 export dotfiles_dir=$HOME/.dotfiles
 export init_dir=$HOME # set to home as a fallback
 
-export PS1="$escaped_bold$escaped_green\u$escaped_clear$escaped_bold@$escaped_clear$escaped_purple\H$escaped_clear $escaped_bold$escaped_blue\w$escaped_clear "'\[$(git-branch-colorcode)\]$(git-branch)'"$escaped_clear\$ "
+export PS1="[$escaped_bold$escaped_green\u$escaped_clear$escaped_bold@$escaped_clear$escaped_purple\H$escaped_clear $escaped_bold$escaped_blue\w$escaped_clear "'\[$(git-branch-colorcode)\]$(git-branch)'"$escaped_clear]\$ "
 
 ### asus-small-debian
 if [ "$(hostname)" = "asus-small-debian" ]; then
