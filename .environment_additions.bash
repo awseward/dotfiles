@@ -12,7 +12,7 @@ export init_dir=$HOME # set to home as a fallback
 #export PS1='[${green}\u${clear}@${purple}\H${clear} ${bold}${cyan}\w${clear} $(git-branch-colorcode)$(git-branch)${clear}]\$ '
 #export PS1="$thing "'$(git-branch-colorcode)$(git-branch)'"${clear}]\$ "
 #export PS1='[\u@\H$ \w $(git-branch)]\$ '
-export PS1=[$green'\u'$clear@$purple'\H'$clear" "$bold$cyan'\w'$clear' $(git-branch-colorcode)$(git-branch)'$clear]$" "
+export PS1=[$bold$green'\u'$clear$bold@$clear$purple'\H'$clear" "$bold$cyan'\w'$clear' $(git-branch-colorcode)$(git-branch)'$clear]$" "
 
 ### asus-small-debian
 if [ "$(hostname)" = "asus-small-debian" ]; then
