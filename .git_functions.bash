@@ -30,11 +30,9 @@ git-branch-colorcode () {
 
 origin-url-base () {
     if isGit; then
-        url=$(git remote -v | grep -m1 origin)
-        url=$(echo $url | awk '{print $2}')
-        url=$(echo $url | sed -e 's/^.*\@/http\:\/\// ; s/\.[a-z]*$//')
-        url=$(echo $url | sed -e 's/\(\.[a-z]*\)\:/\1\//')
-        echo $url
+        echo $(git remote -v | \
+            grep -m1 origin | \
+            sed -e 's:^.*@\(.*\)\..*$:http\:\/\/\1:; s_\.\([a-z]\{3,\}\)\:_.\1\/_')
     fi
 }
 
