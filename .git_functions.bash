@@ -73,7 +73,7 @@ git-push () {
 git-pull-changes () {
     if isGit; then
         if [ $1 ] && [ "$1" != $(git-branch) ]; then
-            git checkout $1
+            echo -e "\e[36m$(git checkout $1 2>&1)\e[0m"
         fi
         git fetch origin
         if [ $(git-commits-behind) -ne 0 ]; then
@@ -92,7 +92,7 @@ git-create-branch () { # stolen from grb...
     git push origin $(git-branch):refs/heads/$1
     git fetch origin
     git branch --track $1 origin/$1
-    git checkout $1
+    echo -e "\e[36m$(git checkout $1 2>&1)\e[0m"
 }
 
 git-delete-branch () { # also stolen from grb...
@@ -100,7 +100,7 @@ git-delete-branch () { # also stolen from grb...
     if isGit; then
         if [ "$branch_to_delete" != "master" ]; then
             git push origin ":$branch_to_delete"
-            git checkout master
+            echo -e "\e[36m$(git checkout master 2>&1)\e[0m"
             git branch -D $branch_to_delete
         fi
     fi
