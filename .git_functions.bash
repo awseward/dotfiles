@@ -14,17 +14,18 @@ isDiff() {
 }
 
 git-branch() {
-    __git_ps1 | sed -e 's/^.(\(.*\))$/\1/'
+    isGit && git rev-parse --abbrev-ref HEAD
+    # old one about 10x as slow...
+    #__git_ps1 | sed -e 's/^.(\(.*\))$/\1/'
 }
 
 git-branch-colorcode () {
-    local color_code=""
-    isMaster && color_code="${underline}$color_code"
-    isDiff && color_code="${bold}${yellow}$color_code"
-    #if [ "$color_code" ]; then
-    #    color_code="\e[1"$color_code"m"
-    #fi
-    echo -e "$color_code"
+    if isGit; then
+        local color_code=""
+        isMaster && color_code=$underline$color_code
+        isDiff && color_code=$bold$yellow$color_code
+        echo $color_code
+    fi
 }
 
 origin-url-base () {
