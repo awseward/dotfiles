@@ -33,7 +33,6 @@
         changed = green
         untracked = cyan
 [core]
-	editor = emacs
   autocrlf = input
 [diff]
 	algorithm = patience
