@@ -142,7 +142,11 @@ git-commits-behind () {
 
 git-merge-master-into-all () {
     local starting_branch=$(git-branch)
-    local branches=( $(git branch | sed 's/\(\ *\|*\|master\)//g') )
+    if [ "$1" ]; then
+        local branches=( $(git branch | grep "$1" | sed 's/\(\ *\|*\|master\)//g') )
+    else
+        local branches=( $(git branch | sed 's/\(\ *\|*\|master\)//g') )
+    fi
     git-pull-changes master
     for branch in "${branches[@]}"; do
         echo -e "$cyan$(git checkout $branch 2>&1)$clear"
@@ -158,5 +162,11 @@ git-merge-master-into-all () {
     done
     if [ $(git-branch) != $starting_branch ]; then
         echo -e "$cyan$(git checkout $starting_branch 2>&1)$clear"
+    fi
+}
+
+git-ude-merge-master-into-all () {
+    if [ "$(hostname)" = "developer.andrew" ]; then
+        git-merge-master-into-all "dev/as"
     fi
 }
