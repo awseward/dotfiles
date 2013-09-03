@@ -23,7 +23,9 @@ git-branch-colorcode () {
     if isGit; then
         local color_code=""
         isMaster && color_code=$underline$color_code
-        isDiff && color_code=$bold$yellow$color_code
+        if [ "$(hostname)" != "asus-large" ]; then
+            isDiff && color_code=$bold$yellow$color_code
+        fi
         echo -e "$color_code"
     fi
 }
