@@ -13,6 +13,7 @@
         pop = stash apply stash@{0}
         info = !clear && git status && git stash list
         local = branch -l
+        back = checkout -
 [color]
         branch = auto
         diff = auto

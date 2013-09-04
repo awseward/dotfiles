@@ -1,4 +1,5 @@
 ### system
+alias back='cd -'
 alias c='cd $init_dir'
 alias cp='cp -v'
 alias df='df -h'
