@@ -147,14 +147,15 @@ git-merge-master-into-all () {
     else
         local branches=( $(git branch | sed 's/\(\ *\|*\|master\)//g') )
     fi
-    clear
-    echo -e $yellow"MERGING MASTER INTO THE FOLLOWING BRANCHES:\n"$clear
-    for branch in "${branches[@]}"; do
-        echo -e $yellow"  "$branch$clear
-    done
-    echo
+
     for second in {3..1}; do
-        echo -n $second
+        clear
+        echo -e $yellow"MERGING MASTER INTO THE FOLLOWING BRANCHES:\n"$clear
+        for branch in "${branches[@]}"; do
+            echo -e $yellow"  "$branch$clear
+        done
+        echo
+        echo -n "Merging in "$second
         sleep 0.33
         echo -n "."
         sleep 0.33
