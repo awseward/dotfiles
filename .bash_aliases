@@ -45,7 +45,7 @@ alias mc='make clean'
 
 ### valgrind
 alias valgrind='valgrind --leak-check=yes '
-alias val='valgriend'
+alias val='valgrind'
 
 ### misc/temporary/pointless
 alias ran='cat /dev/urandom | tr -dc A-Za-z0-9 | fold -w 32 | head -1'
