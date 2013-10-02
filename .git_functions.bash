@@ -133,11 +133,21 @@ git-last-n-commit-hashes () {
 }
 
 git-commits-ahead () {
-    git rev-list --count HEAD ^origin/$(git-branch)
+    if [ "$1" != "" ]; then
+        branch=$1
+    else
+        branch=$(git-branch)
+    fi
+    git rev-list --count HEAD ^origin/$branch
 }
 
 git-commits-behind () {
-    git rev-list --count origin/$(git-branch) ^HEAD
+    if [ "$1" != "" ]; then
+        branch=$1
+    else
+        branch=$(git-branch)
+    fi
+    echo "git rev-list --count origin/$branch ^HEAD"
 }
 
 git-merge-master-into-all () {
