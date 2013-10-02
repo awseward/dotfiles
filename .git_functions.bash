@@ -147,7 +147,7 @@ git-commits-behind () {
     else
         branch=$(git-branch)
     fi
-    echo "git rev-list --count origin/$branch ^HEAD"
+    git rev-list --count origin/$branch ^HEAD
 }
 
 git-merge-master-into-all () {
