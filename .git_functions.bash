@@ -1,19 +1,19 @@
-isGit() {
+isGit () {
     git rev-parse 2> /dev/null && return 0
     return 1
 }
 
-isMaster() {
+isMaster () {
     [ "$(git-branch)" = "master" ] && return 0
     return 1
 }
 
-isDiff() {
+isDiff () {
     [ "$(git diff --name-only 2>/dev/null)" ] && return 0
     return 1
 }
 
-git-branch() {
+git-branch () {
     isGit && git rev-parse --abbrev-ref HEAD
     # old one about 10x as slow...
     #__git_ps1 | sed -e 's/^.(\(.*\))$/\1/'
@@ -28,6 +28,14 @@ git-branch-colorcode () {
         fi
         echo -e "$color_code"
     fi
+}
+
+git-branch-timestamp () {
+    echo -n $(git-branch) && echo "."$(date --iso-8601=minutes)
+}
+
+git-branch-timestamp-charsafe () {
+    git-branch-timestamp | sed -e 's/\/\|\:/-/g'
 }
 
 origin-url-base () {
