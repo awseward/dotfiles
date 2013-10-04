@@ -8,7 +8,7 @@
   br = branch
   cl = clean -df
   files = diff --name-only
-  chart = diff --stat
+  chart = !git diff --stat=$(tput cols)
   summary = diff --shortstat
   sub = !git submodule update --init --recursive
   mine = !git branch -a | grep -isn --color "[^remotes/origin]dev/as_"
