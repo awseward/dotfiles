@@ -30,11 +30,11 @@ git-branch-colorcode () {
     fi
 }
 
-git-branch-timestamp () {
-    echo -n $(git-branch) && echo "."$(date --iso-8601=minutes)
+git-timestamp () {
+    echo -n $(date --iso-8601=minutes) && echo "."$(git-branch)
 }
 
-git-branch-timestamp-charsafe () {
+git-timestamp-charsafe () {
     git-branch-timestamp | sed -e 's/\/\|\:/-/g'
 }
 

@@ -7,7 +7,9 @@
   co = checkout
   br = branch
   cl = clean -df
-  di = diff --name-only
+  files = diff --name-only
+  stat = diff --stat
+  summary = diff --shortstat
   sub = !git submodule update --init --recursive
   mine = !git branch -a | grep -isn --color "[^remotes/origin]dev/as_"
   pop = stash apply stash@{0}

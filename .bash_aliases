@@ -15,7 +15,7 @@ alias mkdir='mkdir -v'
 alias mv='mv -iv'
 alias p='ps -a'
 alias reload='source ~/.bashrc'
-alias rm='rm -v'
+alias rm='rm -Iv'
 
 ### emacs
 alias em='emacs'
