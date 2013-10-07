@@ -35,7 +35,7 @@ git-timestamp () {
 }
 
 git-timestamp-charsafe () {
-    git-branch-timestamp | sed -e 's/\/\|\:/-/g'
+    git-timestamp | sed -e 's/\/\|\:/-/g'
 }
 
 origin-url-base () {
