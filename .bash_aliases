@@ -16,6 +16,7 @@ alias mv='mv -iv'
 alias p='ps -a'
 alias reload='source ~/.bashrc'
 alias rm='rm -Iv'
+alias nuke='kill -9 '
 
 ### emacs
 alias em='emacs'
