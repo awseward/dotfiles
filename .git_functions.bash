@@ -35,7 +35,8 @@ git-branch-colorcode () {
 }
 
 git-timestamp () {
-    echo -n $(date --iso-8601=minutes) && echo "."$(git-branch)
+#    echo -n $(date --iso-8601=minutes) && echo "."$(git-branch)
+    echo -n $(date +%F__%R) && echo "."$(git-branch)
 }
 
 git-timestamp-charsafe () {
@@ -216,7 +217,7 @@ git-ticket-number () {
     else
         branch=$(git-branch)
     fi
-    array=($(echo "$branch" | sed 's/[^0-9]//g'))
+    array=($(echo "$branch" | sed 's/[^0-9]/ /g'))
     arrayLength=${#array[@]}
     lastIndex=$(($arrayLength-1))
     echo ${array[$lastIndex]}
