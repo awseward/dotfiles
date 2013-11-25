@@ -36,7 +36,7 @@ fi
 if [ "$(hostname)" = "asus-large" ]; then
     if [ -d "$newp4d_dir" ]; then
         export init_dir=$newp4d_dir
-    elif [ -d "$p4d_Dir" ]; then
+    elif [ -d "$p4d_dir" ]; then
         export init_dir=$p4d_dir
     fi
 fi
