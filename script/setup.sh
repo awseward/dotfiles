@@ -22,7 +22,7 @@ for file in "${dotfiles[@]}"; do
     existing=$HOME/$file
     if [ -f $existing ]; then
         echo -n "    backup: "
-        if [ ! -d $backup_dir ]; then
+        if [ ! -d "$backup_dir" ]; then
             mkdir "$backup_dir"
         fi
         echo -e "\e[33m$(mv -v $existing $backup_dir/$file)\e[0m"
@@ -32,7 +32,7 @@ for file in "${dotfiles[@]}"; do
 done
 
 # make sure the bashrc source ~/.bash_aliases
-check_bash_aliases=$(fgrep ".bash_aliases" $HOME/.bashrc)
+check_bash_aliases=$(cat $HOME/.bashrc | sed -e 's/^\#.*//g' | fgrep ".bash_aliases")
 if [ -z "$check_bash_aliases" ]; then
     echo -e "$alias_additions" >> $HOME/.bashrc
 fi

@@ -19,6 +19,10 @@ git-branch () {
     #__git_ps1 | sed -e 's/^.(\(.*\))$/\1/'
 }
 
+git-branch-charsafe () {
+    git-branch | sed -e 's/\/\|\:/-/g'
+}
+
 git-branch-colorcode () {
     if isGit; then
         local color_code=""
@@ -31,7 +35,8 @@ git-branch-colorcode () {
 }
 
 git-timestamp () {
-    echo -n $(date --iso-8601=minutes) && echo "."$(git-branch)
+#    echo -n $(date --iso-8601=minutes) && echo "."$(git-branch)
+    echo -n $(date +%F__%R) && echo "."$(git-branch)
 }
 
 git-timestamp-charsafe () {
@@ -204,4 +209,25 @@ git-ude-merge-master-into-all () {
     if [ "$(hostname)" = "developer.andrew" ]; then
         git-merge-master-into-all "dev/as"
     fi
+}
+
+git-ticket-number () {
+    if [ "$1" != "" ]; then
+        branch="$1"
+    else
+        branch=$(git-branch)
+    fi
+    array=($(echo "$branch" | sed 's/[^0-9]/ /g'))
+    arrayLength=${#array[@]}
+    lastIndex=$(($arrayLength-1))
+    echo ${array[$lastIndex]}
+}
+
+git-sandbox () {
+    git branch | sed -e 's/\*\|\ *//g' | while read current_branch; do
+        git checkout $current_branch
+        git checkout -b sandbox/$current_branch
+        git push -u origin HEAD
+        git branch
+    done
 }
