@@ -36,11 +36,19 @@ git-branch-colorcode () {
 
 git-timestamp () {
 #    echo -n $(date --iso-8601=minutes) && echo "."$(git-branch)
-    echo -n $(date +%F__%R) && echo "."$(git-branch)
+    if [ "$1" != "" ]; then
+        echo -n $(date +%F__%R) && echo -n ".${1}" && echo "."$(git-branch)
+    else
+        echo -n $(date +%F__%R) && echo "."$(git-branch)
+    fi
 }
 
 git-timestamp-charsafe () {
-    git-timestamp | sed -e 's/\/\|\:/-/g'
+    if [ "$1" != "" ]; then
+        git-timestamp "$1" | sed -e 's/\/\|\:/-/g'        
+    else
+        git-timestamp | sed -e 's/\/\|\:/-/g'
+    fi
 }
 
 origin-url-base () {
