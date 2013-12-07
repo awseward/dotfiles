@@ -52,5 +52,5 @@ alias val='valgrind'
 ### misc/temporary/pointless
 alias ran='cat /dev/urandom | tr -dc A-Za-z0-9 | fold -w 32 | head -1'
 alias ran2='date +%N | md5sum | sed -e "s/\ .*$//"'
-alias cap='cd $capones_dir'
+#alias cap='cd $capones_dir'
 alias p4dclean='rm -rf */{[Bb]in,[Oo]bj}'
