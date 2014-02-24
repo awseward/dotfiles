@@ -25,8 +25,7 @@ if [ "$(hostname)" = "pi" ]; then
 fi
 
 ### ude
-if [ "$(hostname)" = "developer.andrew" ]; then
-    export PATH=$PATH:$HOME/.rvm/bin # can't remember why this is here, but there was a reason
+if [ "$(hostname)" = "vagrant-ude" ]; then
     if [ -d "$procore_dir" ]; then
         export init_dir=$procore_dir
     fi

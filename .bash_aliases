@@ -30,6 +30,7 @@ alias gm='git-pull-changes master'
 alias gp='git-push'
 
 ### rails/postgres
+alias be='bundle exec '
 alias kr='killall ruby 2> /dev/null'
 alias mailcatcher="mailcatcher --ip $(in)"
 alias psql='psql -U postgres procore_development'
