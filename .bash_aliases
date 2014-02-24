@@ -17,6 +17,7 @@ alias p='ps -a'
 alias reload='source ~/.bashrc'
 alias rm='rm -Iv'
 alias nuke='kill -9 '
+alias vag='cd ~/vagrant-ude && vagrant ssh'
 
 ### emacs
 alias em='emacs'
