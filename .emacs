@@ -3,6 +3,12 @@
 (setq backup-directory-alist `(("." . "~/.emacs_autosaves")))
 (setq js-indent-level 2)
 
+(add-to-list 'load-path "~/.emacs.d/")
+
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-billw)
+
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
