@@ -112,10 +112,10 @@ channels = (
   { name = "#linux"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#git"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#emacs"; chatnet = "fn"; autojoin = "yes"; },
-  { name = "#dogecoin"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#github"; chatnet = "fn"; autojoin = "yes"; },
   { name = "#bash"; chatnet = "fn"; autojoin = "yes"; },
-  { name = "#raspberrypi"; chatnet = "fn"; autojoin = "yes"; }
+  { name = "#raspberrypi"; chatnet = "fn"; autojoin = "yes"; },
+  { name = "#sbhackerspace"; chatnet = "fn"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -288,7 +288,7 @@ settings = {
     recode_fallback = "CP1252";
   };
   "fe-text" = { actlist_sort = "refnum"; };
-  "fe-common/core" = { autolog = "yes"; theme = "lime"; };
+  "fe-common/core" = { autolog = "yes"; theme = "zenbarn"; };
   "irc/core" = { alternate_nick = "rob0tMilk"; };
 };
 logs = { };
