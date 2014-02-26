@@ -109,13 +109,12 @@ channels = (
   { name = "#irssi"; chatnet = "ircnet"; autojoin = "No"; },
   { name = "silc"; chatnet = "silc"; autojoin = "No"; },
   { name = "#friendboyz"; chatnet = "fn"; autojoin = "yes"; },
-  { name = "#linux"; chatnet = "fn"; autojoin = "yes"; },
-  { name = "#git"; chatnet = "fn"; autojoin = "yes"; },
-  { name = "#emacs"; chatnet = "fn"; autojoin = "yes"; },
-  { name = "#github"; chatnet = "fn"; autojoin = "yes"; },
-  { name = "#bash"; chatnet = "fn"; autojoin = "yes"; },
-  { name = "#raspberrypi"; chatnet = "fn"; autojoin = "yes"; },
-  { name = "#sbhackerspace"; chatnet = "fn"; autojoin = "yes"; }
+  { name = "#linux"; chatnet = "fn"; autojoin = "No"; },
+  { name = "#git"; chatnet = "fn"; autojoin = "No"; },
+  { name = "#emacs"; chatnet = "fn"; autojoin = "No"; },
+  { name = "#github"; chatnet = "fn"; autojoin = "No"; },
+  { name = "#bash"; chatnet = "fn"; autojoin = "No"; },
+  { name = "#raspberrypi"; chatnet = "fn"; autojoin = "No"; }
 );
 
 aliases = {

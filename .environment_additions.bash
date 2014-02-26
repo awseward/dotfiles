@@ -38,6 +38,8 @@ if [ "$(hostname)" = "asus-large" ]; then
     elif [ -d "$p4d_dir" ]; then
         export init_dir=$p4d_dir
     fi
+
+    export PATH="${PATH}:${PROGRAMFILES}\WinRAR"
 fi
 
 if [ -d "$init_dir" ]; then
