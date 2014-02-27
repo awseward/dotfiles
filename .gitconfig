@@ -13,7 +13,7 @@
   summary = diff --shortstat
   sub = !git submodule update --init --recursive
   mine = !git branch -a | grep -isn --color "[^remotes/origin]dev/as_"
-  pop = stash apply stash@{0}
+  top = stash apply stash@{0}
   info = !clear && git status && git stash list
   local = branch -l
   back = checkout -
