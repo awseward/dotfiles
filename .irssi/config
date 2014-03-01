@@ -30,6 +30,13 @@ servers = (
     port = "6667";
     use_ssl = "no";
     ssl_verify = "no";
+  },
+  {
+    address = "sup.madsalty.com";
+    port = "5000";
+    password = "r0botmilk:123456";
+    use_ssl = "yes";
+    ssl_verify = "no";
     autoconnect = "yes";
   }
 );
@@ -287,7 +294,12 @@ settings = {
     recode_fallback = "CP1252";
   };
   "fe-text" = { actlist_sort = "refnum"; };
-  "fe-common/core" = { autolog = "yes"; theme = "zenbarn"; };
+  "fe-common/core" = {
+    autolog = "yes";
+    theme = "zenbarn";
+    beep_msg_level = "MSGS NOTICES DCC DCCMSGS HILIGHT";
+    bell_beeps = "yes";
+  };
   "irc/core" = { alternate_nick = "rob0tMilk"; };
 };
 logs = { };
