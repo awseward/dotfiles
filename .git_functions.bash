@@ -55,7 +55,7 @@ origin-url-base () {
     if isGit; then
         echo $(git remote -v | \
             grep -m1 origin | \
-            sed -e 's:^.*@\(.*\)\..*$:http\:\/\/\1:; s_\.\([a-z]\{3,\}\)\:_.\1\/_')
+            sed -e 's_^.*@\(.*\)\:\(.*\)\/\(.*\) .*$_http\:\/\/\1\/\2\/\3_; s_\.git__')
     fi
 }
 
