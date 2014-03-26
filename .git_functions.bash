@@ -60,7 +60,7 @@ origin-url-base () {
 }
 
 github-compare () {
-    echo -e "$blue$(origin-url-base)/compare/$(git-branch)$clear"
+    echo -e "$blue$(origin-url-base)/compare/master...$(git-branch)$clear"
 }
 
 bitbucket-compare () {
