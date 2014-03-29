@@ -40,6 +40,9 @@ if [ "$(hostname)" = "asus-large" ]; then
     fi
 
     export PATH="${PATH}:${PROGRAMFILES}\WinRAR"
+    
+    alias ghh='cygstart $(origin-url-base)'
+    alias ghc='cygstart $(uncolored-git-compare)'
 fi
 
 if [ -d "$init_dir" ]; then

@@ -60,11 +60,21 @@ origin-url-base () {
 }
 
 github-compare () {
-    echo -e "$blue$(origin-url-base)/compare/master...$(git-branch)$clear"
+    echo -e "$blue$(uncolored-github-compare)$clear"
 }
 
+uncolored-github-compare () {
+    echo -e "$(origin-url-base)/compare/master...$(git-branch)"
+}
+
+# these bitbucket ones are broken for now...
+
 bitbucket-compare () {
-    echo -e "$blue$(github-compare)$blue..master$clear"
+    echo -e "$blue$(uncolored-bitbucket-compare)$clear"
+}
+
+uncolored-bitbucket-compare () {
+    echo -e "$(github-compare)..master"
 }
 
 git-compare () {
@@ -73,6 +83,16 @@ git-compare () {
             github-compare
         else
             bitbucket-compare
+        fi
+    fi
+}
+
+uncolored-git-compare () {
+    if isGit; then
+        if [[ "$(git remote -v | grep -m1 'origin')" = *github* ]]; then
+            uncolored-github-compare
+        else
+            uncolored-bitbucket-compare
         fi
     fi
 }
