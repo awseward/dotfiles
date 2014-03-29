@@ -5,6 +5,16 @@
 
 (add-to-list 'load-path "~/.emacs.d/")
 
+(require 'fill-column-indicator)
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode 1)
+(setq-default fill-column 80)
+
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+
 (require 'color-theme)
 (color-theme-initialize)
 (color-theme-billw)

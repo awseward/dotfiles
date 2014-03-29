@@ -25,3 +25,16 @@ pi-status () {
 pi-pull () {
     ssh andrew@pi '~/public_html/cap/script/pull_site_changes.sh'
 }
+
+git-prompt-function() {
+    echo
+    git st
+    echo
+}
+
+git-prompt-function-wrapper() {
+    if [ "$BASH_COMMAND" = "" ]; then
+        isGit && git-prompt-function
+    fi
+}
+
