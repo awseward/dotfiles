@@ -74,7 +74,7 @@ bitbucket-compare () {
 }
 
 uncolored-bitbucket-compare () {
-    echo -e "$(github-compare)..master"
+    echo -e "$(origin-url-base)/compare/$(git-branch)..master"
 }
 
 git-compare () {
