@@ -5,15 +5,15 @@
 
 (add-to-list 'load-path "~/.emacs.d/")
 
+(menu-bar-mode -1)
+
 (require 'fill-column-indicator)
 (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
 (global-fci-mode 1)
 (setq-default fill-column 80)
 
 (require 'package)
-(add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 
 (require 'color-theme)
 (color-theme-initialize)

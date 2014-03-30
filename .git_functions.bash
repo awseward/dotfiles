@@ -19,8 +19,12 @@ git-branch () {
     #__git_ps1 | sed -e 's/^.(\(.*\))$/\1/'
 }
 
-git-branch-with-space () {
-    isGit && echo "$(git-branch) "
+git-branch-no-check() {
+    git rev-parse --abbrev-ref HEAD
+}
+
+git-branch-brackets() {
+    isGit && echo "($(git-branch-no-check))"
 }
 
 git-branch-charsafe () {

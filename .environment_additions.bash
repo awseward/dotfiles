@@ -7,8 +7,9 @@ export dotfiles_dir=$HOME/.dotfiles
 export p4d_dir=/cygdrive/c/Users/Andrew/p4d
 export newp4d_dir=/cygdrive/c/Users/Andrew/procore_for_desktop
 export init_dir=$HOME # set to home as a fallback
-
-export PS1="$escaped_bold$escaped_bg_white$escaped_black(๏_๏)$escaped_clear $escaped_purple\H$escaped_clear $escaped_bold$escaped_blue\W$escaped_clear "'\[$(git-branch-colorcode)\]$(git-branch-with-space)'"$escaped_clear$escaped_bold$escaped_green\$$escaped_clear "
+nsfw="(๏ )( ๏)"
+face="(๏_๏)"
+export PS1="$escaped_blinking$escaped_bold$escaped_bg_red$escaped_black$face$escaped_clear $escaped_purple\H$escaped_clear:$escaped_bold$escaped_blue\W$escaped_clear "'\[$(git-branch-colorcode)\]$(git-branch-brackets)'"$escaped_clear"'$(isGit && echo -n " ")'"$escaped_bold$escaped_green\$$escaped_clear "
 
 ### asus-small-debian
 if [ "$(hostname)" = "asus-small-debian" ]; then
