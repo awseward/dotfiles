@@ -19,6 +19,10 @@ git-branch () {
     #__git_ps1 | sed -e 's/^.(\(.*\))$/\1/'
 }
 
+git-branch-with-space () {
+    isGit && echo "$(git-branch) "
+}
+
 git-branch-charsafe () {
     git-branch | sed -e 's/\/\|\:/-/g'
 }
@@ -60,7 +64,7 @@ origin-url-base () {
 }
 
 github-compare () {
-    echo -e "$blue$(uncolored-github-compare)$clear"
+    echo -e "$bold$blue$(uncolored-github-compare)$clear"
 }
 
 uncolored-github-compare () {
@@ -68,7 +72,7 @@ uncolored-github-compare () {
 }
 
 bitbucket-compare () {
-    echo -e "$blue$(uncolored-bitbucket-compare)$clear"
+    echo -e "$bold$blue$(uncolored-bitbucket-compare)$clear"
 }
 
 uncolored-bitbucket-compare () {

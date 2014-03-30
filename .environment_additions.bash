@@ -8,7 +8,7 @@ export p4d_dir=/cygdrive/c/Users/Andrew/p4d
 export newp4d_dir=/cygdrive/c/Users/Andrew/procore_for_desktop
 export init_dir=$HOME # set to home as a fallback
 
-export PS1="[$escaped_purple\H$escaped_clear $escaped_bold$escaped_blue\w$escaped_clear "'\[$(git-branch-colorcode)\]$(git-branch)'"$escaped_clear]$escaped_green\$$escaped_clear "
+export PS1="$escaped_bold$escaped_bg_white$escaped_black(๏_๏)$escaped_clear $escaped_purple\H$escaped_clear $escaped_bold$escaped_blue\W$escaped_clear "'\[$(git-branch-colorcode)\]$(git-branch-with-space)'"$escaped_clear$escaped_bold$escaped_green\$$escaped_clear "
 
 ### asus-small-debian
 if [ "$(hostname)" = "asus-small-debian" ]; then
@@ -43,6 +43,7 @@ if [ "$(hostname)" = "asus-large" ]; then
     
     alias ghh='cygstart $(origin-url-base)'
     alias ghc='cygstart $(uncolored-git-compare)'
+    alias mail='cygstart http://www.gmail.com'
 fi
 
 if [ -d "$init_dir" ]; then

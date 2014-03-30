@@ -38,3 +38,11 @@ git-prompt-function-wrapper() {
     fi
 }
 
+open() {
+    if [ "$1" != "" ]; then
+        result=$1
+    else
+        result="."
+    fi
+    cygstart $result
+}
