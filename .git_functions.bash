@@ -67,14 +67,12 @@ uncolored-github-compare () {
     echo -e "$(origin-url-base)/compare/master...$(git-branch)"
 }
 
-# these bitbucket ones are broken for now...
-
 bitbucket-compare () {
     echo -e "$blue$(uncolored-bitbucket-compare)$clear"
 }
 
 uncolored-bitbucket-compare () {
-    echo -e "$(origin-url-base)/compare/$(git-branch)..master"
+    echo -e "$(origin-url-base)/compare/$(git-branch)..master#diff"
 }
 
 git-compare () {
