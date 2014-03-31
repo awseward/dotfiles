@@ -171,7 +171,7 @@ git-last-n-commits () {
 '
     array=( $(git log --pretty=format:"%h $clear$yellow(%ar)$clear" -n $1) )
     for thing in "${array[@]}"; do
-        echo -e "$blue$(origin-url-base)/$commit/$thing"
+        echo -e "$bold$blue$(origin-url-base)/$commit/$thing"
     done
 }
 
