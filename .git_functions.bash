@@ -1,5 +1,5 @@
 isGit () {
-    git rev-parse -q && return 0
+    git rev-parse 2> /dev/null && return 0
     return 1
 }
 
