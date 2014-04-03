@@ -75,7 +75,7 @@ github-compare () {
 }
 
 uncolored-github-compare () {
-    if [ isMaster ]; then
+    if [ isMaster = 1 ]; then
         origin-url-base
     else
         echo -e "$(origin-url-base)/compare/master...$(git-branch)"
@@ -87,7 +87,7 @@ bitbucket-compare () {
 }
 
 uncolored-bitbucket-compare () {
-    if [ isMaster ]; then
+    if [ isMaster = 1 ]; then
         origin-url-base
     else
         echo -e "$(origin-url-base)/compare/$(git-branch)..master#diff"
