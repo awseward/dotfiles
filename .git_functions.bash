@@ -1,5 +1,5 @@
 isGit () {
-    git rev-parse 2> /dev/null && return 0
+    git rev-parse -q && return 0
     return 1
 }
 
@@ -15,16 +15,20 @@ isDiff () {
 
 git-branch () {
     isGit && git rev-parse --abbrev-ref HEAD
-    # old one about 10x as slow...
-    #__git_ps1 | sed -e 's/^.(\(.*\))$/\1/'
 }
 
 git-branch-no-check() {
-    git rev-parse --abbrev-ref HEAD
+    git rev-parse --abbrev-ref HEAD | tr -d '\n'
 }
 
 git-branch-brackets() {
-    isGit && echo "($(git-branch-no-check))"
+    isGit && git-branch-brackets-no-check
+}
+
+git-branch-brackets-no-check () {
+    echo -n '['
+    git-branch-no-check
+    echo -n ']'
 }
 
 git-branch-charsafe () {
@@ -34,16 +38,15 @@ git-branch-charsafe () {
 git-branch-colorcode () {
     if isGit; then
         local color_code=""
-        isMaster && color_code=$underline$color_code
-        if [ "$(hostname)" != "asus-large" ]; then
-            isDiff && color_code=$bold$yellow$color_code
-        fi
+        local _isDiff=isDiff
+        local _isMaster=isMaster
+        $_isMaster && color_code=$bold$bg_red$color_code
+        $_isDiff && color_code=$bold$yellow$color_code
         echo -e "$color_code"
     fi
 }
 
 git-timestamp () {
-#    echo -n $(date --iso-8601=minutes) && echo "."$(git-branch)
     if [ "$1" != "" ]; then
         echo -n $(date +%F__%R) && echo -n ".${1}" && echo "."$(git-branch)
     else
@@ -72,7 +75,11 @@ github-compare () {
 }
 
 uncolored-github-compare () {
-    echo -e "$(origin-url-base)/compare/master...$(git-branch)"
+    if [ isMaster ]; then
+        origin-url-base
+    else
+        echo -e "$(origin-url-base)/compare/master...$(git-branch)"
+    fi
 }
 
 bitbucket-compare () {
@@ -80,7 +87,11 @@ bitbucket-compare () {
 }
 
 uncolored-bitbucket-compare () {
-    echo -e "$(origin-url-base)/compare/$(git-branch)..master#diff"
+    if [ isMaster ]; then
+        origin-url-base
+    else
+        echo -e "$(origin-url-base)/compare/$(git-branch)..master#diff"
+    fi
 }
 
 git-compare () {
@@ -205,6 +216,7 @@ git-merge-master-into-all () {
         local branches=( $(git branch | sed 's/\(\ *\|*\|master\)//g') )
     fi
 
+    # lol...
     for second in {3..1}; do
         clear
         echo -e $yellow"MERGING MASTER INTO THE FOLLOWING BRANCHES:\n"$clear
