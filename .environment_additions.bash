@@ -10,7 +10,7 @@ export init_dir=$HOME # set to home as a fallback
 export nsfw="(๏ )( ๏)"
 export face="(๏_๏)"
 export shrug='¯\_(ツ)_/¯'
-export PS1="$escaped_blinking$escaped_bold$escaped_bg_black$escaped_red$shrug$escaped_clear $escaped_purple\H$escaped_clear:$escaped_bold$escaped_blue\W$escaped_clear "'\[$(git-branch-colorcode)\]$(git-branch-brackets)'"$escaped_clear"'$(isGit && echo -n " ")'"$escaped_bold$escaped_green\$$escaped_clear "
+export PS1="$escaped_cyan\H$escaped_clear:$escaped_bold$escaped_cyan\W$escaped_clear "'\[$(git-branch-colorcode)\]$(git-branch-brackets)'"$escaped_clear"'$(isGit && echo -n " ")'"$escaped_bold$escaped_green\$$escaped_clear "
 
 ### asus-small-debian
 if [ "$(hostname)" = "asus-small-debian" ]; then
