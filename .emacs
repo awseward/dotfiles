@@ -1,3 +1,6 @@
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 (setq backup-directory-alist `(("." . "~/.emacs_autosaves")))
@@ -11,9 +14,6 @@
 (define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
 (global-fci-mode 1)
 (setq-default fill-column 80)
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 
 (require 'color-theme)
 (color-theme-initialize)
