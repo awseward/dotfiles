@@ -97,14 +97,6 @@ if !exists(":DiffOrig")
 endif
 
 "
-" Misc additions
-"
-set colorcolumn=80
-set backupdir=~/.vim/backups
-set undodir=~/.vim/undofiles
-set noswapfile
-
-"
 " Vundle
 "
 
@@ -118,7 +110,12 @@ Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 filetype plugin indent on
+let g:ctrlp_show_hidden = 1
 
 "
-" /Vundle
+" Misc additions
 "
+set colorcolumn=80
+set backupdir=~/.vim/backups
+set undodir=~/.vim/undofiles
+set noswapfile
