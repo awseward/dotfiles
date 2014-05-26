@@ -3,7 +3,7 @@
 
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
-(setq backup-directory-alist `(("." . "~/.emacs_autosaves")))
+(setq backup-directory-alist `(("." . "~/.emacs.d/.autosaves")))
 (setq js-indent-level 2)
 
 (add-to-list 'load-path "~/.emacs.d/")
