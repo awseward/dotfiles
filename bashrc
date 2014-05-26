@@ -46,6 +46,10 @@ alias ll='ls -l'                              # long list
 alias la='ls -A'                              # all but . and ..
 alias l='ls -CF'                              #
 
+# Silly old bash stuff that needs cleaning
 if [ -f ~/.bash_additions.bash ]; then
     source ~/.bash_additions.bash
 fi
+
+# Add ~/.bin to path
+export PATH=$PATH:~/.bin
