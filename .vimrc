@@ -102,6 +102,7 @@ endif
 set colorcolumn=80
 set backupdir=~/.vim/backups
 set undodir=~/.vim/undofiles
+set noswapfile
 
 "
 " Vundle
