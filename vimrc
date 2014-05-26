@@ -97,22 +97,6 @@ if !exists(":DiffOrig")
 endif
 
 "
-" Vundle
-"
-
-filetype off
-
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'gmarik/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
-
-call vundle#end()
-filetype plugin indent on
-let g:ctrlp_show_hidden = 1
-
-"
 " Misc additions
 "
 set colorcolumn=80
