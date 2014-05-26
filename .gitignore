@@ -1,7 +1,6 @@
-.irssi/saved_colors
-.emacs.d/auto-save-list
-.emacs.d/elpa
-.vim/backups
-.vim/undofiles
-.vim/swapfiles
-
+irssi/saved_colors
+emacs.d/auto-save-list
+emacs.d/elpa
+vim/backups
+vim/undofiles
+vim/swapfiles
