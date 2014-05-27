@@ -1,4 +1,4 @@
-# ~/.tmuxinator/test.yml
+# ~/.tmuxinator/main.yml
 
 name: main
 root: ~/
