@@ -1,2 +1,0 @@
-#!/bin/bash
-echo "You can put temporary binaries in ${HOME}/.bin/"
