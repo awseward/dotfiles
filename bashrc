@@ -47,8 +47,10 @@ alias la='ls -A'                              # all but . and ..
 alias l='ls -CF'                              #
 
 # Silly old bash stuff that needs cleaning
-if [ -f ~/.bash_additions.bash ]; then
-    source ~/.bash_additions.bash
+if [ -d ~/.bash ]; then
+    for file in ~/.bash/*; do
+	source $file
+    done
 fi
 
 # Add ~/.bin to path

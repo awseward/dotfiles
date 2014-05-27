@@ -1,3 +1,5 @@
+#!/bin/bash
+
 isGit () {
     git rev-parse 2> /dev/null && return 0
     return 1
