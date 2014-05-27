@@ -1,0 +1,48 @@
+[user]
+	name = Andrew Seward
+	email = awswrd@gmail.com
+[alias]
+	l = log master..
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+	cl = clean -df
+	di = !echo "Deprecated: Please use git files; git diff --name-only"
+	files = diff --name-only
+	ch = !git diff --stat=$(tput cols)
+	chart = !git diff --stat=$(tput cols)
+	sum = diff --shortstat
+	summary = diff --shortstat
+	sub = !git submodule update --init --recursive
+	mine = !git branch -a | grep -isn --color "[^remotes/origin]dev/as_"
+	top = stash apply stash@{0}
+	info = !clear && git status && git stash list
+	local = branch -l
+	back = checkout -
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+	ui = auto
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[core]
+	autocrlf = input
+	safecrlf = false	
+	editor = vim
+[diff]
+	algorithm = patience
