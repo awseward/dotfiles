@@ -1,7 +1,7 @@
 ### system
 alias back='cd -'
 alias c='cd $init_dir'
-alias cp='cp -v'
+alias cp='cp -iv'
 alias df='df -h'
 alias du='du -h'
 alias g='fgrep -Irisn --color=auto'
