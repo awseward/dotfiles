@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# setup
+TRACKED=$HOME/.cygwin/packages
+UNTRACKED=$HOME/.installed_packages.$(date +%m%d%Y%N).tmp
+
+if [ ! -e "$TRACKED" ]; then
+  echo "Missing $TRACKED to compare to" && exit
+fi
+
+apt-cyg show > $UNTRACKED
+sort $TRACKED -o $TRACKED
+sort $UNTRACKED -o $UNTRACKED
+
+cleanUp()
+{
+  rm -rf $UNTRACKED
+}
+
+promptPackage()
+{
+  local pkg="$1"
+  apt-cyg -u describe $pkg | ag $pkg
+  echo
+  read -p "Add $pkg to $TRACKED? [Ynq] " -n1 response
+}
+
+handleResponse()
+{
+  if [[ $response =~ [qQ](uit)* ]]; then
+    cleanUp && clear && exit
+  elif [[ $response =~ [yY](es)* ]]; then
+    echo $package >> $TRACKED
+    continue='true'
+  elif [[ $response =~ [nN](o)* ]]; then
+    continue='true'
+  fi
+}
+
+for package in $(comm -13 --check-order $TRACKED $UNTRACKED); do
+  continue=''
+  response=''
+  while [ "$continue" = '' ]; do 
+    clear && promptPackage $package
+    handleResponse $response
+  done
+done
+
+cleanUp && clear
