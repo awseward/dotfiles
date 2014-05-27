@@ -25,11 +25,11 @@ alias vag='cd ~/vagrant-ude && vagrant ssh'
 alias emacs='vim'
 
 ### git 
-alias gb='git-branch'
-alias ghc='git-compare'
-alias ghh='origin-url-base'
-alias gm='git-pull-changes master'
-alias gp='git-push'
+alias gb='git_branch'
+alias ghc='git_compare'
+alias ghh='origin_url_base'
+alias gm='git_pull_changes master'
+alias gp='git_push'
 alias gch='clear && while true; do echo -e "[ $bold$blue$(pwd)$clear ]" && git st && git chart && sleep 3 && clear; done'
 
 ### rails/postgres

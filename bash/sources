@@ -1,12 +1,12 @@
 #!/bin/bash
 
-function trySource() {
-    path="$1"
-    if [ -f $path ]; then
-        source $path
-    else
-	echo "${path} not found..."
-    fi
+trySource() {
+  path="$1"
+  if [ -f $path ]; then
+    source $path
+  else
+    echo "${path} not found..."
+  fi
 }
 
 trySource /etc/bash_completion.d/git

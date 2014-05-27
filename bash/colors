@@ -1,11 +1,11 @@
 #!/bin/bash
 
 escaped_colorcode () {
-    echo "\[$(colorcode $1)\]"
+  echo "\[$(colorcode $1)\]"
 }
 
 colorcode () {
-    echo "\e[${1}m"
+  echo "\e[${1}m"
 }
 
 # formats

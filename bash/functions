@@ -1,49 +1,49 @@
 #!/bin/bash
 psgrep() {
-    ps aux | fgrep -is "$1" | fgrep -v "fgrep --color=auto -is $1"
+  ps aux | fgrep -is "$1" | fgrep -v "fgrep --color=auto -is $1"
 }
 
-pull-dotfile-changes() {
-    if [ -d "$dotfiles_dir" ]; then
-        cd $dotfiles_dir
-        git-pull-changes
-    fi
+pull_dotfile_changes() {
+  if [ -d "$dotfiles_dir" ]; then
+    cd $dotfiles_dir
+    git_pull_changes
+  fi
 }
 
-push-dotfile-changes() {
-    message="$@"
-    if [ -d "$dotfiles_dir" ]; then
-        cd $dotfiles_dir
-        git-commit-all "$message"
-        git-push
-    fi
+push_dotfile_changes() {
+  message="$@"
+  if [ -d "$dotfiles_dir" ]; then
+    cd $dotfiles_dir
+    git_commit_all "$message"
+    git_push
+  fi
 }
 
-pi-status () {
-    ssh andrew@pi '~/public_html/cap/script/check_site_status.sh'
+pi_status () {
+  ssh andrew@pi '~/public_html/cap/script/check_site_status.sh'
 }
 
-pi-pull () {
-    ssh andrew@pi '~/public_html/cap/script/pull_site_changes.sh'
+pi_pull () {
+  ssh andrew@pi '~/public_html/cap/script/pull_site_changes.sh'
 }
 
-git-prompt-function() {
-    echo
-    git st
-    echo
+git_prompt_function() {
+  echo
+  git st
+  echo
 }
 
-git-prompt-function-wrapper() {
-    if [ "$BASH_COMMAND" = "" ]; then
-        isGit && git-prompt-function
-    fi
+git_prompt_function_wrapper() {
+  if [ "$BASH_COMMAND" = "" ]; then
+    isGit && git_prompt_function
+  fi
 }
 
 open() {
-    if [ "$1" != "" ]; then
-        result=$1
-    else
-        result="."
-    fi
-    cygstart $result
+  if [ "$1" != "" ]; then
+    result=$1
+  else
+    result="."
+  fi
+  cygstart $result
 }
