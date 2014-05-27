@@ -96,6 +96,11 @@ if !exists(":DiffOrig")
 		  \ | wincmd p | diffthis
 endif
 
+" Vundle
+if filereadable(expand("~/.vimrc.plugins"))
+  source ~/.vimrc.plugins
+endif
+
 "
 " Misc additions
 "

@@ -1,3 +1,4 @@
+set nocompatible
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -5,6 +6,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
+Plugin 'croaky/vim-colors-github'
 
 call vundle#end()
 filetype plugin indent on
