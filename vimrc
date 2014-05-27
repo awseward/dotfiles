@@ -108,3 +108,7 @@ set colorcolumn=80
 set backupdir=~/.vim/backups
 set undodir=~/.vim/undofiles
 set noswapfile
+set smartindent
+set tabstop=2
+set shiftwidth=2
+set expandtab
