@@ -6,6 +6,14 @@ UNTRACKED=$HOME/.installed_packages.$(date +%m%d%Y%N).tmp
 
 if [ ! -e "$TRACKED" ]; then
   echo "Missing $TRACKED to compare to" && exit
+  exit 1
+fi
+
+which apt-cyg > /dev/null
+if [ "$?" != '0' ]; then
+  echo "This utility depends on apt-cyg."
+  echo "Please install it first from here: https://code.google.com/p/apt-cyg/"
+  exit 1
 fi
 
 apt-cyg show > $UNTRACKED
@@ -28,7 +36,7 @@ promptPackage()
 handleResponse()
 {
   if [[ $response =~ [qQ](uit)* ]]; then
-    cleanUp && clear && exit
+    cleanUp && clear && exit 0
   elif [[ $response =~ [yY](es)* ]]; then
     echo $package >> $TRACKED
     continue='true'
