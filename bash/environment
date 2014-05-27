@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ### universal
-export EDITOR='emacs -nw'
+export EDITOR='vim'
 export PATH=$PATH:$HOME/bin
 export capones_dir=$HOME/public_html/cap
 export procore_dir=$HOME/procore
@@ -45,8 +45,8 @@ if [ "$(hostname)" = "asus-large" ]; then
 
   export PATH="${PATH}:${PROGRAMFILES}\WinRAR"
 
-  alias ghh='cygstart $(origin-url-base)'
-  alias ghc='cygstart $(uncolored-git-compare)'
+  alias ghh='cygstart $(origin_url_base)'
+  alias ghc='cygstart $(uncolored_git_compare)'
   alias mail='cygstart http://www.gmail.com'
 fi
 
