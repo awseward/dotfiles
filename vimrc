@@ -103,6 +103,7 @@ endif
 
 "
 " Misc additions
+" (should probably organize these just a little bit...)
 "
 set colorcolumn=80
 set backupdir=~/.vim/backups
