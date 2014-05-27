@@ -52,4 +52,6 @@ if [ -f ~/.bash_additions.bash ]; then
 fi
 
 # Add ~/.bin to path
-export PATH=$PATH:~/.bin
+if [ -d ~/.bin ]; then
+    export PATH=$PATH:~/.bin
+fi
