@@ -10,4 +10,4 @@ function trySource() {
 }
 
 trySource /etc/bash_completion.d/git
-trySource /usr/share/git/complation/git-completion.bash
+trySource /usr/share/git/completion/git-completion.bash
