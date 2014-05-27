@@ -180,8 +180,7 @@ git_last_n_commits () {
     commit="$commit"s
   fi
 
-  local IFS='
-  '
+  local IFS=$'\n'
   array=( $(git log --pretty=format:"%h $clear$yellow(%ar)$clear" -n $1) )
   for thing in "${array[@]}"; do
     echo -e "$bold$blue$(origin_url_base)/$commit/$thing"
