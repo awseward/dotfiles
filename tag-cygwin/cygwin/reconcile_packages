@@ -2,7 +2,7 @@
 
 # setup
 TRACKED=$HOME/.cygwin/packages
-UNTRACKED=$HOME/.installed_packages.$(date +%m%d%Y%N).tmp
+UNTRACKED="$(mktemp)"
 
 if [ ! -e "$TRACKED" ]; then
   echo "Missing $TRACKED to compare to" && exit
