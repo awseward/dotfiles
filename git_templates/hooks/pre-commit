@@ -1,0 +1,13 @@
+#!/bin/sh
+# post-commit
+
+SEARCH_KEYWORDS=~/.bash/search_keywords.sh
+
+if [ -f "$SEARCH_KEYWORDS" ]; then
+  . "$SEARCH_KEYWORDS"
+else
+  exit 1
+fi
+
+find_todo
+find_console_writeline

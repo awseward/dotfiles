@@ -1,4 +1,9 @@
 #!/bin/sh
+# search_keywords.sh
+
+COLORS=~/.bash/colors.sh
+
+[ -f "$COLORS" ] && . "$COLORS"
 
 FINDER=
 
@@ -19,7 +24,7 @@ find_keyword ()
   resolve_finder
   local keyword="$1"
   local keyword_count=$($FINDER $keyword . | wc -l)
-  echo "$keyword count: $keyword_count"
+  echo -e "$yellow$keyword$clear count: $red$keyword_count$clear"
 }
 
 find_todo ()
