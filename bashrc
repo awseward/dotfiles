@@ -24,12 +24,12 @@ fi
 
 # Silly old bash stuff that needs cleaning
 if [ -d ~/.bash ]; then
-    for file in ~/.bash/*; do
-	source $file
-    done
+  for file in ~/.bash/*; do
+    source $file
+  done
 fi
 
 # Add ~/.bin to path
 if [ -d ~/.bin ]; then
-    export PATH=$PATH:~/.bin
+  export PATH=$PATH:~/.bin
 fi
