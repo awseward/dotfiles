@@ -1,0 +1,4 @@
+#!/bin/sh
+# post-checkout
+
+echo "Post checkout hook..."

@@ -46,3 +46,5 @@
 	editor = vim
 [diff]
 	algorithm = patience
+[init]
+  templatedir = ~/.git_templates
