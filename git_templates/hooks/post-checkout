@@ -10,3 +10,4 @@ else
 fi
 
 find_todo
+find_console_writeline
