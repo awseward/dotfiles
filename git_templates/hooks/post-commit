@@ -1,10 +1,10 @@
 #!/bin/sh
 # post-commit
 
-FIND_KEYWORDS_PATH=~/.git_templates/hooks/find_keywords.sh
+SEARCH_KEYWORDS=~/.bash/search_keywords.sh
 
-if [ -f "$FIND_KEYWORDS_PATH" ]; then
-  . "$FIND_KEYWORDS_PATH"
+if [ -f "$SEARCH_KEYWORDS" ]; then
+  . "$SEARCH_KEYWORDS"
 else
   exit 1
 fi
