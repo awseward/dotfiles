@@ -30,7 +30,7 @@ alias ghc='git_compare'
 alias ghh='origin_url_base'
 alias gm='git_pull_changes master'
 alias gp='git_push'
-alias gch='clear && while true; do echo -e "[ $bold$blue$(pwd)$clear ]" && git st && git chart && sleep 3 && clear; done'
+alias gch='clear && while true; do echo -e "[ $bold$blue$(pwd)$clear ]" && git st && git chart; sleep 3 && clear; done'
 
 ### rails/postgres
 alias be='bundle exec '
