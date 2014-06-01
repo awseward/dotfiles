@@ -1,4 +1,12 @@
 #!/bin/sh
 # post-checkout
 
-echo "Post checkout hook..."
+FIND_KEYWORDS=~/.git_templates/hooks/find_keywords.sh
+
+if [ -f "$FIND_KEYWORDS" ]; then
+  . "$FIND_KEYWORDS"
+else
+  exit 1  
+fi
+
+find_todo
