@@ -9,5 +9,7 @@ else
   exit 1
 fi
 
+echo
 find_todo
 find_console_writeline
+echo
