@@ -1,6 +1,6 @@
 BoldAsFont=yes
 Font=Consolas
-FontHeight=12
+FontHeight=10
 RightClickAction=paste
 BellSound=yes
 CursorType=block
