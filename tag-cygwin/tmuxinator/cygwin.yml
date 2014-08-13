@@ -20,7 +20,7 @@ root: ~/
 
 windows:
   - main:
-      layout: main-vertical
+      layout: f30b,274x70,0,0{155x70,0,0,1,118x70,156,0[118x16,156,0,3,118x53,156,17,4]}
       panes:
         - clear
         - irssi
