@@ -45,7 +45,7 @@ ZSH_THEME="daveverwer"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=()
 
 source $ZSH/oh-my-zsh.sh
 
@@ -78,3 +78,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/andr
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+if [ -f ~/.aliases ]; then
+  source ~/.aliases
+fi
