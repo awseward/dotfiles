@@ -1,0 +1,27 @@
+### general
+alias cp='cp -iv'
+alias mkdir='mkdir -v'
+alias ls='ls -hF --color=auto'
+alias mv='mv -iv'
+alias ln='ln -v'
+alias rm='rm -Iv'
+alias g='grep -Irisn --color=auto'
+alias p='ps -a'
+alias back='cd -'
+
+### git
+# alias gb='git_branch'
+# alias ghc='git_compare'
+# alias ghh='origin_url_base'
+# alias gm='git_pull_changes master'
+# alias gp='git_push'
+# alias gch='clear && while true; do echo -e "[ $bold$blue$(pwd)$clear ]" && git st && git chart; sleep 3 && clear; done'
+
+### make
+# alias m='make clean && make'
+# alias mc='make clean'
+
+### valgrind
+alias valgrind='valgrind --leak-check=yes '
+alias val='valgrind'
+
