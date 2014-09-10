@@ -16,7 +16,7 @@ alias back='cd -'
 # alias gm='git_pull_changes master'
 # alias gp='git_push'
 # alias gch='clear && while true; do echo -e "[ $bold$blue$(pwd)$clear ]" && git st && git chart; sleep 3 && clear; done'
-alias gp='git push -u origin HEAD'
+alias gp='git_push_and_compare'
 
 ### make
 # alias m='make clean && make'
