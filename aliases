@@ -18,6 +18,8 @@ alias back='cd -'
 # alias gch='clear && while true; do echo -e "[ $bold$blue$(pwd)$clear ]" && git st && git chart; sleep 3 && clear; done'
 alias gp='git_push_and_compare'
 alias gm='git checkout master && git pull'
+alias gr='git_open_remote'
+alias grc='git_remote_compare'
 
 ### make
 # alias m='make clean && make'

@@ -30,8 +30,16 @@ git_remote_url() {
   echo "https://${r_host}/${r_owner}/${r_name}"
 }
 
+git_open_remote() {
+  open_url $(git_remote_url)
+}
+
 git_remote_compare_url() {
   echo "$(git_remote_url)/compare/master...$(git_current_branch)"
+}
+
+git_remote_compare() {
+  open_url $(git_remote_compare_url)
 }
 
 git_push_and_compare() {

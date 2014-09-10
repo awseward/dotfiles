@@ -1,3 +1,8 @@
+# override open_url from ~/.helpers/
+open_url() {
+  cygstart $1 > /dev/null 2>&1
+}
+
 __windows_init() {
   local win_home=$(cygpath $USERPROFILE)
   local procore=$win_home/Procore
