@@ -69,5 +69,5 @@ __git_parse_remote_owner() {
 }
 
 __git_parse_remote_name() {
-  echo "$@" | sed -e 's/.\+\/\(.\+\)\.git.*/\1/'
+  echo "$@" | sed -e 's/.\+\/\(.\+\)\ .*/\1/;s/.git//'
 }
