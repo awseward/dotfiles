@@ -26,6 +26,7 @@ git_remote_url() {
   local r_host=$(__git_parse_remote_host $remote_string)
   local r_owner=$(__git_parse_remote_owner $remote_string)
   local r_name=$(__git_parse_remote_name $remote_string)
+
   echo "https://${r_host}/${r_owner}/${r_name}"
 }
 
