@@ -6,7 +6,7 @@ git_is_repo() {
 }
 
 git_current_branch() {
-  git rev-parse --abbrev-ref HEAD | tf -d '\n'
+  git rev-parse --abbrev-ref HEAD
 }
 
 git_remote_host() {
