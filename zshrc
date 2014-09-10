@@ -86,3 +86,7 @@ fi
 if [ -d ~/.helpers ]; then
   source ~/.helpers/*.sh
 fi
+
+[ -d ~/.helpers ] && source ~/.helpers/*.sh
+[ -f ~/.aliases ] && source ~/.aliases
+[ -f ~/.init.sh ] && source ~/.init.sh
