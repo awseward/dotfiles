@@ -30,6 +30,14 @@ git_remote_url() {
   echo "https://${r_host}/${r_owner}/${r_name}"
 }
 
+git_remote_compare_url() {
+  echo "$(git_remote_url)/compare/master...$(git_current_branch)"
+}
+
+git_push_and_compare() {
+  git push -u origin HEAD && git_remote_compare_url
+}
+
 git_delete_branch_local() {
   local current_branch=$(git_current_branch)
   [ "$current_branch" = master ] && return 1
