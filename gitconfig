@@ -49,4 +49,4 @@
 [init]
   templatedir = ~/.git_templates
 [push]
-	default = simple
+	default = current
