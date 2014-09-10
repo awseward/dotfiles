@@ -23,3 +23,5 @@ __windows_init() {
 }
 
 __windows_init
+
+alias remux='rm -rf /tmp/tmux*'
