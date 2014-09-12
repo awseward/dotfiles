@@ -79,14 +79,9 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/andr
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-if [ -f ~/.aliases ]; then
-  source ~/.aliases
-fi
-
-if [ -d ~/.helpers ]; then
-  source ~/.helpers/*.sh
-fi
-
-[ -d ~/.helpers ] && source ~/.helpers/*.sh
 [ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/.init.sh ] && source ~/.init.sh
+
+for file in ~/.helpers/*.sh; do
+  source $file
+done
