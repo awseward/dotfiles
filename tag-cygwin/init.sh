@@ -9,6 +9,7 @@ __windows_init() {
 
   local analytics=$procore/Analytics
   local api=$procore/Api
+  local document_processing=$procore/DocumentProcessing
   local p4d=$procore/ProcoreForDesktop
   local utilities=$procore/Utilities
 
@@ -18,6 +19,7 @@ __windows_init() {
   alias api="cd ${api}"
   alias p4d="cd ${p4d}"
   alias utilities="cd ${utilities}"
+  alias docproc="cd ${document_processing}"
 
   cd $p4d
 }
