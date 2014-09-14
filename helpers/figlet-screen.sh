@@ -20,6 +20,7 @@ fig_screen() {
   local text_height=$(__get_text_height $text)
   local padding=$(__get_vertical_padding)
 
+  clear
   __print_vertical_padding $padding
   figlet -f big -w $term_width -c $text
   __print_vertical_padding $padding
