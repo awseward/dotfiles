@@ -21,9 +21,15 @@ __windows_init() {
   alias utilities="cd ${utilities}"
   alias docproc="cd ${document_processing}"
 
+  alias remux='rm -rf /tmp/tmux*'
+
   cd $p4d
 }
 
-__windows_init
+__vagrant_init() {
+  export PATH=$PATH:/cygdrive/c/Hashicorp/Vagrant/bin/vagrant
+  alias vag='cd ~/vagrant-ude && vagrant ssh'
+}
 
-alias remux='rm -rf /tmp/tmux*'
+__windows_init
+__vagrant_init
