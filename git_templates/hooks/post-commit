@@ -10,6 +10,7 @@ else
 fi
 
 echo
+echo "# DEPRECATED #"
 find_todo
 find_console_writeline
 echo

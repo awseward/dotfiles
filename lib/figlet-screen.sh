@@ -22,7 +22,7 @@ fig_screen() {
 
   clear
   __print_vertical_padding $padding
-  figlet -f big -w $term_width -c $text
+  figlet -w $term_width -c $text
 
   (( remaining_lines = $padding - 2 ))
   __print_vertical_padding $remaining_lines

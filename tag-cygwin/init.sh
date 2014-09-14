@@ -1,4 +1,4 @@
-# override open_url from ~/.helpers/
+# override open_url from ~/.lib/
 open_url() {
   cygstart $1 > /dev/null 2>&1
 }
@@ -21,9 +21,15 @@ __windows_init() {
   alias utilities="cd ${utilities}"
   alias docproc="cd ${document_processing}"
 
+  alias remux='rm -rf /tmp/tmux*'
+
   cd $p4d
 }
 
-__windows_init
+__vagrant_init() {
+  __ensure_in_PATH /cygdrive/c/Hashicorp/Vagrant/bin
+  alias vag='cd ~/vagrant-ude && vagrant ssh'
+}
 
-alias remux='rm -rf /tmp/tmux*'
+__windows_init
+__vagrant_init
