@@ -1,1 +1,2 @@
-/home/andrew/.dotfiles/init.sh
+#!/bin/sh
+# Nothing here yet...
