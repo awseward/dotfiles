@@ -24,4 +24,4 @@ windows:
       panes:
         - clear
         - irssi
-        - gch
+        - clear
