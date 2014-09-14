@@ -27,7 +27,7 @@ find_todo ()
 {
   find_keyword 'TODO'
 }
- 
+
 find_console_writeline ()
 {
   find_keyword 'Console.Writeline'
