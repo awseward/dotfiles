@@ -24,7 +24,7 @@ alias vag='cd ~/vagrant-ude && vagrant ssh'
 #alias emacs='emacs -nw'
 alias emacs='vim'
 
-### git 
+### git
 alias gb='git_branch'
 alias ghc='git_compare'
 alias ghh='origin_url_base'

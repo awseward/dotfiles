@@ -58,7 +58,7 @@ git_timestamp () {
 
 git_timestamp_charsafe () {
   if [ "$1" != "" ]; then
-    git_timestamp "$1" | sed -e 's/\/\|\:/-/g'        
+    git_timestamp "$1" | sed -e 's/\/\|\:/-/g'
   else
     git_timestamp | sed -e 's/\/\|\:/-/g'
   fi

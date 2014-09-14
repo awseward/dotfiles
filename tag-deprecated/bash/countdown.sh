@@ -1,5 +1,5 @@
 #!/bin/sh
-# countdown.sh 
+# countdown.sh
 
 line_start ()
 {
