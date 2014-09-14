@@ -22,10 +22,15 @@ alias gr='git_open_remote'
 alias grc='git_remote_compare'
 
 ### make
-# alias m='make clean && make'
-# alias mc='make clean'
+alias m='make clean && make'
+alias mc='make clean'
 
 ### valgrind
 alias valgrind='valgrind --leak-check=yes '
 alias val='valgrind'
 
+### rcm
+alias lsrc='lsrc -v'
+alias rcup='rcup -v'
+alias rcdn='rcdn -v'
+alias mkrc='mkrc -v'
