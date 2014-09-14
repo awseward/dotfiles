@@ -30,7 +30,6 @@ alias valgrind='valgrind --leak-check=yes '
 alias val='valgrind'
 
 ### rcm
-alias lsrc='lsrc -v'
 alias rcup='rcup -v'
 alias rcdn='rcdn -v'
 alias mkrc='mkrc -v'
