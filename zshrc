@@ -79,7 +79,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/andr
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-for file in ~/.helpers/*.sh; do
+for file in ~/.lib/*.sh; do
   source $file
 done
 

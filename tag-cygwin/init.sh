@@ -1,4 +1,4 @@
-# override open_url from ~/.helpers/
+# override open_url from ~/.lib/
 open_url() {
   cygstart $1 > /dev/null 2>&1
 }
