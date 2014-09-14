@@ -27,7 +27,7 @@ __windows_init() {
 }
 
 __vagrant_init() {
-  export PATH=$PATH:/cygdrive/c/Hashicorp/Vagrant/bin/vagrant
+  __ensure_in_PATH /cygdrive/c/Hashicorp/Vagrant/bin
   alias vag='cd ~/vagrant-ude && vagrant ssh'
 }
 
