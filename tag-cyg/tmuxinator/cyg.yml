@@ -1,6 +1,6 @@
-# ~/.tmuxinator/cygwin.yml
+# ~/.tmuxinator/cyg.yml
 
-name: cygwin
+name: cyg
 root: ~/
 
 # Optional tmux socket

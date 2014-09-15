@@ -42,3 +42,5 @@ alias tmux='tmux_socket_workaround'
 
 __windows_init
 __vagrant_init
+
+mux start cyg
