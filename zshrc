@@ -64,6 +64,8 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/home/andr
 #   export EDITOR='mvim'
 # fi
 
+export EDITOR='vim'
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
