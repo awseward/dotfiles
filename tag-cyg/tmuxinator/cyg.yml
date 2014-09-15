@@ -20,11 +20,11 @@ pre: rm -rf /tmp/tmux-1001/tmuxinator
 
 windows:
   - main:
-      layout: f30b,274x70,0,0{155x70,0,0,1,118x70,156,0[118x16,156,0,3,118x53,156,17,4]}
+      layout: bf5f,199x48,0,0{117x48,0,0,0,81x48,118,0[81x14,118,0,2,81x33,118,15,3]}
       panes:
         - clear
         - irssi
-        - gch
+        - clear
   - vagrant:
       panes:
         - cd ~/vagrant-ude && vagrant up && vag

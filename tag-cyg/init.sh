@@ -38,7 +38,7 @@ __vagrant_init() {
   alias vag='cd ~/vagrant-ude && vagrant ssh'
 }
 
-alias tmux='tmux_socket_workaround'
+alias tmx='tmux_socket_workaround'
 
 __windows_init
 __vagrant_init
