@@ -1,2 +1,3 @@
 #!/bin/sh
-# Nothing here yet...
+
+mux start main
