@@ -64,6 +64,10 @@ git_nuke_branch() {
   git_delete_branch_local
 }
 
+git_delete_pruneable_branches() {
+  __git_pruneable_branches | xargs git branch -D
+}
+
 __git_filter_remote_v() {
   git remote -v | grep -m1 "^${1}\s.*$"
 }
@@ -78,4 +82,8 @@ __git_parse_remote_owner() {
 
 __git_parse_remote_name() {
   echo "$@" | sed -e 's/.\+\/\(.\+\)\ .*/\1/;s/.git//'
+}
+
+__git_pruneable_branches() {
+  git remote prune -n origin | grep 'origin/.*' -o  | sed -e "s/^.*origin\/\(.*\)/\1/g"
 }
