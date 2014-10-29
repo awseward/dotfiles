@@ -5,8 +5,8 @@ __get_text_height() {
 }
 
 __get_vertical_padding() {
-  (( padding = ( $term_height - $text_height ) / 2 ))
-  echo $padding
+  local diff=$(($term_height - $text_height))
+  echo $(($diff / 2))
 }
 
 __print_vertical_padding() {
@@ -24,8 +24,7 @@ fig_screen() {
   __print_vertical_padding $padding
   figlet -w $term_width -c $text
 
-  (( remaining_lines = $padding - 2 ))
-  __print_vertical_padding $remaining_lines
+  __print_vertical_padding $(($padding - 2))
 
   while read line; do done
 }
