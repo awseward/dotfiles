@@ -85,5 +85,6 @@ __git_parse_remote_name() {
 }
 
 __git_pruneable_branches() {
+  git fetch origin;
   git remote prune -n origin | grep 'origin/.*' -o  | sed -e "s/^.*origin\/\(.*\)/\1/g"
 }

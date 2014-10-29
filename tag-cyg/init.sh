@@ -13,6 +13,8 @@ tmux_socket_workaround() {
 }
 
 __windows_init() {
+  compinit # Not sure why we have to invoke this manually like this now...
+
   local win_home=$(cygpath $USERPROFILE)
   local procore=$win_home/Procore
 
@@ -29,6 +31,8 @@ __windows_init() {
   alias p4d="cd ${p4d}"
   alias utilities="cd ${utilities}"
   alias docproc="cd ${document_processing}"
+
+  __ensure_in_PATH /cygdrive/c/Chocolatey/chocolateyinstall
 
   cd $p4d
 }
