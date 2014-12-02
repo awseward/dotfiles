@@ -21,7 +21,7 @@ __windows_init() {
   local analytics=$procore/Analytics
   local api=$procore/Api
   local document_processing=$procore/DocumentProcessing
-  local p4d=$procore/ProcoreForDesktop
+  local p4d=$procore/Drive
   local utilities=$procore/Utilities
 
   alias cdw="cd ${win_home}"
