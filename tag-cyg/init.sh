@@ -21,20 +21,20 @@ __windows_init() {
   local analytics=$procore/Analytics
   local api=$procore/Api
   local document_processing=$procore/DocumentProcessing
-  local p4d=$procore/Drive
+  local pd=$procore/Drive
   local utilities=$procore/Utilities
 
   alias cdw="cd ${win_home}"
   alias procore="cd ${procore}"
   alias analytics="cd ${analytics}"
   alias api="cd ${api}"
-  alias p4d="cd ${p4d}"
+  alias pd="cd ${pd}"
   alias utilities="cd ${utilities}"
   alias docproc="cd ${document_processing}"
 
   __ensure_in_PATH /cygdrive/c/Chocolatey/chocolateyinstall
 
-  cd $p4d
+  cd $pd
 }
 
 __vagrant_init() {
