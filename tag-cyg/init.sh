@@ -18,6 +18,7 @@ __windows_init() {
   local win_home=$(cygpath $USERPROFILE)
   local procore=$win_home/Procore
 
+  local addin=$procore/ProjectAddIn
   local analytics=$procore/Analytics
   local api=$procore/Api
   local document_processing=$procore/DocumentProcessing
@@ -26,6 +27,7 @@ __windows_init() {
 
   alias cdw="cd ${win_home}"
   alias procore="cd ${procore}"
+  alias addin="cd ${addin}"
   alias analytics="cd ${analytics}"
   alias api="cd ${api}"
   alias pd="cd ${pd}"
