@@ -8,6 +8,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'croaky/vim-colors-github'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'pangloss/vim-javascript'
 
 call vundle#end()
 filetype plugin indent on

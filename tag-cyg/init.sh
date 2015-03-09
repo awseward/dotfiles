@@ -44,9 +44,15 @@ __vagrant_init() {
   alias vag='cd ~/vagrant-ude && vagrant ssh'
 }
 
+__react_init() {
+  __ensure_in_PATH '/cygdrive/c/Program Files/nodejs'
+  __ensure_in_PATH /cygdrive/c/Users/Andrew/AppData/Roaming/npm
+}
+
 alias tmx='tmux_socket_workaround'
 
 __windows_init
 __vagrant_init
+__react_init
 
 mux start cyg
