@@ -14,10 +14,14 @@ tmux_socket_workaround() {
 
 __windows_init() {
   compinit # Not sure why we have to invoke this manually like this now...
+  local win_home=$(cygpath $USERPROFILE)
 
+  alias cdw="cd ${win_home}"
+}
+
+__windows_procore_init() {
   local win_home=$(cygpath $USERPROFILE)
   local procore=$win_home/Procore
-
   local addin=$procore/ProjectAddIn
   local analytics=$procore/Analytics
   local api=$procore/Api
@@ -25,7 +29,6 @@ __windows_init() {
   local pd=$procore/Drive
   local utilities=$procore/Utilities
 
-  alias cdw="cd ${win_home}"
   alias procore="cd ${procore}"
   alias addin="cd ${addin}"
   alias analytics="cd ${analytics}"
@@ -34,9 +37,11 @@ __windows_init() {
   alias utilities="cd ${utilities}"
   alias docproc="cd ${document_processing}"
 
-  __ensure_in_PATH /cygdrive/c/Chocolatey/chocolateyinstall
+  [ -f "$pd" ] && cd $pd
+}
 
-  cd $pd
+__chocolatey_init() {
+  __ensure_in_PATH /cygdrive/c/Chocolatey/chocolateyinstall
 }
 
 __vagrant_init() {
@@ -44,7 +49,7 @@ __vagrant_init() {
   alias vag='cd ~/vagrant-ude && vagrant ssh'
 }
 
-__react_init() {
+__node_init() {
   __ensure_in_PATH '/cygdrive/c/Program Files/nodejs'
   __ensure_in_PATH /cygdrive/c/Users/Andrew/AppData/Roaming/npm
 }
@@ -52,7 +57,8 @@ __react_init() {
 alias tmx='tmux_socket_workaround'
 
 __windows_init
+__windows_procore_init
 __vagrant_init
-__react_init
+__node_init
 
 mux start cyg
