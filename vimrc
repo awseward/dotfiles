@@ -123,4 +123,4 @@ if executable('ag')
   let g:ctrlp_show_hidden = 1
 endif
 
-colorscheme gruvbox
+colorscheme badwolf
