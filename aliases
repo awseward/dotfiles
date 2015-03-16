@@ -33,3 +33,6 @@ alias val='valgrind'
 alias rcup='rcup -v'
 alias rcdn='rcdn -v'
 alias mkrc='mkrc -v'
+
+### node
+alias webpack='webpack --progress --colors --watch'
