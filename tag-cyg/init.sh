@@ -35,6 +35,8 @@ __windows_init() {
   alias docproc="cd ${document_processing}"
 
   __ensure_in_PATH /cygdrive/c/Chocolatey/chocolateyinstall
+  __ensure_in_PATH /cygdrive/c/Windows
+  __ensure_in_PATH '/cygdrive/c/Program Files (x86)/Caphyon/Advanced Installer 11.6.3/bin/x86'
 
   cd $pd
 }

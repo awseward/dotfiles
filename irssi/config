@@ -30,14 +30,6 @@ servers = (
     port = "6667";
     use_ssl = "no";
     ssl_verify = "no";
-  },
-  {
-    address = "sup.madsalty.com";
-    port = "5000";
-    password = "r0botmilk:123456";
-    use_ssl = "yes";
-    ssl_verify = "no";
-    autoconnect = "yes";
   }
 );
 
