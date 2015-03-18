@@ -123,9 +123,16 @@ if executable('ag')
   let g:ctrlp_show_hidden = 1
 endif
 
+"
+" Colors
+"
 set t_Co=256
-colorscheme wombat
+colorscheme badwolf
 hi Normal ctermbg=none
+hi NonText ctermbg=none
+hi LineNr ctermbg=none
 
+"
 " vim-jsx
+"
 let g:jsx_ext_required = 0
