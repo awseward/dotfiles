@@ -123,7 +123,8 @@ if executable('ag')
   let g:ctrlp_show_hidden = 1
 endif
 
-colorscheme badwolf
+set t_Co=256
+colorscheme gruvbox
 
 " vim-jsx
 let g:jsx_ext_required = 0
