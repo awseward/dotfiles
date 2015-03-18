@@ -63,6 +63,8 @@ alias tmx='tmux_socket_workaround'
 
 __windows_init
 __windows_procore_init
+__chocolatey_init
+__procore_drive_init
 __vagrant_init
 __node_init
 
