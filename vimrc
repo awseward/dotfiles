@@ -124,7 +124,8 @@ if executable('ag')
 endif
 
 set t_Co=256
-colorscheme gruvbox
+colorscheme wombat
+hi Normal ctermbg=none
 
 " vim-jsx
 let g:jsx_ext_required = 0
