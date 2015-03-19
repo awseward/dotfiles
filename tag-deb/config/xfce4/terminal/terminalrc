@@ -2,7 +2,7 @@
 MiscAlwaysShowTabs=FALSE
 MiscBell=FALSE
 MiscBordersDefault=TRUE
-MiscCursorBlinks=FALSE
+MiscCursorBlinks=TRUE
 MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
 MiscDefaultGeometry=80x24
 MiscInheritGeometry=FALSE
@@ -17,9 +17,11 @@ MiscTabPosition=GTK_POS_TOP
 MiscHighlightUrls=TRUE
 FontName=DejaVu Sans Mono 11
 BackgroundMode=TERMINAL_BACKGROUND_TRANSPARENT
-BackgroundDarkness=0.900000
+BackgroundDarkness=0.900500
 ScrollingBar=TERMINAL_SCROLLBAR_NONE
 ScrollingLines=10002
-ColorPalette=#000000;#cc0000;#4e9a06;#c4a000;#3465a4;#75507b;#06989a;#d3d7cf;#555753;#ef2929;#8ae234;#fce94f;#739fcf;#ad7fa8;#34e2e2;#eeeeec
-ColorBackground=#000008080000
+ColorCursor=#ffffffffffff
+ColorForeground=#ffffffffffff
+ColorBackground=#000000000000
+ColorPalette=#29293b3b3b3b;#bfbf53535757;#4141a5a55151;#aeaea6a64f4f;#41416e6ea5a5;#bfbf60605353;#71714d4da5a5;#878768686868;#343440404040;#bfbf63636767;#5151a5a55f5f;#aeaea7a75d5d;#51517777a5a5;#bfbf6e6e6363;#78785959a5a5;#87876f6f6f6f
 
