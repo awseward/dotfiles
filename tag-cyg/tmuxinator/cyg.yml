@@ -23,7 +23,6 @@ windows:
       layout: bf5f,199x48,0,0{117x48,0,0,0,81x48,118,0[81x14,118,0,2,81x33,118,15,3]}
       panes:
         - clear
-        - irssi
         - clear
   - vagrant:
       panes:
