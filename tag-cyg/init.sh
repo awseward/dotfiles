@@ -1,5 +1,5 @@
-# override open_url from ~/.lib/
-open_url() {
+# override open from ~/.lib/misc.sh
+open() {
   cygstart $1 > /dev/null 2>&1
 }
 

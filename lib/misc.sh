@@ -5,6 +5,6 @@ __ensure_in_PATH() {
   [[ "$PATH" =~ (^|:)$resolved(:|$) ]] || export PATH=$PATH:$resolved
 }
 
-open_url() {
+open() {
   xdg-open $1 > /dev/null 2>&1
 }
