@@ -127,7 +127,7 @@ endif
 " Colors
 "
 set t_Co=256
-colorscheme badwolf
+colorscheme gruvbox
 hi Normal ctermbg=none
 hi NonText ctermbg=none
 hi LineNr ctermbg=none
