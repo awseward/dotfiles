@@ -65,6 +65,10 @@ __MSBuild_init() {
   __ensure_in_PATH '/cygdrive/c/Program Files (x86)/MSBuild/12.0/Bin'
 }
 
+_go_init() {
+  __ensure_in_PATH /cygdrive/c/Go/bin
+}
+
 alias tmx='tmux_socket_workaround'
 
 __windows_init
