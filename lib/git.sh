@@ -31,7 +31,7 @@ git_remote_url() {
 }
 
 git_open_remote() {
-  open_url $(git_remote_url)
+  open $(git_remote_url)
 }
 
 git_remote_compare_url() {
@@ -39,7 +39,7 @@ git_remote_compare_url() {
 }
 
 git_remote_compare() {
-  open_url $(git_remote_compare_url)
+  open $(git_remote_compare_url)
 }
 
 git_push_and_compare() {

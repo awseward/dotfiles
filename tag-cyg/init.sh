@@ -1,5 +1,5 @@
-# override open_url from ~/.lib/
-open_url() {
+# override open from ~/.lib/misc.sh
+open() {
   cygstart $1 > /dev/null 2>&1
 }
 
@@ -41,7 +41,9 @@ __windows_procore_init() {
 }
 
 __chocolatey_init() {
+  # Different install locations
   __ensure_in_PATH /cygdrive/c/Chocolatey/chocolateyinstall
+  __ensure_in_PATH /cygdrive/c/ProgramData/chocolatey/chocolateyinstall
 }
 
 __vagrant_init() {
@@ -59,11 +61,22 @@ __procore_drive_init() {
   __ensure_in_PATH '/cygdrive/c/Program Files (x86)/Caphyon/Advanced Installer 11.6.3/bin/x86'
 }
 
+__MSBuild_init() {
+  __ensure_in_PATH '/cygdrive/c/Program Files (x86)/MSBuild/12.0/Bin'
+}
+
+_go_init() {
+  __ensure_in_PATH /cygdrive/c/Go/bin
+}
+
 alias tmx='tmux_socket_workaround'
 
 __windows_init
 __windows_procore_init
+__chocolatey_init
+__procore_drive_init
 __vagrant_init
 __node_init
+__MSBuild_init
 
 mux start cyg
