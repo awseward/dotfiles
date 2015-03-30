@@ -13,6 +13,7 @@ Plugin 'chriskempson/base16-vim'
 Plugin 'mxw/vim-jsx'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'ervandew/supertab'
+Plugin 'derekwyatt/vim-scala'
 
 call vundle#end()
 filetype plugin indent on
