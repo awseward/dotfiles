@@ -58,7 +58,7 @@ __node_init() {
 
 __procore_drive_init() {
   __ensure_in_PATH /cygdrive/c/Windows
-  __ensure_in_PATH '/cygdrive/c/Program Files (x86)/Caphyon/Advanced Installer 11.6.3/bin/x86'
+  __ensure_in_PATH '/cygdrive/c/Program Files (x86)/Caphyon/Advanced Installer 11.9/bin/x86'
 }
 
 __MSBuild_init() {

@@ -51,7 +51,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/bin:/usr/bin:/bin:/home/andrew/bin:/home/andrew/.bin:/sbin"
+export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/home/andrew/bin:/home/andrew/.bin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -82,7 +82,7 @@ export EDITOR='vim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 for file in ~/.lib/*.sh; do
-  source $file
+  source "$file"
 done
 
 [ -f ~/.aliases ] && source ~/.aliases
