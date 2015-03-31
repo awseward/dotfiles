@@ -65,8 +65,17 @@ __MSBuild_init() {
   __ensure_in_PATH '/cygdrive/c/Program Files (x86)/MSBuild/12.0/Bin'
 }
 
-_go_init() {
+__go_init() {
   __ensure_in_PATH /cygdrive/c/Go/bin
+}
+
+__java_init() {
+  __ensure_in_PATH '/cygdrive/c/Program Files/Java/jdk1.8.0_40/bin'
+}
+
+__scala_init() {
+  __ensure_in_PATH '/cygdrive/c/Program Files (x86)/scala/bin'
+  __ensure_in_PATH '/cygdrive/c/Program Files (x86)/sbt/bin'
 }
 
 alias tmx='tmux_socket_workaround'
@@ -78,5 +87,9 @@ __procore_drive_init
 __vagrant_init
 __node_init
 __MSBuild_init
+__go_init
+__java_init
+__scala_init
+
 
 mux start cyg
