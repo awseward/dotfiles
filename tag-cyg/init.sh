@@ -40,56 +40,14 @@ __windows_procore_init() {
   [ -f "$pd" ] && cd $pd
 }
 
-__chocolatey_init() {
-  # Different install locations
-  __ensure_in_PATH /cygdrive/c/Chocolatey/chocolateyinstall
-  __ensure_in_PATH /cygdrive/c/ProgramData/chocolatey/chocolateyinstall
-}
-
 __vagrant_init() {
-  __ensure_in_PATH /cygdrive/c/Hashicorp/Vagrant/bin
   alias vag='cd ~/vagrant-ude && vagrant ssh'
 }
 
-__node_init() {
-  __ensure_in_PATH '/cygdrive/c/Program Files/nodejs'
-  __ensure_in_PATH /cygdrive/c/Users/Andrew/AppData/Roaming/npm
-}
-
-__procore_drive_init() {
-  __ensure_in_PATH /cygdrive/c/Windows
-  __ensure_in_PATH '/cygdrive/c/Program Files (x86)/Caphyon/Advanced Installer 11.6.3/bin/x86'
-}
-
-__MSBuild_init() {
-  __ensure_in_PATH '/cygdrive/c/Program Files (x86)/MSBuild/12.0/Bin'
-}
-
-__go_init() {
-  __ensure_in_PATH /cygdrive/c/Go/bin
-}
-
-__java_init() {
-  __ensure_in_PATH '/cygdrive/c/Program Files/Java/jdk1.8.0_40/bin'
-}
-
-__scala_init() {
-  __ensure_in_PATH '/cygdrive/c/Program Files (x86)/scala/bin'
-  __ensure_in_PATH '/cygdrive/c/Program Files (x86)/sbt/bin'
-}
-
-alias tmx='tmux_socket_workaround'
-
 __windows_init
 __windows_procore_init
-__chocolatey_init
-__procore_drive_init
 __vagrant_init
-__node_init
-__MSBuild_init
-__go_init
-__java_init
-__scala_init
 
+alias tmx='tmux_socket_workaround'
 
 mux start cyg

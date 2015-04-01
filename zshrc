@@ -86,4 +86,5 @@ for file in ~/.lib/*.sh; do
 done
 
 [ -f ~/.aliases ] && source ~/.aliases
+[ -f ~/.path    ] && source ~/.path.sh
 [ -f ~/.init.sh ] && source ~/.init.sh
