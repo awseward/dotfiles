@@ -1,6 +1,6 @@
 # override open from ~/.lib/misc.sh
 open() {
-  cygstart $1 > /dev/null 2>&1
+  cygstart "$1" > /dev/null 2>&1
 }
 
 print_new_uuid() {
