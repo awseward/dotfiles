@@ -44,6 +44,7 @@
   autocrlf = input
   safecrlf = false
   editor = vim
+  pager = less -F -X
 [diff]
   algorithm = patience
 [init]
