@@ -115,6 +115,9 @@ set shiftwidth=2
 set expandtab
 set number
 set relativenumber
+set ignorecase
+set smartcase
+set laststatus=2
 
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
