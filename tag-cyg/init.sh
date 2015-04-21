@@ -37,7 +37,7 @@ __windows_procore_init() {
   alias utilities="cd ${utilities}"
   alias docproc="cd ${document_processing}"
 
-  [ -f "$pd" ] && cd $pd
+  [ -d "$pd" ] && cd "$pd"
 }
 
 __vagrant_init() {
