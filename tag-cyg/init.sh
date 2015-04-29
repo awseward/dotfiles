@@ -14,14 +14,12 @@ tmux_socket_workaround() {
 
 __windows_init() {
   compinit # Not sure why we have to invoke this manually like this now...
-  local win_home=$(cygpath $USERPROFILE)
 
-  alias cdw="cd ${win_home}"
+  alias cdw="cd $(cygpath $USERPROFILE)"
 }
 
 __windows_procore_init() {
-  local win_home=$(cygpath $USERPROFILE)
-  local procore=$win_home/Procore
+  local procore="$(cygpath $USERPROFILE)/Procore"
   local addin=$procore/ProjectAddIn
   local analytics=$procore/Analytics
   local api=$procore/Api
