@@ -65,7 +65,14 @@ git_nuke_branch() {
 }
 
 git_delete_pruneable_branches() {
-  __git_pruneable_branches | xargs git branch -D
+  local branches="$(__git_pruneable_branches)"
+
+  if [ -n "$branches" ]; then
+    __git_pruneable_branches | xargs git branch -D
+    git remote prune origin
+  else
+    echo No branches to prune
+  fi
 }
 
 __git_filter_remote_v() {
