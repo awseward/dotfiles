@@ -16,6 +16,7 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'ervandew/supertab'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'w0ng/vim-hybrid'
+Plugin 'elixir-lang/vim-elixir'
 
 call vundle#end()
 filetype plugin indent on
