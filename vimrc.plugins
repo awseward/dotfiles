@@ -17,6 +17,8 @@ Plugin 'ervandew/supertab'
 Plugin 'derekwyatt/vim-scala'
 Plugin 'w0ng/vim-hybrid'
 Plugin 'elixir-lang/vim-elixir'
+Plugin 'raichoo/purescript-vim'
+Plugin 'kongo2002/fsharp-vim'
 
 call vundle#end()
 filetype plugin indent on
