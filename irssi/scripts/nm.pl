@@ -31,9 +31,9 @@ $VERSION="0.3.10";
 #########
 # USAGE
 ###
-# 
+#
 # use
-# 
+#
 # /neatcolor help
 #
 # for help on available commands
@@ -65,7 +65,7 @@ my $help = "
 
 /set neat_right_mode <ON|OFF>
     * ON  : print the mode of the nick e.g @%+ after the nick
-    * OFF : print it left of the nick 
+    * OFF : print it left of the nick
 
 /set neat_maxlength <number>
     * number : Maximum length of Nicks to display. Longer nicks are truncated.
@@ -84,7 +84,7 @@ my $help = "
 /set neat_allow_shrinking <ON|OFF>
     * ON  : shrink padding when longest nick disappears
     * OFF : do not shrink, only allow growing
- 
+
 ";
 
 #
@@ -154,7 +154,7 @@ my $help = "
 #
 # Version 0.0.2
 #  - ugly typo fixed
-#  
+#
 # Version 0.0.1
 #  - initial release
 #
@@ -358,7 +358,7 @@ sub sig_setup {
     } else {
         $alignment = \&color_right;
     }
-    
+
     # check if we switched coloring on or off
     my $new = Irssi::settings_get_bool('neat_colorize');
     if ($new != $colorize) {
