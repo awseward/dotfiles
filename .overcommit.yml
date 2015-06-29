@@ -14,3 +14,7 @@ CommitMsg:
 
   RussianNovel:
     enabled: true
+
+PrePush:
+  PrintDiffUrls:
+    enabled: true
