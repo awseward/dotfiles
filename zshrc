@@ -91,3 +91,5 @@ done
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+export GIT_TEMPLATE_DIR=`overcommit --template-dir`
