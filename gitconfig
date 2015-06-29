@@ -47,7 +47,5 @@
   pager = less -F -X
 [diff]
   algorithm = patience
-[init]
-  templatedir = ~/.git_templates
 [push]
   default = current

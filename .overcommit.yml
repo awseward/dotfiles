@@ -5,6 +5,9 @@ PreCommit:
     enabled: true
     problem_on_unmodified_line: ignore
 
+  FearOfCommitment:
+    enabled: true
+
 CommitMsg:
   HardTabs:
     enabled: true
