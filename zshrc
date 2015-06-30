@@ -88,3 +88,8 @@ done
 [ -f ~/.aliases ] && source ~/.aliases
 [ -f ~/.path.sh ] && source ~/.path.sh
 [ -f ~/.init.sh ] && source ~/.init.sh
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+export GIT_TEMPLATE_DIR=`overcommit --template-dir`

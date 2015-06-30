@@ -48,7 +48,7 @@ handleResponse()
 for package in $(comm -13 --check-order $TRACKED $UNTRACKED); do
   continue=''
   response=''
-  while [ "$continue" = '' ]; do 
+  while [ "$continue" = '' ]; do
     clear && promptPackage $package
     handleResponse $response
   done
