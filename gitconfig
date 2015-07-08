@@ -47,5 +47,8 @@
   pager = less -F -X
 [diff]
   algorithm = patience
+  renames = copies
 [push]
   default = current
+[status]
+  showUntrackedFiles = all
