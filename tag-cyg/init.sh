@@ -12,7 +12,12 @@ tmux_socket_workaround() {
   tmux -L $(print_new_uuid)
 }
 
+__set_git_autocrlf() {
+  git config --system core.autocrlf true
+}
+
 __windows_init() {
+  __set_git_autocrlf
   compinit # Not sure why we have to invoke this manually like this now...
 
   alias cdw="cd $(cygpath $USERPROFILE)"
