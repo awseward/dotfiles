@@ -41,8 +41,7 @@
   changed = green
   untracked = cyan
 [core]
-  autocrlf = input
-  safecrlf = false
+  safecrlf = warn
   editor = vim
   pager = less -F -X
 [diff]
