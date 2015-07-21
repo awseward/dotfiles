@@ -1,3 +1,3 @@
 # TODO: Figure out os-specific stuff like this someday...
 alias ls="ls -hFG"
-alias rm="rm -riv"
+alias rm="rm -dv"
