@@ -118,6 +118,8 @@ set relativenumber
 set ignorecase
 set smartcase
 set laststatus=2
+set cursorline
+set cursorcolumn
 
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
