@@ -8,6 +8,10 @@ PreCommit:
   FearOfCommitment:
     enabled: true
 
+  ShellCheck:
+    enabled: true
+    on_fail: warn
+
 CommitMsg:
   HardTabs:
     enabled: true
