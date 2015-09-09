@@ -23,10 +23,10 @@ for file in ~/.lib/*.sh; do
   source "$file"
 done
 
-[ -f ~/.aliases ] && source ~/.aliases
-[ -f ~/.path.sh ] && source ~/.path.sh
-[ -f ~/.init.sh ] && source ~/.init.sh
-[ -f ~/.fn_overrides.sh ] && source ~/.fn_overrides.sh
+source ~/.aliases
+source ~/.path.sh
+source ~/.init.sh
+source ~/.fn_overrides.sh
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
