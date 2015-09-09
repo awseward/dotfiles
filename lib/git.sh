@@ -22,10 +22,10 @@ git_remote_name() {
 }
 
 git_remote_url() {
-  local remote_string="$(__git_filter_remote_v origin)"
-  local r_host=$(__git_parse_remote_host $remote_string)
-  local r_owner=$(__git_parse_remote_owner $remote_string)
-  local r_name=$(__git_parse_remote_name $remote_string)
+  local remote_url=$(git config remote.origin.url)
+  local r_host=$(__git_parse_remote_host_osx $remote_url)
+  local r_owner=$(__git_parse_remote_owner_osx $remote_url)
+  local r_name=$(__git_parse_remote_name_osx $remote_url)
 
   echo "https://${r_host}/${r_owner}/${r_name}"
 }
@@ -83,12 +83,24 @@ __git_parse_remote_host() {
   echo "$@" | sed -e 's/.\+@\(.\+\.com\).*/\1/'
 }
 
+__git_parse_remote_host_osx() {
+  echo "$@" | sed -E 's/[[:alnum:]]+\@([[:alnum:]]+\.[[:alnum:]]+)\:([[:alnum:]]+)\/([[:alnum:]]+)(.git)?/\1/g'
+}
+
 __git_parse_remote_owner() {
   echo "$@" | sed -e 's/.\+\:\(.\+\)\/.*/\1/'
 }
 
+__git_parse_remote_owner_osx() {
+  echo "$@" | sed -E 's/[[:alnum:]]+\@([[:alnum:]]+\.[[:alnum:]]+)\:([[:alnum:]]+)\/([[:alnum:]]+)(.git)?/\2/g'
+}
+
 __git_parse_remote_name() {
   echo "$@" | sed -e 's/.\+\/\(.\+\)\ .*/\1/;s/.git//'
+}
+
+__git_parse_remote_name_osx() {
+  echo "$@" | sed -E 's/[[:alnum:]]+\@([[:alnum:]]+\.[[:alnum:]]+)\:([[:alnum:]]+)\/([[:alnum:]]+)(.git)?/\3/g'
 }
 
 __git_pruneable_branches() {
