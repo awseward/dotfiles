@@ -8,6 +8,7 @@ alias rm='rm -Iv'
 alias g='grep -Irisn --color=auto'
 alias p='ps -a'
 alias back='cd -'
+alias path='echo $PATH | tr -s ":" "\n"'
 
 ### git
 alias gp='git_push_and_compare'
