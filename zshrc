@@ -19,14 +19,15 @@ export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/home/andrew/bin:/home/andrew/.b
 
 export EDITOR='vim'
 
+source ~/.aliases
+
 for file in ~/.lib/*.sh; do
   source "$file"
 done
 
-source ~/.aliases
-source ~/.path.sh
-source ~/.init.sh
-source ~/.fn_overrides.sh
+for file in ~/.env-specific/**/*.sh; do
+  source "$file"
+done
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
