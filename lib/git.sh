@@ -88,7 +88,7 @@ __git_parse_remote_owner() {
 }
 
 __git_parse_remote_name() {
-  echo "$@" | sed -e 's/.\+\/\(.\+\)\ .*/\1/;s/.git//'
+  echo "$@" | sed -e 's/.*\/\(.\+\)$/\1/ ; s/.git$//'
 }
 
 __git_pruneable_branches() {

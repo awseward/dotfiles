@@ -10,7 +10,7 @@ __get_vertical_padding() {
 }
 
 __print_vertical_padding() {
-  for i in $(seq 1 "$1"); do echo; done
+  for _ in $(seq 1 "$1"); do echo; done
 }
 
 fig_screen() {
