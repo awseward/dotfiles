@@ -10,28 +10,28 @@ git_current_branch() {
 }
 
 git_remote_host() {
-  __git_parse_remote_host $(__git_filter_remote_v origin)
+  __git_parse_remote_host "$(__git_filter_remote_v origin)"
 }
 
 git_remote_owner() {
-  __git_parse_remote_owner $(__git_filter_remote_v origin)
+  __git_parse_remote_owner "$(__git_filter_remote_v origin)"
 }
 
 git_remote_name() {
-  __git_parse_remote_name $(__git_filter_remote_v origin)
+  __git_parse_remote_name "$(__git_filter_remote_v origin)"
 }
 
 git_remote_url() {
   local remote_url=$(git config remote.origin.url)
-  local r_host=$(__git_parse_remote_host $remote_url)
-  local r_owner=$(__git_parse_remote_owner $remote_url)
-  local r_name=$(__git_parse_remote_name $remote_url)
+  local r_host=$(__git_parse_remote_host "$remote_url")
+  local r_owner=$(__git_parse_remote_owner "$remote_url")
+  local r_name=$(__git_parse_remote_name "$remote_url")
 
   echo "https://${r_host}/${r_owner}/${r_name}"
 }
 
 git_open_remote() {
-  open $(git_remote_url)
+  open "$(git_remote_url)"
 }
 
 git_remote_compare_url() {
@@ -39,7 +39,7 @@ git_remote_compare_url() {
 }
 
 git_remote_compare() {
-  open $(git_remote_compare_url)
+  open "$(git_remote_compare_url)"
 }
 
 git_push_and_compare() {
@@ -52,11 +52,11 @@ git_delete_branch_local() {
 
   git reset --hard
   git checkout master
-  git branch -D $current_branch
+  git branch -D "$current_branch"
 }
 
 git_delete_branch_remote() {
-  git push origin :$(git_current_branch)
+  git push origin ":$(git_current_branch)"
 }
 
 git_nuke_branch() {
