@@ -26,7 +26,5 @@ fig_screen() {
 
   __print_vertical_padding $((padding - 2))
 
-  while true; do
-    continue
-  done
+  while true; do continue; done
 }
