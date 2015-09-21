@@ -18,7 +18,7 @@ sox_charge() {
     synth 5 square amod 120-1 30 \
     synth 5 sin mix 200-20 \
     synth 5 sawtooth mix 0.01-1000 90 20 \
-    fade h 0.5 5 0.001 \
+    fade h 0.5 5 0.001
 }
 
 sox_engine() {

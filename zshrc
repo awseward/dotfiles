@@ -1,39 +1,40 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# Themes found in $ZSH/themes/
+export ZSH_THEME="robbyrussell"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Plugins found in $ZSH/plugins/
+# Custom plugins in $ZSH/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(rake)
 
-source $ZSH/oh-my-zsh.sh
-
-export PATH=$PATH:"/usr/local/bin:/usr/bin:/bin:/home/andrew/bin:/home/andrew/.bin:/sbin"
-
-export EDITOR='vim'
-
-source ~/.aliases
+source "$ZSH/oh-my-zsh.sh"
 
 for file in ~/.lib/*.sh; do
   source "$file"
 done
 
+__ensure_in_PATH "/usr/local/bin"
+__ensure_in_PATH "/usr/bin"
+__ensure_in_PATH "/bin"
+__ensure_in_PATH "$HOME/bin"
+__ensure_in_PATH "$HOME/.bin"
+__ensure_in_PATH "/sbin"
+
+export EDITOR='vim'
+
+source ~/.aliases
+
 for file in ~/.env-specific/**/*.sh; do
   source "$file"
 done
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+# Heroku
+__ensure_in_PATH "/usr/local/heroku/bin"
 
 # Overcommit
-export GIT_TEMPLATE_DIR=`overcommit --template-dir`
+export GIT_TEMPLATE_DIR=$(overcommit --template-dir)
 
 # NVM
 export NVM_DIR=~"/.nvm"
