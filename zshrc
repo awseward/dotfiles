@@ -39,3 +39,5 @@ export GIT_TEMPLATE_DIR=`overcommit --template-dir`
 export NVM_DIR=~"/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 nvm use stable
+
+warn_if_duplicates_in_path
