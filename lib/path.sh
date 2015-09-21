@@ -10,3 +10,8 @@ warn_if_duplicates_in_path() {
 
   [ "$total" -ne "$unique" ] && echo "Warning: Duplicate entries found in PATH"
 }
+
+get_uniquified_path() {
+  # TODO
+  echo "$PATH"
+}
