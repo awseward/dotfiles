@@ -21,6 +21,7 @@ Plugin 'raichoo/purescript-vim'
 Plugin 'kongo2002/fsharp-vim'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-commentary'
 
 call vundle#end()
 filetype plugin indent on
