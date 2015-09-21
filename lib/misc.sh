@@ -1,7 +1,8 @@
 #!/bin/sh
 
 __ensure_in_PATH() {
-  local resolved="$(realpath "$1")"
+  local resolved
+  resolved="$(realpath "$1")"
   [[ "$PATH" =~ (^|:)$resolved(:|$) ]] || export PATH=$PATH:$resolved
 }
 

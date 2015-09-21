@@ -5,7 +5,8 @@ __get_text_height() {
 }
 
 __get_vertical_padding() {
-  local diff=$((term_height - text_height))
+  local diff
+  diff=$((term_height - text_height))
   echo $((diff / 2))
 }
 
@@ -14,11 +15,16 @@ __print_vertical_padding() {
 }
 
 fig_screen() {
-  local text="$*"
-  local term_width=$(tput cols)
-  local term_height=$(tput lines)
-  local text_height=$(__get_text_height "$text")
-  local padding=$(__get_vertical_padding)
+  local text
+  local term_width
+  local term_height
+  local text_height
+  local padding
+  text="$*"
+  term_width=$(tput cols)
+  term_height=$(tput lines)
+  text_height=$(__get_text_height "$text")
+  padding=$(__get_vertical_padding)
 
   clear
   __print_vertical_padding "$padding"

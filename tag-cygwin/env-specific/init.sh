@@ -4,7 +4,8 @@ open() {
 }
 
 print_new_uuid() {
-  local rb_cmd="require 'securerandom'; puts SecureRandom.uuid"
+  local rb_cmd
+  rb_cmd="require 'securerandom'; puts SecureRandom.uuid"
   ruby -e "$rb_cmd"
 }
 
@@ -24,7 +25,9 @@ __windows_init() {
 }
 
 __windows_procore_init() {
-  export PROCORE_DIR="$(cygpath "$USERPROFILE")/Procore"
+  export PROCORE_DIR
+  PROCORE_DIR="$(cygpath "$USERPROFILE")/Procore"
+
   export PD_DIR="$PROCORE_DIR/Drive"
   export PD_ADDIN_DIR="$PROCORE_DIR/ProjectAddIn"
   export CHAUFFEUR_DIR="$PROCORE_DIR/chauffeur"
