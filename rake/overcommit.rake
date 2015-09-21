@@ -1,5 +1,4 @@
 require 'zip'
-require 'pry'
 
 namespace :oc do
   repo_dir = "https://github.com/awseward/overcommit-hooks"
@@ -27,7 +26,6 @@ namespace :oc do
       unzipped_dir = Dir.glob('*').select{|f| File.directory? f }.first
       Dir.chdir "#{unzipped_dir}/hooks" do
         Dir.glob('*').each do |src|
-          # binding.pry
           cp_r src, dest_hooks_dir
         end
       end
