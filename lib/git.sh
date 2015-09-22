@@ -1,8 +1,7 @@
-#!/bin/sh
+#!/bin/zsh
 
 git_is_repo() {
-  git rev-parse 2> /dev/null && return 0
-  return 1
+  git rev-parse 2> /dev/null
 }
 
 git_current_branch() {
@@ -10,15 +9,15 @@ git_current_branch() {
 }
 
 git_remote_host() {
-  __git_parse_remote_host "$(__git_filter_remote_v origin)"
+  __git_parse_remote_host "$(__git_origin_clone_url)"
 }
 
 git_remote_owner() {
-  __git_parse_remote_owner "$(__git_filter_remote_v origin)"
+  __git_parse_remote_owner "$(__git_origin_clone_url)"
 }
 
 git_remote_name() {
-  __git_parse_remote_name "$(__git_filter_remote_v origin)"
+  __git_parse_remote_name "$(__git_origin_clone_url)"
 }
 
 git_remote_url() {
@@ -26,7 +25,7 @@ git_remote_url() {
   local r_host
   local r_owner
   local r_name
-  remote_url=$(git config remote.origin.url)
+  remote_url=$(__git_origin_clone_url)
   r_host=$(__git_parse_remote_host "$remote_url")
   r_owner=$(__git_parse_remote_owner "$remote_url")
   r_name=$(__git_parse_remote_name "$remote_url")
@@ -81,20 +80,8 @@ git_delete_pruneable_branches() {
   fi
 }
 
-__git_filter_remote_v() {
-  git remote -v | grep -m1 "^${1}\s.*$"
-}
-
-__git_parse_remote_host() {
-  echo "$@" | sed -e 's/.\+@\(.\+\.com\).*/\1/'
-}
-
-__git_parse_remote_owner() {
-  echo "$@" | sed -e 's/.\+\:\(.\+\)\/.*/\1/'
-}
-
-__git_parse_remote_name() {
-  echo "$@" | sed -e 's/.*\/\(.\+\)$/\1/ ; s/.git$//'
+__git_origin_clone_url() {
+  git config remote.origin.url
 }
 
 __git_pruneable_branches() {

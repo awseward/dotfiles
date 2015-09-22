@@ -1,17 +1,21 @@
-#!/bin/sh
+#!/bin/zsh
 
 __canonicalize_path() {
   realpath "$1"
 }
 
+__exists_in_PATH() {
+  [[ "$PATH" =~ (^|:)$1(:|$) ]]
+}
+
 __prepend_to_PATH() {
   local entry="$1"
-  [[ "$PATH" =~ (^|:)$entry(:|$) ]] || export PATH="$entry:$PATH"
+  __exists_in_PATH "$entry" || export PATH="$entry:$PATH"
 }
 
 __append_to_PATH() {
   local entry="$1"
-  [[ "$PATH" =~ (^|:)$entry(:|$) ]] || export PATH="$PATH:$entry"
+  __exists_in_PATH "$entry" || export PATH="$PATH:$entry"
 }
 
 __ensure_in_PATH() {
