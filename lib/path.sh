@@ -6,12 +6,12 @@ __canonicalize_path() {
 
 __prepend_to_PATH() {
   local entry="$1"
-  [[ "$PATH" =~ (^|:)$entry(:|$) ]] || export PATH="$PATH:$entry"
+  [[ "$PATH" =~ (^|:)$entry(:|$) ]] || export PATH="$entry:$PATH"
 }
 
 __append_to_PATH() {
   local entry="$1"
-  [[ "$PATH" =~ (^|:)$entry(:|$) ]] || export PATH="$entry:$PATH"
+  [[ "$PATH" =~ (^|:)$entry(:|$) ]] || export PATH="$PATH:$entry"
 }
 
 __ensure_in_PATH() {
