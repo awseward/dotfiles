@@ -24,6 +24,7 @@ for file in ~/.env-specific/**/*.sh; do
 done
 
 __ensure_in_PATH          \
+  "$HOME/.rbenv/bin"      \
   "/usr/local/bin"        \
   "/usr/bin"              \
   "/bin"                  \
@@ -32,8 +33,12 @@ __ensure_in_PATH          \
   "/sbin"                 \
   "/usr/local/heroku/bin"
 
+# rbenv
+eval "$(rbenv init -)"
+
 # Overcommit
-export GIT_TEMPLATE_DIR=$(overcommit --template-dir)
+export GIT_TEMPLATE_DIR
+GIT_TEMPLATE_DIR=$(overcommit --template-dir)
 
 # NVM
 export NVM_DIR=~"/.nvm"
