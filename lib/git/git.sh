@@ -94,7 +94,7 @@ __git_error_cannot_delete_master() {
 }
 
 git_nuke_branch() {
-  git_delete_branch_remote && git_delete_branch_local
+  git_delete_branch_local && git_delete_branch_remote
 }
 
 git_delete_pruneable_branches() {
