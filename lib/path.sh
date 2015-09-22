@@ -36,7 +36,10 @@ warn_if_duplicates_in_path() {
   total=$(pretty_path | wc -l | xargs)
   unique=$(pretty_path | sort | uniq | wc -l | xargs)
 
-  [ "$total" -ne "$unique" ] && echo "Warning: Duplicate entries found in PATH"
+  if [ "$total" -ne "$unique" ]; then
+    echo "Warning: Duplicate entries found in PATH"
+    return 1
+  fi
 }
 
 get_uniquified_path() {
