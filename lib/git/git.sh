@@ -52,20 +52,39 @@ git_push_and_compare() {
 git_delete_branch_local() {
   local current_branch
   current_branch=$(git_current_branch)
-  [ "$current_branch" = master ] && return 1
 
-  git reset --hard
-  git checkout master
-  git branch -D "$current_branch"
+  if __git_branch_is_master "$current_branch"; then
+    __git_error_cannot_delete_master
+    return 1
+  else
+    git reset --hard
+    git checkout master
+    git branch -D "$current_branch"
+  fi
 }
 
 git_delete_branch_remote() {
-  git push origin ":$(git_current_branch)"
+  local current_branch
+  current_branch=$(git_current_branch)
+
+  if __git_branch_is_master "$current_branch"; then
+    __git_error_cannot_delete_master
+    return 1
+  else
+    git push origin ":$(git_current_branch)"
+  fi
+}
+
+__git_branch_is_master() {
+  [ "$1" = "master" ]
+}
+
+__git_error_cannot_delete_master() {
+  echo "Error: cannot delete 'master'"
 }
 
 git_nuke_branch() {
-  git_delete_branch_remote
-  git_delete_branch_local
+  git_delete_branch_remote && git_delete_branch_local
 }
 
 git_delete_pruneable_branches() {
