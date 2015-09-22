@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 __git_parse_remote_host_http() {
-  echo "$1" | sed -E 's/.*\:\/\/(.+\..+)\/.*$/\1/'
+  echo "$1" | sed -E 's/.*\:\/\/(.+\.[^/]+)\/.*/\1/'
 }
 
 __git_parse_remote_host_ssh() {
@@ -9,7 +9,7 @@ __git_parse_remote_host_ssh() {
 }
 
 __git_parse_remote_owner_http() {
-  echo "$1" | sed -E 's/.*\:\/\/.*\/(.+)\/.*$/\1/'
+  echo "$1" | sed -E 's/.*\:\/\/.*\/(.+)\/.*/\1/'
 }
 
 __git_parse_remote_owner_ssh() {

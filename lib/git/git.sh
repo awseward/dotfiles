@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 git_is_repo() {
   git rev-parse 2> /dev/null
@@ -30,7 +30,7 @@ git_remote_url() {
   r_owner=$(__git_parse_remote_owner "$remote_url")
   r_name=$(__git_parse_remote_name "$remote_url")
 
-  echo "https://${r_host}/${r_owner}/${r_name}"
+  echo "https://$r_host/$r_owner/$r_name"
 }
 
 git_open_remote() {
@@ -38,7 +38,17 @@ git_open_remote() {
 }
 
 git_remote_compare_url() {
-  echo "$(git_remote_url)/compare/master...$(git_current_branch)"
+  local current_branch
+  local remote_url
+  current_branch=$(git_current_branch)
+  remote_url=$(git_remote_url)
+
+  if __git_branch_is_master "$current_branch"; then
+    # No comparison to be done on master...
+    echo "$remote_url"
+  else
+    echo "$remote_url/compare/master...$current_branch"
+  fi
 }
 
 git_remote_compare() {
