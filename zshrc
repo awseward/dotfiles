@@ -11,6 +11,10 @@ plugins=(rake)
 
 source "$ZSH/oh-my-zsh.sh"
 
+export EDITOR='vim'
+
+source ~/.aliases
+
 for file in ~/.lib/*.sh; do
   source "$file"
 done
@@ -26,9 +30,6 @@ __ensure_in_PATH "$HOME/bin"
 __ensure_in_PATH "$HOME/.bin"
 __ensure_in_PATH "/sbin"
 
-export EDITOR='vim'
-
-source ~/.aliases
 
 # Heroku
 __ensure_in_PATH "/usr/local/heroku/bin"
