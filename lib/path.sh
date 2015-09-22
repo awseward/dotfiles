@@ -15,7 +15,9 @@ __append_to_PATH() {
 }
 
 __ensure_in_PATH() {
-  __append_to_PATH "$1"
+  for filePath in "$@"; do
+    __append_to_PATH "$filePath"
+  done
 }
 
 pretty_path() {

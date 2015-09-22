@@ -23,16 +23,14 @@ for file in ~/.env-specific/**/*.sh; do
   source "$file"
 done
 
-__ensure_in_PATH "/usr/local/bin"
-__ensure_in_PATH "/usr/bin"
-__ensure_in_PATH "/bin"
-__ensure_in_PATH "$HOME/bin"
-__ensure_in_PATH "$HOME/.bin"
-__ensure_in_PATH "/sbin"
-
-
-# Heroku
-__ensure_in_PATH "/usr/local/heroku/bin"
+__ensure_in_PATH          \
+  "/usr/local/bin"        \
+  "/usr/bin"              \
+  "/bin"                  \
+  "$HOME/bin"             \
+  "$HOME/.bin"            \
+  "/sbin"                 \
+  "/usr/local/heroku/bin"
 
 # Overcommit
 export GIT_TEMPLATE_DIR=$(overcommit --template-dir)
