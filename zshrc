@@ -15,6 +15,10 @@ for file in ~/.lib/*.sh; do
   source "$file"
 done
 
+for file in ~/.env-specific/**/*.sh; do
+  source "$file"
+done
+
 __ensure_in_PATH "/usr/local/bin"
 __ensure_in_PATH "/usr/bin"
 __ensure_in_PATH "/bin"
@@ -25,10 +29,6 @@ __ensure_in_PATH "/sbin"
 export EDITOR='vim'
 
 source ~/.aliases
-
-for file in ~/.env-specific/**/*.sh; do
-  source "$file"
-done
 
 # Heroku
 __ensure_in_PATH "/usr/local/heroku/bin"

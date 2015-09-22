@@ -14,6 +14,10 @@ __append_to_PATH() {
   [[ "$PATH" =~ (^|:)$entry(:|$) ]] || export PATH="$entry:$PATH"
 }
 
+__ensure_in_PATH() {
+  __append_to_PATH "$1"
+}
+
 pretty_path() {
   echo "$PATH" | tr -s ":" "\n"
 }
