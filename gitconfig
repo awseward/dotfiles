@@ -51,3 +51,5 @@
   default = current
 [status]
   showUntrackedFiles = all
+[fetch]
+  prune = false
