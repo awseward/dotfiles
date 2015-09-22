@@ -11,6 +11,7 @@ __get_vertical_padding() {
 }
 
 __print_vertical_padding() {
+  # shellcheck disable=2034
   for i in $(seq 1 "$1"); do echo; done
 }
 
