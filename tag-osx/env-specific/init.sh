@@ -32,4 +32,6 @@ alias ls="ls -hFG"
 alias rm="rm -dv"
 
 # Unset open() from ~/.lib/misc.sh
-unset -f open
+if [[ "$(type open)" =~ 'is a shell function' ]]; then
+  unset -f open
+fi
