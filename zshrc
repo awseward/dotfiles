@@ -15,7 +15,7 @@ export EDITOR='vim'
 
 source ~/.aliases
 
-for file in ~/.lib/**/*.sh; do
+for file in ~/.lib/autoload/**/*.sh; do
   source "$file"
 done
 
