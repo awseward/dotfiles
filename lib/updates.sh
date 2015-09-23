@@ -15,7 +15,7 @@ is_time_to_check() {
   local timestamp
   timestamp="$(read_timestamp)"
 
-  has_interval_passed "$timestamp"
+  _has_interval_passed "$timestamp"
 }
 
 write_timestamp_file() {
@@ -34,7 +34,7 @@ timestamp_exists() {
 
 # Pure
 
-has_interval_passed() {
+_has_interval_passed() {
   local timestamp="$1"
   local now
   local actual_interval
