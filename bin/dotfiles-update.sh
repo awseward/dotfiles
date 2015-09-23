@@ -11,10 +11,10 @@
   print_options() {
     local function_names
     function_names="$(typeset -f | grep -E '\(\)\ $' | sed -e 's/()//g')"
-    echo "  Options:"
+    echo "Options:"
 
     echo "$function_names" | while read line; do
-      echo "    $line"
+      echo "  $line"
     done
   }
 
@@ -26,11 +26,12 @@
     current_time="$(date +%s)"
     elapsed_time="$((current_time - last_checked))"
 
-    echo "  Update check interval:  ${UPDATE_INTERVAL}s"
-    echo "  Timestamp file:         $UPDATES_TIMESTAMP_FILEPATH"
-    echo "  Last checked:           $last_checked"
-    echo "  Current time:           $current_time"
-    echo "  Elapsed time:           $elapsed_time"
+    echo "Timestamp file:         $UPDATES_TIMESTAMP_FILEPATH"
+    echo "Update check interval:  ${UPDATE_INTERVAL}s"
+    echo
+    echo "Current time:           $current_time"
+    echo "Last checked:           $last_checked"
+    echo "Elapsed time:           $elapsed_time"
   }
 
   print_info_and_options() {
@@ -40,7 +41,10 @@
   }
 
   # Do something
-  echo "dotfiles-update:"
-  $_FN_NAME
-  echo
+  (
+    IFS=''
+    $_FN_NAME | while read line; do
+      echo "  $line"
+    done
+  )
 )
