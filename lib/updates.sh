@@ -5,7 +5,7 @@
   _UPDATES_TIMESTAMP_FILEPATH="$HOME/.dotfiles-update-timestamp"
 
   get_update_timestamp() {
-    if __dotfiles_update_timestamp_exists; then
+    if dotfiles_update_timestamp_exists; then
       cat "$_UPDATES_TIMESTAMP_FILEPATH"
     else
       echo 0
@@ -16,7 +16,7 @@
     local timestamp
     timestamp="$(get_update_timestamp)"
 
-    __has_update_interval_passed "$timestamp"
+    has_update_interval_passed "$timestamp"
   }
 
   write_updates_timestamp_file() {
@@ -33,11 +33,11 @@
     fi
   }
 
-  __dotfiles_update_timestamp_exists() {
+  dotfiles_update_timestamp_exists() {
     [ -f "$_UPDATES_TIMESTAMP_FILEPATH" ]
   }
 
-  __has_update_interval_passed() {
+  has_update_interval_passed() {
     local timestamp="$1"
     local now
     local actual_interval
