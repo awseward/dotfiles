@@ -4,13 +4,14 @@
   # Handle args
   _FN_NAME="$1"
   if [ "" = "$_FN_NAME" ]; then
-    _FN_NAME='print_usage'
+    _FN_NAME='print_usage_and_info'
   fi
 
   # Print info
   print_usage() {
     local function_names
     function_names="$(typeset -f | grep -E '\(\)\ $' | sed -e 's/()//g')"
+
     echo
     echo "Usage: dotfiles-update.sh [function_name]"
     echo
@@ -48,10 +49,9 @@
     echo
   }
 
-  print_info_and_usage() {
-    print_info
-    echo
+  print_usage_and_info() {
     print_usage
+    print_info
   }
 
   # Do something
