@@ -11,26 +11,41 @@
   print_usage() {
     local function_names
     function_names="$(typeset -f | grep -E '\(\)\ $' | sed -e 's/()//g')"
+    echo
     echo "Usage: dotfiles-update.sh [function_name]"
+    echo
     echo "  Functions:"
+    echo
     echo "$function_names" | while read line; do
       echo "    $line"
     done
+    echo
   }
 
   print_info() {
     local last_checked
     local current_time
     local elapsed_time
+    local time_to_check
     last_checked="$(read_timestamp)"
     current_time="$(date +%s)"
     elapsed_time="$((current_time - last_checked))"
+    if is_time_to_check; then
+      time_to_check='true'
+    else
+      time_to_check='false'
+    fi
 
-    echo "Timestamp file        :  $TIMESTAMP_FILEPATH"
-    echo "Update check interval :  ${UPDATE_INTERVAL}s"
-    echo "Current time          :  $current_time"
-    echo "Last checked          :  $last_checked"
-    echo "Elapsed time          :  $elapsed_time"
+    echo
+    echo "Dotfiles update info:"
+    echo
+    echo "  Timestamp file           :  $TIMESTAMP_FILEPATH"
+    echo "  Update check interval    :  ${UPDATE_INTERVAL}s"
+    echo "  Current time             :  $current_time"
+    echo "  Last checked             :  $last_checked"
+    echo "  Elapsed time             :  $elapsed_time"
+    echo "  Should check for updates :  $time_to_check"
+    echo
   }
 
   print_info_and_usage() {
