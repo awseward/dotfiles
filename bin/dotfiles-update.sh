@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 (
   source ~/.lib/updates.sh
 
@@ -7,10 +9,26 @@
     _FN_NAME='print_usage_and_info'
   fi
 
+  _print_functions() {
+    case "$OSTYPE" in
+      (darwin*)
+        typeset -f \
+          | grep -E '\(\)\ $' \
+          | sed -e 's/().*$//'
+      ;;
+      (linux*)
+        typeset -f \
+          | grep '() {$' \
+          | grep --invert-match '^_' \
+          |  sed -e 's/().*$//'
+      ;;
+    esac
+  }
+
   # Print info
   print_usage() {
     local function_names
-    function_names="$(typeset -f | grep -E '\(\)\ $' | sed -e 's/()//g')"
+    function_names="$(_print_functions)"
 
     echo
     echo "Usage: dotfiles-update.sh [function_name]"
