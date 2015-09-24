@@ -10,19 +10,10 @@
   fi
 
   _print_functions() {
-    case "$OSTYPE" in
-      (darwin*)
-        typeset -f \
-          | grep -E '\(\)\ $' \
-          | sed -e 's/().*$//'
-      ;;
-      (linux*)
-        typeset -f \
-          | grep '() {$' \
-          | grep --invert-match '^_' \
-          |  sed -e 's/().*$//'
-      ;;
-    esac
+    (
+      source ~/.lib/autoload/misc.sh
+      list_functions
+    )
   }
 
   # Print info
