@@ -23,6 +23,22 @@ for file in ~/.env-specific/**/*.sh; do
   source "$file"
 done
 
+# This section meant to be temporary vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+case "$OSTYPE" in
+  (darwin*)
+    # ...
+  ;;
+  (cygwin*)
+    # ...
+  ;;
+  (linux*)
+    export TERM='xterm-256color'
+  ;;
+esac
+
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 __ensure_in_PATH          \
   "$HOME/.rbenv/bin"      \
   "/usr/local/bin"        \
