@@ -54,25 +54,67 @@ __git_parse_remote_name() {
 }
 
 __git_parse_remote_host_http() {
-  echo "$1" | sed -e 's/^.\+\:\/\/\(.\+\..\+\)\/.\+\/.\+$/\1/'
+  case "$OSTTYPE" in
+    (darwin*)
+      echo "$1" | sed -E 's/.*\:\/\/(.+\.[^/]+)\/.*/\1/'
+    ;;
+    (linux*)
+      echo "$1" | sed -e 's/^.\+\:\/\/\(.\+\..\+\)\/.\+\/.\+$/\1/'
+    ;;
+  esac
 }
 
 __git_parse_remote_host_ssh() {
-  echo "$1" | sed -e 's/.\+@\(.\+\..\+\)\:.*$/\1/'
+  case "$OSTYPE" in
+    (darwin*)
+      echo "$1" | sed -E 's/[[:alnum:]]+\@([[:alnum:]]+\.[[:alnum:]]+)\:([[:alnum:]]+)\/([[:alnum:]]+)(.git)?/\1/g'
+    ;;
+    (linux*)
+      echo "$1" | sed -e 's/.\+@\(.\+\..\+\)\:.*$/\1/'
+    ;;
+  esac
 }
 
 __git_parse_remote_owner_http() {
-  echo "$1" | sed -e 's/^.\+\:\/\/.\+\/\(.\+\)\/.\+$/\1/'
+  case "$OSTYPE" in
+    (darwin*)
+      echo "$1" | sed -E 's/.*\:\/\/.*\/(.+)\/.*/\1/'
+    ;;
+    (linux*)
+      echo "$1" | sed -e 's/^.\+\:\/\/.\+\/\(.\+\)\/.\+$/\1/'
+    ;;
+  esac
 }
 
 __git_parse_remote_owner_ssh() {
-  echo "$1" | sed -e 's/.\+\:\(.\+\)\/.*/\1/'
+  case "$OSTYPE" in
+    (darwin*)
+      echo "$1" | sed -E 's/[[:alnum:]]+\@([[:alnum:]]+\.[[:alnum:]]+)\:([[:alnum:]]+)\/([[:alnum:]]+)(.git)?/\2/g'
+    ;;
+    (linux*)
+      echo "$1" | sed -e 's/.\+\:\(.\+\)\/.*/\1/'
+    ;;
+  esac
 }
 
 __git_parse_remote_name_http() {
-  echo "$1" | sed -e 's/^.\+\:\/\/.\+\/.\+\/\(.\+\)/\1/ ; s/\.git$//'
+  case "$OSTYPE" in
+    (darwin*)
+      echo "$1" | sed -E 's/.*\/(.+)$/\1/ ; s/\.git$//'
+    ;;
+    (linux*)
+      echo "$1" | sed -e 's/^.\+\:\/\/.\+\/.\+\/\(.\+\)/\1/ ; s/\.git$//'
+    ;;
+  esac
 }
 
 __git_parse_remote_name_ssh() {
-  echo "$1" | sed -e 's/.*\/\(.\+\)$/\1/ ; s/.git$//'
+  case "$OSTYPE" in
+    (darwin*)
+      echo "$1" | sed -E 's/[[:alnum:]]+\@([[:alnum:]]+\.[[:alnum:]]+)\:([[:alnum:]]+)\/([[:alnum:]]+)(.git)?/\3/g'
+    ;;
+    (linux*)
+      echo "$1" | sed -e 's/.*\/\(.\+\)$/\1/ ; s/.git$//'
+    ;;
+  esac
 }
