@@ -1,7 +1,14 @@
 #!/bin/zsh
 
 __canonicalize_path() {
-  realpath "$1"
+  case "$OSTYPE" in
+    (darwin*)
+      realpath "$!" &> /dev/null
+    ;;
+    (linux*)
+      realpath -q "$1"
+    ;;
+  esac
 }
 
 __exists_in_PATH() {

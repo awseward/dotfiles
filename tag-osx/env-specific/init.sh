@@ -24,10 +24,6 @@ __git_parse_remote_name_ssh() {
   echo "$1" | sed -E 's/[[:alnum:]]+\@([[:alnum:]]+\.[[:alnum:]]+)\:([[:alnum:]]+)\/([[:alnum:]]+)(.git)?/\3/g'
 }
 
-__canonicalize_path() {
-  realpath "$1" 2>/dev/null
-}
-
 alias ls="ls -hFG"
 alias rm="rm -dv"
 
