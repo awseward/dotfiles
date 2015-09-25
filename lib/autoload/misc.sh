@@ -1,8 +1,12 @@
 #!/bin/sh
 
-open() {
-  xdg-open "$1" &> /dev/null
-}
+case "$OSTYPE" in
+  (linux*)
+    open() {
+      xdg-open "$1" &> /dev/null
+    }
+  ;;
+esac
 
 list_functions() {
   case "$OSTYPE" in
