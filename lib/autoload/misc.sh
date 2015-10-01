@@ -12,8 +12,8 @@ list_functions() {
   case "$OSTYPE" in
     (darwin*)
       typeset -f \
-        | grep -E '\(\)\ $' \
-        | sed -e 's/().*$//'
+        | \grep -E '\(\)\ \{$' \
+        | \sed -e 's/().*{$//'
       ;;
     (linux*)
       typeset -f \
