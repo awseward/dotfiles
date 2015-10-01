@@ -11,7 +11,8 @@ url_is_http() {
 }
 
 __git_error_invalid_remote_url() {
-  echo "Error: invalid remote url: '$1'"
+  echo "Error: invalid remote url: '$1'" 1>&2
+  return 1
 }
 
 __git_parse_remote_host() {
