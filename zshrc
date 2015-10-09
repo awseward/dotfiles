@@ -63,4 +63,6 @@ nvm use stable
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Some checks
 warn_if_duplicates_in_path
+warn_if_dotfiles_update_check_recommended

@@ -5,7 +5,7 @@ case "$OSTYPE" in
     open() {
       xdg-open "$1" &> /dev/null
     }
-  ;;
+    ;;
 esac
 
 list_functions() {
@@ -23,3 +23,4 @@ list_functions() {
       ;;
   esac
 }
+
