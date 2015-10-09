@@ -21,7 +21,7 @@ alias m='make clean && make'
 alias mc='make clean'
 
 ### valgrind
-alias valgrind='valgrind --leak-check=yes '
+alias valgrind='valgrind --leak-check=yes'
 alias val='valgrind'
 
 ### rcm
