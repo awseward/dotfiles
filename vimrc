@@ -136,6 +136,7 @@ colorscheme hybrid
 hi Normal ctermbg=none
 hi NonText ctermbg=none
 hi LineNr ctermbg=none
+hi LineNr ctermfg=magenta
 
 "
 " vim-jsx
