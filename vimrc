@@ -111,6 +111,7 @@ set smartcase
 set laststatus=2
 set cursorline
 set cursorcolumn
+set virtualedit=all
 
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
