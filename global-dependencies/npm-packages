@@ -1,0 +1,9 @@
+babel
+eslint
+grunt
+gulp
+node-debug
+node-inspector
+webpack
+webpack-dev-server
+yo

@@ -6,6 +6,8 @@ if [ ! -e "$HOME/.vim/bundle/Vundle.vim" ]; then
 fi
 vim -u "$HOME/.vimrc.plugins" +PluginInstall +qa
 
-# Install global rake dependencies
-cd "$HOME/.rake"
+# Install global dependencies
+cd "$HOME/.global-dependencies"
+
 bundle install
+npm install -g $(cat npm-packages | xargs)
