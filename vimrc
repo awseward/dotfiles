@@ -1,3 +1,6 @@
+"Set leader key
+let mapleader = " "
+
 " When started as "evim", evim.vim will already have done these settings.
 if v:progname =~? "evim"
   finish
@@ -111,7 +114,7 @@ set smartcase
 set laststatus=2
 set cursorline
 set cursorcolumn
-set virtualedit=all
+set virtualedit=block
 
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
@@ -134,3 +137,17 @@ hi LineNr ctermfg=magenta
 " vim-jsx
 "
 let g:jsx_ext_required = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RENAME CURRENT FILE (thanks Gary Bernhardt)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RenameFile()
+  let old_name = expand('%')
+  let new_name = input('New file name: ', expand('%'), 'file')
+  if new_name != '' && new_name != old_name
+    exec ':saveas ' . new_name
+    exec ':silent !rm ' . old_name
+    redraw!
+  endif
+endfunction
+map <Leader>n :call RenameFile()<cr>
