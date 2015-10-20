@@ -16,7 +16,7 @@ warn_if_duplicates_in_path() {
 
 warn_if_dotfiles_update_check_recommended() {
   if $(dotfiles-update.sh is_time_to_check); then
-    >&2 echo "Warning: Please check for dotfile updates, then run \`dotfiles-update write_timestamp_file\`."
+    >&2 echo "Warning: Please check for dotfile updates, then run \`dotfiles-update.sh write_timestamp_file\`."
     return 1
   fi
 }
