@@ -151,3 +151,6 @@ function! RenameFile()
   endif
 endfunction
 map <Leader>n :call RenameFile()<cr>
+
+" Tell syntastic to use eslint for javascript
+let g:syntastic_javascript_checkers = ['eslint']
