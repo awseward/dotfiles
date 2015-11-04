@@ -1,0 +1,19 @@
+# ~/.tmuxinator/procore.yml
+
+name: procore
+root: ~/projects/
+
+windows:
+  - procore-wrench:
+      root: ~/projects/js/wrench/
+      layout: "6450,272x63,0,0{163x63,0,0,6,108x63,164,0[108x16,164,0,7,108x46,164,17,8]}"
+      panes:
+        - vim
+        - npm run dev
+        - clear
+  - procore-rails:
+      root: ~/projects/ruby/procore/
+      layout: even-horizontal
+      panes:
+        - puma -p 3000
+        - tail -f log/development.log
