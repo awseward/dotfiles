@@ -1,7 +1,6 @@
 # ~/.tmuxinator/procore.yml
 
 name: procore
-root: ~/projects/
 
 windows:
   - procore-wrench:
