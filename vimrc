@@ -154,3 +154,9 @@ map <Leader>n :call RenameFile()<cr>
 
 " Tell syntastic to use eslint for javascript
 let g:syntastic_javascript_checkers = ['eslint']
+
+" Always start at top of file in commit message editor
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+
+" TODO: Think about this
+" map <leader>t :!npm t<cr>
