@@ -32,6 +32,7 @@ alias mkrc='mkrc -v'
 
 ### node
 alias webpack='webpack --progress --colors --watch'
+alias webpack-dev-server='webpack-dev-server --progress --colors'
 
 ### ruby
 alias be='bundle exec'
