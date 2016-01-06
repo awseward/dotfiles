@@ -49,17 +49,19 @@ __ensure_in_PATH          \
   "/sbin"                 \
   "/usr/local/heroku/bin"
 
-# rbenv
+## rbenv
 eval "$(rbenv init -)"
 
-# Overcommit
+## Overcommit
 export GIT_TEMPLATE_DIR
 GIT_TEMPLATE_DIR=$(overcommit --template-dir)
 
-# NVM
+## NVM
 export NVM_DIR=~"/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-nvm use stable
+# This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+# Following line no longer needed w/ command `nvm alias default stable`
+# nvm use stable
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
