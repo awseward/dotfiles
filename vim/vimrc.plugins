@@ -3,25 +3,34 @@ filetype off
 
 call plug#begin()
 
-Plug 'kien/ctrlp.vim'
+" Syntax Highlighting
+Plug 'derekwyatt/vim-scala'
+Plug 'elixir-lang/vim-elixir'
+Plug 'fatih/vim-go'
+Plug 'kongo2002/fsharp-vim'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
+Plug 'raichoo/purescript-vim'
+
+" Colors
+Plug 'chriskempson/base16-vim'
 Plug 'croaky/vim-colors-github'
 Plug 'flazz/vim-colorschemes'
-Plug 'pangloss/vim-javascript'
-Plug 'chriskempson/base16-vim'
-Plug 'mxw/vim-jsx'
-Plug 'fatih/vim-go'
-Plug 'junegunn/vim-easy-align'
-Plug 'ervandew/supertab'
-Plug 'derekwyatt/vim-scala'
 Plug 'w0ng/vim-hybrid'
-Plug 'elixir-lang/vim-elixir'
-Plug 'raichoo/purescript-vim'
-Plug 'kongo2002/fsharp-vim'
+
+" Editor Utils
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'tpope/vim-surround'
+Plug 'ervandew/supertab'
+Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
-Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+
+" Shell Utils
+Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
+
+" Misc
+Plug 'scrooloose/syntastic'
 
 call plug#end()
 filetype plugin indent on
