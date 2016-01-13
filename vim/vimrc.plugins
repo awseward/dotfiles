@@ -3,7 +3,6 @@ filetype off
 
 call plug#begin()
 
-Plug 'gmarik/Vundle.vim'
 Plug 'kien/ctrlp.vim'
 Plug 'croaky/vim-colors-github'
 Plug 'flazz/vim-colorschemes'
@@ -22,6 +21,7 @@ Plug 'bronson/vim-trailing-whitespace'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'scrooloose/syntastic'
+Plug 'rking/ag.vim'
 
 call plug#end()
 filetype plugin indent on
