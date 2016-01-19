@@ -20,6 +20,7 @@
   info = !clear && git status && git stash list
   local = branch -l
   back = checkout -
+  lc = log -n 1
 [color]
   branch = auto
   diff = auto
