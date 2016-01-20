@@ -14,15 +14,15 @@ set nocompatible
 set backspace=indent,eol,start
 
 if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
+  set nobackup    " do not keep a backup file, use versions instead
 else
-  set backup		" keep a backup file (restore to previous version)
-  set undofile		" keep an undo file (undo changes after closing)
+  set backup      " keep a backup file (restore to previous version)
+  set undofile    " keep an undo file (undo changes after closing)
 endif
-set history=50		" keep 50 lines of command line history
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-set incsearch		" do incremental searching
+set history=150   " keep 150 lines of command line history
+set ruler         " show the cursor position all the time
+set showcmd       " display incomplete commands
+set incsearch     " do incremental searching
 
 " For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
 " let &guioptions = substitute(&guioptions, "t", "", "g")
@@ -89,33 +89,49 @@ if !exists(":DiffOrig")
 endif
 
 "
-" vim.plug
+" Begin custom config
 "
+
+" vim.plug
 if filereadable(expand("~/.vim/vimrc.plugins"))
   source ~/.vim/vimrc.plugins
 endif
 
+" Status bar
+set laststatus=2
 
-" Misc additions
-" (should probably organize these just a little bit...)
-"
-set colorcolumn=80
+" File behavior
 set backupdir=~/.vim/backups
 set undodir=~/.vim/undofiles
 set noswapfile
-set smartindent
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set number
-set relativenumber
+set wildmenu
+set wildmode=list:longest
+
+" Search options
+set hlsearch
 set ignorecase
 set smartcase
-set laststatus=2
-set cursorline
-set cursorcolumn
-set virtualedit=block
 
+" Indentation and spacing
+set expandtab
+set shiftwidth=2
+set smartindent
+set tabstop=2
+
+" Line numbers
+set number
+set relativenumber
+
+" Faster viewport scrolling
+nnoremap <C-e> 4<C-e>
+nnoremap <C-y> 4<C-y>
+
+" Misc
+set colorcolumn=80
+set virtualedit=block
+set scrolloff=4
+
+" Use the silver searcher for things
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
   let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
@@ -123,24 +139,18 @@ if executable('ag')
   let g:ctrlp_show_hidden = 1
 endif
 
-"
 " Colors
-"
 set t_Co=256
 colorscheme hybrid
-hi Normal ctermbg=none
-hi NonText ctermbg=none
-hi LineNr ctermbg=none
-hi LineNr ctermfg=magenta
+if filereadable(expand("~/.vim/vimrc.color-overrides"))
+  source ~/.vim/vimrc.color-overrides
+endif
 
 "
-" vim-jsx
-"
+" Enable vim-jsx
 let g:jsx_ext_required = 0
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RENAME CURRENT FILE (thanks Gary Bernhardt)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Rename current file (Gary Bernhardt)
 function! RenameFile()
   let old_name = expand('%')
   let new_name = input('New file name: ', expand('%'), 'file')
@@ -158,5 +168,8 @@ let g:syntastic_javascript_checkers = ['eslint']
 " Always start at top of file in commit message editor
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
-" TODO: Think about this
-" map <leader>t :!npm t<cr>
+" Cursor crosshair
+map <leader>c :set cursorcolumn!<Bar>set cursorline!<CR>
+
+" Toggle relative line numbers
+map <leader>r :set relativenumber!<CR>

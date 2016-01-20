@@ -1,0 +1,15 @@
+" BG Transparency
+hi Normal ctermbg=none
+hi NonText ctermbg=none
+
+" Line numbers
+hi LineNr ctermbg=none
+hi LineNr ctermfg=grey
+
+" ColorColumn (80)
+hi ColorColumn ctermbg=234
+hi ColorColumn ctermfg=161
+
+" CursorColumn
+hi CursorColumn ctermbg=555
+hi CursorLine ctermbg=555
