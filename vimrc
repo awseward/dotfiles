@@ -126,6 +126,10 @@ set relativenumber
 nnoremap <C-e> 4<C-e>
 nnoremap <C-y> 4<C-y>
 
+" Crosshair (CursorColumn)
+set nocursorcolumn
+set nocursorline
+
 " Misc
 set colorcolumn=80
 set virtualedit=block
