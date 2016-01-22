@@ -141,7 +141,7 @@ endif
 
 " Colors
 set t_Co=256
-colorscheme hybrid
+colorscheme apprentice
 if filereadable(expand("~/.vim/vimrc.color-overrides"))
   source ~/.vim/vimrc.color-overrides
 endif
@@ -173,3 +173,5 @@ map <leader>c :set cursorcolumn!<Bar>set cursorline!<CR>
 
 " Toggle relative line numbers
 map <leader>r :set relativenumber!<CR>
+
+map <leader>u ggg?G``

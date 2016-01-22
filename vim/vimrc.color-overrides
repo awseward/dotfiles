@@ -1,6 +1,6 @@
-" BG Transparency
-hi Normal ctermbg=none
-hi NonText ctermbg=none
+" BG Transparency (only needed to make some colorschemes not look awful)
+" hi Normal ctermbg=none
+" hi NonText ctermbg=none
 
 " Line numbers
 hi LineNr ctermbg=none
