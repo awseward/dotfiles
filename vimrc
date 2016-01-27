@@ -178,4 +178,8 @@ map <leader>c :set cursorcolumn!<Bar>set cursorline!<CR>
 " Toggle relative line numbers
 map <leader>r :set relativenumber!<CR>
 
+" Rot13 whole buffer
 map <leader>u ggg?G``
+
+" Evenly size splits on vim resize
+autocmd VimResized * wincmd =
