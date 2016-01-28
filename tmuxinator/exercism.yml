@@ -1,0 +1,12 @@
+# ~/.tmuxinator/exercism.yml
+
+name: exercism
+root: ~/exercism/
+
+windows:
+  - editor:
+      layout: "f2a7,272x63,0,0{136x63,0,0,16,135x63,137,0[135x31,137,0,35,135x31,137,32,36]}"
+      panes:
+        - vim
+        - fig_screen "repl"
+        - fig_screen "term"
