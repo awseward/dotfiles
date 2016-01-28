@@ -1,0 +1,13 @@
+# ~/.tmuxinator/gutibot.yml
+
+name: gutibot
+
+windows:
+  - gutibot:
+    root: ~/projects/js/gutibot/
+    layout: "6450,272x63,0,0{163x63,0,0,6,108x63,164,0[108x16,164,0,7,108x46,164,17,8]}"
+    panes:
+      - vim
+      - heroku logs --tail --app gutibot-staging
+      - clear
+
