@@ -138,15 +138,17 @@ set scrolloff=4
 " Use the silver searcher for things
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-  let g:ctrlp_use_caching = 0
-  let g:ctrlp_show_hidden = 1
 endif
+
+" FZF
+let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
+map <C-p> :Files<CR>
+map <leader>b :Buffers<CR>
 
 " Colors
 set t_Co=256
-colorscheme apprentice
 " for some reason gruvbox only works if transitioned into certain colorschemes
+colorscheme apprentice
 colorscheme gruvbox
 if filereadable(expand("~/.vim/vimrc.color-overrides"))
   source ~/.vim/vimrc.color-overrides
@@ -174,6 +176,9 @@ let g:syntastic_javascript_checkers = ['eslint']
 " Always start at top of file in commit message editor
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
 
+" Evenly size splits on vim resize
+autocmd VimResized * wincmd =
+
 " Cursor crosshair
 map <leader>c :set cursorcolumn!<Bar>set cursorline!<CR>
 
@@ -183,5 +188,5 @@ map <leader>r :set relativenumber!<CR>
 " Rot13 whole buffer
 map <leader>u ggg?G``
 
-" Evenly size splits on vim resize
-autocmd VimResized * wincmd =
+" Ag
+map <leader>g :Ag<CR>

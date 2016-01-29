@@ -20,8 +20,9 @@ Plug 'tpope/vim-surround'
 Plug 'scrooloose/syntastic'
 
 " Shell Utils
-Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " Syntax Highlighting
 Plug 'derekwyatt/vim-scala'
