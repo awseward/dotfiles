@@ -1,6 +1,6 @@
 " BG Transparency (only needed to make some colorschemes not look awful)
-" hi Normal ctermbg=none
-" hi NonText ctermbg=none
+hi Normal ctermbg=none
+hi NonText ctermbg=none
 
 " Line numbers
 hi LineNr ctermbg=none
@@ -18,3 +18,8 @@ hi CursorLine ctermfg=16
 
 " CtrlP
 hi CtrlPMatch ctermfg=210
+
+" Make gruvbox comments a little less aggressive
+hi Comment cterm=none
+hi Comment ctermfg=grey
+hi Comment ctermbg=none
