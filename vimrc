@@ -190,3 +190,6 @@ map <leader>u ggg?G``
 
 " Ag
 map <leader>g :Ag<CR>
+
+" Clear highlights after a search
+nnoremap <CR> :noh<CR><CR>
