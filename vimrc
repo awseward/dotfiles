@@ -146,6 +146,8 @@ endif
 " Colors
 set t_Co=256
 colorscheme apprentice
+" for some reason gruvbox only works if transitioned into certain colorschemes
+colorscheme gruvbox
 if filereadable(expand("~/.vim/vimrc.color-overrides"))
   source ~/.vim/vimrc.color-overrides
 endif
