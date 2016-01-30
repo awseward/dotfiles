@@ -165,7 +165,7 @@ colorscheme apprentice
 colorscheme gruvbox
 call ApplyColorOverrides()
 
-map <leader>m call RandomColorSchemeWithOverrides()<CR>
+map <leader>m :call RandomColorSchemeWithOverrides()<CR>
 " Change colorschemes on `updatetime`ms of no input (normal & insert)
 " autocmd CursorHold,CursorHoldI * call RandomColorSchemeWithOverrides()
 
