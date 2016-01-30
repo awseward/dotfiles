@@ -15,7 +15,7 @@ __print_vertical_padding() {
   for i in $(seq 1 "$1"); do echo; done
 }
 
-fig_screen() {
+__fig_screen() {
   local text
   local term_width
   local term_height
@@ -32,6 +32,22 @@ fig_screen() {
   figlet -w "$term_width" -c "$text"
 
   __print_vertical_padding $((padding - 2))
+}
+
+fig_screen() {
+  __fig_screen "$*"
 
   while true; do continue; done
+}
+
+fig_screen_exit() {
+  __fig_screen "$*"
+}
+
+fig_dirname() {
+  fig_screen "$(basename "$(pwd)")"
+}
+
+fig_dirname_exit() {
+  fig_screen_exit "$(basename "$(pwd)")"
 }
