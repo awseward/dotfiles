@@ -4,7 +4,7 @@ hi NonText ctermbg=none
 
 " Line numbers
 hi LineNr ctermbg=none
-hi LineNr ctermfg=grey
+hi LineNr ctermfg=248
 
 " ColorColumn (80)
 hi ColorColumn ctermbg=234
@@ -21,5 +21,10 @@ hi CtrlPMatch ctermfg=210
 
 " Make gruvbox comments a little less aggressive
 hi Comment cterm=none
-hi Comment ctermfg=grey
 hi Comment ctermbg=none
+hi Comment ctermfg=248
+
+" Colors for TODO/FIXME
+hi Todo cterm=bold
+hi Todo ctermbg=none
+hi Todo ctermfg=200
