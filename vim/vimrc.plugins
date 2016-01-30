@@ -4,6 +4,7 @@ filetype off
 call plug#begin()
 
 " Colors
+Plug 'xolox/vim-colorscheme-switcher'
 Plug 'chriskempson/base16-vim'
 Plug 'croaky/vim-colors-github'
 Plug 'flazz/vim-colorschemes'
@@ -18,6 +19,7 @@ Plug 'tpope/vim-surround'
 
 " Misc
 Plug 'scrooloose/syntastic'
+Plug 'xolox/vim-misc' " <-- req'd dep'cy of `xolox/vim-colorscheme-switcher`
 
 " Shell Utils
 Plug 'rking/ag.vim'

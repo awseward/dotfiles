@@ -145,16 +145,30 @@ let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 map <C-p> :Files<CR>
 map <leader>b :Buffers<CR>
 
+"
 " Colors
+"
+function! ApplyColorOverrides()
+  if filereadable(expand("~/.vim/vimrc.color-overrides"))
+    source ~/.vim/vimrc.color-overrides
+  endif
+endfunction
+
+function! RandomColorSchemeWithOverrides()
+  RandomColorScheme
+  call ApplyColorOverrides()
+endfunction
+
 set t_Co=256
-" for some reason gruvbox only works if transitioned into certain colorschemes
+" for some reason gruvbox only works if transitioned into from certain colorschemes
 colorscheme apprentice
 colorscheme gruvbox
-if filereadable(expand("~/.vim/vimrc.color-overrides"))
-  source ~/.vim/vimrc.color-overrides
-endif
+call ApplyColorOverrides()
 
-"
+map <leader>m call RandomColorSchemeWithOverrides()<CR>
+" Change colorschemes on `updatetime`ms of no input (normal & insert)
+" autocmd CursorHold,CursorHoldI * call RandomColorSchemeWithOverrides()
+
 " Enable vim-jsx
 let g:jsx_ext_required = 0
 
