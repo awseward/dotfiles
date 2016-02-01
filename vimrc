@@ -160,9 +160,8 @@ function! RandomColorSchemeWithOverrides()
 endfunction
 
 set t_Co=256
-" for some reason gruvbox only works if transitioned into from certain colorschemes
-colorscheme apprentice
-colorscheme gruvbox
+set background=dark
+colorscheme PaperColor
 call ApplyColorOverrides()
 
 map <leader>m :call RandomColorSchemeWithOverrides()<CR>

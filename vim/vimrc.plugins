@@ -4,11 +4,12 @@ filetype off
 call plug#begin()
 
 " Colors
-Plug 'xolox/vim-colorscheme-switcher'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'chriskempson/base16-vim'
 Plug 'croaky/vim-colors-github'
 Plug 'flazz/vim-colorschemes'
 Plug 'w0ng/vim-hybrid'
+Plug 'xolox/vim-colorscheme-switcher'
 
 " Editor Utils
 Plug 'bronson/vim-trailing-whitespace'
