@@ -73,6 +73,9 @@
   algorithm = patience
   renames = copies
 
+[merge]
+  verbosity = 5
+
 [push]
   default = current
 
