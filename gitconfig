@@ -2,25 +2,36 @@
   name = Andrew William Seward
   email = awswrd@gmail.com
 [alias]
-  l = log master..
-  st = status
-  ci = commit
-  co = checkout
-  br = branch
-  cl = clean -df
-  di = !echo "Deprecated: Please use git files" && echo && git files
-  files = diff --name-only
-  ch = !git diff --stat=$(tput cols)
+  ### Informational
+  # Long-form
   chart = !git diff --stat=$(tput cols)
-  sum = diff --shortstat
+  files = diff --name-only
+  info-pane = !clear && git status && git stash list
+  last-commit = log -n 1
+  local-branches = branch -l
+  nuke-dry = clean -xdf
+  remote-branches = branch -r
   summary = diff --shortstat
-  sub = !git submodule update --init --recursive
-  mine = !git branch -a | grep -isn --color "[^remotes/origin]dev/as_"
-  top = stash apply stash@{0}
-  info = !clear && git status && git stash list
-  local = branch -l
+  # Abbreviated
+  br = branch
+  ch = !git chart
+  lbr = !git local-branches
+  lc = !git last-commit
+  lm = log master..
+  rbr = !git remote-branches
+  st = status
+  sum = diff --shortstat
+
+  ### Actually does something
+  # Long-form
+  nuke = clean -xdfn
   back = checkout -
-  lc = log -n 1
+  submodule-update = !git submodule update --init --recursive
+  # Abbreviated
+  co = checkout
+  cl = clean -df
+  sub = !git submodule-update
+
 [color]
   branch = auto
   diff = auto
