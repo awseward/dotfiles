@@ -206,3 +206,6 @@ map <leader>g :Ag<CR>
 
 " Clear highlights after a search
 nnoremap <CR> :noh<CR><CR>
+
+" Sort in visual, select modes
+vmap <leader>s :sort u<CR>
