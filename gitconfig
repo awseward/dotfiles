@@ -61,8 +61,7 @@
   changed = yellow bold
   untracked = blue
   updated = white bold reverse
-  # Not quite sure what this one means but it sounds like it wants attention
-  unmerged = red reverse
+  unmerged = red reverse bold
 
 [core]
   safecrlf = warn
