@@ -5,6 +5,7 @@
 [alias]
   ### Informational
   # Long-form
+  amend = commit --amend
   chart = !git diff --stat=$(tput cols)
   files = diff --name-only
   info-pane = !clear && git status && git stash list
