@@ -8,7 +8,7 @@
   co = checkout
   br = branch
   cl = clean -df
-  di = !echo "Deprecated: Please use git files; git diff --name-only"
+  di = !echo "Deprecated: Please use git files" && echo && git files
   files = diff --name-only
   ch = !git diff --stat=$(tput cols)
   chart = !git diff --stat=$(tput cols)
