@@ -56,9 +56,12 @@
   whitespace = red reverse
 
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+  branch = red bold
+  changed = yellow bold
+  untracked = blue
+  updated = white bold reverse
+  # Not quite sure what this one means but it sounds like it wants attention
+  unmerged = red reverse
 
 [core]
   safecrlf = warn
