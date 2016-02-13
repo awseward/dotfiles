@@ -1,6 +1,7 @@
 [user]
   name = Andrew William Seward
   email = awswrd@gmail.com
+
 [alias]
   ### Informational
   # Long-form
@@ -38,11 +39,13 @@
   interactive = auto
   status = auto
   ui = auto
+
 [color "branch"]
   current = green bold
   local = green
   remote = yellow
   upstream = yellow bold
+
 [color "diff"]
   commit = yellow bold
   frag = blue
@@ -51,21 +54,27 @@
   new = green bold
   old = red bold
   whitespace = red reverse
+
 [color "status"]
   added = yellow
   changed = green
   untracked = cyan
+
 [core]
   safecrlf = warn
   editor = vim
   pager = less -F -X
   ignoreCase = true
+
 [diff]
   algorithm = patience
   renames = copies
+
 [push]
   default = current
+
 [status]
   showUntrackedFiles = all
+
 [fetch]
   prune = false
