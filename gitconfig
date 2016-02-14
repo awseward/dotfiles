@@ -5,6 +5,7 @@
 [alias]
   ### Informational
   # Long-form
+  alias = !git config --get-regex '^alias\\.'
   amend = commit --amend
   chart = !git diff --stat=$(tput cols)
   files = diff --name-only
