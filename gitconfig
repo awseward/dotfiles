@@ -43,7 +43,7 @@
   ui = auto
 
 [color "branch"]
-  current = green bold
+  current = white bold reverse
   local = green
   remote = yellow
   upstream = yellow bold
