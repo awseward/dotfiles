@@ -23,6 +23,12 @@ for file in ~/.env-specific/**/*.sh; do
   source "$file"
 done
 
+if [ -d ~/.completions ]; then
+  for file in ~/.completions/**/*; do
+    source "$file"
+  done
+fi
+
 # This section meant to be temporary vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
 case "$OSTYPE" in
