@@ -12,7 +12,7 @@
   info-pane = !clear && git status && git stash list
   last-commit = log -n 1
   local-branches = branch -l
-  nuke-dry = clean -xdf
+  nuke-dry = clean -xdfn
   remote-branches = branch -r
   summary = diff --shortstat
   # Abbreviated
@@ -27,7 +27,7 @@
 
   ### Actually does something
   # Long-form
-  nuke = clean -xdfn
+  nuke = clean -xdf
   back = checkout -
   submodule-update = !git submodule update --init --recursive
   # Abbreviated
