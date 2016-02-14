@@ -22,6 +22,7 @@
   lbr = !git local-branches
   lc = !git last-commit
   lm = log master..
+  nd = !git nuke-dry
   ni = !git nuke-interactive
   rbr = !git remote-branches
   st = status
