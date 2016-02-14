@@ -13,6 +13,7 @@
   last-commit = log -n 1
   local-branches = branch -l
   nuke-dry = clean -xdfn
+  nuke-interactive = clean -xdfi
   remote-branches = branch -r
   summary = diff --shortstat
   # Abbreviated
@@ -21,6 +22,7 @@
   lbr = !git local-branches
   lc = !git last-commit
   lm = log master..
+  ni = !git nuke-interactive
   rbr = !git remote-branches
   st = status
   sum = diff --shortstat
