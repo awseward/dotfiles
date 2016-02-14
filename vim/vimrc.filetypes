@@ -1,2 +1,12 @@
+" gitconfig
 au Bufread,BufNewFile *gitconfig set filetype=gitconfig
+
+""" Node
+" babelrc
+au Bufread,BufNewFile *.babelrc,*babelrc set filetype=json
+" eslintrc
 au Bufread,BufNewFile *.eslintrc,*eslintrc set filetype=json
+" flowconfig
+au Bufread,BufNewFile *.flowconfig,*flowconfig set filetype=config
+" npmrc
+au Bufread,BufNewFile *.npmrc,*npmrc set filetype=config
