@@ -1,0 +1,2 @@
+au Bufread,BufNewFile *gitconfig set filetype=gitconfig
+au Bufread,BufNewFile *.eslintrc,*eslintrc set filetype=json

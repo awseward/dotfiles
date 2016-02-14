@@ -97,6 +97,11 @@ if filereadable(expand("~/.vim/vimrc.plugins"))
   source ~/.vim/vimrc.plugins
 endif
 
+" filetype mappings
+if filereadable(expand("~/.vim/vimrc.filetypes"))
+  source ~/.vim/vimrc.filetypes
+endif
+
 " Status bar
 set laststatus=2
 
