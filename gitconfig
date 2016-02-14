@@ -49,7 +49,7 @@
 
 [color "diff"]
   commit = yellow bold
-  frag = blue
+  frag = blue ul
   func = blue bold
   meta = cyan bold
   new = green bold
@@ -59,7 +59,7 @@
 [color "status"]
   branch = red bold
   changed = yellow bold
-  untracked = blue
+  untracked = blue dim
   updated = white bold reverse
   unmerged = red reverse bold
 
