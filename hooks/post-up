@@ -7,11 +7,11 @@ if [ ! -e "$HOME/.vim/autoload/plug.vim" ]; then
 fi
 vim -u "$HOME/.vim/vimrc.plugins" +PlugInstall +qa
 
+# Set up npm completion
+npm completion > "$HOME/.completions/npm.completion.sh"
+
 # Install global dependencies
 cd "$HOME/.global-dependencies"
 
 bundle install
 npm install -g $(cat npm-packages | xargs)
-
-# Set up npm completion
-npm completion > "$HOME/.completions/npm.completion.sh"
