@@ -58,8 +58,9 @@
   whitespace = red reverse
 
 [color "status"]
-  branch = red bold
+  branch = white bold ul
   changed = yellow bold
+  header = black bold
   untracked = blue dim
   updated = white bold reverse
   unmerged = red reverse bold
