@@ -217,3 +217,6 @@ vmap <leader>s :sort u<CR>
 
 " Make sure :W doesn't trigger Windows from fzf-vim
 command! W :w
+
+" Map Ctrl-C to escape
+inoremap <C-c> <Esc>
