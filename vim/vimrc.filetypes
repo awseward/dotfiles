@@ -10,3 +10,7 @@ au Bufread,BufNewFile *.eslintrc,*eslintrc set filetype=json
 au Bufread,BufNewFile *.flowconfig,*flowconfig set filetype=config
 " npmrc
 au Bufread,BufNewFile *.npmrc,*npmrc set filetype=config
+
+""" Ruby
+" jbuilder
+au Bufread,BufNewFile *.jbuilder set filetype=ruby
