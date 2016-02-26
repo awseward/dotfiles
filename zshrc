@@ -47,6 +47,7 @@ esac
 
 __ensure_in_PATH          \
   "$HOME/.rbenv/bin"      \
+  "$HOME/.rbenv/shims"    \
   "/usr/local/bin"        \
   "/usr/bin"              \
   "/bin"                  \
