@@ -120,7 +120,7 @@ git_delete_pruneable_branches() {
     echo "$branches" | xargs git branch -D
     git remote prune origin
   else
-    echo No branches to prune
+    echo "No branches to prune"
   fi
 }
 
