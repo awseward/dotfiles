@@ -22,7 +22,7 @@
     function_names="$(_print_functions)"
 
     echo
-    echo "Usage: dotfiles-update.sh [function_name]"
+    echo "Usage: dotfiles-update.sh <function_name>"
     echo
     echo "  Functions:"
     echo
