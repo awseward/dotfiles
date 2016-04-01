@@ -17,6 +17,7 @@ Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
+Plug 'vim-scripts/paredit.vim'
 
 " Misc
 Plug 'scrooloose/syntastic'
@@ -26,6 +27,7 @@ Plug 'xolox/vim-misc' " <-- req'd dep'cy of `xolox/vim-colorscheme-switcher`
 Plug 'rking/ag.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'benmills/vimux'
 
 " Syntax Highlighting
 Plug 'derekwyatt/vim-scala'
