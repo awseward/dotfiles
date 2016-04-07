@@ -15,6 +15,6 @@ windows:
       layout: "578f,238x64,0,0{118x64,0,0,1,119x64,119,0[119x8,119,0,4,119x27,119,9,10,119x27,119,37,11]}"
       panes:
         - vim
-        - puma -p 3000
+        - bin/rails s puma
         - tail -f log/development.log
         - clear
