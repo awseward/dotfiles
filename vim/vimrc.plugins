@@ -22,6 +22,7 @@ Plug 'vim-scripts/paredit.vim'
 " Misc
 Plug 'scrooloose/syntastic'
 Plug 'xolox/vim-misc' " <-- req'd dep'cy of `xolox/vim-colorscheme-switcher`
+Plug 'junegunn/goyo.vim'
 
 " Shell Utils
 Plug 'rking/ag.vim'
