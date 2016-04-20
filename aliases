@@ -50,3 +50,7 @@ case "$OSTYPE" in
     # ...
   ;;
 esac
+
+### Windows dev
+alias fake='./fake.bat'
+alias paket='./paket.bat'
