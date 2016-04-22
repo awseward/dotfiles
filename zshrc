@@ -57,11 +57,13 @@ __ensure_in_PATH          \
   "/usr/local/heroku/bin"
 
 ## rbenv
-eval "$(rbenv init -)"
+which rbenv &>/dev/null \
+  && eval "$(rbenv init -)"
 
 ## Overcommit
-export GIT_TEMPLATE_DIR
-GIT_TEMPLATE_DIR=$(overcommit --template-dir)
+which overcommit &>/dev/null \
+  && export GIT_TEMPLATE_DIR \
+  && GIT_TEMPLATE_DIR=$(overcommit --template-dir)
 
 ## NVM
 export NVM_DIR=~"/.nvm"
