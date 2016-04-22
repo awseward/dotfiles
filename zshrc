@@ -67,8 +67,6 @@ GIT_TEMPLATE_DIR=$(overcommit --template-dir)
 export NVM_DIR=~"/.nvm"
 # This loads nvm
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-# Following line no longer needed w/ command `nvm alias default stable`
-# nvm use stable
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
