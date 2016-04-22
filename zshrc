@@ -73,3 +73,5 @@ export NVM_DIR=~"/.nvm"
 # Some checks
 warn_if_duplicates_in_path
 warn_if_dotfiles_update_check_recommended
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
