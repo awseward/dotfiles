@@ -73,6 +73,7 @@
   editor = vim
   pager = less -F -X
   ignoreCase = true
+  trustctime = false
 
 [core.whitespace]
   tab-in-indent = true
