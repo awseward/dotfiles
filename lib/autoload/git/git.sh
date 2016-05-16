@@ -117,6 +117,7 @@ git_delete_pruneable_branches() {
   branches="$(__git_pruneable_branches)"
 
   if [ -n "$branches" ]; then
+    echo "Deleting local branches eligible for pruning"
     echo "$branches" | xargs git branch -D 2> /dev/null
     git remote prune origin
   else
