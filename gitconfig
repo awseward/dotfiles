@@ -15,6 +15,7 @@
   nuke-dry = clean -xdfn
   nuke-interactive = clean -xdfi
   remote-branches = branch -r
+  prettylog = log --pretty=format:'%Cred%h%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
   summary = diff --shortstat
   # Abbreviated
   br = branch
@@ -24,6 +25,7 @@
   lm = log master..
   nd = !git nuke-dry
   ni = !git nuke-interactive
+  pl = !git prettylog
   rbr = !git remote-branches
   st = status
   sum = diff --shortstat
