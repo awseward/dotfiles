@@ -15,7 +15,7 @@
   nuke-dry = clean -xdfn
   nuke-interactive = clean -xdfi
   remote-branches = branch -r
-  prettylog = log --pretty=format:'%Cred%h%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
+  prettylog = log --pretty=format:'%C(blue)%h%C(reset) %C(bold)%s%C(reset) %C(yellow)<%ae>%C(reset)' --abbrev-commit
   summary = diff --shortstat
   # Abbreviated
   br = branch
