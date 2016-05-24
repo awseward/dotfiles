@@ -32,3 +32,66 @@ sox_engine() {
     fade h 0.2 22 4
     reverb
 }
+
+__sox_rnd_waveform() {
+  local waveformIndex
+  waveformIndex="$((RANDOM % 5))"
+
+  case $waveformIndex in
+    0)
+      echo "sin"
+      ;;
+    1)
+      echo "square"
+      ;;
+    2)
+      echo "sawtooth"
+      ;;
+    3)
+      echo "trapezium"
+      ;;
+    4)
+      echo "exp"
+      ;;
+  esac
+}
+
+sox_random_beep() {
+  local duration
+  local repeatCount
+  duration="$((RANDOM % 1)).$((RANDOM % 3))$(((RANDOM % 1000) + 1))"
+  repeatCount="$(((RANDOM % 6)))"
+
+  local startPitch
+  local endPitch
+  startPitch="$(((RANDOM % 500) + 1))"
+  endPitch="$(((RANDOM % 200) + 1))"
+
+  local duration2
+  local startPitch2
+  local endPitch2
+  startPitch2="$(((RANDOM % 1000) + 1))"
+  endPitch2="$(((RANDOM % 4000) + 1))"
+
+  play -n \
+    synth "$duration" \
+      sin 80 \
+    synth "${duration}" \
+      "$(__sox_rnd_waveform)" "${startPitch}-${endPitch}" \
+      "$(__sox_rnd_waveform)" "${endPitch}-${startPitch}" \
+    synth "${duration}" \
+      "$(__sox_rnd_waveform)" "${startPitch2}-${endPitch2}" \
+      "$(__sox_rnd_waveform)" "${endPitch2}-${startPitch2}" \
+    synth "$duration" square      fmod 200-1 \
+    synth "$duration" sawtooth    amod 200-1 \
+    repeat "$repeatCount" \
+    reverb \
+    overdrive 100 100 \
+    vol 0.2
+}
+
+sox_random_beeps() {
+  while true; do
+    sox_random_beep
+  done
+}
