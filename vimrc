@@ -138,7 +138,9 @@ set nocursorline
 " Misc
 set colorcolumn=80
 set virtualedit=block
-set scrolloff=4
+
+" Keep cursor centered when possible
+set scrolloff=999
 
 " Use the silver searcher for things
 if executable('ag')
