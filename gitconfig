@@ -9,17 +9,19 @@
   amend = commit --amend
   chart = !git diff --stat=$(tput cols)
   files = diff --name-only
+  github-log = !git --no-pager prettylog --reverse
   info-pane = !clear && git status && git stash list
   last-commit = log -n 1
   local-branches = branch -l
   nuke-dry = clean -xdfn
   nuke-interactive = clean -xdfi
-  remote-branches = branch -r
   prettylog = log --pretty=format:'%C(blue)%h%C(reset) %C(bold)%s%C(reset) %C(yellow)<%ae>%C(reset)' --abbrev-commit
+  remote-branches = branch -r
   summary = diff --shortstat
   # Abbreviated
   br = branch
   ch = !git chart
+  ghl = !git github-log
   lbr = !git local-branches
   lc = !git last-commit
   lm = log master..
