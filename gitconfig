@@ -1,67 +1,67 @@
 [user]
-  name = Andrew William Seward
+  name  = Andrew William Seward
   email = awswrd@gmail.com
 
 [alias]
   ### Informational
   # Long-form
-  alias = !git config --get-regex '^alias\\.'
-  amend = commit --amend
-  chart = !git diff --stat=$(tput cols)
-  files = diff --name-only
-  github-log = !git --no-pager prettylog --reverse
-  info-pane = !clear && git status && git stash list
-  last-commit = log -n 1
-  local-branches = branch -l
-  nuke-dry = clean -xdfn
+  alias            = !git config --get-regex '^alias\\.'
+  amend            = commit --amend
+  chart            = !git diff --stat=$(tput cols)
+  files            = diff --name-only
+  github-log       = !git --no-pager prettylog --reverse
+  info-pane        = !clear && git status && git stash list
+  last-commit      = log -n 1
+  local-branches   = branch -l
+  nuke-dry         = clean -xdfn
   nuke-interactive = clean -xdfi
-  prettylog = log --pretty=format:'%C(blue)%h%C(reset) %C(bold)%s%C(reset) %C(yellow)<%ae>%C(reset)' --abbrev-commit
-  remote-branches = branch -r
-  summary = diff --shortstat
+  prettylog        = log --pretty=format:'%C(blue)%h%C(reset) %C(bold)%s%C(reset) %C(yellow)<%ae>%C(reset)' --abbrev-commit
+  remote-branches  = branch -r
+  summary          = diff --shortstat
   # Abbreviated
-  br = branch
-  ch = !git chart
-  ghl = !git github-log
-  lbr = !git local-branches
-  lc = !git last-commit
-  lm = log master..
-  nd = !git nuke-dry
-  ni = !git nuke-interactive
-  pl = !git prettylog
-  rbr = !git remote-branches
-  st = status
-  sum = diff --shortstat
+  br               = branch
+  ch               = !git chart
+  ghl              = !git github-log
+  lbr              = !git local-branches
+  lc               = !git last-commit
+  lm               = log master..
+  nd               = !git nuke-dry
+  ni               = !git nuke-interactive
+  pl               = !git prettylog
+  rbr              = !git remote-branches
+  st               = status
+  sum              = diff --shortstat
 
   ### Actually does something
   # Long-form
-  nuke = clean -xdf
-  back = checkout -
+  back             = checkout -
+  nuke             = clean -xdf
   submodule-update = !git submodule update --init --recursive
   # Abbreviated
-  co = checkout
-  cl = clean -df
-  sub = !git submodule-update
+  cl               = clean -df
+  co               = checkout
+  sub              = !git submodule-update
 
 [color]
-  branch = auto
-  diff = auto
+  branch      = auto
+  diff        = auto
   interactive = auto
-  status = auto
-  ui = auto
+  status      = auto
+  ui          = auto
 
 [color "branch"]
-  current = white bold reverse
-  local = green
-  remote = yellow
+  current  = white bold reverse
+  local    = green
+  remote   = yellow
   upstream = yellow bold
 
 [color "diff"]
-  commit = yellow bold
-  frag = blue ul
-  func = blue bold
-  meta = cyan bold
-  new = green bold
-  old = red bold
+  commit     = yellow bold
+  frag       = blue ul
+  func       = blue bold
+  meta       = cyan bold
+  new        = green bold
+  old        = red bold
   whitespace = red reverse
 
 [color "status"]
@@ -73,23 +73,23 @@
   unmerged = red reverse bold
 
 [core]
-  safecrlf = warn
-  editor = vim
-  pager = less -F -X
+  editor     = vim
   ignoreCase = true
+  pager      = less -F -X
+  safecrlf   = warn
   trustctime = false
 
 [core.whitespace]
   tab-in-indent = true
 
 [diff]
-  algorithm = patience
+  algorithm           = patience
   compactionHeuristic = true
-  renames = copies
+  renames             = copies
 
 [merge]
   verbosity = 5
-  ff = only
+  ff        = only
 
 [push]
   default = current
