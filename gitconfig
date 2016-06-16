@@ -99,3 +99,6 @@
 
 [fetch]
   prune = false
+
+[commit]
+  verbose = true
