@@ -5,17 +5,19 @@ alias ls='ls -hF --color=auto'
 alias mv='mv -iv'
 alias ln='ln -v'
 alias rm='rm -Iv'
-alias g='grep -Irisn --color=auto'
+alias gr='grep -Irisn --color=auto'
 alias p='ps -a'
 alias back='cd -'
 alias path='pretty_path'
 
 ### git
+alias g='git'
 alias gp='git_push_and_compare'
 alias gm='git checkout master && git pull'
 alias gd='git checkout develop && git pull'
-alias gr='git_open_remote'
-alias grc='git_remote_compare'
+# Note: These two have largely been replaced by hub
+#alias gr='git_open_remote'
+#alias grc='git_remote_compare'
 
 ### make
 alias m='make clean && make'

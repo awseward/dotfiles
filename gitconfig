@@ -28,6 +28,7 @@
   lm  = log master..
   nd  = !git nuke-dry
   ni  = !git nuke-interactive
+  p   = push -u
   pf  = !git push-force
   pl  = !git prettylog
   rbr = !git remote-branches
