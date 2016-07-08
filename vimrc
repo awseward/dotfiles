@@ -148,9 +148,12 @@ if executable('ag')
 endif
 
 " FZF
-let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
-map <C-p> :Files<CR>
-map <leader>b :Buffers<CR>
+if has('win16') || has('win32') || has('win64') || has('win32unix')
+else
+  let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
+  map <C-p> :Files<CR>
+  map <leader>b :Buffers<CR>
+endif
 
 "
 " Colors
