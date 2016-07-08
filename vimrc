@@ -228,3 +228,6 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Reload buffers
+map <leader>e :set autoread <bar> :checktime <bar> :set noautoread<cr>
