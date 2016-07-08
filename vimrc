@@ -147,9 +147,11 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
-" FZF
 if has('win16') || has('win32') || has('win64') || has('win32unix')
+  " Ignore .gitignore files
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 else
+  " FZF
   let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
   map <C-p> :Files<CR>
   map <leader>b :Buffers<CR>
