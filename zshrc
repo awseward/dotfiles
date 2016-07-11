@@ -13,6 +13,9 @@ source "$ZSH/oh-my-zsh.sh"
 
 export EDITOR='vim'
 
+# Disable .NET core telemetry
+export DOTNET_CLI_TELEMETRY_OPTOUT="true"
+
 source ~/.aliases
 
 for file in ~/.lib/autoload/**/*.sh; do
