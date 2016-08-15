@@ -14,3 +14,6 @@ au Bufread,BufNewFile *.npmrc,*npmrc set filetype=config
 """ Ruby
 " jbuilder
 au Bufread,BufNewFile *.jbuilder set filetype=ruby
+
+""" Fuse
+au Bufread,BufNewFile *.ux set filetype=xml
