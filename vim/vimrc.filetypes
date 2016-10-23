@@ -1,5 +1,7 @@
 " gitconfig
 au Bufread,BufNewFile *gitconfig set filetype=gitconfig
+" markdown
+au Bufread,BufNewFile *.md set filetype=markdown
 
 """ Node
 " babelrc

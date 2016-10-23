@@ -22,7 +22,12 @@ __prepend_to_PATH() {
 
 __append_to_PATH() {
   local entry="$1"
-  __exists_in_PATH "$entry" || export PATH="$PATH:$entry"
+  if __exists_in_PATH "$entry"; then
+    echo "Skip ${entry} (already in \$PATH)"
+  else
+    echo "Append ${entry} to \$PATH"
+    export PATH="$PATH:$entry"
+  fi
 }
 
 __ensure_in_PATH() {
