@@ -18,13 +18,17 @@ export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 
 source ~/.aliases
 
-for file in ~/.lib/autoload/**/*.sh; do
-  source "$file"
-done
+if [ -d ~/.lib/autoload ]; then
+  for file in ~/.lib/autoload/**/*.sh; do
+    source "$file"
+  done
+fi
 
-for file in ~/.env-specific/**/*.sh; do
-  source "$file"
-done
+if [ -d ~/.env-specific ]; then
+  for file in ~/.env-specific/**/*.sh; do
+    source "$file"
+  done
+fi
 
 if [ -d ~/.completions ]; then
   for file in ~/.completions/**/*; do
