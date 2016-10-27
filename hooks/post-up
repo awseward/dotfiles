@@ -13,5 +13,5 @@ npm completion > "$HOME/.completions/npm.completion.sh"
 # Install global dependencies
 cd "$HOME/.global-dependencies"
 
-bundle install
-npm install -g $(cat npm-packages | xargs)
+# bundle install
+# npm install -g $(cat npm-packages | xargs)
