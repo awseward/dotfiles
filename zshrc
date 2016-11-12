@@ -53,6 +53,7 @@ esac
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 __ensure_in_PATH          \
+  "$HOME/.cargo/bin"      \
   "$HOME/.rbenv/bin"      \
   "$HOME/.rbenv/shims"    \
   "/usr/local/bin"        \
