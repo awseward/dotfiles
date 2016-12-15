@@ -140,7 +140,7 @@ set colorcolumn=80
 set virtualedit=block
 
 " Keep cursor centered when possible
-set scrolloff=999
+" set scrolloff=999
 
 " Use the silver searcher for things
 if executable('ag')
