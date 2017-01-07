@@ -19,3 +19,6 @@ au Bufread,BufNewFile *.jbuilder set filetype=ruby
 
 """ Fuse
 au Bufread,BufNewFile *.ux set filetype=xml
+
+" .NET configuration
+au Bufread,BufNewFile *.config set filetype=xml
