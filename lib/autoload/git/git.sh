@@ -93,6 +93,13 @@ git_delete_current_branch_remote() {
   git_delete_branch_remote "$(git_current_branch)"
 }
 
+git_cherry_pick_and_reset() {
+  local sha
+  sha="$1"
+
+  git cherry-pick "$sha" && git reset --mixed HEAD~1
+}
+
 __git_branch_is_master() {
   [ "$1" = "master" ]
 }
