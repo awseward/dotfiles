@@ -1,3 +1,5 @@
+" TODO: Make these overrides a little friendlier to light colorschemes
+
 " BG Transparency (only needed to make some colorschemes not look awful)
 hi Normal ctermbg=none
 hi NonText ctermbg=none
@@ -7,8 +9,11 @@ hi LineNr ctermbg=none
 hi LineNr ctermfg=248
 
 " ColorColumn (80)
-hi ColorColumn ctermbg=234
-hi ColorColumn ctermfg=161
+
+if $LIGHT_SHELL == ""
+  hi ColorColumn ctermbg=234
+  hi ColorColumn ctermfg=161
+endif
 
 " CursorColumn
 hi CursorColumn ctermbg=230

@@ -172,9 +172,17 @@ function! RandomColorSchemeWithOverrides()
 endfunction
 
 set t_Co=256
-set background=dark
-colorscheme PaperColor
-call ApplyColorOverrides()
+
+if $LIGHT_SHELL != ""
+  set background=light
+  colorscheme PaperColor
+  call ApplyColorOverrides()
+else
+  set background=dark
+  colorscheme PaperColor
+  call ApplyColorOverrides()
+end
+
 
 map <leader>m :call RandomColorSchemeWithOverrides()<CR>
 " Change colorschemes on `updatetime`ms of no input (normal & insert)
