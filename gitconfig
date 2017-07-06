@@ -68,12 +68,12 @@
   whitespace = red reverse
 
 [color "status"]
-  branch = white bold ul
-  changed = yellow bold reverse
-  header = black bold
+  branch    = white bold ul
+  changed   = yellow bold reverse
+  header    = black bold
   untracked = normal bold reverse
-  updated = magenta bold
-  unmerged = red bold reverse
+  updated   = magenta bold
+  unmerged  = red bold reverse
 
 [core]
   editor     = vim
