@@ -17,7 +17,7 @@ Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/paredit.vim'
+" Plug 'vim-scripts/paredit.vim'
 
 " Misc
 Plug 'scrooloose/syntastic'
