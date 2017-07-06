@@ -71,9 +71,9 @@
   branch = white bold ul
   changed = yellow bold reverse
   header = black bold
-  untracked = white
+  untracked = normal bold reverse
   updated = magenta bold
-  unmerged = red reverse bold
+  unmerged = red bold reverse
 
 [core]
   editor     = vim
