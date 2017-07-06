@@ -17,8 +17,8 @@ alias cdw='cd "$USERPROFILE"'
 alias psh='cmd /c start powershell'
 alias lein='lein.bat'
 
-alias dark_shell='LIGHT_SHELL= nohup mintty -w full & disown; exit'
-alias light_shell='LIGHT_SHELL=true nohup mintty -C "$(cygpath ~/.minttyrc-light)" -w full & disown; exit'
+alias dark_shell='LIGHT_SHELL= nohup mintty -w "full" > ~/nohup.out & disown; exit'
+alias light_shell='LIGHT_SHELL=true nohup mintty -C "$(cygpath ~/.minttyrc-light)" -w "full" > ~/nohup.out & disown; exit'
 
 
 # Misc
