@@ -22,6 +22,7 @@
   # Abbreviated
   br  = branch
   ch  = !git chart
+  dc  = diff --cached
   ghl = !git github-log
   lbr = !git local-branches
   lc  = !git last-commit
