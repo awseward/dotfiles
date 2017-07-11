@@ -1,6 +1,8 @@
 # override open from ~/.lib/misc.sh
+
+unalias open
 open() {
-  explorer "$1" > /dev/null 2>&1
+  explorer "$(cygpath --windows "$1")" > /dev/null 2>&1
 }
 
 print_new_uuid() {
