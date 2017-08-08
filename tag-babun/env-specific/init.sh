@@ -5,6 +5,10 @@ open() {
   explorer "$(cygpath --windows "$1")" > /dev/null 2>&1
 }
 
+psh() {
+  cmd /c start powershell -noexit -command "cd $(cygpath -w $1)"
+}
+
 print_new_uuid() {
   local rb_cmd
   rb_cmd="require 'securerandom'; puts SecureRandom.uuid"
@@ -16,7 +20,6 @@ export PERL5LIB=/usr/lib/perl5/vendor_perl/5.14
 
 # Aliases
 alias cdw='cd "$USERPROFILE"'
-alias psh='cmd /c start powershell'
 alias lein='lein.bat'
 
 alias dark_shell='LIGHT_SHELL= nohup mintty -w "full" > ~/nohup.out & disown; exit'
