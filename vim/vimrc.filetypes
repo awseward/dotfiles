@@ -2,6 +2,8 @@
 au Bufread,BufNewFile *gitconfig set filetype=gitconfig
 " markdown
 au Bufread,BufNewFile *.md set filetype=markdown
+" hub release
+au Bufread,BufNewFile RELEASE_EDITMSG set filetype=markdown
 
 """ Node
 " babelrc
