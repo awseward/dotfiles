@@ -1,5 +1,3 @@
-umask 022 # WSL workaround
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -12,12 +10,6 @@ export ZSH_THEME="robbyrussell"
 plugins=()
 
 source "$ZSH/oh-my-zsh.sh"
-
-# https://github.com/bobcats/dotfiles/blob/master/zshrc
-function git_prompt_info() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-}
 
 export EDITOR='vim'
 
