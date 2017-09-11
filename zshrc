@@ -7,7 +7,7 @@ export ZSH_THEME="robbyrussell"
 # Plugins found in $ZSH/plugins/
 # Custom plugins in $ZSH/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(rake)
+plugins=()
 
 source "$ZSH/oh-my-zsh.sh"
 
