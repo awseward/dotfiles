@@ -77,6 +77,7 @@
   unmerged  = red bold reverse
 
 [core]
+  autocrlf   = input
   editor     = vim
   ignoreCase = true
   pager      = less -F -X
