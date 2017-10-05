@@ -11,5 +11,14 @@ git config --system core.autocrlf true
 
 
 psh() {
-  cmd.exe /c start powershell -noexit -command "cd $(wslpath -w $1)"
+  local psh_path
+
+  if [ "$1" = "" ]; then
+    psh_path="$(pwd)"
+  else
+    psh_path="$1"
+  fi
+
+
+  cmd.exe /c start powershell -noexit -command "cd $(wslpath -w $psh_path)"
 }
