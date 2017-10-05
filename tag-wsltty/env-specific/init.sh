@@ -1,11 +1,11 @@
 psh() {
   local psh_path
 
-  if [ "$1" = "" ] || [ "$1" = "." ]; then
-    psh_path="$(pwd)"
-  else
-    psh_path="$1"
-  fi
+  case "$1" in
+    "" ) psh_path="$(pwd)" ;;
+    ".") psh_path="$(pwd)" ;;
+    *  ) psh_path="$1" ;;
+  esac
 
   cmd.exe /c start powershell -noexit -command "cd $(wslpath -w $psh_path)"
 }
