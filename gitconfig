@@ -94,7 +94,6 @@
 
 [merge]
   verbosity = 5
-  ff        = only
 
 [push]
   default = current
