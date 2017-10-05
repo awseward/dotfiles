@@ -11,5 +11,5 @@ git config --system core.autocrlf true
 
 
 psh() {
-  cmd.exe /c start powershell -noexit -command "cd $(cygpath -w $1)"
+  cmd.exe /c start powershell -noexit -command "cd $(wslpath -w $1)"
 }
