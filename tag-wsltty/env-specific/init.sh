@@ -13,7 +13,7 @@ git config --system core.autocrlf true
 psh() {
   local psh_path
 
-  if [ "$1" = "" ]; then
+  if [ "$1" = "" ] || [ "$1" = "." ]; then
     psh_path="$(pwd)"
   else
     psh_path="$1"
