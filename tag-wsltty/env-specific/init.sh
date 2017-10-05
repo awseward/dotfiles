@@ -8,3 +8,8 @@ alias paket="./paket.sh "
 
 umask 022 # WSL Windows /mnt/* dir permissions workaround
 git config --system core.autocrlf true
+
+
+psh() {
+  cmd.exe /c start powershell -noexit -command "cd $(wslpath -w $1)"
+}
