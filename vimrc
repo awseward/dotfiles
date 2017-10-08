@@ -227,8 +227,8 @@ map <leader>g :Ag<CR>
 " Clear highlights after a search
 nnoremap <CR> :noh<CR><CR>
 
-" Sort in visual, select modes
-vmap <leader>s :sort u<CR>
+" Sort in visual, select modes (case-insensitive)
+vmap <leader>s :sort iu<CR>
 
 " Make sure :W doesn't trigger Windows from fzf-vim
 command! W :w
