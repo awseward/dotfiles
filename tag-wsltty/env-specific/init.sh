@@ -4,6 +4,9 @@ psh() {
   case "$1" in
     "" ) psh_path="$(pwd)" ;;
     ".") psh_path="$(pwd)" ;;
+    # TODO: This could use some more work. For example, if you're under
+    # a lxss dir that will need translating, you can't just type `open lib`
+    # at the moment. You'd need to type open "$(pwd)/lib"
     *  ) psh_path="$1" ;;
   esac
 
@@ -31,6 +34,21 @@ win_env() {
   fi
 }
 
+# override open from ~/.lib/misc.sh
+open() {
+  local arg_path
+
+  case "$1" in
+    "" ) arg_path="$(pwd)" ;;
+    ".") arg_path="$(pwd)" ;;
+    *  ) arg_path="$1" ;;
+  esac
+
+  explorer.exe "$(wslpath -w $arg_path)"
+  return 0
+}
+
+
 export LS_COLORS="ow=0"
 export SHELL="/bin/zsh" # isn't getting updated/set propertly by chsh, so just setting it manually here
 
@@ -40,7 +58,6 @@ export LOCALAPPDATA="$(wslpath -u $(win_env 'LOCALAPPDATA'))"
 alias fake="./fake.sh "
 alias hub="hub.exe " # should be temporary... find a better way
 alias lappd='cd "$LOCALAPPDATA"'
-alias open="explorer.exe" # override open from ~/.lib/misc.sh
 alias paket="./paket.sh "
 alias uspro='cd "$USERPROFILE"'
 
