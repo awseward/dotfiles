@@ -36,7 +36,7 @@ alias webpack-dev-server='webpack-dev-server --progress --colors'
 ### ruby
 alias be='bundle exec'
 # Tmuxinator doesn't seem to want to give the standard mux shortcut when
-# installed by rbenv, so I'm just doing this for now because I don't care to 
+# installed by rbenv, so I'm just doing this for now because I don't care to
 # investivate it at the moment.
 alias mux='tmuxinator'
 
