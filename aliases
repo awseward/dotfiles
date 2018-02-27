@@ -12,13 +12,9 @@ alias path='pretty_path'
 
 ### git
 alias g='git'
-alias gp='git_push_and_compare'
 alias gm='git checkout master && git pull'
 alias gd='git checkout develop && git pull'
 alias gcpr='git_cherry_pick_and_reset'
-# Note: These two have largely been replaced by hub
-#alias gr='git_open_remote'
-#alias grc='git_remote_compare'
 
 ### make
 alias m='make clean && make'

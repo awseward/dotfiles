@@ -20,21 +20,23 @@
   remote-branches  = branch -r
   summary          = diff --shortstat
   # Abbreviated
-  br  = branch
-  ch  = !git chart
-  dc  = diff --cached
-  ghl = !git github-log
-  lbr = !git local-branches
-  lc  = !git last-commit
-  lm  = log master..
-  nd  = !git nuke-dry
-  ni  = !git nuke-interactive
-  p   = push -u
-  pf  = !git push-force
-  pl  = !git prettylog
-  rbr = !git remote-branches
-  st  = status
-  sum = diff --shortstat
+  br   = branch
+  ch   = !git chart
+  dc   = diff --cached
+  ghl  = !git github-log
+  lbr  = !git local-branches
+  lc   = !git last-commit
+  lm   = log master..
+  nd   = !git nuke-dry
+  ni   = !git nuke-interactive
+  p    = push -u
+  pf   = !git push-force
+  pfoh = !git push-force origin head
+  pl   = !git prettylog
+  poh  = push -u origin HEAD
+  rbr  = !git remote-branches
+  st   = status
+  sum  = diff --shortstat
 
   ### Potentially destructive
   # Long-form
