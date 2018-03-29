@@ -68,11 +68,6 @@ __ensure_in_PATH          \
 which rbenv &>/dev/null \
   && eval "$(rbenv init -)"
 
-## Overcommit
-which overcommit &>/dev/null \
-  && export GIT_TEMPLATE_DIR \
-  && GIT_TEMPLATE_DIR=$(overcommit --template-dir)
-
 ## NVM
 export NVM_DIR=~"/.nvm"
 # This loads nvm
