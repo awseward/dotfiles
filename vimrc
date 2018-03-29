@@ -152,7 +152,7 @@ if has('win16') || has('win32') || has('win64') || has('win32unix')
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 else
   " FZF
-  let $FZF_DEFAULT_COMMAND = 'ag --path-to-agignore "~/.agignore" --files-with-matches --hidden -g ""'
+  let $FZF_DEFAULT_COMMAND = 'ag --path-to-ignore "~/.agignore" --files-with-matches --hidden -g ""'
   map <C-p> :Files<CR>
   map <leader>b :Buffers<CR>
 endif
