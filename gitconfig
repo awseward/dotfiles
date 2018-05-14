@@ -6,6 +6,7 @@
   ### Informational
   # Long-form
   alias            = !git config --get-regex '^alias\\.'
+  blame-short      = blame -c
   amend            = commit --amend
   chart            = !git diff --stat=$(tput cols)
   files            = diff --name-only
@@ -21,6 +22,7 @@
   summary          = diff --shortstat
   # Abbreviated
   br   = branch
+  bs   = !git blame-short
   ch   = !git chart
   dc   = diff --cached
   ghl  = !git github-log
