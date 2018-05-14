@@ -244,3 +244,6 @@ nmap ga <Plug>(EasyAlign)
 
 " Reload buffers
 map <leader>e :set autoread <bar> :checktime <bar> :set noautoread<cr>
+
+" macOS clipboard workaround (https://github.com/tmux/tmux/issues/543#issuecomment-248980734)
+set clipboard=unnamed
