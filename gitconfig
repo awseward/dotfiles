@@ -35,7 +35,7 @@
   ni   = !git nuke-interactive
   p    = push -u
   pf   = !git push-force
-  pfoh = !git push-force origin head
+  pfoh = !git push-force origin HEAD
   pl   = !git prettylog
   poh  = push -u origin HEAD
   rbr  = !git remote-branches
