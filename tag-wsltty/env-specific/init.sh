@@ -48,6 +48,9 @@ open() {
   return 0
 }
 
+# this is just a placeholder for macOS Sierra clipboard workaround described
+# here: https://github.com/tmux/tmux/issues/543#issuecomment-248980734"
+reattach-to-user-namespace() { }
 
 export LS_COLORS="ow=0"
 export SHELL="/bin/zsh" # isn't getting updated/set propertly by chsh, so just setting it manually here
