@@ -21,6 +21,7 @@
   push-force       = push --force-with-lease
   remote-branches  = branch -r
   summary          = diff --shortstat
+  tags             = tag -l --sort=v:refname
   # Abbreviated
   br   = branch
   bs   = !git blame-short
