@@ -65,6 +65,10 @@ __ensure_in_PATH                         \
   "/usr/local/heroku/bin"                \
   "/Users/andrew/Library/Python/3.6/bin" \
 
+if [ "$RACKET_BIN_DIR" != "" ]; then
+  __ensure_in_PATH "$RACKET_BIN_DIR"
+fi
+
 ## rbenv
 which rbenv &>/dev/null \
   && eval "$(rbenv init -)"
