@@ -9,7 +9,7 @@ _error() {
   return 1
 }
 
-warn_if_duplicates_in_path() {
+warn_if_duplicates_in_PATH() {
   # Using xargs here because wc in osx leaves a bunch of whitespace around and
   # just throwing it through xargs was the simplest way to trim that
   local total

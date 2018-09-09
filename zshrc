@@ -54,7 +54,6 @@ esac
 
 __ensure_in_PATH                         \
   "$HOME/.cargo/bin"                     \
-  "$HOME/.rbenv/bin"                     \
   "$HOME/.rbenv/shims"                   \
   "/usr/local/bin"                       \
   "/usr/bin"                             \
@@ -63,11 +62,9 @@ __ensure_in_PATH                         \
   "$HOME/.bin"                           \
   "/sbin"                                \
   "/usr/local/heroku/bin"                \
-  "/Users/andrew/Library/Python/3.6/bin" \
-
-if [ "$RACKET_BIN_DIR" != "" ]; then
-  __ensure_in_PATH "$RACKET_BIN_DIR"
-fi
+  "$HOME/Library/Python/3.6/bin"         \
+  "$RACKET_BIN_DIR"                      \
+  "$HOME/.dotnet/tools"
 
 ## rbenv
 which rbenv &>/dev/null \
@@ -80,8 +77,11 @@ export NVM_DIR=~"/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Some cleanup
+remove_duplicates_from_PATH
+
 # Some checks
-warn_if_duplicates_in_path
+warn_if_duplicates_in_PATH
 warn_if_dotfiles_update_check_recommended
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
