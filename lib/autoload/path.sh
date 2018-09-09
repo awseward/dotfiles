@@ -26,10 +26,12 @@ __prepend_to_PATH() {
 
 __try_append_to_PATH() {
   local entry="$1"
-  if __not_on_disk "$entry";      then echo "Skip (not found):        ${entry}"
-  elif __exists_in_PATH "$entry"; then echo "Skip (already in \$PATH): ${entry}"
+  if __not_on_disk "$entry"; then
+    [ -z "$DEBUG_DOTFILES" ] || echo "Skip (not found):        ${entry}"
+  elif __exists_in_PATH "$entry"; then
+    [ -z "$DEBUG_DOTFILES" ] || echo "Skip (already in \$PATH): ${entry}"
   else
-    echo                                    "Append to \$PATH:         ${entry}"
+    [ -z "$DEBUG_DOTFILES" ] || echo "Append to \$PATH:         ${entry}"
     export PATH="$PATH:$entry"
   fi
 }
