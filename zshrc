@@ -83,5 +83,3 @@ remove_duplicates_from_PATH
 # Some checks
 warn_if_duplicates_in_PATH
 warn_if_dotfiles_update_check_recommended
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
