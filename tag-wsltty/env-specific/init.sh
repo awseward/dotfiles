@@ -59,9 +59,9 @@ export USERPROFILE="$(wslpath -u $(win_env 'USERPROFILE'))"
 export LOCALAPPDATA="$(wslpath -u $(win_env 'LOCALAPPDATA'))"
 
 alias fake="./fake.sh "
+alias paket="./paket.sh "
 alias hub="hub.exe " # should be temporary... find a better way
 alias lappd='cd "$LOCALAPPDATA"'
-alias paket="./paket.sh "
 alias uspro='cd "$USERPROFILE"'
 
 umask 022 # WSL Windows /mnt/* dir permissions workaround
