@@ -7,7 +7,7 @@ export ZSH_THEME="robbyrussell"
 # Plugins found in $ZSH/plugins/
 # Custom plugins in $ZSH/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=()
+plugins=(asdf)
 
 source "$ZSH/oh-my-zsh.sh"
 
@@ -52,19 +52,21 @@ esac
 
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-__ensure_in_PATH                         \
-  "$HOME/.cargo/bin"                     \
-  "$HOME/.rbenv/shims"                   \
-  "/usr/local/bin"                       \
-  "/usr/bin"                             \
-  "/bin"                                 \
-  "$HOME/bin"                            \
-  "$HOME/.bin"                           \
-  "/sbin"                                \
-  "/usr/local/heroku/bin"                \
-  "$HOME/Library/Python/3.6/bin"         \
-  "$RACKET_BIN_DIR"                      \
-  "$HOME/.dotnet/tools"
+__ensure_in_PATH                 \
+  "$HOME/.cargo/bin"             \
+  "$HOME/.rbenv/shims"           \
+  "/usr/local/bin"               \
+  "/usr/bin"                     \
+  "/bin"                         \
+  "$HOME/bin"                    \
+  "$HOME/.bin"                   \
+  "/sbin"                        \
+  "/usr/local/heroku/bin"        \
+  "$HOME/Library/Python/3.6/bin" \
+  "$RACKET_BIN_DIR"              \
+  "$HOME/.dotnet/tools"          \
+  "$HOME/.asdf/asdf.sh"          \
+  "$HOME/.asdf/completions/asdf.bash"
 
 ## rbenv
 which rbenv &>/dev/null \
