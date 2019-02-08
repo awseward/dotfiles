@@ -52,21 +52,22 @@ esac
 
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-__ensure_in_PATH                 \
-  "$HOME/.cargo/bin"             \
-  "$HOME/.rbenv/shims"           \
-  "/usr/local/bin"               \
-  "/usr/bin"                     \
-  "/bin"                         \
-  "$HOME/bin"                    \
-  "$HOME/.bin"                   \
-  "/sbin"                        \
-  "/usr/local/heroku/bin"        \
-  "$HOME/Library/Python/3.6/bin" \
-  "$RACKET_BIN_DIR"              \
-  "$HOME/.dotnet/tools"          \
-  "$HOME/.asdf/asdf.sh"          \
-  "$HOME/.asdf/completions/asdf.bash"
+__ensure_in_PATH                      \
+  "$HOME/.cargo/bin"                  \
+  "$HOME/.rbenv/shims"                \
+  "/usr/local/bin"                    \
+  "/usr/bin"                          \
+  "/bin"                              \
+  "$HOME/bin"                         \
+  "$HOME/.bin"                        \
+  "/sbin"                             \
+  "/usr/local/heroku/bin"             \
+  "$HOME/Library/Python/3.6/bin"      \
+  "$RACKET_BIN_DIR"                   \
+  "$HOME/.dotnet/tools"               \
+  "$HOME/.asdf/asdf.sh"               \
+  "$HOME/.asdf/completions/asdf.bash" \
+  "$HOME/go/bin"
 
 ## rbenv
 which rbenv &>/dev/null \
