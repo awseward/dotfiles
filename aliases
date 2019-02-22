@@ -9,6 +9,8 @@ alias gr='grep -Irisn --color=auto'
 alias p='ps -a'
 alias back='cd -'
 alias path='pretty_path'
+alias l='exa -la'
+alias ll='exa -l'
 
 ### git
 alias g='git'
