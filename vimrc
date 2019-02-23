@@ -247,3 +247,9 @@ map <leader>e :set autoread <bar> :checktime <bar> :set noautoread<cr>
 
 " macOS clipboard workaround (https://github.com/tmux/tmux/issues/543#issuecomment-248980734)
 set clipboard=unnamed
+
+" https://www.reddit.com/r/vim/comments/2om1ib/how_to_disable_sql_dynamic_completion/cmop4zh
+let g:omni_sql_no_default_maps = 1
+
+" https://vi.stackexchange.com/a/2956
+let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
