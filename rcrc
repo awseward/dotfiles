@@ -1,0 +1,1 @@
+EXCLUDES="README*.md setup/* Brewfile Shortcuts.json"

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 # Install plug.vim and plugins
 if [ ! -e "$HOME/.vim/autoload/plug.vim" ]; then
@@ -7,11 +7,19 @@ if [ ! -e "$HOME/.vim/autoload/plug.vim" ]; then
 fi
 vim -u "$HOME/.vim/vimrc.plugins" +PlugInstall +qa
 
-# Set up npm completion
-npm completion > "$HOME/.completions/npm.completion.sh"
+reset -Q
 
-# Install global dependencies
-cd "$HOME/.global-dependencies"
+cat <<MESSAGE
 
-# bundle install
-# npm install -g $(cat npm-packages | xargs)
+NOTE: Please make sure iTerm2 is configured to load from "~/.iterm".
+
+      This can be configured by navigating to "Preferences > General" and then
+      looking for the phrase (near the bottom):
+
+        "Load preferences from a custom folder or URL"
+
+NOTE: This setup process currently does not account for any ssh configuration.
+
+      Such things will bave to be managed manually for now.
+
+MESSAGE
