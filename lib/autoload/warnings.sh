@@ -1,11 +1,11 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 _warn() {
-  >&2 echo "Warning: $@"
+  >&2 echo "WARNING: $@"
 }
 
 _error() {
-  >&2 echo "Error: $@"
+  >&2 echo "ERROR: $@"
   return 1
 }
 

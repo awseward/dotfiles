@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 TMP_FILE="$(mktemp)"
 ALL_FILES="$(mktemp)"
