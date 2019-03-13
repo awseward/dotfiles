@@ -16,7 +16,7 @@ rcup -v -t osx
 
 # This is a bit wacky
 spectacle_shortcuts="Library/Application Support/Spectacle/Shortcuts.json"
-spec_src="$dotfiles/$spectacle_shortcuts"
+spec_src="$dotfiles/tag-osx/$spectacle_shortcuts"
 spec_dst="$HOME/$spectacle_shortcuts"
 
 diff "$spec_src" "$spec_dst" >/dev/null 2>&1 \
