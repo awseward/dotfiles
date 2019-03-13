@@ -154,7 +154,9 @@ else
   " FZF
   let $FZF_DEFAULT_COMMAND = 'ag --path-to-ignore "~/.agignore" --files-with-matches --hidden -g ""'
   map <C-p> :Files<CR>
-  map <leader>b :Buffers<CR>
+  map <C-b> :Files<CR>
+  map <leader>f :Ag<Space>
+  map <leader>R :source ~/.vimrc<CR>
 endif
 
 "

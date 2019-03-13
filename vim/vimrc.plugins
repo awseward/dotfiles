@@ -18,6 +18,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 " Plug 'vim-scripts/paredit.vim'
+Plug 'troydm/zoomwintab.vim'
 
 " Misc
 Plug 'scrooloose/syntastic'

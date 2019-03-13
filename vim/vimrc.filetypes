@@ -8,3 +8,4 @@ au Bufread,BufNewFile *.npmrc,*npmrc           set filetype=config
 au Bufread,BufNewFile *.jbuilder               set filetype=ruby
 au Bufread,BufNewFile *.ux                     set filetype=xml " (Fuse)
 au Bufread,BufNewFile *.config                 set filetype=xml " (.NET)
+au Bufread,BufNewFile *.env                    set filetype=shell
