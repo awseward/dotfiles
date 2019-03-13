@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 __canonicalize_path() {
   case "$OSTYPE" in

@@ -9,6 +9,8 @@ vim -u "$HOME/.vim/vimrc.plugins" +PlugInstall +qa
 
 reset -Q
 
+test -e "$HOME/.env-specific/post-up" && "$HOME/.env-specific/post-up"
+
 cat <<MESSAGE
 
 NOTE: Please make sure iTerm2 is configured to load from "~/.iterm".
