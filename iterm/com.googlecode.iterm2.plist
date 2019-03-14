@@ -1073,8 +1073,6 @@
 			<true/>
 			<key>Window Type</key>
 			<integer>12</integer>
-			<key>Working Directory</key>
-			<string>/Users/andrewseward</string>
 		</dict>
 		<dict>
 			<key>ASCII Anti Aliased</key>
@@ -1843,8 +1841,6 @@
 			<true/>
 			<key>Window Type</key>
 			<integer>12</integer>
-			<key>Working Directory</key>
-			<string>/Users/andrewseward</string>
 		</dict>
 	</array>
 	<key>NoSyncPermissionToShowTip</key>
@@ -1904,8 +1900,6 @@
 			<string>kNextWindowPointerAction</string>
 		</dict>
 	</dict>
-	<key>PrefsCustomFolder</key>
-	<string>/Users/andrewseward</string>
 	<key>Print In Black And White</key>
 	<true/>
 	<key>PromptOnQuit</key>

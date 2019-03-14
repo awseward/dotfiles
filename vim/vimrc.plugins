@@ -18,6 +18,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 " Plug 'vim-scripts/paredit.vim'
+Plug 'troydm/zoomwintab.vim'
 
 " Misc
 Plug 'scrooloose/syntastic'
@@ -42,6 +43,7 @@ Plug 'kongo2002/fsharp-vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'raichoo/purescript-vim'
+Plug 'idris-hackers/idris-vim'
 
 call plug#end()
 filetype plugin indent on

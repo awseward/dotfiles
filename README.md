@@ -1,6 +1,6 @@
 # dotfiles
 
-## MacOS
+### MacOS Quickstart
 
 
 ```sh
