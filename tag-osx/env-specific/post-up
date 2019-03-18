@@ -17,21 +17,24 @@ if [ ! -d "$iterm2_schemes_dir" ]; then
   git clone --depth=1 'git@github.com:mbadolato/iTerm2-Color-Schemes.git' "$iterm2_schemes_dir"
 fi
 
-cat <<MESSAGE
+mdp <<MESSAGE
 
-NOTE: Please make sure iTerm2 is configured to load from "~/.iterm".
+# NOTE: Please make sure iTerm2 is configured to load from \`~/.iterm\`.
 
-      This can be configured by navigating to "Preferences > General" and then
-      looking for the phrase (near the bottom):
+This can be configured by navigating to \`Preferences > General\` and then
+looking for the phrase (near the bottom):
 
-        "Load preferences from a custom folder or URL"
+\`Load preferences from a custom folder or URL\`
 
-      Also, when importing color schemes from $HOME/.iterm2-color-schemes, in
-      case finder is not configured to show hidden files/folders, you can
-      quickly toggle this with \`CMD + SHIFT + .\`.
+Also, when importing color schemes from \`~/.iterm2-color-schemes\`, in case
+finder is not configured to show hidden files/folders, you can quickly toggle
+this with \`CMD + SHIFT + .\`.
 
-NOTE: This setup process currently does not account for any ssh configuration.
+Don't forget to not only import it, but then also configure it to be used as
+well.
 
-      Such things will bave to be managed manually for now.
+# NOTE: This setup process currently does not account for any ssh configuration.
+
+Such things will bave to be managed manually for now.
 
 MESSAGE

@@ -39,6 +39,7 @@ brew "libvorbis"
 brew "mad"
 brew "mas"
 brew "maven"
+brew "mdp"
 brew "memcached", restart_service: true
 brew "mono"
 brew "nmap"
