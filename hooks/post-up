@@ -10,18 +10,3 @@ vim -u "$HOME/.vim/vimrc.plugins" +PlugInstall +qa
 reset -Q
 
 test -e "$HOME/.env-specific/post-up" && "$HOME/.env-specific/post-up"
-
-cat <<MESSAGE
-
-NOTE: Please make sure iTerm2 is configured to load from "~/.iterm".
-
-      This can be configured by navigating to "Preferences > General" and then
-      looking for the phrase (near the bottom):
-
-        "Load preferences from a custom folder or URL"
-
-NOTE: This setup process currently does not account for any ssh configuration.
-
-      Such things will bave to be managed manually for now.
-
-MESSAGE
