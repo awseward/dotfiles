@@ -26,6 +26,10 @@ NOTE: Please make sure iTerm2 is configured to load from "~/.iterm".
 
         "Load preferences from a custom folder or URL"
 
+      Also, when importing color schemes from $HOME/.iterm2-color-schemes, in
+      case finder is not configured to show hidden files/folders, you can
+      quickly toggle this with \`CMD + SHIFT + .\`.
+
 NOTE: This setup process currently does not account for any ssh configuration.
 
       Such things will bave to be managed manually for now.
