@@ -23,7 +23,14 @@ warn_if_duplicates_in_PATH() {
 }
 
 warn_if_dotfiles_update_check_recommended() {
+  local update_command
+  update_command="$HOME/.bin/dotfiles-update.sh write_timestamp_file"
   if $(dotfiles-update.sh is_time_to_check); then
-    _warn "Please check for dotfile updates, then run \`dotfiles-update.sh write_timestamp_file\`."
+    _warn "Please check for dotfile updates, then run \`$update_command\`."
+    echo -n "Run now [yN]? " && read answer
+
+    if [ "$answer" != "${answer#[Yy]}" ] ;then
+      eval "$update_command"
+    fi
   fi
 }
