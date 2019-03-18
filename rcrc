@@ -1,1 +1,1 @@
-EXCLUDES="README*.md setup/* Brewfile Shortcuts.json"
+EXCLUDES="README*.md setup/* Shortcuts.json"

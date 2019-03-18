@@ -17,9 +17,21 @@ if [ ! -d "$iterm2_schemes_dir" ]; then
   git clone --depth=1 'git@github.com:mbadolato/iTerm2-Color-Schemes.git' "$iterm2_schemes_dir"
 fi
 
+if [ ! -f "$HOME/.ssh/id_rsa" ] && [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
+  if [ "$OP_SESSION_my" = "" ]; then
+    eval $(op signin my)
+  fi
+  op get document id_rsa     --vault=Personal > "$HOME/.ssh/id_rsa"
+  op get document id_rsa.pub --vault=Personal > "$HOME/.ssh/id_rsa.pub"
+fi
+
 mdp <<MESSAGE
 
-# NOTE: Please make sure iTerm2 is configured to load from \`~/.iterm\`.
+# Notes
+
+## iTerm2 Configuration
+
+Please make sure iTerm2 is configured to load from \`~/.iterm\`.
 
 This can be configured by navigating to \`Preferences > General\` and then
 looking for the phrase (near the bottom):
@@ -33,8 +45,9 @@ this with \`CMD + SHIFT + .\`.
 Don't forget to not only import it, but then also configure it to be used as
 well.
 
-# NOTE: This setup process currently does not account for any ssh configuration.
+## SSH Configuration
 
-Such things will bave to be managed manually for now.
+This setup process currently attempts to auto-setup ssh keys, but does not
+attempt to do anything for \`~/.ssh/config\`.
 
 MESSAGE

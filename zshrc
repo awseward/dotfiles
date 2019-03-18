@@ -6,6 +6,12 @@ export ZSH_THEME="robbyrussell"
 # Custom plugins in $ZSH/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(asdf)
+
+# https://docs.brew.sh/Shell-Completion
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
 source "$ZSH/oh-my-zsh.sh"
 
 export EDITOR='vim'
