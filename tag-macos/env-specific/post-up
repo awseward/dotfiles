@@ -3,10 +3,11 @@
 set -euo pipefail
 
 dotfiles="$HOME/.dotfiles"
+tag="macos"
 
 # This is a bit wacky, but couldn't quite get rcm to do what I wanted here
 spectacle_shortcuts="Library/Application Support/Spectacle/Shortcuts.json"
-spec_src="$dotfiles/tag-osx/$spectacle_shortcuts"
+spec_src="$dotfiles/tag-$tag/$spectacle_shortcuts"
 spec_dst="$HOME/$spectacle_shortcuts"
 
 diff "$spec_src" "$spec_dst" >/dev/null 2>&1 \

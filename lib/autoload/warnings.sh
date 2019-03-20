@@ -10,8 +10,8 @@ _error() {
 }
 
 warn_if_duplicates_in_PATH() {
-  # Using xargs here because wc in osx leaves a bunch of whitespace around and
-  # just throwing it through xargs was the simplest way to trim that
+  # Using xargs here because wc in macos leaves a bunch of whitespace around
+  # and just throwing it through xargs was the simplest way to trim that
   local total
   local unique
   total=$(pretty_path | wc -l | xargs)
