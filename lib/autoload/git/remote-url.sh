@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 # git@host:owner/repo-name.git
 url_is_ssh() {

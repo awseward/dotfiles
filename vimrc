@@ -154,7 +154,9 @@ else
   " FZF
   let $FZF_DEFAULT_COMMAND = 'ag --path-to-ignore "~/.agignore" --files-with-matches --hidden -g ""'
   map <C-p> :Files<CR>
-  map <leader>b :Buffers<CR>
+  map <C-b> :Files<CR>
+  map <leader>f :Ag<Space>
+  map <leader>R :source ~/.vimrc<CR>
 endif
 
 "
@@ -179,10 +181,16 @@ if $LIGHT_SHELL != ""
   call ApplyColorOverrides()
 else
   set background=dark
-  colorscheme PaperColor
+  " colorscheme PaperColor
+  " colorscheme lilydjwg_dark
+  colorscheme gruvbox
   call ApplyColorOverrides()
 end
 
+" https://www.reddit.com/r/vim/comments/5416d0/true_colors_in_vim_under_tmux/
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 map <leader>m :call RandomColorSchemeWithOverrides()<CR>
 " Change colorschemes on `updatetime`ms of no input (normal & insert)
@@ -247,3 +255,10 @@ map <leader>e :set autoread <bar> :checktime <bar> :set noautoread<cr>
 
 " macOS clipboard workaround (https://github.com/tmux/tmux/issues/543#issuecomment-248980734)
 set clipboard=unnamed
+
+" https://www.reddit.com/r/vim/comments/2om1ib/how_to_disable_sql_dynamic_completion/cmop4zh
+let g:omni_sql_no_default_maps = 1
+
+" https://vi.stackexchange.com/a/2956
+let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
+

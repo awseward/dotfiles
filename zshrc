@@ -1,13 +1,16 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
 # Themes found in $ZSH/themes/
 export ZSH_THEME="robbyrussell"
-
 # Plugins found in $ZSH/plugins/
 # Custom plugins in $ZSH/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(asdf)
+
+# https://docs.brew.sh/Shell-Completion
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
 
 source "$ZSH/oh-my-zsh.sh"
 
@@ -36,46 +39,22 @@ if [ -d ~/.completions ]; then
   done
 fi
 
-# This section meant to be temporary vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+export TERM='xterm-256color'
 
-case "$OSTYPE" in
-  (darwin*)
-    # ...
-  ;;
-  (cygwin*)
-    # ...
-  ;;
-  (linux*)
-    export TERM='xterm-256color'
-  ;;
-esac
-
-# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-__ensure_in_PATH                 \
-  "$HOME/.cargo/bin"             \
-  "$HOME/.rbenv/shims"           \
-  "/usr/local/bin"               \
-  "/usr/bin"                     \
-  "/bin"                         \
-  "$HOME/bin"                    \
-  "$HOME/.bin"                   \
-  "/sbin"                        \
-  "/usr/local/heroku/bin"        \
-  "$HOME/Library/Python/3.6/bin" \
-  "$RACKET_BIN_DIR"              \
-  "$HOME/.dotnet/tools"          \
-  "$HOME/.asdf/asdf.sh"          \
-  "$HOME/.asdf/completions/asdf.bash"
-
-## rbenv
-which rbenv &>/dev/null \
-  && eval "$(rbenv init -)"
-
-## NVM
-export NVM_DIR=~"/.nvm"
-# This loads nvm
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+__ensure_in_PATH                      \
+  "/usr/local/bin"                    \
+  "/usr/bin"                          \
+  "/bin"                              \
+  "/sbin"                             \
+  "$HOME/bin"                         \
+  "$HOME/.bin"                        \
+  "$HOME/.asdf/asdf.sh"               \
+  "$HOME/.asdf/completions/asdf.bash" \
+  "$HOME/.cargo/bin"                  \
+  "$HOME/.dotnet/tools"               \
+  "$HOME/go/bin"                      \
+  "$HOME/Library/Python/3.6/bin"      \
+  "$RACKET_BIN_DIR"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

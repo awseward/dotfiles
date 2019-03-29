@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+dotfiles="$HOME/.dotfiles"
+tag="macos"
+
+# This is a bit wacky, but couldn't quite get rcm to do what I wanted here
+spectacle_shortcuts="Library/Application Support/Spectacle/Shortcuts.json"
+spec_src="$dotfiles/tag-$tag/$spectacle_shortcuts"
+spec_dst="$HOME/$spectacle_shortcuts"
+
+diff "$spec_src" "$spec_dst" >/dev/null 2>&1 \
+  || cp -v "$spec_src" "$spec_dst"
+
+iterm2_schemes_dir="$HOME/.iterm2-color-schemes"
+if [ ! -d "$iterm2_schemes_dir" ]; then
+  git clone --depth=1 'git@github.com:mbadolato/iTerm2-Color-Schemes.git' "$iterm2_schemes_dir"
+fi
+
+if [ ! -f "$HOME/.ssh/id_rsa" ] && [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
+  if [ "$OP_SESSION_my" = "" ]; then
+    eval $(op signin my)
+  fi
+  op get document id_rsa     --vault=Personal > "$HOME/.ssh/id_rsa"
+  op get document id_rsa.pub --vault=Personal > "$HOME/.ssh/id_rsa.pub"
+fi
+
+mdp <<MESSAGE
+
+# Notes
+
+## iTerm2 Configuration
+
+Please make sure iTerm2 is configured to load from \`~/.iterm\`.
+
+This can be configured by navigating to \`Preferences > General\` and then
+looking for the phrase (near the bottom):
+
+\`Load preferences from a custom folder or URL\`
+
+Also, when importing color schemes from \`~/.iterm2-color-schemes\`, in case
+finder is not configured to show hidden files/folders, you can quickly toggle
+this with \`CMD + SHIFT + .\`.
+
+Don't forget to not only import it, but then also configure it to be used as
+well.
+
+## SSH Configuration
+
+This setup process currently attempts to auto-setup ssh keys, but does not
+attempt to do anything for \`~/.ssh/config\`.
+
+MESSAGE

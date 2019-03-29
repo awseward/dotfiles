@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 __get_text_height() {
   figlet "$@" | wc -l

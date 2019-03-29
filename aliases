@@ -1,37 +1,39 @@
 ### general
-alias cp='cp -iv'
-alias mkdir='mkdir -v'
-alias ls='ls -hF --color=auto'
-alias mv='mv -iv'
-alias ln='ln -v'
-alias rm='rm -Iv'
-alias gr='grep -Irisn --color=auto'
-alias p='ps -a'
 alias back='cd -'
+alias cp='cp -iv'
+alias gr='grep -Irisn --color=auto'
+alias l='exa -la'
+alias ll='exa -l'
+alias ln='ln -v'
+alias ls='ls -hF --color=auto'
+alias mkdir='mkdir -v'
+alias mv='mv -iv'
+alias p='ps -a'
 alias path='pretty_path'
+alias rm='rm -Iv'
 
 ### git
 alias g='git'
-alias gm='git checkout master && git pull'
-alias gd='git checkout develop && git pull'
 alias gcpr='git_cherry_pick_and_reset'
+alias gd='git checkout develop && git pull'
+alias gm='git checkout master && git pull'
 
 ### make
 alias m='make clean && make'
 alias mc='make clean'
 
 ### valgrind
-alias valgrind='valgrind --leak-check=yes'
 alias val='valgrind'
+alias valgrind='valgrind --leak-check=yes'
 
 ### rcm
-alias rcup='rcup -v'
-alias rcdn='rcdn -v'
 alias mkrc='mkrc -v'
+alias rcdn='rcdn -v'
+alias rcup='rcup -v'
 
 ### node
-alias webpack='webpack --progress --colors --watch'
 alias webpack-dev-server='webpack-dev-server --progress --colors'
+alias webpack='webpack --progress --colors --watch'
 
 ### ruby
 alias be='bundle exec'
