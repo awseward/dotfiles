@@ -57,6 +57,7 @@ export SHELL="/bin/zsh" # isn't getting updated/set propertly by chsh, so just s
 
 export USERPROFILE="$(wslpath -u $(win_env 'USERPROFILE'))"
 export LOCALAPPDATA="$(wslpath -u $(win_env 'LOCALAPPDATA'))"
+export GITHUB_TOKEN="$(wslpath -u $(win_env 'GITHUB_TOKEN'))"
 
 alias fake="./fake.sh "
 alias paket="./paket.sh "
@@ -65,4 +66,4 @@ alias lappd='cd "$LOCALAPPDATA"'
 alias uspro='cd "$USERPROFILE"'
 
 umask 022 # WSL Windows /mnt/* dir permissions workaround
-git config --system core.autocrlf true
+# git config --system core.autocrlf true
