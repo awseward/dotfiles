@@ -26,7 +26,12 @@ Plug 'xolox/vim-misc' " <-- req'd dep'cy of `xolox/vim-colorscheme-switcher`
 Plug 'junegunn/goyo.vim'
 
 " Shell Utils
-Plug 'rking/ag.vim'
+if executable('ag')
+  Plug 'rking/ag.vim'
+endif
+if executable('rg')
+  Plug 'jremmen/vim-ripgrep'
+endif
 if has('win16') || has('win32') || has('win64') || has('win32unix')
   Plug 'ctrlpvim/ctrlp.vim'
 else

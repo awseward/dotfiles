@@ -142,22 +142,32 @@ set virtualedit=block
 " Keep cursor centered when possible
 " set scrolloff=999
 
-" Use the silver searcher for things
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-endif
+" TODO: Consider whether this is even necessary. Can't remember the last time
+"       I actually used `:grep`.
+" Use ag for things
+" if executable('rg')
+"   set grepprg=rg\ --vimgrep\ --no-heading
+"   " set grepformat=%f:%l:%c:%m,%f:%l:%m
+" elseif executable('ag')
+"   set grepprg=ag\ --nogroup\ --nocolor
+"   " set grepformat=%f:%l:%c:%m,%f:%l:%m
+" endif
 
 if has('win16') || has('win32') || has('win64') || has('win32unix')
   " Ignore .gitignore files
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 else
-  " FZF
-  let $FZF_DEFAULT_COMMAND = 'ag --path-to-ignore "~/.agignore" --files-with-matches --hidden -g ""'
   map <C-p> :Files<CR>
-  map <C-b> :Files<CR>
-  map <leader>f :Ag<Space>
-  map <leader>R :source ~/.vimrc<CR>
+  map <C-b> :Buffers<CR>
+  if executable('rg')
+    let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
+  elseif executable('ag')
+    let $FZF_DEFAULT_COMMAND = 'ag --files-with-matches --hidden -g ""'
+  endif
 endif
+
+map <leader>f :Rg<Space>
+map <leader>R :source ~/.vimrc<CR>
 
 "
 " Colors
