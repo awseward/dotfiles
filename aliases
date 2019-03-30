@@ -58,5 +58,5 @@ if type "fzf" > /dev/null; then
   #       `$HOME/projects/$LANG_OR_CONTEXT/`
   alias jr='cd $(find "$HOME/projects" -type d -maxdepth 2 -mindepth 2 | fzf --height 100% --reverse)'
   # (pv for 'PreView')
-  alias pv="fzf --preview 'bat --style=numbers --color=always {}' --bind 'enter:accept+execute(vim {})'"
+  alias pv="fzf --preview 'bat --style=numbers --color=always {}' --preview-window=right:60%:wrap --bind 'enter:accept+execute(vim {})'"
 fi
