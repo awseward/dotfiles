@@ -44,11 +44,11 @@ Plug 'benmills/vimux'
 Plug 'derekwyatt/vim-scala'
 Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
+Plug 'idris-hackers/idris-vim'
 Plug 'kongo2002/fsharp-vim'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'raichoo/purescript-vim'
-Plug 'idris-hackers/idris-vim'
 
 call plug#end()
 filetype plugin indent on
