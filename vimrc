@@ -239,8 +239,8 @@ map <leader>r :set relativenumber!<CR>
 " Rot13 whole buffer
 map <leader>u ggg?G``
 
-" Ag
-map <leader>g :Ag<CR>
+" Search for word under cursor with ripgrep
+map <leader>g :Rg <C-R><C-W><CR>
 
 " Clear highlights after a search
 nnoremap <CR> :noh<CR><CR>
