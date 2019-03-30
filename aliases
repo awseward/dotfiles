@@ -56,4 +56,6 @@ esac
 if type "fzf" > /dev/null; then
   # (jr for 'Jump to Repo')
   alias jr='cd $(find "$HOME/projects" -type d -maxdepth 2 -mindepth 2 | fzf --reverse)'
+  # (pv for 'PreView')
+  alias pv="fzf --preview 'bat --style=numbers --color=always {}' --bind 'enter:accept+execute(vim {})'"
 fi
