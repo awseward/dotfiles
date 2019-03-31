@@ -9,11 +9,12 @@ function _review() {
   local install_file
   install_file="$1"
   local yn
-  cat "$install_file" && echo -n "Execute [yN]? " && read yn
+  echo -e "=====\nPlease review $install_file before continuing:\n=====\n"
+  cat "$install_file" && echo -ne "\n-----\nExecute $qs [yN]? " && read yn
 
   shopt -s nocasematch
   if ! [[ $yn =~ (y|yes) ]]; then
-    >&2 echo "\n=> Aborting (chose not to execute $install_file)\n"
+    >&2 echo -e "\n=> Aborting (chose not to execute $install_file)\n"
     exit 1
   fi
 }
