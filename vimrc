@@ -1,4 +1,8 @@
-"Set leader key
+" Disable netrw
+let g:loaded_netrw = 1
+let g:netrw_loaded_netrwPlugin = 1
+
+" Set leader key
 let mapleader = " "
 
 " When started as "evim", evim.vim will already have done these settings.
