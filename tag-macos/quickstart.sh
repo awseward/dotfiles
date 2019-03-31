@@ -36,8 +36,18 @@ function _ensure_brew_installed() {
   rm "$install_file"
 }
 
-function _install_brew_deps() {
-  brew bundle --file="$dotfiles/tag-$tag/Brewfile"
+function _ensure_brew_bundle_installed() {
+  local brewfile
+  brewfile="$dotfiles/tag-$tag/Brewfile"
+
+  set +e
+  brew bundle check --file="$brewfile"
+  if [ $? != 0 ]; then
+    set -e
+    brew bundle install --file="$brewfile"
+  else
+    set -e
+  fi
 }
 
 function _ensure_omz_installed() {
@@ -64,7 +74,7 @@ function _ensure_omz_installed() {
 
 function main {
   _ensure_brew_installed
-  _install_brew_deps
+  _ensure_brew_bundle_installed
   _ensure_omz_installed
 
   export RCRC="$dotfiles/rcrc" && rcup -v -d "$dotfiles" -t "$tag"
