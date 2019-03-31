@@ -3,7 +3,13 @@
 ### MacOS Quickstart
 
 ```sh
-qs="$(mktemp)" curl -fsSLo "$qs" https://raw.githubusercontent.com/awseward/dotfiles/master/quickstart.sh && "$qs"
+qs="$(mktemp)" \
+  && chmod +x "$qs" \
+  && curl -fLo "$qs" https://raw.githubusercontent.com/awseward/dotfiles/master/quickstart.sh \
+  && cat "$qs" && echo -n "Execute [yN]? " && read answer && \
+  if [ "$answer" != "${answer#[Yy]}" ]; then
+    "$qs"
+  fi
 ```
 
 ### WSLTTY Quickstart
