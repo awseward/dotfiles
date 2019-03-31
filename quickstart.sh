@@ -2,22 +2,18 @@
 
 set -euo pipefail
 
-if [ -z ${HOME+x} ]; then
-  export HOME=~
-fi
-
+[ -z ${HOME+x} ] && export HOME=~
 export DOTFILES="$HOME/.dotfiles"
 
-function _resolve_rcm_tag() {
+function _resolve_rcm_tag {
   case "$OSTYPE" in
     (darwin*)
-      export RCM_TAG=macos
+      export RCM_TAG=macos && return 0
     ;;
   # More if necessary...
   esac
 
-  if [ -z ${RCM_TAG+x} ]; then
-    >&2 cat <<ERR
+  >&2 cat <<ERR
 
 Bummer.
 
@@ -26,8 +22,7 @@ It appears this quickstart script couldn't resolve your OS to an RCM tag.
 For more more info on RCM, see: https://github.com/thoughtbot/rcm#readme
 
 ERR
-    exit 1
-  fi
+  exit 1
 }
 
 _resolve_rcm_tag
