@@ -3,11 +3,7 @@
 ### MacOS Quickstart
 
 ```sh
-export RCM_TAG=macos
-export DOTFILES="$HOME/.dotfiles"
-
-git clone git@github.com:awseward/dotfiles.git "$DOTFILES"
-"$DOTFILES"/tag-$RCM_TAG/quickstart.sh
+qs="$(mktemp)" curl -fsSLo "$qs" https://raw.githubusercontent.com/awseward/dotfiles/master/quickstart.sh && "$qs"
 ```
 
 ### WSLTTY Quickstart
