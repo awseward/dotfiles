@@ -7,13 +7,15 @@ tag="macos"
 
 function _review() {
   local install_file
-  local answer
   install_file="$1"
-  cat "$install_file" && echo -n "Execute [yN]? " && read answer
+  local yn
+  cat "$install_file" && echo -n "Execute [yN]? " && read yn
 
-  [ "$answer" != "${answer#[Yy]}" ] \
-    && >&2 echo "Aborting quickstart (chose not to execute $install_file)" \
-    && exit 1
+  shopt -s nocasematch
+  if ! [[ $yn =~ (y|yes) ]]; then
+    >&2 echo "Aborting quickstart (chose not to execute $install_file)"
+    exit 1
+  fi
 }
 
 function _ensure_brew_installed() {
