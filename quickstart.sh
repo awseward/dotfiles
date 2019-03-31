@@ -30,5 +30,6 @@ ERR
   fi
 }
 
+_resolve_rcm_tag
 git clone git@github.com:awseward/dotfiles.git "$DOTFILES"
 "$DOTFILES"/tag-$RCM_TAG/up.sh
