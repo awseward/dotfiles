@@ -26,6 +26,10 @@ if [ ! -f "$HOME/.ssh/id_rsa" ] && [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
   op get document id_rsa.pub --vault=Personal > "$HOME/.ssh/id_rsa.pub"
 fi
 
+if [ -z ${TERM+x} ] || [ "$TERM" = 'dumb' ]; then
+  export TERM='xterm-256color'
+fi
+
 mdp <<MESSAGE
 
 # Notes
@@ -50,5 +54,14 @@ well.
 
 This setup process currently attempts to auto-setup ssh keys, but does not
 attempt to do anything for \`~/.ssh/config\`.
+
+## Shell Restart
+
+If this is the very first time running this on a given machine, you may want to
+restart the shell or just hop into a new tab from this point.
+
+I'd like to automate that, but in what I've tried so far, nothing has been
+able to do the final transition from macOS' very old bash to zsh automatically,
+so it's still a bit manual for now.
 
 MESSAGE
