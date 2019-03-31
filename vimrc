@@ -104,6 +104,34 @@ endif
 " filetype mappings
 if filereadable(expand("~/.vim/vimrc.filetypes"))
   source ~/.vim/vimrc.filetypes
+
+  " Keep vimrc.filetypes file aligned, sorted
+  au BufWritePre vimrc.filetypes silent! call _CleanUpVimFiletypes() | redraw!
+  function _CleanUpVimFiletypes()
+    " align
+    :1,$left
+    :1,$EasyAlign *\
+    " sort by filetype
+    :sort iu /.*filetype=/
+    " remove blank lines
+    :g/^\s*$/d
+  endfunction
+endif
+
+if filereadable(expand("~/.vim/vimrc.languages"))
+  source ~/.vim/vimrc.languages
+
+  " Keep vimrc.languages file aligned, sorted
+  au BufWritePre *vimrc.languages silent! call _CleanUpVimLanguages() | redraw!
+  function _CleanUpVimLanguages()
+    " align
+    :1,$left
+    :1,$EasyAlign *\
+    " sort
+    :sort iu
+    " remove blank lines
+    :g/^\s*$/d
+  endfunction
 endif
 
 " Status bar
@@ -275,16 +303,4 @@ let g:omni_sql_no_default_maps = 1
 
 " https://vi.stackexchange.com/a/2956
 let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
-
-" Keep vimrc.filetypes file aligned, sorted
-au BufWritePre *vimrc.filetypes call _CleanUpVimFiletypes()
-function _CleanUpVimFiletypes()
-  " align
-  :1,$left
-  :1,$EasyAlign *\
-  " sort by filetype
-  :sort iu /.*filetype=/
-  " remove blank lines
-  :g/^\s*$/d
-endfunction
 
