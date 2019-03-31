@@ -1,33 +1,31 @@
 # dotfiles
 
-### MacOS Quickstart
+## Setup
+
+#### MacOS
 
 ```sh
 qs="$(mktemp)" \
   && chmod +x "$qs" \
   && curl -fLo "$qs" https://raw.githubusercontent.com/awseward/dotfiles/master/quickstart.sh \
-  && cat "$qs" && echo -n "Execute [yN]? " && read answer && \
-  if [ "$answer" != "${answer#[Yy]}" ]; then
+  && echo "=====\nPlease review $qs before continuing:\n=====\n" \
+  && cat "$qs" && echo -n "Execute [yN]? " && read yn && \
+  if ! [[ "$(echo "$yn" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')" =~ (y|yes) ]]; then
+    2>&1 echo "\n=> Aborting (chose not to execute $qs)\n"
+  else
     "$qs"
   fi
 ```
 
-### WSLTTY Quickstart
+#### Debian
 
 ```sh
-export RCM_TAG=wsltty
-export DOTFILES="$HOME/.dotfiles"
-
-git clone git@github.com:awseward/dotfiles.git "$DOTFILES"
-"$DOTFILES"/tag-$RCM_TAG/quickstart.sh
+# TODO
 ```
 
-### Debian Quickstart
+#### Window Subsystem for Linux
 
 ```sh
-export RCM_TAG=debian
-export DOTFILES="$HOME/.dotfiles"
-
-git clone git@github.com:awseward/dotfiles.git "$DOTFILES"
-"$DOTFILES"/tag-$RCM_TAG/quickstart.sh
+# TODO
 ```
+

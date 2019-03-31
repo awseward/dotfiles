@@ -28,4 +28,4 @@ ERR
 
 
 git clone git@github.com:awseward/dotfiles.git "$DOTFILES"
-"$DOTFILES"/tag-$RCM_TAG/quickstart.sh
+"$DOTFILES"/tag-$RCM_TAG/up.sh

@@ -13,7 +13,7 @@ function _review() {
 
   shopt -s nocasematch
   if ! [[ $yn =~ (y|yes) ]]; then
-    >&2 echo "Aborting quickstart (chose not to execute $install_file)"
+    >&2 echo "\n=> Aborting (chose not to execute $install_file)\n"
     exit 1
   fi
 }
