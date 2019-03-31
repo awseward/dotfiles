@@ -10,7 +10,7 @@ function _review() {
   install_file="$1"
   local yn
   echo -e "=====\nPlease review $install_file before continuing:\n=====\n"
-  cat "$install_file" && echo -ne "\n-----\nExecute $qs [yN]? " && read yn
+  cat "$install_file" && echo -ne "\n-----\nExecute $install_file [yN]? " && read yn
 
   shopt -s nocasematch
   if ! [[ $yn =~ (y|yes) ]]; then
