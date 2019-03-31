@@ -5,32 +5,39 @@ set -euo pipefail
 dotfiles="$HOME/.dotfiles"
 tag="macos"
 
-# This is a bit wacky, but couldn't quite get rcm to do what I wanted here
-spectacle_shortcuts="Library/Application Support/Spectacle/Shortcuts.json"
-spec_src="$dotfiles/tag-$tag/$spectacle_shortcuts"
-spec_dst="$HOME/$spectacle_shortcuts"
+function _setup_spectacle_shortcut {
+  # This is a bit wacky, but couldn't quite get rcm to do what I wanted here
+  local rel_path; rel_path="Library/Application Support/Spectacle/Shortcuts.json"
+  local spec_src; spec_src="$dotfiles/tag-$tag/$rel_path"
+  local spec_dst; spec_dst="$HOME/$rel_path"
 
-diff "$spec_src" "$spec_dst" >/dev/null 2>&1 \
-  || cp -v "$spec_src" "$spec_dst"
+  diff "$spec_src" "$spec_dst" >/dev/null 2>&1 \
+    || cp -v "$spec_src" "$spec_dst"
+}
 
-iterm2_schemes_dir="$HOME/.iterm2-color-schemes"
-if [ ! -d "$iterm2_schemes_dir" ]; then
-  git clone --depth=1 'git@github.com:mbadolato/iTerm2-Color-Schemes.git' "$iterm2_schemes_dir"
-fi
-
-if [ ! -f "$HOME/.ssh/id_rsa" ] && [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
-  if [ "$OP_SESSION_my" = "" ]; then
-    eval $(op signin my)
+function _setup_iterm_color_schemes {
+  local schemes_dir; schemes_dir="$HOME/.iterm2-color-schemes"
+  if [ ! -d "$schemes_dir" ]; then
+    git clone --depth=1 'git@github.com:mbadolato/iTerm2-Color-Schemes.git' "$schemes_dir"
   fi
-  op get document id_rsa     --vault=Personal > "$HOME/.ssh/id_rsa"
-  op get document id_rsa.pub --vault=Personal > "$HOME/.ssh/id_rsa.pub"
-fi
+}
 
-if [ -z ${TERM+x} ] || [ "$TERM" = 'dumb' ]; then
-  export TERM='xterm-256color'
-fi
+function _setup_ssh_keys {
+  if [ ! -f "$HOME/.ssh/id_rsa" ] && [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
+    if [ "$OP_SESSION_my" = "" ]; then
+      eval $(op signin my)
+    fi
+    op get document id_rsa     --vault=Personal > "$HOME/.ssh/id_rsa"
+    op get document id_rsa.pub --vault=Personal > "$HOME/.ssh/id_rsa.pub"
+  fi
+}
 
-mdp <<MESSAGE
+function _display_messages {
+  if [ -z ${TERM+x} ] || [ "$TERM" = 'dumb' ]; then
+    export TERM='xterm-256color'
+  fi
+
+  mdp <<MESSAGE
 
 # Notes
 
@@ -65,3 +72,9 @@ able to do the final transition from macOS' very old bash to zsh automatically,
 so it's still a bit manual for now.
 
 MESSAGE
+}
+
+_setup_spectacle_shortcut
+_setup_iterm_color_schemes
+_setup_ssh_keys
+_display_messages

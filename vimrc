@@ -200,6 +200,7 @@ endif
 
 map <leader>f :Rg<Space>
 map <leader>R :source ~/.vimrc<CR>
+map <leader>W :FixWhitespace<CR>:w<CR>
 
 "
 " Colors

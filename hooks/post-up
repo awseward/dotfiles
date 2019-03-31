@@ -1,4 +1,13 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+
+function _symlink_projects_dotfiles_dir {
+  local src_dir_path; src_dir_path="$HOME/.dotfiles"
+  local dir_path; dir_path="$HOME/projects/misc/dotfiles"
+
+  test -d "$dir_path" || ln -s "$src_dir_path" "$dir_path"
+}
+
+_symlink_projects_dotfiles_dir
 
 # Install plug.vim and plugins
 if [ ! -e "$HOME/.vim/autoload/plug.vim" ]; then
