@@ -56,7 +56,7 @@ if type "fzf" > /dev/null; then
   # (jr for 'Jump to Repo')
   # NOTE: This assumes a convention of repositories being located in:
   #       `$HOME/projects/$LANG_OR_CONTEXT/`
-  alias jr='cd $(find "$HOME/projects" -type d -maxdepth 2 -mindepth 2 | fzf --height 100% --reverse)'
+  alias jr='cd $(find "$HOME/projects" -type d -maxdepth 2 -mindepth 2 | fzf --height 30% --reverse)'
   # (pv for 'PreView')
   alias pv="fzf --preview 'bat --style=numbers --color=always {}' --preview-window=right:60%:wrap --bind 'enter:accept+execute(vim {})'"
 fi
