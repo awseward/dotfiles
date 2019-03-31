@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+if [ -z ${HOME+x} ]; then
+  export HOME=~
+fi
+
 export DOTFILES="$HOME/.dotfiles"
 
 function _resolve_rcm_tag() {
