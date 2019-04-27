@@ -19,6 +19,10 @@ alias gcpr='git_cherry_pick_and_reset'
 alias gd='git checkout develop && git pull'
 alias gm='git checkout master && git pull'
 
+### hub
+alias hc='hub compare'
+alias hb='hub browse'
+
 ### make
 alias m='make clean && make'
 alias mc='make clean'
