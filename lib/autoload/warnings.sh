@@ -27,9 +27,9 @@ warn_if_dotfiles_update_check_recommended() {
   update_command="$HOME/.bin/dotfiles-update.sh write_timestamp_file"
   if $(dotfiles-update.sh is_time_to_check); then
     _warn "Please check for dotfile updates, then run \`$update_command\`."
-    echo -n "Run now [yN]? " && read answer
+    echo -n "Run now [Yn]? " && read answer
 
-    if [ "$answer" != "${answer#[Yy]}" ] ;then
+    if [ "$answer" != "${answer#[Nn]}" ]; then
       eval "$update_command"
     fi
   fi
