@@ -19,7 +19,8 @@ export EDITOR='vim'
 # Disable .NET core telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 
-source ~/.aliases
+source $HOME/.aliases
+[ -f $HOME/.aliases.work ] && source $HOME/.aliases.work
 
 if [ -d ~/.lib/autoload ]; then
   for file in ~/.lib/autoload/**/*.sh; do
@@ -56,7 +57,7 @@ __ensure_in_PATH                      \
   "$HOME/Library/Python/3.6/bin"      \
   "$RACKET_BIN_DIR"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f $HOME/fzf.zsh ] && source $HOME/.fzf.zsh
 
 # Some cleanup
 remove_duplicates_from_PATH
