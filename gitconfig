@@ -28,6 +28,8 @@
   ch   = !git chart
   dc   = diff --cached
   ghl  = !git github-log
+  l5   = !git github-log -n5
+  l10  = !git github-log -n10
   lbr  = !git local-branches
   lc   = !git last-commit
   lm   = log master..
