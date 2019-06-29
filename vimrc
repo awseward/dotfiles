@@ -118,6 +118,12 @@ if filereadable(expand("~/.vim/vimrc.filetypes"))
   endfunction
 endif
 
+au BufWritePost *.dhall silent! call _DhallFormatAndReload() | redraw!
+function _DhallFormatAndReload()
+  !dhall format --inplace=<afile>
+  :e
+endfunction
+
 if filereadable(expand("~/.vim/vimrc.languages"))
   source ~/.vim/vimrc.languages
 
