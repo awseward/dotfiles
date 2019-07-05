@@ -56,12 +56,3 @@ case "$OSTYPE" in
     # ...
   ;;
 esac
-
-if type "fzf" > /dev/null; then
-  # (jr for 'Jump to Repo')
-  # NOTE: This assumes a convention of repositories being located in:
-  #       `$HOME/projects/$LANG_OR_CONTEXT/`
-  alias jr='cd $(find -H "$HOME/projects" -mindepth 2 -maxdepth 2 -type d -or -type l | fzf --height 25% --reverse --border) && l'
-  # (pv for 'PreView')
-  alias pv="fzf --border --preview 'bat --style=numbers --color=always {}' --preview-window=right:60%:wrap --bind 'enter:accept+execute(vim {})'"
-fi
