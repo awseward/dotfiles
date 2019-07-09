@@ -41,6 +41,7 @@
   pfoh = !git push-force origin HEAD
   pl   = !git prettylog
   poh  = push -u origin HEAD
+  puom = pull origin master
   rbr  = !git remote-branches
   st   = status
   sum  = diff --shortstat
