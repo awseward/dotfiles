@@ -38,6 +38,29 @@ if type "fzf" > /dev/null; then
   }
   zle -N _jump-repo && bindkey '^j^r' _jump-repo
 
+
+  # (gh not for any real reason other than making it work)
+  #
+  # I wanted to use jb or gb for 'Jump to Branch' or `Git Branch', but neither
+  # of those wanted to work. TODO: Figure out exactly why that is.
+  function _git-branch {
+    local branch="$(git branch -r | tail -n +2 | sed -e 's/^\ *origin\///' | fzf --height 25% --reverse --border --header='Branches:')"
+
+    if [ "$branch" != '' ]; then
+      git checkout "$branch"
+    fi
+
+    zle reset-prompt
+  }
+  zle -N _git-branch && bindkey '^g^h' _git-branch
+
+  # TODO: Maybe reallocate '^g^h' for hub...
+  #
+  # Initial rough cut is this:
+  #
+  #   hub --help | ag -A 100 'GitHub commands' | tail -n +2 | sed -E 's/^\ +([^ ]+)\ .*$/\1/ ; /^$/d' | fzf | xargs hub
+  #
+
   # (pv for 'PreView')
   function _preview-wd {
     ls | fzf --border --preview 'bat --style=numbers --color=always {}' --preview-window=right:60%:wrap --bind 'enter:accept+execute(vim {})'
