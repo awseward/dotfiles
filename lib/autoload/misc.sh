@@ -62,9 +62,10 @@ if type "fzf" > /dev/null; then
   #
 
   # (pv for 'PreView')
-  function _preview-wd {
-    ls | fzf --border --preview 'bat --style=numbers --color=always {}' --preview-window=right:60%:wrap --bind 'enter:accept+execute(vim {})'
-    zle reset-prompt
-  }
-  zle -N _preview-wd && bindkey '^p^v' _preview-wd
+  # FIXME: This is too broken to be very useful for now.
+  # function _preview-wd {
+  #   ls | fzf --border --preview 'bat --style=numbers --color=always {}' --preview-window=right:60%:wrap --bind 'enter:accept+execute(vim {})'
+  #   zle reset-prompt
+  # }
+  # zle -N _preview-wd && bindkey '^p^v' _preview-wd
 fi
