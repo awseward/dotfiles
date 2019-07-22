@@ -44,7 +44,8 @@ if type "fzf" > /dev/null; then
   # I wanted to use jb or gb for 'Jump to Branch' or `Git Branch', but neither
   # of those wanted to work. TODO: Figure out exactly why that is.
   function _git-branch {
-    local branch="$(git branch -r | tail -n +2 | sed -e 's/^\ *origin\///' | fzf --height 25% --reverse --border --header='Branches:')"
+    local branches=$(git branch -a | sed -E 's/remotes\/[^\/]*\///g; /(\*|HEAD).*$/d' | sort -u | awk '{$1=$1};1')
+    local branch="$(echo $branches | fzf --height 25% --reverse --border --header='Branches:')"
 
     if [ "$branch" != '' ]; then
       git checkout "$branch"
