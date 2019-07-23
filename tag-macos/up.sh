@@ -40,7 +40,7 @@ _ensure_brew_bundle_installed() {
   local brewfile="$dotfiles/tag-$tag/Brewfile"
 
   if ! brew bundle check --file="$brewfile"; then
-    brew bundle install --file="$brewfile"
+    brew bundle install --no-upgrade --file="$brewfile"
   fi
 }
 
