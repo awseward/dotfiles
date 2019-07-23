@@ -1,4 +1,5 @@
-# dotfiles
+# dotfiles [![actions-badge](https://action-badges.now.sh/awseward/dotfiles)](https://github.com/awseward/dotfiles/actions)
+
 
 ## Setup
 
