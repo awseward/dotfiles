@@ -15,9 +15,6 @@ alias rm='rm -Iv'
 
 ### git
 alias g='git'
-alias gcpr='git_cherry_pick_and_reset'
-alias gd='git checkout develop && git pull'
-alias gm='git checkout master && git pull'
 
 ### hub
 alias hc='hub compare'
@@ -35,10 +32,6 @@ alias valgrind='valgrind --leak-check=yes'
 alias mkrc='mkrc -v'
 alias rcdn='rcdn -v'
 alias rcup='rcup -v'
-
-### node
-alias webpack-dev-server='webpack-dev-server --progress --colors'
-alias webpack='webpack --progress --colors --watch'
 
 ### ruby
 alias be='bundle exec'
