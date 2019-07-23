@@ -20,7 +20,7 @@ function git_delete_pruneables {
 
   for br in "${branches[@]}"; do
     if [ "$curr_br" = "$br" ]; then
-      >&2 echo "ERROR: Current branch ($curr_br) is included in list of branches to prune & delete: (${branches[@]})"
+      >&2 echo "ERROR: Current branch ($curr_br) is included in list of branches to prune & delete: (${branches[*]})"
       return 1
     fi
   done
