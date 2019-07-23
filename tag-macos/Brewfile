@@ -56,6 +56,7 @@ brew "reattach-to-user-namespace"
 brew "redis", restart_service: true
 brew "ripgrep"
 brew "scala"
+brew "shellcheck"
 brew "sox"
 brew "the_silver_searcher"
 brew "thoughtbot/formulae/rcm"
