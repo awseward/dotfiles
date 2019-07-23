@@ -1,1 +1,1 @@
-EXCLUDES="README*.md quickstart.sh Shortcuts.json"
+EXCLUDES="README*.md quickstart.sh Shortcuts.json actions-*"
