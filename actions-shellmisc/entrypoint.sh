@@ -4,7 +4,7 @@ set -eu
 set -o xtrace
 
 _warn_stdin() {
-  2>&1 echo "WARNING: $-"
+  2>&1 echo "WARNING: $(cat -)"
 }
 
 _detect_missing_shebang() {
@@ -32,14 +32,14 @@ _warn_if_missing_shebangs() {
   _missing_shebangs="$(echo "$_sh_or_bash_files" | while read -r line; do _detect_missing_shebang "$line"; done)"
 
   if [ "$_missing_shebangs" != "" ]; then
-    _warn_stdin <<MSG
-WARNING: Found the following file(s) with missing shebang:
+    _warn_stdin <<WRN
+Found the following file(s) with missing shebang:
 
 $_missing_shebangs
 
 Please specify a shebang in these files.
 
-MSG
+WRN
   fi
 }
 
@@ -48,14 +48,14 @@ _warn_if_zsh_shebangs() {
   _zsh_shebang_files="$(grep -rlE '#!/.*\ zsh' .)"
 
   if [ "$_zsh_shebang_files" != "" ]; then
-    _warn_stdin <<MSG
-WARNING: Found the following file(s) with zsh shebang:
+    _warn_stdin <<WRN
+Found the following file(s) with zsh shebang:
 
 $_zsh_shebang_files
 
-Please try to refrain from declaring dependency on zsh. Try preferring bash.
+Please try to refrain from declaring dependency on zsh if possible. Try preferring bash.
 
-MSG
+WRN
   fi
 }
 
