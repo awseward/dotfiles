@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 psh() {
   local psh_path
 
@@ -10,7 +12,7 @@ psh() {
     *  ) psh_path="$1" ;;
   esac
 
-  cmd.exe /c start powershell -noexit -command "cd $(wslpath -w $psh_path)"
+  cmd.exe /c start powershell -noexit -command "cd $(wslpath -w "$psh_path")"
 }
 
 win_env() {
@@ -25,7 +27,7 @@ win_env() {
   cmd_exe_arg="echo $paren_wrapped"
 
   local cmd_result
-  cmd_result="$(cmd.exe /C $cmd_exe_arg 2>&1 | tail -n1 | sed 's/\r$//g')"
+  cmd_result="$(cmd.exe /C "$cmd_exe_arg" 2>&1 | tail -n1 | sed 's/\r$//g')"
 
   if [ "$cmd_result" = "$paren_wrapped" ]; then
     echo
@@ -44,20 +46,23 @@ open() {
     *  ) arg_path="$1" ;;
   esac
 
-  explorer.exe "$(wslpath -w $arg_path)"
+  explorer.exe "$(wslpath -w "$arg_path")"
   return 0
 }
 
 # this is just a placeholder for macOS Sierra clipboard workaround described
 # here: https://github.com/tmux/tmux/issues/543#issuecomment-248980734"
-reattach-to-user-namespace() { }
+reattach-to-user-namespace() { true; }
 
 export LS_COLORS="ow=0"
 export SHELL="/bin/zsh" # isn't getting updated/set propertly by chsh, so just setting it manually here
 
-export USERPROFILE="$(wslpath -u $(win_env 'USERPROFILE'))"
-export LOCALAPPDATA="$(wslpath -u $(win_env 'LOCALAPPDATA'))"
-export GITHUB_TOKEN="$(wslpath -u $(win_env 'GITHUB_TOKEN'))"
+USERPROFILE="$(wslpath -u "$(win_env 'USERPROFILE')")"
+export USERPROFILE
+LOCALAPPDATA="$(wslpath -u "$(win_env 'LOCALAPPDATA')")"
+export LOCALAPPDATA
+GITHUB_TOKEN="$(wslpath -u "$(win_env 'GITHUB_TOKEN')")"
+export GITHUB_TOKEN
 
 alias fake="./fake.sh "
 alias paket="./paket.sh "
