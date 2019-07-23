@@ -46,7 +46,7 @@ _warn_if_zsh_shebangs() {
   local _zsh_shebang_files
   _zsh_shebang_files="$(grep -rlE '#!/.*\ zsh' .)"
 
-  if [ "_zsh_shebang_files" != "" ]; then
+  if [ "$_zsh_shebang_files" != "" ]; then
     _warn_stdin <<MSG
 WARNING: Found the following file(s) with zsh shebang:
 
