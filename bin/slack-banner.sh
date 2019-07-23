@@ -29,7 +29,7 @@ ERR
   fi
 }
 
-function _do_the_thing() {
+function _do_the_thing {
   local result
   result="$(figlet -f banner "$message" | sed -e "s/\#/$fg_emoji/g;s/\ /$bg_emoji/g")"
   pbcopy <<< "$result"
