@@ -2,25 +2,62 @@
 
 set -eu
 
+_warn_stdin() {
+  2>&1 echo "WARNING: $-"
+}
+
 _detect_missing_shebang() {
   local f_name="$1"
 
-  local f_1
-  f_1="$(head -n1 "$f_name")"
-
-  if echo "$f_1" | command grep -q -E '^#!'; then
+  if head -n1 "$f_name" | command grep -q -E '^#!'; then
     return 0
   fi
 
   echo "$f_name"
 }
 
-_shell_files="$(find . -type f -name '*.sh' -or -name '*.bash')"
-_missing_shebangs="$(echo "$_shell_files" | while read -r line; do _detect_missing_shebang "$line"; done)"
+_detect_zsh_shebang() {
+  local f_name="$1"
 
-if [ "$_missing_shebangs" != "" ]; then
-  2>&1 cat <<WRN
-WARNING: Found the following files with missing shebangs:
+  if head -n1 "$f_name" | command grep -q -E '^#![^ ]+\ zsh'; then
+    echo "$f_name"
+  fi
+}
+
+_warn_if_missing_shebangs() {
+  local _sh_or_bash_files
+  local _missing_shebangs
+  _sh_or_bash_files="$(find . -type f -name '*.sh' -or -name '*.bash')"
+  _missing_shebangs="$(echo "$_sh_or_bash_files" | while read -r line; do _detect_missing_shebang "$line"; done)"
+
+  if [ "$_missing_shebangs" != "" ]; then
+    _warn_stdin <<MSG
+WARNING: Found the following file(s) with missing shebang:
+
 $_missing_shebangs
-WRN
-fi
+
+Please specify a shebang in these files.
+
+MSG
+  fi
+}
+
+_warn_if_zsh_shebangs() {
+  local _zsh_shebang_files
+  _zsh_shebang_files="$(grep -rlE '#!/.*\ zsh' .)"
+
+  if [ "_zsh_shebang_files" != "" ]; then
+    _warn_stdin <<MSG
+WARNING: Found the following file(s) with zsh shebang:
+
+$_zsh_shebang_files
+
+Please try to refrain from declaring dependency on zsh. Try preferring bash.
+
+MSG
+  fi
+}
+
+
+_warn_if_missing_shebangs
+_warn_if_zsh_shebangs
