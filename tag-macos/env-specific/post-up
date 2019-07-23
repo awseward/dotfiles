@@ -23,12 +23,18 @@ function _setup_iterm_color_schemes {
 }
 
 function _setup_ssh_keys {
-  if [ ! -f "$HOME/.ssh/id_rsa" ] && [ ! -f "$HOME/.ssh/id_rsa.pub" ]; then
-    if [ "$OP_SESSION_my" = "" ]; then
-      eval $(op signin my)
+  local ssh_dir="$HOME/.ssh"
+  local priv_filename="id_rsa"
+  local pub_filename="$priv_filename.pub"
+  local priv_filepath="$ssh_dir/$priv_filename"
+  local pub_filepath="$ssh_dir/$pub_filename"
+
+  if [ ! -f "$priv_filepath" ] && [ ! -f "$pub_filepath" ]; then
+    if [ "${OP_SESSION_my:-}" = "" ]; then
+      eval "$(op signin my)"
     fi
-    op get document id_rsa     --vault=Personal > "$HOME/.ssh/id_rsa"
-    op get document id_rsa.pub --vault=Personal > "$HOME/.ssh/id_rsa.pub"
+    op get document "$priv_filename" --vault=Personal > "$priv_filepath"
+    op get document "$pub_filename"  --vault=Personal > "$pub_filepath"
   fi
 }
 
