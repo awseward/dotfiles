@@ -9,6 +9,7 @@
   blame-short      = blame -c
   amend            = commit --amend
   chart            = !git diff --stat=$(tput cols)
+  fetch-all        = !git remote -v | awk '{print $1}' | sort -u | xargs -L1 git fetch -v --progress
   files            = diff --name-only
   github-log       = !git --no-pager prettylog --reverse
   info-pane        = !clear && git status && git stash list
@@ -27,6 +28,7 @@
   bs   = !git blame-short
   ch   = !git chart
   dc   = diff --cached
+  fa   = !git fetch-all
   ghl  = !git github-log
   l5   = !git github-log -n5
   l10  = !git github-log -n10
