@@ -4,9 +4,9 @@ set -eu
 
 _shell_files="$(grep -rlE '#!/.*\ (ba)?sh' .)"
 
-echo "$_shell_files" | xargs shellcheck --severity=error
+if echo "$_shell_files" | xargs shellcheck --severity=warning; then
+  echo "👍 No warnings or errors from shellcheck!"
+fi
 
-# TODO: Remove the `|| true` here once warnings are fixed.
-echo "$_shell_files" | xargs shellcheck --severity=warning || true
-
+# Check the rest (info & style), but don't error
 echo "$_shell_files" | xargs shellcheck || true
