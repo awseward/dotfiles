@@ -10,7 +10,7 @@ _review() {
   install_file="$1"
   local yn
   echo -e "=====\nPlease review $install_file before continuing:\n=====\n"
-  cat "$install_file" && echo -ne "\n-----\nExecute $install_file [yN]? " && read yn
+  cat "$install_file" && echo -ne "\n-----\nExecute $install_file [yN]? " && read -r yn
 
   shopt -s nocasematch
   if ! [[ $yn =~ (y|yes) ]]; then
@@ -28,26 +28,19 @@ _ensure_brew_installed() {
 
   _review "$install_file"
 
-  /usr/bin/ruby "$install_file"
-
-  [ $? != 0 ] \
-    && >&2 echo 'Failure installing Homebrew... See: https://brew.sh' \
-    && exit 1
+  if ! /usr/bin/ruby "$install_file"; then
+    >&2 echo 'Failure installing Homebrew... See: https://brew.sh'
+    exit 1
+  fi
 
   rm "$install_file"
 }
 
 _ensure_brew_bundle_installed() {
-  local brewfile
-  brewfile="$dotfiles/tag-$tag/Brewfile"
+  local brewfile="$dotfiles/tag-$tag/Brewfile"
 
-  set +e
-  brew bundle check --file="$brewfile"
-  if [ $? != 0 ]; then
-    set -e
+  if ! brew bundle check --file="$brewfile"; then
     brew bundle install --file="$brewfile"
-  else
-    set -e
   fi
 }
 
@@ -64,11 +57,10 @@ _ensure_omz_installed() {
 
   _review "$install_file"
 
-  sh "$install_file"
-
-  [ $? != 0 ] \
-    && >&2 echo 'Failure installing Oh My Zsh... See: https://ohmyz.sh/' \
-    && exit 1
+  if ! sh "$install_file"; then
+    >&2 echo 'Failure installing Oh My Zsh... See: https://ohmyz.sh/'
+    exit 1
+  fi
 
   rm "$install_file"
 }
