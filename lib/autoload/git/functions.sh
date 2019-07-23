@@ -12,11 +12,13 @@ function git_get_pruneables {
 
 function git_delete_pruneables {
   local r_name="${1:-origin}"
-  local branches="$(git_get_pruneables $r_name)"
+  local branches
+  branches="$(git_get_pruneables "$r_name")"
 
-  [ ! -n "$branches" ] && return 0
+  [ -z "$branches" ] && return 0
 
-  local curr_br="$(git_current_branch)"
+  local curr_br
+  curr_br="$(git_current_branch)"
 
   for br in "${branches[@]}"; do
     if [ "$curr_br" = "$br" ]; then

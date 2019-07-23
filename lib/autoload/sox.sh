@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 sox_alarm() {
   play -n \
@@ -67,7 +67,7 @@ sox_random_beep() {
   startPitch="$(((RANDOM % 500) + 1))"
   endPitch="$(((RANDOM % 200) + 1))"
 
-  local duration2
+  # local duration2
   local startPitch2
   local endPitch2
   startPitch2="$(((RANDOM % 1000) + 1))"
