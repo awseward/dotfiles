@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 git_current_branch() {
   git rev-parse --abbrev-ref HEAD
@@ -64,20 +64,26 @@ git_nuke_current_branch() {
   git_nuke_branch "$(git_current_branch)"
 }
 
-git_delete_pruneable_branches() {
-  local branches
-  branches="$(__git_pruneable_branches)"
-
-  if [ -n "$branches" ]; then
-    echo "Deleting local branches eligible for pruning"
-    echo "$branches" | xargs git branch -D 2> /dev/null
-    git remote prune origin
-  else
-    echo "No branches to prune"
-  fi
+function git_get_pruneables {
+  local r_name="${1:-origin}"
+  git fetch "$r_name";
+  git remote prune -n "$r_name" | command grep --only-matching "$r_name/.\+" | sed -E "s/^$r_name\/(.+)$/\1/g"
 }
 
-__git_pruneable_branches() {
-  git fetch origin;
-  git remote prune -n origin | grep 'origin/.*' -o  | sed -e "s/^.*origin\/\(.*\)/\1/g"
+function git_delete_pruneables {
+  local r_name="${1:-origin}"
+  local branches="$(git_get_pruneables $r_name)"
+
+  [ ! -n "$branches" ] && return 0
+
+  local curr_br="$(git_current_branch)"
+
+  for br in "${branches[@]}"; do
+    if [ "$curr_br" = "$br" ]; then
+      >&2 echo "ERROR: Current branch ($curr_br) is included in list of branches to prune & delete: (${branches[@]})"
+      return 1
+    fi
+  done
+
+  echo "$branches" | xargs git branch --delete && git remote prune "$r_name"
 }

@@ -6,8 +6,8 @@
   ### Informational
   # Long-form
   alias            = !git config --get-regex '^alias\\.'
-  blame-short      = blame -c
   amend            = commit --amend
+  blame-short      = blame -c
   chart            = !git diff --stat=$(tput cols)
   fetch-all        = !git remote -v | awk '{print $1}' | sort -u | xargs -L1 git fetch -v --progress
   files            = diff --name-only
