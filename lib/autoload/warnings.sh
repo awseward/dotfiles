@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 _warn() {
-  >&2 echo "WARNING: $@"
+  >&2 echo "WARNING: $*"
 }
 
 _error() {
-  >&2 echo "ERROR: $@"
+  >&2 echo "ERROR: $*"
   return 1
 }
 
@@ -23,14 +23,13 @@ warn_if_duplicates_in_PATH() {
 }
 
 warn_if_dotfiles_update_check_recommended() {
-  local fq_du
+  local fq_du="$HOME/.bin/dotfiles-update"
   local write_timestamp
-  fq_du="$HOME/.bin/dotfiles-update"
   write_timestamp="$fq_du write_timestamp_file"
 
-  if $("$fq_du" is_time_to_check); then
+  if "$fq_du" is_time_to_check; then
     _warn "Please check for dotfile updates, then run \`$write_timestamp\`."
-    echo -n "Run now [yN]? " && read yn
+    echo -n "Run now [yN]? " && read -r yn
     if [[ "$(echo -e "$yn" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')" = "y" ]]; then
       eval "$write_timestamp"
     else
