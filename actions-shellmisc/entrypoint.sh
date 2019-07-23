@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -eu
+set -o xtrace
 
 _warn_stdin() {
   2>&1 echo "WARNING: $(cat -)"
