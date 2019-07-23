@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 _warn() {
   >&2 echo "WARNING: $@"
@@ -23,14 +23,18 @@ warn_if_duplicates_in_PATH() {
 }
 
 warn_if_dotfiles_update_check_recommended() {
-  local update_command
-  update_command="$HOME/.bin/dotfiles-update.sh write_timestamp_file"
-  if $(dotfiles-update.sh is_time_to_check); then
-    _warn "Please check for dotfile updates, then run \`$update_command\`."
-    echo -n "Run now [Yn]? " && read answer
+  local fq_du
+  local write_timestamp
+  fq_du="$HOME/.bin/dotfiles-update"
+  write_timestamp="$fq_du write_timestamp_file"
 
-    if [ "$answer" != "${answer#[Nn]}" ]; then
-      eval "$update_command"
+  if $("$fq_du" is_time_to_check); then
+    _warn "Please check for dotfile updates, then run \`$write_timestamp\`."
+    echo -n "Run now [yN]? " && read yn
+    if [[ "$(echo -e "$yn" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')" = "y" ]]; then
+      eval "$write_timestamp"
+    else
+      return 1
     fi
   fi
 }

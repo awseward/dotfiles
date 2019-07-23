@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+(
+  # shellcheck source=/dev/null
+  source "$HOME/.lib/updates.sh"
+
+
+  _list_fns() {
+    case "$OSTYPE" in
+      (darwin*)
+        declare -f \
+        | command grep -o '^[^ ]\+\ ()\s*$' \
+        | command sed -E '/^_+/d; s/\(\).*$//' \
+        ;;
+      (linux*)
+        2>&1 echo "WARNING: This is probably broken"
+        typeset -f \
+          | grep '() {$' \
+          | grep --invert-match '^_' \
+          |  sed -e 's/().*$//'
+        ;;
+    esac
+  }
+
+  print_usage() {
+    echo
+    echo "Usage: dotfiles-update <function>"
+    echo
+    echo "Available functions:"
+    _list_fns | while read -r line; do
+      echo "  $line"
+    done
+    echo
+  }
+
+  print_status() {
+    local last_checked
+    local current_time
+    local elapsed_time
+    local time_to_check
+    last_checked="$(read_timestamp)"
+    current_time="$(date +%s)"
+    elapsed_time="$((current_time - last_checked))"
+    if is_time_to_check; then
+      time_to_check='true'
+    else
+      time_to_check='false'
+    fi
+
+    echo
+    echo "Dotfiles update status:"
+    echo "  Timestamp file           :  $TIMESTAMP_FILEPATH"
+    echo "  Update check interval    :  ${UPDATE_INTERVAL}s"
+    echo "  Current time             :  $current_time"
+    echo "  Last checked             :  $last_checked"
+    echo "  Elapsed time             :  $elapsed_time"
+    echo "  Should check for updates :  $time_to_check"
+    echo
+  }
+
+  print_usage_and_status() {
+    print_usage
+    print_status
+  }
+
+  # Run command or print usage and status
+  "${1:-print_usage_and_status}"
+)

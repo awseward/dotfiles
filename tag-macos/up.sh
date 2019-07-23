@@ -5,7 +5,7 @@ set -euo pipefail
 dotfiles="$HOME/.dotfiles"
 tag="macos"
 
-function _review() {
+_review() {
   local install_file
   install_file="$1"
   local yn
@@ -19,7 +19,7 @@ function _review() {
   fi
 }
 
-function _ensure_brew_installed() {
+_ensure_brew_installed() {
   if type brew; then return 0; fi # skip if brew installed
 
   local install_file
@@ -37,7 +37,7 @@ function _ensure_brew_installed() {
   rm "$install_file"
 }
 
-function _ensure_brew_bundle_installed() {
+_ensure_brew_bundle_installed() {
   local brewfile
   brewfile="$dotfiles/tag-$tag/Brewfile"
 
@@ -51,7 +51,7 @@ function _ensure_brew_bundle_installed() {
   fi
 }
 
-function _ensure_omz_installed() {
+_ensure_omz_installed() {
   if [ -d "$HOME/.oh-my-zsh" ]; then return 0; fi # skip if omz installed
 
   local install_file
@@ -73,7 +73,7 @@ function _ensure_omz_installed() {
   rm "$install_file"
 }
 
-function main {
+main() {
   _ensure_brew_installed
   _ensure_brew_bundle_installed
   _ensure_omz_installed
