@@ -15,6 +15,7 @@ alias rm='rm -Iv'
 
 ### git
 alias g='git'
+alias gm='git checkout master && git pull'
 
 ### hub
 alias hc='hub compare'
