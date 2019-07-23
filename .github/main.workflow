@@ -1,8 +1,8 @@
-workflow "New workflow" {
+workflow "Main Workflow" {
   on = "push"
   resolves = ["Shellcheck"]
 }
 
 action "Shellcheck" {
-  uses = "./action-shellcheck/"
+  uses = "./actions-shellcheck/"
 }
