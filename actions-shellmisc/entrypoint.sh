@@ -37,7 +37,7 @@ WRN
 
 _warn_if_zsh_shebangs() {
   local _zsh_shebang_files
-  _zsh_shebang_files="$(head -n1 ./* | grep -rlE '^#!/.*\ zsh' .)"
+  _zsh_shebang_files="$(find . -type f -not -path './.*' | grep -rlE '^#!/.*\ zsh' .)"
 
   if [ "$_zsh_shebang_files" != "" ]; then
     _warn_stdin <<WRN
