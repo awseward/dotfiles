@@ -7,9 +7,24 @@ _shellcheck="shellcheck -W100"
 
 printf "Running shellcheck on the following files:\n%s" "$_files"
 
-if echo "$_files" | xargs "$_shellcheck" --severity=warning; then
-  echo "👍 No warnings or errors from shellcheck!"
-fi
+function _run_warning() {
+  local _cmd
+  _cmd"=$(echo "$_files" | xargs echo "$_shellcheck" --severity=warning)"
 
-# Check the rest (info & style), but don't error
-echo "$_files" | xargs "$_shellcheck" || true
+  echo "$_cmd"
+  if "$_cmd"; then
+    echo "👍 No warnings or errors from shellcheck!"
+  else
+    return 1
+  fi
+}
+
+function _run_all() {
+  local _cmd
+  _cmd="$(echo "$_files" | xargs echo "$_shellcheck")"
+
+  echo "$_cmd"
+  "$_cmd" || return 0
+}
+
+_run_warning && _run_all
