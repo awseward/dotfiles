@@ -1,12 +1,15 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 set -eu
 
-_shell_files="$(grep -rlE '#!/.*\ (ba)?sh' .)"
+_files="$(grep -rlE '#!/.*\ (ba)?sh' .)"
+_shellcheck="shellcheck -W100"
 
-if echo "$_shell_files" | xargs shellcheck --severity=warning; then
+printf "Running shellcheck on the following files:\n%s" "$_files"
+
+if echo "$_files" | xargs "$_shellcheck" --severity=warning; then
   echo "👍 No warnings or errors from shellcheck!"
 fi
 
 # Check the rest (info & style), but don't error
-echo "$_shell_files" | xargs shellcheck || true
+echo "$_files" | xargs "$_shellcheck" || true
