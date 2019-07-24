@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 UPDATE_INTERVAL=$((60 * 60 * 24 * 5))
 TIMESTAMP_FILEPATH="$HOME/.dotfiles-update-timestamp"
