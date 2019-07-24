@@ -46,6 +46,9 @@ WRN
 _warn_if_zsh_shebangs() {
   echo "Checking for unwanted zsh shebangs..."
 
+  find . -type f -not -path './.*'
+  return 0
+
   local _zsh_shebang_files
   _zsh_shebang_files="$(find . -type f -not -path './.*' | grep -rlE '^#!/.*\ zsh' .)"
 
@@ -62,9 +65,6 @@ WRN
     _ok "No zsh shebangs found!"
   fi
 }
-
-echo "*******************************************************"
-ls -lah
 
 _warn_if_missing_shebangs
 _warn_if_zsh_shebangs
