@@ -51,6 +51,8 @@ WRN
   fi
 }
 
+echo "*******************************************************"
+ls -lah
 
 _warn_if_missing_shebangs
-_warn_if_zsh_shebangs
+# _warn_if_zsh_shebangs
