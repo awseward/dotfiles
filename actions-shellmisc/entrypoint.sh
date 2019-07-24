@@ -24,6 +24,8 @@ _detect_missing_shebang() {
 }
 
 _warn_if_missing_shebangs() {
+  echo "Checking for missing shebangs..."
+
   local _missing_shebangs
   _missing_shebangs="$(_find_files_by_extension | while read -r line; do _detect_missing_shebang "$line"; done)"
 
@@ -42,6 +44,8 @@ WRN
 }
 
 _warn_if_zsh_shebangs() {
+  echo "Checking for unwanted zsh shebangs..."
+
   local _zsh_shebang_files
   _zsh_shebang_files="$(find . -type f -not -path './.*' | grep -rlE '^#!/.*\ zsh' .)"
 
