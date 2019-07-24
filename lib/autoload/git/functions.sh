@@ -27,5 +27,5 @@ function git_delete_pruneables {
     fi
   done
 
-  echo "$branches" | xargs git branch --delete && git remote prune "$r_name"
+  echo "$branches" | xargs git branch --delete || true && git remote prune "$r_name"
 }
