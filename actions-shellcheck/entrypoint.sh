@@ -6,11 +6,7 @@ _files="$(grep -rlE '#!/.*\ (ba)?sh' .)"
 _shellcheck="shellcheck -W100"
 
 function _run_warning() {
-  local _cmd
-  _cmd="$(echo "$_files" | xargs echo "$_shellcheck" --severity=warning)"
-
-  echo "$_cmd"
-  if "$_cmd"; then
+  if echo "$_files" | xargs -t "$_shellcheck" --severity=warning; then
     echo "👍 No warnings or errors from shellcheck!"
   else
     return 1
@@ -18,11 +14,7 @@ function _run_warning() {
 }
 
 function _run_all() {
-  local _cmd
-  _cmd="$(echo "$_files" | xargs echo "$_shellcheck")"
-
-  echo "$_cmd"
-  "$_cmd" || return 0
+  echo "$_files" | xargs -t "$_shellcheck" || return 0
 }
 
 _run_warning && _run_all
