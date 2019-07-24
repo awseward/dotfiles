@@ -30,9 +30,9 @@ _detect_missing_shebang() {
 _detect_zsh_shebang() {
   local f_name="$1"
   if head -n1 "$f_name" | command grep -q -E '^#!/.*\ zsh'; then
-    return 0
-  else
     echo "$f_name"
+  else
+    return 0
   fi
 }
 
@@ -58,8 +58,6 @@ WRN
 
 _warn_if_zsh_shebangs() {
   echo "Checking for unwanted zsh shebangs..."
-
-  find . -type f -not -path './.*'
 
   local _zsh_shebang_files
   _zsh_shebang_files="$(_find_files_excluding_dot_dirs | while read -r line; do _detect_zsh_shebang "$line"; done)"
