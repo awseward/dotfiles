@@ -4,7 +4,7 @@ UPDATE_INTERVAL=$((60 * 60 * 24 * 5))
 TIMESTAMP_FILEPATH="$HOME/.dotfiles-update-timestamp"
 
 read_timestamp() {
-  if $(timestamp_exists); then
+  if timestamp_exists; then
     cat "$TIMESTAMP_FILEPATH"
   else
     echo 0
@@ -23,7 +23,7 @@ write_timestamp_file() {
 }
 
 status() {
-  if $(is_time_to_check); then
+  if is_time_to_check; then
     echo "Time to check updates"
   fi
 }

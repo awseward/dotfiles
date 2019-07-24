@@ -66,5 +66,6 @@ pretty_path() {
 }
 
 remove_duplicates_from_PATH() {
-  export PATH="$(__get_uniquified_path)"
+  local _newPATH
+  _newPATH="$(__get_uniquified_path)" && export PATH="$_newPATH"
 }
