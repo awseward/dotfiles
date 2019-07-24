@@ -5,11 +5,9 @@ set -eu
 _files="$(grep -rlE '#!/.*\ (ba)?sh' .)"
 _shellcheck="shellcheck -W100"
 
-printf "Running shellcheck on the following files:\n%s" "$_files"
-
 function _run_warning() {
   local _cmd
-  _cmd"=$(echo "$_files" | xargs echo "$_shellcheck" --severity=warning)"
+  _cmd="$(echo "$_files" | xargs echo "$_shellcheck" --severity=warning)"
 
   echo "$_cmd"
   if "$_cmd"; then
