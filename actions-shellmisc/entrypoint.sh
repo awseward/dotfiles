@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
 set -eu
-set -o xtrace
+
+_find_files_by_extension() {
+  find . -type f -name '*.sh' -or -name '*.bash'
+}
 
 _warn_stdin() {
   2>&1 echo "WARNING: $(cat -)"
@@ -9,19 +12,16 @@ _warn_stdin() {
 
 _detect_missing_shebang() {
   local f_name="$1"
-
   if head -n1 "$f_name" | command grep -q -E '^#!'; then
     return 0
+  else
+    echo "$f_name"
   fi
-
-  echo "$f_name"
 }
 
 _warn_if_missing_shebangs() {
-  local _sh_or_bash_files
   local _missing_shebangs
-  _sh_or_bash_files="$(find . -type f -name '*.sh' -or -name '*.bash')"
-  _missing_shebangs="$(echo "$_sh_or_bash_files" | while read -r line; do _detect_missing_shebang "$line"; done)"
+  _missing_shebangs="$(_find_files_by_extension | while read -r line; do _detect_missing_shebang "$line"; done)"
 
   if [ "$_missing_shebangs" != "" ]; then
     _warn_stdin <<WRN
