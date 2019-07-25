@@ -5,7 +5,7 @@ set -eu
 _files="$(grep -rlE '#!/.*\ (ba)?sh' .)"
 
 function _run_warning() {
-  if echo "$_files" | xargs -t shellcheck --wiki-link-count=100 --severity=warning; then
+  if echo "$_files" | xargs -t shellcheck --wiki-link-count=1000 --severity=warning; then
     echo "👍 No warnings or errors from shellcheck!"
   else
     return 1
@@ -13,7 +13,9 @@ function _run_warning() {
 }
 
 function _run_all() {
-  echo "$_files" | xargs -t shellcheck --wiki-link-count=100 || return 0
+  echo "$_files" | xargs -t shellcheck --wiki-link-count=1000 || return 0
 }
+
+shellcheck --version
 
 _run_warning && _run_all
