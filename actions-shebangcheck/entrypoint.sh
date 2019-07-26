@@ -15,7 +15,7 @@ _warn_stdin() {
 }
 
 _ok() {
-  echo "👍 $*"
+  echo "👍 $*" && echo
 }
 
 _detect_missing_shebang() {

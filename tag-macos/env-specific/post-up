@@ -43,9 +43,13 @@ function _display_messages {
     export TERM='xterm-256color'
   fi
 
-  mdp <<MESSAGE
+  mdp --nofade <<MSG
 
-# Notes
+# Dotfiles setup complete (mostly...)!
+
+Following slides contain futher information.
+
+---
 
 ## iTerm2 Configuration
 
@@ -63,10 +67,14 @@ this with \`CMD + SHIFT + .\`.
 Don't forget to not only import it, but then also configure it to be used as
 well.
 
+---
+
 ## SSH Configuration
 
 This setup process currently attempts to auto-setup ssh keys, but does not
 attempt to do anything for \`~/.ssh/config\`.
+
+---
 
 ## Shell Restart
 
@@ -77,7 +85,7 @@ I'd like to automate that, but in what I've tried so far, nothing has been
 able to do the final transition from macOS' very old bash to zsh automatically,
 so it's still a bit manual for now.
 
-MESSAGE
+MSG
 }
 
 _setup_spectacle_shortcut

@@ -2,7 +2,7 @@ workflow "Main Workflow" {
   on = "push"
   resolves = [
     "Shellcheck",
-    "Shellmisc",
+    "Shebang Check",
   ]
 }
 
@@ -10,6 +10,6 @@ action "Shellcheck" {
   uses = "./actions-shellcheck/"
 }
 
-action "Shellmisc" {
-  uses = "./actions-shellmisc/"
+action "Shebang Check" {
+  uses = "./actions-shebangcheck/"
 }

@@ -1,13 +1,11 @@
 FROM bash:5.0.7
 
-LABEL "com.github.actions.name"="Shellcheck"
-LABEL "com.github.actions.description"="Run shellcheck on shell files in a repository"
+LABEL "com.github.actions.name"="Shebang Check"
+LABEL "com.github.actions.description"="Check on shebang consistency in a repository (in a _just slightly_ opinionated way)"
 LABEL "com.github.actions.icon"="clipboard"
 LABEL "com.github.actions.color"="blue"
 
 LABEL "maintainer"="Andrew Seward <awswrd@gmail.com>"
-
-COPY --from=koalaman/shellcheck:v0.6.0 /bin/shellcheck /bin/shellcheck
 
 COPY entrypoint.sh /entrypoint.sh
 
