@@ -11,9 +11,8 @@ plugins=(asdf)
 . "$ZSH/oh-my-zsh.sh"
 
 export EDITOR='vim'
-
-# Disable .NET core telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
+export TERM='xterm-256color'
 
 _source_file_if_present() {
   local file="$1"
@@ -31,13 +30,15 @@ _source_dir_rec_if_present() {
 }
 
 . "$HOME/.aliases"
+
 _source_file_if_present "$HOME/.aliases.work"
+_source_file_if_present "$HOME/.fzf.zsh"
+
 _source_dir_rec_if_present "$HOME/.functions"
 _source_dir_rec_if_present "$HOME/.lib/autoload"
 _source_dir_rec_if_present "$HOME/.env-specific"
 _source_dir_rec_if_present "$HOME/.completions"
 
-export TERM='xterm-256color'
 
 __ensure_in_PATH                      \
   "/usr/local/bin"                    \
@@ -54,7 +55,6 @@ __ensure_in_PATH                      \
   "$HOME/Library/Python/3.6/bin"      \
   "$RACKET_BIN_DIR"
 
-_source_file_if_present "$HOME/.fzf.zsh"
 
 # Some cleanup
 remove_duplicates_from_PATH
