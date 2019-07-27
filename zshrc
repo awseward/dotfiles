@@ -10,11 +10,6 @@ export ZSH_THEME="robbyrussell"
 plugins=(asdf)
 . "$ZSH/oh-my-zsh.sh"
 
-# https://docs.brew.sh/Shell-Completion
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-fi
-
 export EDITOR='vim'
 
 # Disable .NET core telemetry
