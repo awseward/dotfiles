@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 # Themes found in $ZSH/themes/
@@ -6,39 +8,39 @@ export ZSH_THEME="robbyrussell"
 # Custom plugins in $ZSH/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(asdf)
+. "$ZSH/oh-my-zsh.sh"
 
 # https://docs.brew.sh/Shell-Completion
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
-source "$ZSH/oh-my-zsh.sh"
-
 export EDITOR='vim'
 
 # Disable .NET core telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 
-source $HOME/.aliases
-[ -f $HOME/.aliases.work ] && source $HOME/.aliases.work
+_source_file_if_present() {
+  local file="$1"
+  [ -f "$file" ] && . "$file"
+}
 
-if [ -d ~/.lib/autoload ]; then
-  for file in ~/.lib/autoload/**/*.sh; do
-    source "$file"
-  done
-fi
+_source_dir_rec_if_present() {
+  local dir="$1"
+  if [ -d "$dir" ]; then
+    for file in "$dir"/**/*.sh; do
+      # shellcheck disable=SC1090
+      . "$file"
+    done
+  fi
+}
 
-if [ -d ~/.env-specific ]; then
-  for file in ~/.env-specific/**/*.sh; do
-    source "$file"
-  done
-fi
-
-if [ -d ~/.completions ]; then
-  for file in ~/.completions/**/*; do
-    source "$file"
-  done
-fi
+. "$HOME/.aliases"
+_source_file_if_present "$HOME/.aliases.work"
+_source_dir_rec_if_present "$HOME/.functions"
+_source_dir_rec_if_present "$HOME/.lib/autoload"
+_source_dir_rec_if_present "$HOME/.env-specific"
+_source_dir_rec_if_present "$HOME/.completions"
 
 export TERM='xterm-256color'
 
@@ -57,7 +59,7 @@ __ensure_in_PATH                      \
   "$HOME/Library/Python/3.6/bin"      \
   "$RACKET_BIN_DIR"
 
-[ -f $HOME/fzf.zsh ] && source $HOME/.fzf.zsh
+_source_file_if_present "$HOME/.fzf.zsh"
 
 # Some cleanup
 remove_duplicates_from_PATH
