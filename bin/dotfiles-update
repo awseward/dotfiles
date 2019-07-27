@@ -2,7 +2,7 @@
 
 (
   # shellcheck source=/dev/null
-  source "$HOME/.lib/updates.sh"
+  source "$HOME/.lib/functions/updates.sh"
 
 
   _list_fns() {

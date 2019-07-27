@@ -36,9 +36,9 @@ _source_file_if_present "$HOME/.fzf.zsh"
 
 _source_dir_rec_if_present "$HOME/.lib/autoload"
 _source_dir_rec_if_present "$HOME/.lib/functions"
-_source_dir_rec_if_present "$HOME/.env-specific"
 _source_dir_rec_if_present "$HOME/.completions"
 
+_source_dir_rec_if_present "$HOME/.env-specific"
 
 __ensure_in_PATH                      \
   "/usr/local/bin"                    \
