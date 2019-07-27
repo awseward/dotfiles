@@ -65,7 +65,7 @@ pretty_path() {
   echo "$PATH" | tr -s ":" "\n"
 }
 
-remove_duplicates_from_PATH() {
+export_deduped_PATH() {
   local _newPATH
   _newPATH="$(__get_uniquified_path)" && export PATH="$_newPATH"
 }

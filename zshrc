@@ -34,8 +34,8 @@ _source_dir_rec_if_present() {
 _source_file_if_present "$HOME/.aliases.work"
 _source_file_if_present "$HOME/.fzf.zsh"
 
-_source_dir_rec_if_present "$HOME/.functions"
 _source_dir_rec_if_present "$HOME/.lib/autoload"
+_source_dir_rec_if_present "$HOME/.lib/functions"
 _source_dir_rec_if_present "$HOME/.env-specific"
 _source_dir_rec_if_present "$HOME/.completions"
 
@@ -57,7 +57,7 @@ __ensure_in_PATH                      \
 
 
 # Some cleanup
-remove_duplicates_from_PATH
+export_deduped_PATH
 
 # Some checks
 warn_if_duplicates_in_PATH
