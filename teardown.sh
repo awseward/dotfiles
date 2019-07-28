@@ -30,20 +30,9 @@ ERR
   esac
 }
 
-_clone_repo() {
-  if ! [ -d "$DOTFILES" ]; then
-    git clone git@github.com:awseward/dotfiles.git "$DOTFILES"
-  else
-    echo "WARNING: Directory $DOTFILES already exists."
-
-    _prompt_yn 'Skip cloning and continue anyway' 'y' || return 1
-  fi
-}
-
-_up() {
-  "$DOTFILES/tag-$RCM_TAG/up.sh"
+_down() {
+  "$DOTFILES/tag-$RCM_TAG/down.sh"
 }
 
 _resolve_rcm_tag
-_clone_repo
-_up
+_down
