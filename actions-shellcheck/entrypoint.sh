@@ -51,6 +51,8 @@ echo
 shellcheck --version
 echo
 
+export SHELLCHECK_OPTS="-e SC1071"
+
 _files="$(_list_files)"
 
 _run_warning "$_files" && _run_any "$_files"

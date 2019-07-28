@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-_warn() {
-  >&2 echo "WARNING: $*"
-}
-
-_error() {
-  >&2 echo "ERROR: $*"
-  return 1
-}
-
 warn_if_duplicates_in_PATH() {
   # Using xargs here because wc in macos leaves a bunch of whitespace around
   # and just throwing it through xargs was the simplest way to trim that
@@ -29,8 +20,8 @@ warn_if_dotfiles_update_check_recommended() {
 
   if "$fq_du" is_time_to_check; then
     _warn "Please check for dotfile updates, then run \`$write_timestamp\`."
-    echo -n "Run now [yN]? " && read -r yn
-    if [[ "$(echo -e "$yn" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')" = "y" ]]; then
+
+    if _prompt_yn 'Run now' 'n'; then
       eval "$write_timestamp"
     else
       return 1
