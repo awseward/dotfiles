@@ -1,5 +1,4 @@
 #!/usr/bin/env zsh
-# shellcheck disable=SC1071
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
