@@ -1,1 +1,1 @@
-EXCLUDES="README*.md setup.sh up.sh Shortcuts.json actions-*"
+EXCLUDES="README*.md setup.sh teardown.sh up.sh down.sh Shortcuts.json actions-*"
