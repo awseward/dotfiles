@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 function _symlink_projects_dotfiles_dir {
-  local name; name="dotfiles"
-  local src_dir_path; src_dir_path="$HOME/.$name"
-  local dir_path; dir_path="$HOME/projects/misc/$name"
+  local name="dotfiles"
+  local src_dir_path="$HOME/.$name"
+  local dir_path="$HOME/projects/misc/$name"
 
   test -d "$dir_path" || ln -s "$src_dir_path" "$dir_path"
 }
