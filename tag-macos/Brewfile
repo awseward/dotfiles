@@ -21,6 +21,7 @@ brew "figlet"
 brew "findutils"
 brew "flac"
 brew "gawk"
+brew "gettext", link: true
 brew "git"
 brew "gnu-getopt"
 brew "gnu-indent"
