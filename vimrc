@@ -118,19 +118,20 @@ if filereadable(expand("~/.vim/vimrc.filetypes"))
   endfunction
 endif
 
-au BufWritePost *.dhall silent! call _DhallFormatAndReload() | redraw!
-function _DhallFormatAndReload()
+au BufWritePost *.dhall silent! call _DhallFormat() | redraw!
+function _DhallFormat()
   !dhall format --inplace=<afile>
   :e
 endfunction
 
-function DhallFreezeAndReload()
+function _DhallFreeze()
   :silent exec "!dhall freeze --inplace %:p"
   :e!
   :redraw!
-  :FixWhitespace
   :w
 endfunction
+
+command DhFr call _DhallFreeze()
 
 if filereadable(expand("~/.vim/vimrc.languages"))
   source ~/.vim/vimrc.languages
