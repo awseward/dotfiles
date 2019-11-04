@@ -33,6 +33,7 @@ _source_dir_rec_if_present() {
 
 _source_file_if_present "$HOME/.aliases.work"
 _source_file_if_present "$HOME/.fzf.zsh"
+_source_file_if_present "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
 _source_dir_rec_if_present "$HOME/.lib/autoload"
 _source_dir_rec_if_present "$HOME/.lib/functions"
@@ -54,7 +55,6 @@ __ensure_in_PATH                      \
   "$HOME/go/bin"                      \
   "$HOME/Library/Python/3.6/bin"      \
   "$RACKET_BIN_DIR"
-
 
 # Some cleanup
 export_deduped_PATH
