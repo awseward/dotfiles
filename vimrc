@@ -124,6 +124,14 @@ function _DhallFormatAndReload()
   :e
 endfunction
 
+function DhallFreezeAndReload()
+  :silent exec "!dhall freeze --inplace %:p"
+  :e!
+  :redraw!
+  :FixWhitespace
+  :w
+endfunction
+
 if filereadable(expand("~/.vim/vimrc.languages"))
   source ~/.vim/vimrc.languages
 
