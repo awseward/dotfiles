@@ -213,6 +213,8 @@ else
   endif
 endif
 
+map <leader>B :Buffers<CR>
+map <leader>E :bufdo! :e!<CR>
 map <leader>f :Rg<Space>
 map <leader>R :source ~/.vimrc<CR>
 map <leader>W :FixWhitespace<CR>:w<CR>

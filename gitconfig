@@ -27,6 +27,7 @@
   br   = branch
   bs   = !git blame-short
   ch   = !git chart
+  cm   = commit
   dc   = diff --cached
   fa   = !git fetch-all
   ghl  = !git github-log
