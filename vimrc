@@ -172,7 +172,6 @@ set tabstop=2
 
 " Line numbers
 set number
-set relativenumber
 
 " Faster viewport scrolling
 nnoremap <C-e> 4<C-e>
