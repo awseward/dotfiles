@@ -33,11 +33,13 @@ _configure_dnscrypt_proxy() {
         | tail -n1
     )"
 
+    local dnscrypt_proxy_dir='/usr/local/etc/dnscrypt-proxy.d'
+    mkdir -p "$dnscrypt_proxy_dir"
     local rule_src
     local rule_content
     while IFS='' read -r rule_src; do
       rule_basename="$(basename "${rule_src//example-/}")"
-      rule_dest="/usr/local/etc/dnscrypt-proxy.d/$rule_basename"
+      rule_dest="$dnscrypt_proxy_dir/$rule_basename"
       rule_content="# For example, see $rule_src"
 
       if [ ! -f "$rule_dest" ]; then
@@ -47,10 +49,13 @@ _configure_dnscrypt_proxy() {
     done < <(find "$share_dir" -type f -name '*.txt')
   }
 
+  restart_proxy() { dnsc restart; }
+
   # ---
 
   link_proxy_conf
   create_empty_rules_files
+  restart_proxy
 }
 
 _clone_iterm_color_schemes() {
