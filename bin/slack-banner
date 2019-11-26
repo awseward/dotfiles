@@ -11,7 +11,7 @@ message="$1"
 fg_emoji="$2"
 bg_emoji="$3"
 
-function _warn_if_too_long {
+_warn_if_too_long() {
   local result_length
   local max_length
   result_length="$1"
@@ -29,7 +29,7 @@ ERR
   fi
 }
 
-function _do_the_thing {
+_do_the_thing() {
   local result
   result="$(figlet -f banner "$message" | sed -e "s/\#/$fg_emoji/g;s/\ /$bg_emoji/g")"
   pbcopy <<< "$result"

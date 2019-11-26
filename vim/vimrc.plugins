@@ -41,6 +41,7 @@ endif
 Plug 'benmills/vimux'
 
 " Syntax Highlighting
+Plug 'aliou/bats.vim'
 Plug 'bfontaine/Brewfile.vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'elixir-lang/vim-elixir'

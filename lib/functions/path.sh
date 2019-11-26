@@ -1,18 +1,12 @@
 #!/usr/bin/env bash
 
-__canonicalize_path() {
-  case "$OSTYPE" in
-    (darwin*)
-      realpath "$!" &> /dev/null
-    ;;
-    (linux*)
-      realpath -q "$1"
-    ;;
-  esac
+__exists_in() {
+  local sep="${3:-:}"
+  [[ "$1" =~ (^|"$sep")"$2"("$sep"|$) ]]
 }
 
 __exists_in_PATH() {
-  [[ "$PATH" =~ (^|:)$1(:|$) ]]
+  __exists_in "$PATH" "$1"
 }
 
 __not_on_disk() {

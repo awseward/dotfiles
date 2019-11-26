@@ -5,24 +5,33 @@ set -euo pipefail
 dotfiles="$HOME/.dotfiles"
 tag="macos"
 
-function _setup_spectacle_shortcut {
+_configure_spectacle() {
   # This is a bit wacky, but couldn't quite get rcm to do what I wanted here
-  local rel_path; rel_path="Library/Application Support/Spectacle/Shortcuts.json"
-  local spec_src; spec_src="$dotfiles/tag-$tag/$rel_path"
-  local spec_dst; spec_dst="$HOME/$rel_path"
+  local rel_path='Library/Application Support/Spectacle/Shortcuts.json'
+  local spec_src="$dotfiles/tag-$tag/$rel_path"
+  local spec_dst="$HOME/$rel_path"
 
   diff "$spec_src" "$spec_dst" >/dev/null 2>&1 \
     || cp -v "$spec_src" "$spec_dst"
 }
 
-function _setup_iterm_color_schemes {
-  local schemes_dir; schemes_dir="$HOME/.iterm2-color-schemes"
+_configure_dnscrypt_proxy() {
+  local conf_filename='dnscrypt-proxy.toml'
+  local src_path="$dotfiles/tag-$tag/rcm-exclude/$conf_filename"
+  local dest_path="/usr/local/etc/$conf_filename"
+
+  ln -v -s "$src_path" "$dest_path" || true
+}
+
+_clone_iterm_color_schemes() {
+  local schemes_dir="$HOME/.iterm2-color-schemes"
+
   if [ ! -d "$schemes_dir" ]; then
     git clone --depth=1 'git@github.com:mbadolato/iTerm2-Color-Schemes.git' "$schemes_dir"
   fi
 }
 
-function _setup_ssh_keys {
+_set_up_ssh_keys() {
   local ssh_dir="$HOME/.ssh"
   local priv_filename="id_rsa"
   local pub_filename="$priv_filename.pub"
@@ -38,7 +47,7 @@ function _setup_ssh_keys {
   fi
 }
 
-function _display_messages {
+_display_messages() {
   if [ -z ${TERM+x} ] || [ "$TERM" = 'dumb' ]; then
     export TERM='xterm-256color'
   fi
@@ -76,6 +85,14 @@ attempt to do anything for \`~/.ssh/config\`.
 
 ---
 
+## DNSCrypt Usage
+
+By now, \`dnscrypt-proxy\` should be set up and running, but to actually use
+it, you'll need to configure DNS in MacOS' Network settings to use
+\`127.0.0.1\`.
+
+---
+
 ## Shell Restart
 
 If this is the very first time running this on a given machine, you may want to
@@ -88,7 +105,8 @@ so it's still a bit manual for now.
 MSG
 }
 
-_setup_spectacle_shortcut
-_setup_iterm_color_schemes
-_setup_ssh_keys
+_configure_spectacle
+_configure_dnscrypt_proxy
+_clone_iterm_color_schemes
+_set_up_ssh_keys
 _display_messages

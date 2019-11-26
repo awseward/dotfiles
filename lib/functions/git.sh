@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-function git_current_branch {
+git_current_branch() {
   git rev-parse --abbrev-ref HEAD
 }
 
-function git_get_pruneables {
+git_get_pruneables() {
   local r_name="${1:-origin}"
   git fetch "$r_name";
   git remote prune -n "$r_name" | command grep --only-matching "$r_name/.\+" | sed -E "s/^$r_name\/(.+)$/\1/g"
 }
 
-function git_delete_pruneables {
+git_delete_pruneables() {
   local r_name="${1:-origin}"
   local branches
   branches="$(git_get_pruneables "$r_name")"
