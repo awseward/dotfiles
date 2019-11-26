@@ -5,7 +5,7 @@ set -euo pipefail
 _PREFIX='/usr/local/etc'
 _DNSCRYPT_PROXY_DIR="${_PREFIX}/dnscrypt-proxy.d"
 
-_VALID_CMDS=(tail stop start restart)
+_VALID_CMDS=(edit restart start stop system tail)
 
 
 _join_by() {
@@ -27,6 +27,14 @@ _resolve_cmd() {
 }
 
 _brew_services() { sudo brew services "$1" dnscrypt-proxy; }
+
+dnsc_edit() { "$EDITOR" "$(command -v dnsc)"; }
+
+dnsc_restart() { _brew_services restart; }
+dnsc_start()   { _brew_services start;   }
+dnsc_stop()    { _brew_services stop;    }
+
+dnsc_system() { cat /etc/resolv.conf; }
 
 dnsc_tail() {
   local which_log="${1:-}"
@@ -53,10 +61,6 @@ dnsc_tail() {
     ;;
   esac
 }
-
-dnsc_restart() { _brew_services restart; }
-dnsc_start()   { _brew_services start;   }
-dnsc_stop()    { _brew_services stop;    }
 
 DNSC_CMD="$(_resolve_cmd "${1:-}")"
 
