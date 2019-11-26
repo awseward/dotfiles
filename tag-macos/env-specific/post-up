@@ -46,10 +46,11 @@ _configure_dnscrypt_proxy() {
 }
 
 _clone_iterm_color_schemes() {
+  local schemes_repo='git@github.com:mbadolato/iTerm2-Color-Schemes.git'
   local schemes_dir="$HOME/.iterm2-color-schemes"
 
   if [ ! -d "$schemes_dir" ]; then
-    git clone --depth=1 'git@github.com:mbadolato/iTerm2-Color-Schemes.git' "$schemes_dir"
+    git clone --depth=1 "$schemes_repo" "$schemes_dir"
   fi
 }
 
