@@ -58,6 +58,6 @@ dnsc_restart() { _brew_services restart; }
 dnsc_start()   { _brew_services start;   }
 dnsc_stop()    { _brew_services stop;    }
 
-DNSC_CMD="$(_resolve_cmd "${1:-help}")"
+DNSC_CMD="$(_resolve_cmd "${1:-}")"
 
 "$DNSC_CMD" "${@:2}"
