@@ -5,6 +5,8 @@ set -euo pipefail
 dotfiles="$HOME/.dotfiles"
 tag="macos"
 
+# ---
+
 _review() {
   local install_file
   install_file="$1"
@@ -36,12 +38,14 @@ _ensure_brew_installed() {
   rm "$install_file"
 }
 
-_ensure_brew_bundle_installed() {
+_ensure_brew_deps_installed() {
   local brewfile="$dotfiles/tag-$tag/Brewfile"
 
   if ! brew bundle check --file="$brewfile"; then
     brew bundle install --no-upgrade --file="$brewfile"
   fi
+
+  brew update --verbose && brew outdated --verbose
 }
 
 _ensure_omz_installed() {
@@ -67,10 +71,12 @@ _ensure_omz_installed() {
 
 main() {
   _ensure_brew_installed
-  _ensure_brew_bundle_installed
+  _ensure_brew_deps_installed
   _ensure_omz_installed
 
   export RCRC="$dotfiles/rcrc" && rcup -v -d "$dotfiles" -t "$tag"
 }
+
+# ---
 
 main
