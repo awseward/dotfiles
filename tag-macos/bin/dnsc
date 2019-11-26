@@ -19,47 +19,52 @@ _join_by() {
 _resolve_cmd() {
   # shellcheck disable=SC2199,SC2076
   if [[ ! " ${_VALID_CMDS[@]} " =~ " $1 " ]]; then
-    >&2 echo "ERROR: Invalid command \`$1\`. Must be one of: $(_join_by ', ' "${_VALID_CMDS[@]}")"
+    local valid_cs; valid_cs="$(_join_by ', ' "${_VALID_CMDS[@]}")"
+    >&2 echo -e "ERROR: Invalid command \`$1\`.\nMust be one of: $valid_cs"
     return 1
   fi
 
   echo "dnsc_$1"
 }
 
-_brew_services() { sudo brew services "$1" dnscrypt-proxy; }
+_brew_svc() {
+  case "$1" in
+    start|stop|restart) : ;;
+    *) return 1
+  esac
+
+  sudo brew services "$1" dnscrypt-proxy
+}
 
 dnsc_edit() { "$EDITOR" "$(command -v dnsc)"; }
 
-dnsc_restart() { _brew_services restart; }
-dnsc_start()   { _brew_services start;   }
-dnsc_stop()    { _brew_services stop;    }
+dnsc_restart() { _brew_svc restart; }
+dnsc_start()   { _brew_svc start;   }
+dnsc_stop()    { _brew_svc stop;    }
 
 dnsc_system() { cat /etc/resolv.conf; }
 
 dnsc_tail() {
   local which_log="${1:-}"
-
-  single_file() {
-    local log_cmd="tail -f $_DNSCRYPT_PROXY_DIR/$1.log"
-    echo -e "$log_cmd\n"
-    $log_cmd
-  }
+  local files
 
   case "$which_log" in
     app|dnscrypt-proxy)
-      single_file 'dnscrypt-proxy'
+      files=("$_DNSCRYPT_PROXY_DIR/dnscrypt-proxy.log")
     ;;
     query|nx)
-      single_file "$which_log"
+      files=("$_DNSCRYPT_PROXY_DIR/$which_log.log")
     ;;
     '')
-      tail -f "$_DNSCRYPT_PROXY_DIR"/*.log
+      files=("$_DNSCRYPT_PROXY_DIR"/*.log)
     ;;
     *)
       >&2 echo "ERROR: Unknown log \`$which_log\`"
       return 1
     ;;
   esac
+
+  xargs -t tail -f <<< "${files[@]}"
 }
 
 DNSC_CMD="$(_resolve_cmd "${1:-}")"
