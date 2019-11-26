@@ -16,11 +16,33 @@ _configure_spectacle() {
 }
 
 _configure_dnscrypt_proxy() {
+  # Link conf file
   local conf_filename='dnscrypt-proxy.toml'
   local src_path="$dotfiles/tag-$tag/rcm-exclude/$conf_filename"
   local dest_path="/usr/local/etc/$conf_filename"
 
   ln -v -s "$src_path" "$dest_path" || true
+
+  # Set up "rules" files (proxy won't start w/o these if configured to use)
+  local brew_pfx; brew_pfx="$(brew --prefix)"
+  local share_dir; share_dir="$(
+    find "$brew_pfx/Cellar/dnscrypt-proxy" -type d -name 'share' \
+      | sort -u \
+      | tail -n1
+  )"
+
+  local rule_src
+  local rule_content
+  while IFS='' read -r rule_src; do
+    rule_basename="$(basename "${rule_src//example-/}")"
+    rule_dest="/usr/local/etc/dnscrypt-proxy.d/$rule_basename"
+    rule_content="# See $rule_src"
+
+    if [ ! -f "$rule_dest" ]; then
+      echo "Creating empty file at $rule_dest"
+      echo "$rule_content" > "$rule_dest"
+    fi
+  done < <(find "$share_dir" -type f -name '*.txt')
 }
 
 _clone_iterm_color_schemes() {
