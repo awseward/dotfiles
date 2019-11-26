@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+_PREFIX='/usr/local/etc'
+_DNSCRYPT_PROXY_DIR="${_PREFIX}/dnscrypt-proxy.d"
+
+_VALID_CMDS=(tail stop start restart)
+
+
+_join_by() {
+  local d=$1
+  shift
+  echo -n "$1"
+  shift
+  printf "%s" "${@/#/$d}"
+}
+
+_resolve_cmd() {
+  # shellcheck disable=SC2199,SC2076
+  if [[ ! " ${_VALID_CMDS[@]} " =~ " $1 " ]]; then
+    >&2 echo "ERROR: Invalid command \`$1\`. Must be one of: $(_join_by ', ' "${_VALID_CMDS[@]}")"
+    return 1
+  fi
+
+  echo "dnsc_$1"
+}
+
+_brew_services() { sudo brew services "$1" dnscrypt-proxy; }
+
+dnsc_tail() {
+  local which_log="${1:-}"
+
+  single_file() {
+    local log_cmd="tail -f $_DNSCRYPT_PROXY_DIR/$1.log"
+    echo -e "$log_cmd\n"
+    $log_cmd
+  }
+
+  case "$which_log" in
+    app|dnscrypt-proxy)
+      single_file 'dnscrypt-proxy'
+    ;;
+    query|nx)
+      single_file "$which_log"
+    ;;
+    '')
+      tail -f "$_DNSCRYPT_PROXY_DIR"/*.log
+    ;;
+    *)
+      >&2 echo "ERROR: Unknown log \`$which_log\`"
+      return 1
+    ;;
+  esac
+}
+
+dnsc_restart() { _brew_services restart; }
+dnsc_start()   { _brew_services start;   }
+dnsc_stop()    { _brew_services stop;    }
+
+DNSC_CMD="$(_resolve_cmd "${1:-help}")"
+
+"$DNSC_CMD" "${@:2}"
