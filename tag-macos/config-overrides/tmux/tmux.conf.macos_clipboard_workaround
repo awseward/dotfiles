@@ -1,3 +1,7 @@
 # macOS clipboard fix (https://github.com/tmux/tmux/issues/543#issuecomment-248980734)
 set -g default-shell $SHELL
-set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+
+# NOTE: I don't think this line is required beyond MacOS Sierra, which I've got
+#       no machines running on...
+#       In the meantime, leaving it commented out here just in case
+# set -g default-command "reattach-to-user-namespace -l ${SHELL}"
