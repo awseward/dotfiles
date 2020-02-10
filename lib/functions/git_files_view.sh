@@ -12,13 +12,15 @@ ghv() {
       dirname "$temp_filename" | xargs -t mkdir -p -
       git show "${git_sha}:${filename}" > "$temp_filename"
     done
+    local v_lines; v_lines="$(tput lines)"
 
     # TODO: Make this a little smarter
     ( \
       cd "${temp_dir}" \
         && fzf \
           --preview 'bat --style=numbers --color=always {}' \
-          --preview-window up:50 \
+          --preview-window "up:$((v_lines - 10))" \
+          --bind 'enter:execute(vim -R -c "set nomodifiable" {})'
     )
 
     # Nice for jumping from one file to another
