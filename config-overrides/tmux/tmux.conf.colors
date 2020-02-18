@@ -13,7 +13,7 @@ set -g pane-border-style fg='#1C4364'
 set -g pane-active-border-style fg='#F69974'
 
 # useful current window status
-set-window-option -g window-status-current-style bg='yellow',fg='#1C4364'
+set-window-option -g window-status-current-style bg='yellow',fg='#1C4364',bold
 
 # TODO: document reason why this is necessary
 set -g terminal-overrides ',xterm-256color:Tc'
