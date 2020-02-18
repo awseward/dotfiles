@@ -37,7 +37,7 @@ ghv() {
         && fzf \
           --preview 'bat --style=numbers --color=always {}' \
           --preview-window "${preview_window}" \
-          --bind 'enter:execute(vim -R -c "set nomodifiable" {})'
+          --bind 'enter:execute(vim -R -c "set nomodifiable" -c "set buftype=nofile" {})'
     )
   }
 
