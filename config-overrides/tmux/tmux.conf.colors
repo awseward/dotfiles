@@ -1,19 +1,12 @@
 # improve colors
 set-option -g default-terminal "screen-256color"
 
-# status-bar color
-set -g status-fg '#F69974'
-set -g status-bg '#1C4364'
-
-# message color
-set -g message-style fg='#1C4364',bg='#F69974'
-
-# border color
-set -g pane-border-style fg='#1C4364'
-set -g pane-active-border-style fg='#F69974'
-
-# useful current window status
-set-window-option -g window-status-current-style bg='yellow',fg='#1C4364',bold
-
 # TODO: document reason why this is necessary
 set -g terminal-overrides ',xterm-256color:Tc'
+
+set -g status-style bg='#1C4364',fg='#F69974'
+set -g message-style bg='#F69974',fg='#1C4364'
+set -g pane-border-style fg='#1C4364'
+set -g pane-active-border-style fg='#F69974'
+# Visually highlight current window
+set -g window-status-current-style bg='white',fg='#1C4364',bold

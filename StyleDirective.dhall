@@ -5,7 +5,7 @@ let List/pkg =
 
 let List/concat = List/pkg.concat
 
-let List/filter = List/pkg.filter
+let List/concatMap = List/pkg.concatMap
 
 let List/map = List/pkg.map
 
@@ -16,17 +16,24 @@ let Optional/default = Optional/pkg.default
 
 let Optional/map = Optional/pkg.map
 
-let Optional/some =
-        λ(a : Type)
-      → λ(opt : Optional a)
-      → merge { None = False, Some = λ(_ : a) → True } opt
-
-let Optional/textShow = Optional/default Text ""
+let Optional/toList = Optional/pkg.toList
 
 let Text/pkg =
       https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Text/package.dhall
 
+let Text/concatSep = Text/pkg.concatSep
+
 let Text/concatMapSep = Text/pkg.concatMapSep
+
+let Optional/filterList =
+        λ(a : Type)
+      → λ(xs : List (Optional a))
+      → List/concatMap (Optional a) a (Optional/toList a) xs
+
+let Optional/concatSep =
+        λ(sep : Text)
+      → λ(xs : List (Optional Text))
+      → Text/concatSep sep (Optional/filterList Text xs)
 
 let Attribute =
       < none
@@ -69,7 +76,7 @@ let Attribute/show =
 
 let Attribute/tryShow = λ(attr : Attribute) → Some (Attribute/show attr)
 
-let tryShowKvp =
+let Misc/tryShowKvp =
         λ(name : Text)
       → λ(value : Optional Text)
       → merge
@@ -94,16 +101,7 @@ let StyleDirective =
 
 let StyleDirective/show =
         λ(sDir : StyleDirective.Type)
-      → let Optional/concatSep =
-                λ(sep : Text)
-              → λ(optTexts : List (Optional Text))
-              → Text/concatMapSep
-                  sep
-                  (Optional Text)
-                  Optional/textShow
-                  (List/filter (Optional Text) (Optional/some Text) optTexts)
-
-        let comment =
+      → let comment =
               Optional/map Text Text (λ(txt : Text) → "# ${txt}") sDir.comment
 
         let argsStr =
@@ -111,8 +109,8 @@ let StyleDirective/show =
                 ","
                 ( List/concat
                     (Optional Text)
-                    [ [ tryShowKvp "bg" sDir.bg ]
-                    , [ tryShowKvp "fg" sDir.fg ]
+                    [ [ Misc/tryShowKvp "bg" sDir.bg ]
+                    , [ Misc/tryShowKvp "fg" sDir.fg ]
                     , List/map
                         Attribute
                         (Optional Text)
@@ -136,11 +134,11 @@ let StyleDirective/build =
           , comment = Some "Visually highlight current window"
           , name = "window-status-current"
           , fg = colorA
-          , bg = Some "yellow"
+          , bg = Some "white"
           , attrs = [ Attribute.bold ]
           }
         ]
 
 let sDirs = StyleDirective/build (Some "#1C4364") (Some "#F69974")
 
-in  Text/concatMapSep "\n\n" StyleDirective.Type StyleDirective/show sDirs
+in  Text/concatMapSep "\n" StyleDirective.Type StyleDirective/show sDirs
