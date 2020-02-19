@@ -4,6 +4,11 @@
 # make it just a little bit nicer to use:
 #
 # https://twitter.com/tenderlove/status/1032299379707863040
+#
+# Example usage:
+#
+# slack-banner 'hello' ':wave:' ':transparent:'
+#
 
 set -euo pipefail
 
