@@ -1,3 +1,5 @@
+# WARNING: This file is generated. See StyleDirective.dhall to modify.
+
 # improve colors
 set-option -g default-terminal "screen-256color"
 
@@ -8,5 +10,6 @@ set -g status-style bg='#1C4364',fg='#F69974'
 set -g message-style bg='#F69974',fg='#1C4364'
 set -g pane-border-style fg='#1C4364'
 set -g pane-active-border-style fg='#F69974'
+
 # Visually highlight current window
 set -g window-status-current-style bg='white',fg='#1C4364',bold

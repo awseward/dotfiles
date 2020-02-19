@@ -102,7 +102,15 @@ let StyleDirective =
 let StyleDirective/show =
         λ(sDir : StyleDirective.Type)
       → let comment =
-              Optional/map Text Text (λ(txt : Text) → "# ${txt}") sDir.comment
+              Optional/map
+                Text
+                Text
+                (   λ(txt : Text)
+                  → ''
+
+                    # ${txt}''
+                )
+                sDir.comment
 
         let argsStr =
               Optional/concatSep
@@ -141,4 +149,14 @@ let StyleDirective/build =
 
 let sDirs = StyleDirective/build (Some "#1C4364") (Some "#F69974")
 
-in  Text/concatMapSep "\n" StyleDirective.Type StyleDirective/show sDirs
+in  ''
+    # WARNING: This file is generated. See StyleDirective.dhall to modify.
+
+    # improve colors
+    set-option -g default-terminal "screen-256color"
+
+    # TODO: document reason why this is necessary
+    set -g terminal-overrides ',xterm-256color:Tc'
+
+    ${Text/concatMapSep "\n" StyleDirective.Type StyleDirective/show sDirs}
+    ''
