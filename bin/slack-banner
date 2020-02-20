@@ -12,20 +12,18 @@
 
 set -euo pipefail
 
-message="$1"
-fg_emoji="$2"
-bg_emoji="$3"
+message="${1}"
+fg_emoji="${2}"
+bg_emoji="${3}"
 
 _warn_if_too_long() {
-  local result_length
-  local max_length
-  result_length="$1"
-  max_length=4000
+  local result_length; result_length="$1"
+  local max_length; max_length=4000
 
-  if [ "$result_length" -ge "$max_length" ]; then
+  if [ "${result_length}" -ge "${max_length}" ]; then
     >&2 cat <<ERR
-WARNING: Max Slack message character length: $max_length (at the time of authoring, 2019-03-31)
-         Your banner's character length: $result_length
+WARNING: Max Slack message character length: ${max_length} (at the time of authoring, 2019-03-31)
+         Your banner's character length: ${result_length}
 
          It is likely that your banner will not fit as is, unless Slack has
          since increased its character limits per message.
@@ -36,9 +34,9 @@ ERR
 
 _do_the_thing() {
   local result
-  result="$(figlet -f banner "$message" | sed -e "s/\#/$fg_emoji/g;s/\ /$bg_emoji/g")"
-  pbcopy <<< "$result"
-  echo "Slack emoji banner of '$message' spelled out with '$fg_emoji' copied to clipboard!"
+  result="$(figlet -f banner "${message}" | sed -e "s/\#/${fg_emoji}/g;s/\ /${bg_emoji}/g")"
+  pbcopy <<< "${result}"
+  echo "Slack emoji banner of '${message}' spelled out with '${fg_emoji}' copied to clipboard!"
   _warn_if_too_long ${#result}
 }
 
