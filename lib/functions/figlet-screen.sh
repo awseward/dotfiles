@@ -24,12 +24,12 @@ __fig_screen() {
   text="$*"
   term_width=$(tput cols)
   term_height=$(tput lines)
-  text_height=$(__get_text_height "$text")
+  text_height=$(__get_text_height "${text}")
   padding=$(__get_vertical_padding)
 
   clear
-  __print_vertical_padding "$padding"
-  figlet -w "$term_width" -c "$text"
+  __print_vertical_padding "${padding}"
+  figlet -w "${term_width}" -c "${text}"
 
   __print_vertical_padding $((padding - 2))
 }

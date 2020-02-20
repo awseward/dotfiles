@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
 UPDATE_INTERVAL=$((60 * 60 * 24 * 5))
-TIMESTAMP_FILEPATH="$HOME/.dotfiles-update-timestamp"
+TIMESTAMP_FILEPATH="${HOME}/.dotfiles-update-timestamp"
 
 read_timestamp() {
   if timestamp_exists; then
-    cat "$TIMESTAMP_FILEPATH"
+    cat "${TIMESTAMP_FILEPATH}"
   else
     echo 0
   fi
@@ -15,11 +15,11 @@ is_time_to_check() {
   local timestamp
   timestamp="$(read_timestamp)"
 
-  _has_interval_passed "$timestamp"
+  _has_interval_passed "${timestamp}"
 }
 
 write_timestamp_file() {
-  date +%s > "$TIMESTAMP_FILEPATH"
+  date +%s > "${TIMESTAMP_FILEPATH}"
 }
 
 status() {
@@ -29,7 +29,7 @@ status() {
 }
 
 timestamp_exists() {
-  [ -f "$TIMESTAMP_FILEPATH" ]
+  [ -f "${TIMESTAMP_FILEPATH}" ]
 }
 
 # Pure
@@ -42,5 +42,5 @@ _has_interval_passed() {
   actual_interval="$((now - timestamp))"
 
   # -ge (greater than or equal to)
-  [ "$actual_interval" -ge "$UPDATE_INTERVAL" ]
+  [ "${actual_interval}" -ge "${UPDATE_INTERVAL}" ]
 }
