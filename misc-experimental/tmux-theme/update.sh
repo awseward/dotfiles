@@ -3,9 +3,8 @@
 set -euo pipefail
 
 _file_should_exist() {
-  local file_path="${1}"
-  if [ ! -f "${file_path}" ]; then
-    echo "File should exist, but doesn't: ${file_path}"
+  if [ ! -f "${1}" ]; then
+    >&2 echo "File should exist, but doesn't: ${1}"
     exit 1
   fi
 }
