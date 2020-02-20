@@ -7,7 +7,7 @@ let Text/concatMapSep = Text/pkg.concatMapSep
 
 let Attribute = (./Attribute.dhall).Type
 
-let StyleDirective = ./StyleDirective.dhall
+let Style = ./Style.dhall
 
 let Theme = { bg : Text, fg : Text, accent1 : Text, accent2 : Text }
 
@@ -28,28 +28,28 @@ let directives =
 
         let bg = Some theme.bg
 
-        in  [ StyleDirective::{ name = "status", fg = fg, bg = bg }
-            , StyleDirective::{
+        in  [ Style::{ name = "status", fg = fg, bg = bg }
+            , Style::{
               , name = "message"
               , fg = bg
               , bg = accent1
               , attrs = [ Attribute.bold ]
               }
-            , StyleDirective::{ name = "pane-border", fg = bg }
-            , StyleDirective::{ name = "pane-active-border", fg = fg }
-            , StyleDirective::{
+            , Style::{ name = "pane-border", fg = bg }
+            , Style::{ name = "pane-active-border", fg = fg }
+            , Style::{
               , comment = Some "Visually highlight current window"
               , name = "window-status-current"
               , fg = bg
               , bg = accent1
               , attrs = [ Attribute.bold ]
               }
-            , StyleDirective::{
+            , Style::{
               , name = "status-left"
               , fg = accent2
               , attrs = [ Attribute.bold ]
               }
-            , StyleDirective::{
+            , Style::{
               , comment = Some "Currently shows local and UTC time"
               , name = "status-right"
               , fg = accent1
@@ -60,7 +60,7 @@ let directives =
 let show =
         λ(theme : Theme)
       → ''
-        # WARNING: This file is generated. See StyleDirective.dhall to modify.
+        # WARNING: This file is generated. See Style.dhall to modify.
 
         # improve colors
         set-option -g default-terminal "screen-256color"
@@ -68,11 +68,7 @@ let show =
         # TODO: document reason why this is necessary
         set -g terminal-overrides ',xterm-256color:Tc'
 
-        ${Text/concatMapSep
-            "\n\n"
-            StyleDirective.Type
-            StyleDirective.show
-            (directives theme)}
+        ${Text/concatMapSep "\n\n" Style.Type Style.show (directives theme)}
         ''
 
 in  { Type = Theme, default = default, directives = directives, show = show }

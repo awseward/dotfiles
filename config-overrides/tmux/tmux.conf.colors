@@ -1,4 +1,4 @@
-# WARNING: This file is generated. See StyleDirective.dhall to modify.
+# WARNING: This file is generated. See Style.dhall to modify.
 
 # improve colors
 set-option -g default-terminal "screen-256color"

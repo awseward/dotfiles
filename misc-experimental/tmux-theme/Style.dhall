@@ -31,7 +31,7 @@ let Optional/ext = ./Optional.dhall
 
 let Optional/concatSep = Optional/ext.concatSep
 
-let StyleDirective =
+let Style =
       { comment : Optional Text
       , name : Text
       , fg : Optional Text
@@ -47,7 +47,7 @@ let default =
       }
 
 let show =
-        λ(style : StyleDirective)
+        λ(style : Style)
       → let comment =
               Optional/map Text Text (λ(txt : Text) → "# ${txt}") style.comment
 
@@ -70,4 +70,4 @@ let show =
 
         in  Optional/concatSep "\n" [ comment, command ]
 
-in  { Type = StyleDirective, default = default, show = show }
+in  { Type = Style, default = default, show = show }
