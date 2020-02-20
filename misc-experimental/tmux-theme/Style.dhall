@@ -70,4 +70,24 @@ let show =
 
         in  Optional/concatSep "\n" [ comment, command ]
 
+let _show0 =
+      let style = default ⫽ { name = "foo", fg = Some "bar" }
+
+      in  assert : show style ≡ "set -g foo-style fg='bar'"
+
+let _show1 =
+      let style =
+              default
+            ⫽ { comment = Some "this is a comment"
+              , name = "foo"
+              , bg = Some "bar"
+              , attrs = [ Attribute.italics, Attribute.underscore ]
+              }
+
+      in    assert
+          :   show style
+            ≡ ''
+              # this is a comment
+              set -g foo-style bg='bar',italics,underscore''
+
 in  { Type = Style, default = default, show = show }
