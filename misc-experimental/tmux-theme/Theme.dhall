@@ -1,7 +1,7 @@
 -- See: http://man7.org/linux/man-pages/man1/tmux.1.html#STYLES
 
 let Text/pkg =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Text/package.dhall
+      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Text/package.dhall sha256:3a5e3acde76fe5f90bd296e6c9d2e43e6ae81c56f804029b39352d2f1664b769
 
 let Text/concatMapSep = Text/pkg.concatMapSep
 
