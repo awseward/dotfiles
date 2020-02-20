@@ -9,33 +9,56 @@ let Attribute = (./Attribute.dhall).Type
 
 let StyleDirective = ./StyleDirective.dhall
 
-let Theme = { bg : Text, fg : Text, accent : Text }
+let Theme = { bg : Text, fg : Text, accent1 : Text, accent2 : Text }
 
-let default = { bg = "#1C4364", fg = "#F69974", accent = "#01FF70" }
+let default =
+      { bg = "#004445"
+      , fg = "#FF2E63"
+      , accent1 = "#F8B400"
+      , accent2 = "#5B8C85"
+      }
 
 let directives =
-        λ(thm : Theme)
-      → let accent = thm.accent
+        λ(theme : Theme)
+      → let accent1 = Some theme.accent1
 
-        let colorB = Some thm.fg
+        let accent2 = Some theme.accent2
 
-        let colorA = Some thm.bg
+        let fg = Some theme.fg
 
-        in  [ StyleDirective::{ name = "status", fg = colorB, bg = colorA }
-            , StyleDirective::{ name = "message", fg = colorA, bg = colorB }
-            , StyleDirective::{ name = "pane-border", fg = colorA }
-            , StyleDirective::{ name = "pane-active-border", fg = colorB }
+        let bg = Some theme.bg
+
+        in  [ StyleDirective::{ name = "status", fg = fg, bg = bg }
+            , StyleDirective::{
+              , name = "message"
+              , fg = bg
+              , bg = accent1
+              , attrs = [ Attribute.bold ]
+              }
+            , StyleDirective::{ name = "pane-border", fg = bg }
+            , StyleDirective::{ name = "pane-active-border", fg = fg }
             , StyleDirective::{
               , comment = Some "Visually highlight current window"
               , name = "window-status-current"
-              , fg = colorA
-              , bg = Some accent
+              , fg = bg
+              , bg = accent1
+              , attrs = [ Attribute.bold ]
+              }
+            , StyleDirective::{
+              , name = "status-left"
+              , fg = accent2
+              , attrs = [ Attribute.bold ]
+              }
+            , StyleDirective::{
+              , comment = Some "Currently shows local and UTC time"
+              , name = "status-right"
+              , fg = accent1
               , attrs = [ Attribute.bold ]
               }
             ]
 
 let show =
-        λ(thm : Theme)
+        λ(theme : Theme)
       → ''
         # WARNING: This file is generated. See StyleDirective.dhall to modify.
 
@@ -46,10 +69,10 @@ let show =
         set -g terminal-overrides ',xterm-256color:Tc'
 
         ${Text/concatMapSep
-            "\n"
+            "\n\n"
             StyleDirective.Type
             StyleDirective.show
-            (directives thm)}
+            (directives theme)}
         ''
 
 in  { Type = Theme, default = default, directives = directives, show = show }
