@@ -13,8 +13,9 @@ let Optional/pkg =
 
 let Optional/toList = Optional/pkg.toList
 
-let filterList =
-        λ(a : Type)
+let filterList
+    : ∀(a : Type) → List (Optional a) → List a
+    =   λ(a : Type)
       → λ(xs : List (Optional a))
       → List/concatMap (Optional a) a (Optional/toList a) xs
 
@@ -24,10 +25,11 @@ let _filterList0 =
 let _filterList1 =
       assert : filterList Text [ None Text, None Text ] ≡ ([] : List Text)
 
-let concatSep =
-        λ(sep : Text)
+let concatSep
+    : ∀(separator : Text) → List (Optional Text) → Text
+    =   λ(separator : Text)
       → λ(xs : List (Optional Text))
-      → Text/concatSep sep (filterList Text xs)
+      → Text/concatSep separator (filterList Text xs)
 
 let _concatSep0 =
       assert : concatSep "," [ Some "a", None Text, Some "c" ] ≡ "a,c"

@@ -18,8 +18,9 @@ let Attribute =
       | dashed-underscore
       >
 
-let show =
-        λ(attr : Attribute)
+let show
+    : Attribute → Text
+    =   λ(attr : Attribute)
       → merge
           { none = "none"
           , bold = "bold"
