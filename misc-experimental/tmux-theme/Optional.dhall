@@ -18,9 +18,20 @@ let filterList =
       → λ(xs : List (Optional a))
       → List/concatMap (Optional a) a (Optional/toList a) xs
 
+let _filterList0 =
+      assert : filterList Natural [ Some 1, None Natural, Some 3 ] ≡ [ 1, 3 ]
+
+let _filterList1 =
+      assert : filterList Text [ None Text, None Text ] ≡ ([] : List Text)
+
 let concatSep =
         λ(sep : Text)
       → λ(xs : List (Optional Text))
       → Text/concatSep sep (filterList Text xs)
+
+let _concatSep0 =
+      assert : concatSep "," [ Some "a", None Text, Some "c" ] ≡ "a,c"
+
+let _concatSep1 = assert : concatSep "," [ None Text, None Text ] ≡ ""
 
 in  { filterlist = filterList, concatSep = concatSep }
