@@ -16,6 +16,13 @@ let tropic =
           , accent2 = steelBlue
           }
 
+let hipster =
+      let blue = "#1C4364"
+
+      let pink = "#F69974"
+
+      in  Theme::{ bg = blue, fg = pink, accent1 = pink, accent2 = pink }
+
 let camo =
       let brown = "#837B68"
 
@@ -43,4 +50,4 @@ let contrast =
           , accent2 = teal
           }
 
-in  Theme.show tropic
+in  Theme.show hipster
