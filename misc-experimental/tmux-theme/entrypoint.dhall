@@ -21,7 +21,9 @@ let hipster =
 
       let pink = "#F69974"
 
-      in  Theme::{ bg = blue, fg = pink, accent1 = pink, accent2 = pink }
+      let seafoam = "#71EEB8"
+
+      in  Theme::{ bg = blue, fg = seafoam, accent1 = pink, accent2 = pink }
 
 let camo =
       let brown = "#837B68"
