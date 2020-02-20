@@ -27,4 +27,20 @@ let camo =
 
       in  Theme::{ bg = grey, fg = olive, accent1 = white, accent2 = brown }
 
+let contrast =
+      let purpleBlack = "#1A1423"
+
+      let salmon = "#FF715B"
+
+      let teal = "#1EA896"
+
+      let white = "#FFFFFF"
+
+      in  Theme::{
+          , bg = purpleBlack
+          , fg = white
+          , accent1 = salmon
+          , accent2 = teal
+          }
+
 in  Theme.show tropic
