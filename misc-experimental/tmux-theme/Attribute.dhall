@@ -39,4 +39,8 @@ let show =
           }
           attr
 
+let _show0 = assert : show Attribute.none ≡ "none"
+
+let _show1 = assert : show Attribute.double-underscore ≡ "double-underscore"
+
 in  { Type = Attribute, show = show }
