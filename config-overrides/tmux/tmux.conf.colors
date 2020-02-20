@@ -12,4 +12,4 @@ set -g pane-border-style fg='#1C4364'
 set -g pane-active-border-style fg='#F69974'
 
 # Visually highlight current window
-set -g window-status-current-style bg='white',fg='#1C4364',bold
+set -g window-status-current-style bg='#01FF70',fg='#1C4364',bold
