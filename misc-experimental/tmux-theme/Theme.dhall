@@ -12,11 +12,7 @@ let Style = ./Style.dhall
 let Theme = { bg : Text, fg : Text, accent1 : Text, accent2 : Text }
 
 let default =
-      { bg = "#004445"
-      , fg = "#FF2E63"
-      , accent1 = "#F8B400"
-      , accent2 = "#5B8C85"
-      }
+      { bg = "black", fg = "white", accent1 = "cyan", accent2 = "magenta" }
 
 let directives =
         λ(theme : Theme)
