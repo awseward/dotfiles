@@ -50,22 +50,26 @@ let tryRenderComment =
           (λ(comment : Text) → "# ${comment}")
           style.comment
 
+let collectAttributes =
+        λ(style : Style)
+      → List/concat
+          Attribute
+          [ Optional/filterList
+              Attribute
+              [ Optional/map Text Attribute Attribute.bg style.bg
+              , Optional/map Text Attribute Attribute.fg style.fg
+              ]
+          , style.attrs
+          ]
+
 let renderCommand =
         λ(style : Style)
-      → let attrs =
-              List/concat
-                Attribute
-                [ Optional/filterList
-                    Attribute
-                    [ Optional/map Text Attribute Attribute.bg style.bg
-                    , Optional/map Text Attribute Attribute.fg style.fg
-                    ]
-                , style.attrs
-                ]
+      → let attributes = collectrAttributes style
 
-        let attrsString = Text/concatMapSep "," Attribute Attribute/show attrs
+        let attributesString =
+              Text/concatMapSep "," Attribute Attribute/show attributes
 
-        in  "set -g ${style.name}-style ${attrsString}"
+        in  "set -g ${style.name}-style ${attributesString}"
 
 let show =
         λ(style : Style)
