@@ -36,4 +36,4 @@ let _concatSep0 =
 
 let _concatSep1 = assert : concatSep "," [ None Text, None Text ] ≡ ""
 
-in  { filterlist = filterList, concatSep = concatSep }
+in  { filterList = filterList, concatSep = concatSep }

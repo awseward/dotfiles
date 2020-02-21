@@ -5,8 +5,6 @@ let List/pkg =
 
 let List/concat = List/pkg.concat
 
-let List/map = List/pkg.map
-
 let Optional/pkg =
       https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Optional/package.dhall sha256:4324b2bf84ded40f67485f14355e4cb7b237a8f173e713c791ec44cebebc552c
 
@@ -15,21 +13,19 @@ let Optional/map = Optional/pkg.map
 let Text/pkg =
       https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Text/package.dhall sha256:3a5e3acde76fe5f90bd296e6c9d2e43e6ae81c56f804029b39352d2f1664b769
 
-let Text/concatSep = Text/pkg.concatSep
+let Text/concatMapSep = Text/pkg.concatMapSep
 
 let Attribute/pkg = ./Attribute.dhall
 
 let Attribute = Attribute/pkg.Type
 
-let Attribute/tryShow = λ(attr : Attribute) → Some (Attribute/pkg.show attr)
-
-let Misc/pkg = ./Misc.dhall
-
-let Misc/tryShowKvp = Misc/pkg.tryShowKvp
+let Attribute/show = Attribute/pkg.show
 
 let Optional/ext = ./Optional.dhall
 
 let Optional/concatSep = Optional/ext.concatSep
+
+let Optional/filterList = Optional/ext.filterList
 
 let Style =
       { comment : Optional Text
@@ -46,29 +42,36 @@ let default =
       , attrs = [] : List Attribute
       }
 
+let tryRenderComment =
+        λ(style : Style)
+      → Optional/map
+          Text
+          Text
+          (λ(comment : Text) → "# ${comment}")
+          style.comment
+
+let renderCommand =
+        λ(style : Style)
+      → let attrs =
+              List/concat
+                Attribute
+                [ Optional/filterList
+                    Attribute
+                    [ Optional/map Text Attribute Attribute.bg style.bg
+                    , Optional/map Text Attribute Attribute.fg style.fg
+                    ]
+                , style.attrs
+                ]
+
+        let attrsString = Text/concatMapSep "," Attribute Attribute/show attrs
+
+        in  "set -g ${style.name}-style ${attrsString}"
+
 let show =
         λ(style : Style)
-      → let comment =
-              Optional/map Text Text (λ(txt : Text) → "# ${txt}") style.comment
-
-        let argsStr =
-              Optional/concatSep
-                ","
-                ( List/concat
-                    (Optional Text)
-                    [ [ Misc/tryShowKvp "bg" style.bg ]
-                    , [ Misc/tryShowKvp "fg" style.fg ]
-                    , List/map
-                        Attribute
-                        (Optional Text)
-                        Attribute/tryShow
-                        style.attrs
-                    ]
-                )
-
-        let command = Some "set -g ${style.name}-style ${argsStr}"
-
-        in  Optional/concatSep "\n" [ comment, command ]
+      → Optional/concatSep
+          "\n"
+          [ tryRenderComment style, Some (renderCommand style) ]
 
 let _show0 =
       let style = default ⫽ { name = "foo", fg = Some "bar" }

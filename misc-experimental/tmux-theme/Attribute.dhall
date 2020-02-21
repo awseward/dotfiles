@@ -1,7 +1,13 @@
 -- See: http://man7.org/linux/man-pages/man1/tmux.1.html#STYLES
 
+-- TODO: Eventually use Attribute.fg and Attribute.bg
+
+let Misc/showKvp = (./Misc.dhall).showKvp
+
 let Attribute =
-      < none
+      < fg : Text
+      | bg : Text
+      | none
       | bold
       | bright
       | dim
@@ -22,7 +28,9 @@ let show
     : Attribute → Text
     =   λ(attr : Attribute)
       → merge
-          { none = "none"
+          { fg = λ(value : Text) → Misc/showKvp "fg" value
+          , bg = λ(value : Text) → Misc/showKvp "bg" value
+          , none = "none"
           , bold = "bold"
           , bright = "bright"
           , dim = "dim"
@@ -43,5 +51,9 @@ let show
 let _show0 = assert : show Attribute.none ≡ "none"
 
 let _show1 = assert : show Attribute.double-underscore ≡ "double-underscore"
+
+let _show2 = assert : show (Attribute.bg "foo") ≡ "bg='foo'"
+
+let _show3 = assert : show (Attribute.fg "foo") ≡ "fg='foo'"
 
 in  { Type = Attribute, show = show }
