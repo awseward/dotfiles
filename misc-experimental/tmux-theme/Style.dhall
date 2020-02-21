@@ -13,13 +13,15 @@ let Optional/map = Optional/pkg.map
 let Text/pkg =
       https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Text/package.dhall sha256:3a5e3acde76fe5f90bd296e6c9d2e43e6ae81c56f804029b39352d2f1664b769
 
-let Text/concatMapSep = Text/pkg.concatMapSep
+let Text/default = Text/pkg.default
 
 let Attribute/pkg = ./Attribute.dhall
 
 let Attribute = Attribute/pkg.Type
 
 let Attribute/show = Attribute/pkg.show
+
+let SetCommand/tryRender = (./SetCommand.dhall).tryRender
 
 let Optional/ext = ./Optional.dhall
 
@@ -64,12 +66,9 @@ let collectAttributes =
 
 let renderCommand =
         λ(style : Style)
-      → let attributes = collectrAttributes style
+      → let attributes = collectAttributes style
 
-        let attributesString =
-              Text/concatMapSep "," Attribute Attribute/show attributes
-
-        in  "set -g ${style.name}-style ${attributesString}"
+        in  Text/default (SetCommand/tryRender style.name attributes)
 
 let show =
         λ(style : Style)
@@ -96,5 +95,15 @@ let _show1 =
             ≡ ''
               # this is a comment
               set -g foo-style bg='bar',italics,underscore''
+
+let _show2__EventuallyChangeToOptional =
+      assert : show (default ⫽ { name = "foo" }) ≡ ""
+
+let _show3__IncorrectBehavior__PleaseFix__ShouldJustBeNoneText =
+        assert
+      :   show (default ⫽ { comment = Some "foo", name = "foo" })
+        ≡ ''
+          # foo
+          ''
 
 in  { Type = Style, default = default, show = show }
