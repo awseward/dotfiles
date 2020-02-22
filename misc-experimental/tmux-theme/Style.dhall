@@ -1,25 +1,13 @@
 -- See: http://man7.org/linux/man-pages/man1/tmux.1.html#STYLES
 
-let List/pkg =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/List/package.dhall sha256:67899380860ce07a2d5d9530dc502800f2c11c73c2d64e8c827f4920b5473887
-
-let List/concat = List/pkg.concat
-
 let Optional/pkg =
       https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Optional/package.dhall sha256:4324b2bf84ded40f67485f14355e4cb7b237a8f173e713c791ec44cebebc552c
 
 let Optional/map = Optional/pkg.map
 
-let Text/pkg =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Text/package.dhall sha256:3a5e3acde76fe5f90bd296e6c9d2e43e6ae81c56f804029b39352d2f1664b769
-
-let Text/default = Text/pkg.default
-
 let Attribute/pkg = ./Attribute.dhall
 
 let Attribute = Attribute/pkg.Type
-
-let Attribute/show = Attribute/pkg.show
 
 let SetCommand/tryRender = (./SetCommand.dhall).tryRender
 
@@ -54,34 +42,46 @@ let tryRenderComment =
 
 let collectAttributes =
         λ(style : Style)
-      → List/concat
-          Attribute
-          [ Optional/filterList
-              Attribute
-              [ Optional/map Text Attribute Attribute.bg style.bg
-              , Optional/map Text Attribute Attribute.fg style.fg
-              ]
-          , style.attrs
-          ]
+      →   Optional/filterList
+            Attribute
+            [ Optional/map Text Attribute Attribute.bg style.bg
+            , Optional/map Text Attribute Attribute.fg style.fg
+            ]
+        # style.attrs
 
-let renderCommand =
+let tryRenderCommand =
         λ(style : Style)
       → let attributes = collectAttributes style
 
-        in  Text/default (SetCommand/tryRender style.name attributes)
+        in  SetCommand/tryRender style.name attributes
 
-let show =
-        λ(style : Style)
-      → Optional/concatSep
-          "\n"
-          [ tryRenderComment style, Some (renderCommand style) ]
+let tryShow
+    : Style → Optional Text
+    =   λ(style : Style)
+      → Optional/map
+          Text
+          Text
+          (   λ(command : Text)
+            → Optional/concatSep "\n" [ tryRenderComment style, Some command ]
+          )
+          (tryRenderCommand style)
 
-let _show0 =
+let _tryShow0 =
+      let style = default ⫽ { name = "foo" }
+
+      in  assert : tryShow style ≡ None Text
+
+let _tryShow1 =
+      let style = default ⫽ { comment = Some "this is a comment", name = "foo" }
+
+      in  assert : tryShow style ≡ None Text
+
+let _tryShow2 =
       let style = default ⫽ { name = "foo", fg = Some "bar" }
 
-      in  assert : show style ≡ "set -g foo-style fg='bar'"
+      in  assert : tryShow style ≡ Some "set -g foo-style fg='bar'"
 
-let _show1 =
+let _tryShow3 =
       let style =
               default
             ⫽ { comment = Some "this is a comment"
@@ -91,19 +91,10 @@ let _show1 =
               }
 
       in    assert
-          :   show style
-            ≡ ''
-              # this is a comment
-              set -g foo-style bg='bar',italics,underscore''
+          :   tryShow style
+            ≡ Some
+                ''
+                # this is a comment
+                set -g foo-style bg='bar',italics,underscore''
 
-let _show2__EventuallyChangeToOptional =
-      assert : show (default ⫽ { name = "foo" }) ≡ ""
-
-let _show3__IncorrectBehavior__PleaseFix__ShouldJustBeNoneText =
-        assert
-      :   show (default ⫽ { comment = Some "foo", name = "foo" })
-        ≡ ''
-          # foo
-          ''
-
-in  { Type = Style, default = default, show = show }
+in  { Type = Style, default = default, tryShow = tryShow }
