@@ -1,5 +1,3 @@
--- See: http://man7.org/linux/man-pages/man1/tmux.1.html#STYLES
-
 let Attribute = (./Attribute.dhall).Type
 
 let Style = ./Style.dhall

@@ -1,3 +1,8 @@
+let Optional/pkg =
+      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Optional/package.dhall sha256:4324b2bf84ded40f67485f14355e4cb7b237a8f173e713c791ec44cebebc552c
+
+let Optional/map = Optional/pkg.map
+
 let Text/pkg =
       https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Text/package.dhall sha256:3a5e3acde76fe5f90bd296e6c9d2e43e6ae81c56f804029b39352d2f1664b769
 
@@ -36,15 +41,15 @@ let tryRender
     : ∀(name : Text) → ∀(attributes : List Attribute) → Optional Text
     =   λ(name : Text)
       → λ(attributes : List Attribute)
-      → merge
-          { None = None Text
-          , Some =
-                λ(attributes : List Attribute)
-              → let attributesString =
-                      Text/concatMapSep "," Attribute Attribute/show attributes
+      → Optional/map
+          (List Attribute)
+          Text
+          (   λ(attributes : List Attribute)
+            → let attributesString =
+                    Text/concatMapSep "," Attribute Attribute/show attributes
 
-                in  Some "set -g ${name}-style ${attributesString}"
-          }
+              in  "set -g ${name}-style ${attributesString}"
+          )
           (tryCollectAttributes attributes)
 
 let _tryRender0 = assert : tryRender "foo" ([] : List Attribute) ≡ None Text
