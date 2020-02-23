@@ -4,7 +4,7 @@ let Text/pkg =
 let Text/concatSep = Text/pkg.concatSep
 
 let Optional/listWhereSome =
-      https://raw.githubusercontent.com/awseward/dhall-utils/master/Optional/listWhereSome.dhall
+      https://raw.githubusercontent.com/awseward/dhall-utils/master/Optional/listWhereSome.dhall sha256:9cf3541b16e0c63fc1f1c6a16b69124523409e3801da0c27ee0029bf0ce13983
 
 let KeyBinding = { noPrefix : Bool, repeats : Bool, key : Text, command : Text }
 
