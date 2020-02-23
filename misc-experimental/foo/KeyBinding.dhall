@@ -10,14 +10,23 @@ let KeyBinding = { noPrefix : Bool, repeats : Bool, key : Text, command : Text }
 
 let default = { noPrefix = False, repeats = False }
 
+let tryRenderFlag =
+        λ(on : Bool)
+      → λ(letter : Text)
+      → if on then Some "-${letter}" else None Text
+
+let _tryRenderFlag0 = assert : tryRenderFlag True "a" ≡ Some "-a"
+
+let _tryRenderFlag1 = assert : tryRenderFlag False "a" ≡ None Text
+
 let renderTokens
     : ∀(binding : KeyBinding) → List Text
     =   λ(binding : KeyBinding)
       → Optional/listWhereSome
           Text
           [ Some "bind-key"
-          , if binding.noPrefix then Some "-n" else None Text
-          , if binding.repeats then Some "-r" else None Text
+          , tryRenderFlag binding.noPrefix "n"
+          , tryRenderFlag binding.repeats "r"
           , Some binding.key
           , Some binding.command
           ]
