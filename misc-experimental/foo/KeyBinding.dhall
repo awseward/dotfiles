@@ -3,31 +3,17 @@ let Text/pkg =
 
 let Text/concatSep = Text/pkg.concatSep
 
+let Optional/listWhereSome =
+      https://raw.githubusercontent.com/awseward/dhall-utils/master/Optional/listWhereSome.dhall
+
 let KeyBinding = { noPrefix : Bool, repeats : Bool, key : Text, command : Text }
 
 let default = { noPrefix = False, repeats = False }
 
-let whereSome
-    : ∀(a : Type) → List (Optional a) → List a
-    =   λ(a : Type)
-      → λ(xOpts : List (Optional a))
-      → List/fold
-          (Optional a)
-          xOpts
-          (List a)
-          (   λ(xOpt : Optional a)
-            → λ(xs : List a)
-            → merge { None = xs, Some = λ(x : a) → [ x ] # xs } xOpt
-          )
-          ([] : List a)
-
-let _whereSome0 =
-      assert : whereSome Text [ Some "a", None Text, Some "c" ] ≡ [ "a", "c" ]
-
 let renderTokens
     : ∀(binding : KeyBinding) → List Text
     =   λ(binding : KeyBinding)
-      → whereSome
+      → Optional/listWhereSome
           Text
           [ Some "bind-key"
           , if binding.noPrefix then Some "-n" else None Text
