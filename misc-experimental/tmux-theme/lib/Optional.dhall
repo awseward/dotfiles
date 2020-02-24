@@ -10,26 +10,13 @@ let Text/pkg =
 
 let Text/concatSep = Text/pkg.concatSep
 
-let Optional/pkg =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Optional/package.dhall sha256:4324b2bf84ded40f67485f14355e4cb7b237a8f173e713c791ec44cebebc552c
-
-let Optional/toList = Optional/pkg.toList
-
-let filterList =
-        λ(a : Type)
-      → λ(xs : List (Optional a))
-      → List/concatMap (Optional a) a (Optional/toList a) xs
-
-let _filterList0 =
-      assert : filterList Natural [ Some 1, None Natural, Some 3 ] ≡ [ 1, 3 ]
-
-let _filterList1 =
-      assert : filterList Text [ None Text, None Text ] ≡ ([] : List Text)
+let Optional/listWhereSome =
+      https://raw.githubusercontent.com/awseward/dhall-utils/master/Optional/listWhereSome.dhall sha256:9cf3541b16e0c63fc1f1c6a16b69124523409e3801da0c27ee0029bf0ce13983
 
 let concatSep =
         λ(separator : Text)
       → λ(xs : List (Optional Text))
-      → Text/concatSep separator (filterList Text xs)
+      → Text/concatSep separator (Optional/listWhereSome Text xs)
 
 let _concatSep0 =
       assert : concatSep "," [ Some "a", None Text, Some "c" ] ≡ "a,c"
@@ -43,7 +30,7 @@ let tryConcatMapSep =
       → λ(xs : List a)
       → let mapped = List/map a (Optional Text) fn xs
 
-        let filtered = filterList Text mapped
+        let filtered = Optional/listWhereSome Text mapped
 
         in  Text/concatSep separator filtered
 
@@ -61,7 +48,4 @@ let _tryConcatMapSep1 =
       :   tryConcatMapSep " " Natural (λ(n : Natural) → None Text) [ 1, 2, 3 ]
         ≡ ""
 
-in  { filterList = filterList
-    , concatSep = concatSep
-    , tryConcatMapSep = tryConcatMapSep
-    }
+in  { concatSep = concatSep, tryConcatMapSep = tryConcatMapSep }

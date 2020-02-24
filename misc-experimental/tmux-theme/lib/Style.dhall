@@ -15,7 +15,8 @@ let Optional/ext = ./Optional.dhall
 
 let Optional/concatSep = Optional/ext.concatSep
 
-let Optional/filterList = Optional/ext.filterList
+let Optional/listWhereSome =
+      https://raw.githubusercontent.com/awseward/dhall-utils/master/Optional/listWhereSome.dhall sha256:9cf3541b16e0c63fc1f1c6a16b69124523409e3801da0c27ee0029bf0ce13983
 
 let Style =
       { comment : Optional Text
@@ -42,7 +43,7 @@ let tryRenderComment =
 
 let collectAttributes =
         λ(style : Style)
-      →   Optional/filterList
+      →   Optional/listWhereSome
             Attribute
             [ Optional/map Text Attribute Attribute.bg style.bg
             , Optional/map Text Attribute Attribute.fg style.fg
