@@ -1,7 +1,7 @@
 # WARNING: This file is generated. See Style.dhall to modify.
 
 # improve colors
-set-option -g default-terminal "screen-256color"
+set-option -g default-terminal 'screen-256color'
 
 # TODO: document reason why this is necessary
 set -g terminal-overrides ',xterm-256color:Tc'

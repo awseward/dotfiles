@@ -1,4 +1,4 @@
-let Theme = ./Theme.dhall
+let Theme = ../lib/Theme.dhall
 
 in  { tropic =
         let steelBlue = "#5B8C85"

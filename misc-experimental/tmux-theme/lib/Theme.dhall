@@ -1,20 +1,17 @@
--- See: http://man7.org/linux/man-pages/man1/tmux.1.html#STYLES
-
-let Text/pkg =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Text/package.dhall sha256:3a5e3acde76fe5f90bd296e6c9d2e43e6ae81c56f804029b39352d2f1664b769
-
-let Text/concatMapSep = Text/pkg.concatMapSep
-
 let Attribute = (./Attribute.dhall).Type
 
 let Style = ./Style.dhall
+
+let Optional/ext = ./Optional.dhall
+
+let Optional/tryConcatMapSep = Optional/ext.tryConcatMapSep
 
 let Theme = { bg : Text, fg : Text, accent1 : Text, accent2 : Text }
 
 let default =
       { bg = "black", fg = "white", accent1 = "cyan", accent2 = "magenta" }
 
-let directives =
+let styles =
         λ(theme : Theme)
       → let accent1 = Some theme.accent1
 
@@ -59,12 +56,16 @@ let show =
         # WARNING: This file is generated. See Style.dhall to modify.
 
         # improve colors
-        set-option -g default-terminal "screen-256color"
+        set-option -g default-terminal 'screen-256color'
 
         # TODO: document reason why this is necessary
         set -g terminal-overrides ',xterm-256color:Tc'
 
-        ${Text/concatMapSep "\n\n" Style.Type Style.show (directives theme)}
+        ${Optional/tryConcatMapSep
+            "\n\n"
+            Style.Type
+            Style.tryShow
+            (styles theme)}
         ''
 
-in  { Type = Theme, default = default, directives = directives, show = show }
+in  { Type = Theme, default = default, styles = styles, show = show }
