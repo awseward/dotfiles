@@ -43,9 +43,9 @@ ghv() {
 
   # ---
 
-  if [ $(changed_files | wc -l) = 0 ]; then
+  if [ $(( $(changed_files | wc -l) )) = 0 ]; then
     return 1
   fi
 
-  { populate_local_disk || true && fzf_prev } || true && cleanup
+  { populate_local_disk || true && fzf_prev; } || true && cleanup
 }
