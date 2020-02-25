@@ -1,10 +1,9 @@
 name: CI
-
 on: [push]
-
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: awseward/dhall-typecheck-action@master
       - uses: awseward/dhall-lint-action@master
