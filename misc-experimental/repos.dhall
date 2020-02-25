@@ -4,14 +4,14 @@ let fns =
 let p = fns.buildRepo "awseward"
 
 in  fns.mapLocations
-    [ p "dhall" "repo-experimentation"
-    , p "dotnet" "gh-action-fake5"
-    , p "dotnet" "habits-app"
-    , p "dotnet" "misctools"
-    , p "dotnet" "notary"
-    , p "dotnet" "what-did"
-    , p "elixir" "rundot"
-    , p "golang" "interpreter_book"
-    , p "haskell" "beans-hs"
-    , p "haskell" "lyah"
-    ]
+      [ p "dhall" "repo-experimentation"
+      , p "dotnet" "gh-action-fake5"
+      , p "dotnet" "habits-app"
+      , p "dotnet" "misctools"
+      , p "dotnet" "notary"
+      , p "dotnet" "what-did"
+      , p "elixir" "rundot"
+      , p "golang" "interpreter_book"
+      , p "haskell" "beans-hs"
+      , p "haskell" "lyah"
+      ]
