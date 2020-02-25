@@ -7,3 +7,4 @@ jobs:
       - uses: actions/checkout@v2
       - uses: awseward/dhall-typecheck-action@master
       - uses: awseward/dhall-lint-action@master
+      - uses: ./.github/actions/shellcheck

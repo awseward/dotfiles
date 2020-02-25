@@ -1,0 +1,5 @@
+name: 'Shellcheck'
+description: 'Run shellcheck on .sh files in repo'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

@@ -29,7 +29,7 @@ _run_warning() {
   echo "Checking for errors or warnings..."
   local _files="$1"
 
-  if echo "${_files}" | xargs -t shellcheck --wiki-link-count=1000 --severity=warning; then
+  if echo "${_files}" | xargs -t shellcheck --wiki-link-count=1000 --severity=warning --; then
     echo "👍 No warnings or errors from shellcheck!"
     echo
   else
@@ -41,7 +41,7 @@ _run_any() {
   echo "Checking for any actionable issues..."
   local _files="$1"
 
-  if echo "${_files}" | xargs -t shellcheck --wiki-link-count=1000; then
+  if echo "${_files}" | xargs -t shellcheck --wiki-link-count=1000 --severity=style -- ; then
     echo "👍 No actionable issues from shellcheck!"
     echo
   fi
