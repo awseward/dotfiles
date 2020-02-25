@@ -1,0 +1,5 @@
+name: 'Shebangcheck'
+description: 'Run shebangcheck on .sh files in repo'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
