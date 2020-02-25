@@ -1,7 +1,6 @@
 -- See: http://man7.org/linux/man-pages/man1/tmux.1.html#STYLES
 
-let Optional/pkg =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Optional/package.dhall sha256:4324b2bf84ded40f67485f14355e4cb7b237a8f173e713c791ec44cebebc552c
+let Optional/pkg = (./imports.dhall).Prelude.Optional
 
 let Optional/map = Optional/pkg.map
 
@@ -11,12 +10,11 @@ let Attribute = Attribute/pkg.Type
 
 let SetCommand/tryRender = (./SetCommand.dhall).tryRender
 
-let Optional/ext = ./Optional.dhall
+let Optional/ext = (./imports.dhall).Utils.Optional
 
 let Optional/concatSep = Optional/ext.concatSep
 
-let Optional/listWhereSome =
-      https://raw.githubusercontent.com/awseward/dhall-utils/master/Optional/listWhereSome.dhall sha256:9cf3541b16e0c63fc1f1c6a16b69124523409e3801da0c27ee0029bf0ce13983
+let Optional/listWhereSome = Optional/ext.listWhereSome
 
 let Style =
       { comment : Optional Text

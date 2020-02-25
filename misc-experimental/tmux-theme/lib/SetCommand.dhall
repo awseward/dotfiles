@@ -1,15 +1,12 @@
-let Optional/pkg =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Optional/package.dhall sha256:4324b2bf84ded40f67485f14355e4cb7b237a8f173e713c791ec44cebebc552c
+let Optional/pkg = (./imports.dhall).Prelude.Optional
 
 let Optional/map = Optional/pkg.map
 
-let Text/pkg =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/Text/package.dhall sha256:3a5e3acde76fe5f90bd296e6c9d2e43e6ae81c56f804029b39352d2f1664b769
+let Text/pkg = (./imports.dhall).Prelude.Text
 
 let Text/concatMapSep = Text/pkg.concatMapSep
 
-let List/pkg =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/master/Prelude/List/package.dhall sha256:67899380860ce07a2d5d9530dc502800f2c11c73c2d64e8c827f4920b5473887
+let List/pkg = (./imports.dhall).Prelude.List
 
 let List/null = List/pkg.null
 
