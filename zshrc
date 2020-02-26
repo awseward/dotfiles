@@ -36,8 +36,8 @@ _source_file_if_present "$HOME/.fzf.zsh"
 _source_file_if_present "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
 _source_dir_rec_if_present "$HOME/.lib/autoload"
-_source_dir_rec_if_present "${HOME}/.lib/misc"
 _source_dir_rec_if_present "$HOME/.lib/functions"
+_source_dir_rec_if_present "${HOME}/.lib/misc"
 _source_dir_rec_if_present "$HOME/.completions"
 
 _source_dir_rec_if_present "$HOME/.env-specific"
