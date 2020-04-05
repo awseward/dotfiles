@@ -2,7 +2,7 @@
 
 g_repo() {
   local repo
-  repo="$(find -H "$HOME/projects" -mindepth 2 -maxdepth 2 -type d -or -type l | fzf --height 25% --reverse --border --header='Repositories:')"
+  repo="$(find -H "$HOME/projects" -maxdepth 2 -type d -or -type l | fzf --height 25% --reverse --border --header='Repositories:')"
   if [ "$repo" != '' ]; then
     cd "$repo" && pwd && l
   fi
