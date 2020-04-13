@@ -41,7 +41,7 @@ else
 endif
 Plug 'benmills/vimux'
 
-" Syntax Highlighting
+" Language Plugins
 Plug 'aliou/bats.vim'
 Plug 'bfontaine/Brewfile.vim'
 Plug 'derekwyatt/vim-scala'
@@ -54,6 +54,7 @@ Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'raichoo/purescript-vim'
 Plug 'vmchale/dhall-vim'
+Plug 'direnv/direnv.vim'
 
 call plug#end()
 filetype plugin indent on
