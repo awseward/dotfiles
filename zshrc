@@ -40,7 +40,7 @@ _source_dir_rec_if_present "$HOME/.lib/functions"
 _source_dir_rec_if_present "${HOME}/.lib/misc"
 _source_dir_rec_if_present "$HOME/.completions"
 
-_source_dir_rec_if_present "$HOME/.env-specific"
+# _source_dir_rec_if_present "$HOME/.env-specific"
 
 __ensure_in_PATH                      \
   "/usr/local/bin"                    \
