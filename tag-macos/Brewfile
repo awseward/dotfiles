@@ -76,8 +76,6 @@ brew "opusfile"
 brew "pandoc"
 brew "parallel"
 brew "parquet-tools"
-brew "postgresql@9.5"
-brew "postgresql@9.6", link: true
 brew "pwgen"
 brew "reattach-to-user-namespace"
 brew "recode"
