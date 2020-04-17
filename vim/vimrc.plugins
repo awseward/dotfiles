@@ -45,6 +45,7 @@ Plug 'benmills/vimux'
 Plug 'aliou/bats.vim'
 Plug 'bfontaine/Brewfile.vim'
 Plug 'derekwyatt/vim-scala'
+Plug 'direnv/direnv.vim'
 Plug 'elixir-lang/vim-elixir'
 Plug 'fatih/vim-go'
 Plug 'gisphm/vim-gitignore'
@@ -54,7 +55,7 @@ Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'raichoo/purescript-vim'
 Plug 'vmchale/dhall-vim'
-Plug 'direnv/direnv.vim'
+Plug 'zah/nim.vim'
 
 call plug#end()
 filetype plugin indent on
