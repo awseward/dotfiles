@@ -1,12 +1,26 @@
 name: CI
 on: [push]
 jobs:
-  check:
+  dhall:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 
       - uses: awseward/dhall-typecheck-action@master
       - uses: awseward/dhall-lint-action@master
+
+  shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
       - uses: ./.github/actions/shebangcheck
       - uses: ./.github/actions/shellcheck
+
+  local:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Run checks committed directly to repository
+        run:  set -euo pipefail; find .checks -type f | while read -r check_file; do "${check_file}"; done
