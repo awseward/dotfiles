@@ -204,7 +204,6 @@ if has('win16') || has('win32') || has('win64') || has('win32unix')
   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 else
   map <C-p> :Files<CR>
-  map <C-b> :Buffers<CR>
   if executable('rg')
     let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
   elseif executable('ag')
@@ -214,10 +213,12 @@ endif
 
 map <leader>B :Buffers<CR>
 map <leader>E :bufdo! :e!<CR><CR>
+map <leader>F :Filetypes<CR>
 map <leader>f :Rg<Space>
 map <leader>q :bufdo! :bd!<CR><CR>
 map <leader>R :source ~/.vimrc<CR>
 map <leader>W :FixWhitespace<CR>:w<CR>
+map <leader>p :Commands<CR>
 
 "
 " Colors
