@@ -57,6 +57,10 @@ __ensure_in_PATH                      \
   "$HOME/Library/Python/3.6/bin"      \
   "$RACKET_BIN_DIR"
 
+# Warning: Homebrew's sbin was not found in your PATH but you have installed
+# formulae that put executables in /usr/local/sbin.
+__ensure_in_PATH "/usr/local/sbin"
+
 # Some cleanup
 export_deduped_PATH
 
