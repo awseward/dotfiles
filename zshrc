@@ -55,7 +55,8 @@ __ensure_in_PATH                      \
   "$HOME/.dotnet/tools"               \
   "$HOME/go/bin"                      \
   "$HOME/Library/Python/3.6/bin"      \
-  "$RACKET_BIN_DIR"
+  "$RACKET_BIN_DIR"                   \
+  "${HOME}/.nimble/bin"
 
 # Some cleanup
 export_deduped_PATH

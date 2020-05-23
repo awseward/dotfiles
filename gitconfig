@@ -119,3 +119,6 @@
 
 [commit]
   verbose = true
+
+[checkout]
+  defaultRemote = origin
