@@ -96,6 +96,7 @@
   pager      = less -F -X
   safecrlf   = warn
   trustctime = false
+  excludesfile = /Users/andrew/.gitignore
 
 [core.whitespace]
   tab-in-indent = true
@@ -119,3 +120,6 @@
 
 [commit]
   verbose = true
+
+[checkout]
+  defaultRemote = origin

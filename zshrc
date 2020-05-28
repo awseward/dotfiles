@@ -55,7 +55,8 @@ __ensure_in_PATH                      \
   "$HOME/.dotnet/tools"               \
   "$HOME/go/bin"                      \
   "$HOME/Library/Python/3.6/bin"      \
-  "$RACKET_BIN_DIR"
+  "$RACKET_BIN_DIR"                   \
+  "${HOME}/.nimble/bin"
 
 # Warning: Homebrew's sbin was not found in your PATH but you have installed
 # formulae that put executables in /usr/local/sbin.
