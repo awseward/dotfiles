@@ -33,7 +33,7 @@ _brew_svc() {
     *) return 1
   esac
 
-  sudo brew services "$1" dnscrypt-proxy
+  brew services "$1" dnscrypt-proxy
 }
 
 dnsc_edit() { "$EDITOR" "$(command -v dnsc)"; }
