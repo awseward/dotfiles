@@ -238,13 +238,13 @@ set t_Co=256
 
 if $LIGHT_SHELL != ""
   set background=light
-  colorscheme PaperColor
+  colorscheme yui
   call ApplyColorOverrides()
 else
   set background=dark
   " colorscheme PaperColor
   " colorscheme lilydjwg_dark
-  colorscheme gruvbox
+  colorscheme paramount
   call ApplyColorOverrides()
 end
 
@@ -323,3 +323,6 @@ let g:omni_sql_no_default_maps = 1
 " https://vi.stackexchange.com/a/2956
 let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
 
+" https://github.com/frazrepo/vim-rainbow#simple-configuration
+let g:rainbow_active = 1
+au FileType diff call rainbow#clear()

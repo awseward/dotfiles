@@ -10,6 +10,12 @@ Plug 'croaky/vim-colors-github'
 Plug 'flazz/vim-colorschemes'
 Plug 'w0ng/vim-hybrid'
 Plug 'xolox/vim-colorscheme-switcher'
+Plug 'frazrepo/vim-rainbow'
+Plug 'cideM/yui'
+Plug 'aditya-azad/candle-grey'
+Plug 'nikolvs/vim-sunbather'
+Plug 'reedes/vim-colors-pencil'
+Plug 'owickstrom/vim-colors-paramount' " Current favorite
 
 " Editor Utils
 Plug 'bronson/vim-trailing-whitespace'
