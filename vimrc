@@ -1,6 +1,7 @@
-" Disable netrw
-let g:loaded_netrw = 1
-let g:netrw_loaded_netrwPlugin = 1
+" TODO: Figure out why I'd been disabling netrw
+" " " Disable netrw
+" let g:loaded_netrw = 1
+" let g:netrw_loaded_netrwPlugin = 1
 
 " Set leader key
 let mapleader = " "
