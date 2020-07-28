@@ -237,17 +237,15 @@ endfunction
 
 set t_Co=256
 
+colorscheme paramount
+
 if $LIGHT_SHELL != ""
   set background=light
-  colorscheme yui
-  call ApplyColorOverrides()
 else
   set background=dark
-  " colorscheme PaperColor
-  " colorscheme lilydjwg_dark
-  colorscheme paramount
-  call ApplyColorOverrides()
 end
+
+call ApplyColorOverrides()
 
 " https://www.reddit.com/r/vim/comments/5416d0/true_colors_in_vim_under_tmux/
 set termguicolors
