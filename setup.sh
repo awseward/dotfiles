@@ -5,6 +5,9 @@ set -euo pipefail
 [ -z ${HOME+x} ] && export HOME=~
 export DOTFILES="${HOME}/.dotfiles"
 
+# NOTE: There's nothing to source here for brand new setups, since the dotfiles
+# repo hasn't been cloned yet 🤦...
+#
 # shellcheck disable=SC1091
 . lib/functions/interaction.sh
 
