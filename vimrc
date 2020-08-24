@@ -137,17 +137,19 @@ command DhFr call _DhallFreeze()
 if filereadable(expand("~/.vim/vimrc.languages"))
   source ~/.vim/vimrc.languages
 
-  " Keep vimrc.languages file aligned, sorted
-  au BufWritePre *vimrc.languages silent! call _CleanUpVimLanguages() | redraw!
-  function _CleanUpVimLanguages()
-    " align
-    :1,$left
-    :1,$EasyAlign *\
-    " sort
-    :sort iu
-    " remove blank lines
-    :g/^\s*$/d
-  endfunction
+  " NOTE: Commented this out because honestly it's a little bit much...
+  "
+  " " Keep vimrc.languages file aligned, sorted
+  " au BufWritePre *vimrc.languages silent! call _CleanUpVimLanguages() | redraw!
+  " function _CleanUpVimLanguages()
+  "   " align
+  "   :1,$left
+  "   :1,$EasyAlign *\
+  "   " sort
+  "   :sort iu
+  "   " remove blank lines
+  "   :g/^\s*$/d
+  " endfunction
 endif
 
 " Status bar
