@@ -1,6 +1,7 @@
-" Disable netrw
-let g:loaded_netrw = 1
-let g:netrw_loaded_netrwPlugin = 1
+" TODO: Figure out why I'd been disabling netrw
+" " " Disable netrw
+" let g:loaded_netrw = 1
+" let g:netrw_loaded_netrwPlugin = 1
 
 " Set leader key
 let mapleader = " "
@@ -236,17 +237,15 @@ endfunction
 
 set t_Co=256
 
+colorscheme paramount
+
 if $LIGHT_SHELL != ""
   set background=light
-  colorscheme PaperColor
-  call ApplyColorOverrides()
 else
   set background=dark
-  " colorscheme PaperColor
-  " colorscheme lilydjwg_dark
-  colorscheme gruvbox
-  call ApplyColorOverrides()
 end
+
+call ApplyColorOverrides()
 
 " https://www.reddit.com/r/vim/comments/5416d0/true_colors_in_vim_under_tmux/
 set termguicolors
@@ -323,3 +322,6 @@ let g:omni_sql_no_default_maps = 1
 " https://vi.stackexchange.com/a/2956
 let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
 
+" https://github.com/frazrepo/vim-rainbow#simple-configuration
+let g:rainbow_active = 1
+au FileType diff call rainbow#clear()
