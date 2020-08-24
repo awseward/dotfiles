@@ -1,4 +1,4 @@
-:set prompt "\ESC[2;33m\x03BB \ESC[1;37m[\ESC[1;34m%s\ESC[1;37m]\ESC[1;90m> \ESC[m"
+:set prompt "\ESC[2;33m𝝺 \ESC[1;90m[\ESC[1;34m%s\ESC[1;90m]\ESC[1;90m:\ESC[1;90m%l\ESC[1;90m> \ESC[m"
 :set prompt-cont "\ESC[1;90m > \ESC[m"
 
 :seti -XInstanceSigs
