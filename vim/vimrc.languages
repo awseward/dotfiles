@@ -1,4 +1,5 @@
 au Filetype gitcommit colorscheme gruvbox
+au Filetype diff      colorscheme gruvbox
 au Filetype haskell   colorscheme gruvbox
 
 au FileType python setlocal softtabstop=2 shiftwidth=2 tabstop=2 expandtab
