@@ -4,7 +4,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
-    (vim_configurable.override { python = python3; })
+    config.programs.vim.package
   ];
 
   # Auto upgrade nix package and the daemon service.
@@ -13,6 +13,12 @@
 
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true;  # default shell on catalina
+
+  programs.vim.package = pkgs.vim_configurable.override {
+    darwinSupport = true;
+    guiSupport = "no";
+    python = pkgs.python3;
+  };
 
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog

@@ -93,8 +93,7 @@ brew "tmate"
 brew "utf8proc"
 brew "tree"
 brew "unixodbc"
-# See ~/.nixpkgs/darwin-configuration.nix
-# brew "vim"
+# brew "vim" # See ~/.nixpkgs/darwin-configuration.nix
 brew "watch"
 brew "wget"
 brew "xsv"
