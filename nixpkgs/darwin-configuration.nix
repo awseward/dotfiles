@@ -9,10 +9,13 @@
     ag
     bat
     bats
+    cloc
+    cowsay
     dhall
     dhall-bash
     dhall-json
     direnv
+    dive
     entr
     exa
     figlet
@@ -20,6 +23,10 @@
     jq
     ripgrep
     shellcheck
+    sox
+    tmate
+    tree
+    wget
   ];
 
   # Auto upgrade nix package and the daemon service.
