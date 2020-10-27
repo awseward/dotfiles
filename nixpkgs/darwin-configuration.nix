@@ -6,6 +6,8 @@
   environment.systemPackages = with pkgs; [
     config.programs.vim.package
 
+    ag
+    bat
     bats
     dhall
     dhall-bash
@@ -13,6 +15,10 @@
     direnv
     entr
     exa
+    figlet
+    htop
+    jq
+    ripgrep
     shellcheck
   ];
 
