@@ -82,7 +82,7 @@ brew "pwgen"
 brew "py3cairo"
 brew "reattach-to-user-namespace"
 brew "recode"
-brew "redis", restart_service: true
+# brew "redis", restart_service: true
 # brew "ripgrep"
 # brew "shellcheck"
 brew "snappy"
