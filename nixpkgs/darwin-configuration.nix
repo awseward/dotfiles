@@ -7,6 +7,9 @@
     config.programs.vim.package
 
     bats
+    dhall
+    dhall-bash
+    dhall-json
     entr
     exa
     shellcheck
