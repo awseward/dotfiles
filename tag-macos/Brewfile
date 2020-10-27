@@ -18,22 +18,22 @@ brew "icu4c"
 brew "automake"
 brew "avro-tools"
 brew "bat"
-# brew "bats" # See ~/.nixpkgs/darwin-configuration.nix
+# brew "bats"
 brew "binutils"
 brew "ccloud"
 brew "cloc"
 brew "cmake"
 brew "coreutils"
 brew "cowsay"
-# brew "dhall" # See ~/.nixpkgs/darwin-configuration.nix
-# brew "dhall-bash" # See ~/.nixpkgs/darwin-configuration.nix
-# brew "dhall-json" # See ~/.nixpkgs/darwin-configuration.nix
+# brew "dhall"
+# brew "dhall-bash"
+# brew "dhall-json"
 # brew "direnv"
 brew "dive"
 brew "dnscrypt-proxy", restart_service: true
 brew "dos2unix"
-# brew "exa" # See ~/.nixpkgs/darwin-configuration.nix
-# brew "entr" # See ~/.nixpkgs/darwin-configuration.nix
+# brew "exa"
+# brew "entr"
 brew "figlet"
 brew "findutils"
 brew "flac"
@@ -85,7 +85,7 @@ brew "recode"
 brew "redis", restart_service: true
 brew "ripgrep"
 brew "scala"
-# brew "shellcheck" # See ~/.nixpkgs/darwin-configuration.nix
+# brew "shellcheck"
 brew "snappy"
 brew "sox"
 brew "the_silver_searcher"
@@ -93,7 +93,7 @@ brew "tmate"
 brew "utf8proc"
 brew "tree"
 brew "unixodbc"
-# brew "vim" # See ~/.nixpkgs/darwin-configuration.nix
+# brew "vim"
 brew "watch"
 brew "wget"
 brew "xsv"
