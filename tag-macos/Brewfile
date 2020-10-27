@@ -28,7 +28,7 @@ brew "cowsay"
 # brew "dhall" # See ~/.nixpkgs/darwin-configuration.nix
 # brew "dhall-bash" # See ~/.nixpkgs/darwin-configuration.nix
 # brew "dhall-json" # See ~/.nixpkgs/darwin-configuration.nix
-brew "direnv"
+# brew "direnv"
 brew "dive"
 brew "dnscrypt-proxy", restart_service: true
 brew "dos2unix"

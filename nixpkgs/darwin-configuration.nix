@@ -10,6 +10,7 @@
     dhall
     dhall-bash
     dhall-json
+    direnv
     entr
     exa
     shellcheck
