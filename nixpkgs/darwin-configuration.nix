@@ -5,6 +5,7 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     config.programs.vim.package
+    shellcheck
   ];
 
   # Auto upgrade nix package and the daemon service.

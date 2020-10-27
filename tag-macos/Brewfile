@@ -85,7 +85,7 @@ brew "recode"
 brew "redis", restart_service: true
 brew "ripgrep"
 brew "scala"
-brew "shellcheck"
+# brew "shellcheck" # See ~/.nixpkgs/darwin-configuration.nix
 brew "snappy"
 brew "sox"
 brew "the_silver_searcher"
