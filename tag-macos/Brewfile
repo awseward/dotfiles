@@ -18,7 +18,7 @@ brew "icu4c"
 brew "automake"
 brew "avro-tools"
 brew "bat"
-brew "bats"
+# brew "bats" # See ~/.nixpkgs/darwin-configuration.nix
 brew "binutils"
 brew "ccloud"
 brew "cloc"
@@ -32,8 +32,8 @@ brew "direnv"
 brew "dive"
 brew "dnscrypt-proxy", restart_service: true
 brew "dos2unix"
-brew "exa"
-brew "entr"
+# brew "exa" # See ~/.nixpkgs/darwin-configuration.nix
+# brew "entr" # See ~/.nixpkgs/darwin-configuration.nix
 brew "figlet"
 brew "findutils"
 brew "flac"

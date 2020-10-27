@@ -5,6 +5,10 @@
   # $ nix-env -qaP | grep wget
   environment.systemPackages = with pkgs; [
     config.programs.vim.package
+
+    bats
+    entr
+    exa
     shellcheck
   ];
 
