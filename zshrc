@@ -8,7 +8,6 @@ export ZSH_THEME="robbyrussell"
 # Custom plugins in $ZSH/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(asdf)
-. "$ZSH/oh-my-zsh.sh"
 
 export EDITOR='vim'
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
@@ -34,6 +33,11 @@ _source_dir_rec_if_present() {
 _source_file_if_present "$HOME/.aliases.work"
 _source_file_if_present "$HOME/.fzf.zsh"
 _source_file_if_present "$HOME/.nix-profile/etc/profile.d/nix.sh"
+
+# There's sort of a duel happening between this and nix profile; I prefer the
+# oh-my-zsh, so we'll let that win
+prompt off
+. "$ZSH/oh-my-zsh.sh"
 
 _source_dir_rec_if_present "$HOME/.lib/autoload"
 _source_dir_rec_if_present "$HOME/.lib/functions"
