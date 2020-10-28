@@ -103,9 +103,7 @@ cask "basictex"
 cask "calibre"
 cask "docker"
 cask "iterm2"
-# FIXME: Seems to be some conflict here-- might be that it disagrees with a
-# preexisting GUI-based install
-# cask "rectangle"
+cask "rectangle"
 cask "snowflake-snowsql"
 cask "tla-plus-toolbox"
 cask "vlc"
