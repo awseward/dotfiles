@@ -5,16 +5,6 @@ set -euo pipefail
 dotfiles="$HOME/.dotfiles"
 tag="macos"
 
-_configure_spectacle() {
-  # This is a bit wacky, but couldn't quite get rcm to do what I wanted here
-  local rel_path='Library/Application Support/Spectacle/Shortcuts.json'
-  local spec_src="$dotfiles/tag-$tag/$rel_path"
-  local spec_dst="$HOME/$rel_path"
-
-  diff "$spec_src" "$spec_dst" >/dev/null 2>&1 \
-    || cp -v "$spec_src" "$spec_dst"
-}
-
 _configure_dnscrypt_proxy() {
   link_proxy_conf() {
     local conf_filename='dnscrypt-proxy.toml'
@@ -141,7 +131,6 @@ so it's still a bit manual for now.
 MSG
 }
 
-_configure_spectacle
 _configure_dnscrypt_proxy
 _clone_iterm_color_schemes
 _set_up_ssh_keys
