@@ -1,14 +1,5 @@
 #!/usr/bin/env zsh
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-# Themes found in $ZSH/themes/
-export ZSH_THEME="robbyrussell"
-# Plugins found in $ZSH/plugins/
-# Custom plugins in $ZSH/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(asdf)
-
 export EDITOR='vim'
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 export TERM='xterm-256color'
@@ -28,21 +19,33 @@ _source_dir_rec_if_present() {
   fi
 }
 
+_source_file_if_present "$HOME/.nix-profile/etc/profile.d/nix.sh"
+
+# Need to disable this prompt here because nix.sh sets a prompt that interferes
+# with some things, i.e. cuts off the last line of some commands' output;
+# namely: `git l5`
+prompt off
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+# Themes found in $ZSH/themes/
+export ZSH_THEME="robbyrussell"
+# Plugins found in $ZSH/plugins/
+# Custom plugins in $ZSH/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(asdf)
+. "$ZSH/oh-my-zsh.sh"
+
 . "$HOME/.aliases"
 
 _source_file_if_present "$HOME/.aliases.work"
 _source_file_if_present "$HOME/.fzf.zsh"
-_source_file_if_present "$HOME/.nix-profile/etc/profile.d/nix.sh"
-
-# There's sort of a duel happening between this and nix profile; I prefer the
-# oh-my-zsh, so we'll let that win
-prompt off
-. "$ZSH/oh-my-zsh.sh"
 
 _source_dir_rec_if_present "$HOME/.lib/autoload"
 _source_dir_rec_if_present "$HOME/.lib/functions"
 _source_dir_rec_if_present "${HOME}/.lib/misc"
 _source_dir_rec_if_present "$HOME/.completions"
+
 
 # _source_dir_rec_if_present "$HOME/.env-specific"
 
