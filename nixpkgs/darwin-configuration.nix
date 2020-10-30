@@ -36,10 +36,7 @@
 
   services.redis = {
     enable = true;
-    # FIXME: At the time of writing, the nix-darwin module for this does not expose
-    # `extraConfig` the same way the nixpkgs one does...
-    # See: https://github.com/LnL7/nix-darwin/blob/master/modules/services/redis/default.nix)
-    #
+    # TODO: Uncomment extraConfig if this ships: https://github.com/LnL7/nix-darwin/pull/241
     # extraConfig = ''
     #   stop-writes-on-bgsave-error no
     # '';
