@@ -57,10 +57,9 @@
 
   services.redis = {
     enable = true;
-    # TODO: Uncomment extraConfig if this ships: https://github.com/LnL7/nix-darwin/pull/241
-    # extraConfig = ''
-    #   stop-writes-on-bgsave-error no
-    # '';
+    extraConfig = ''
+      stop-writes-on-bgsave-error no
+    '';
   };
 
   programs.vim.package = pkgs.vim_configurable.override {
