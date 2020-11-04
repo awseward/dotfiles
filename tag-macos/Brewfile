@@ -98,7 +98,6 @@ brew "heroku/brew/heroku"
 brew "thoughtbot/formulae/rcm"
 
 cask "1password-cli"
-cask "alacritty"
 cask "basictex"
 cask "calibre"
 cask "docker"
