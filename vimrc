@@ -172,6 +172,7 @@ set expandtab
 set shiftwidth=2
 set smartindent
 set tabstop=2
+set nojoinspaces
 
 " Line numbers
 set number
