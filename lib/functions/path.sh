@@ -47,7 +47,7 @@ __contains_element() {
 __get_uniquified_path() {
   local unique_entries=()
 
-  pretty_path | while read entry; do
+  pretty_path | while read -r entry; do
     __contains_element "$entry" "${unique_entries[@]}" || unique_entries+=("$entry")
   done
 
