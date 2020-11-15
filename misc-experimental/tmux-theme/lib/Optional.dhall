@@ -6,8 +6,6 @@ let Text/pkg = (./imports.dhall).Prelude.Text
 
 let Text/concatSep = Text/pkg.concatSep
 
-let Optional/listWhereSome = (./imports.dhall).Utils.Optional.listWhereSome
-
 let tryConcatMapSep =
       λ(separator : Text) →
       λ(a : Type) →
@@ -15,7 +13,7 @@ let tryConcatMapSep =
       λ(xs : List a) →
         let mapped = List/map a (Optional Text) fn xs
 
-        let filtered = Optional/listWhereSome Text mapped
+        let filtered = List/pkg.unpackOptionals Text mapped
 
         in  Text/concatSep separator filtered
 

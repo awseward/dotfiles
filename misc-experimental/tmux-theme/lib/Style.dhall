@@ -1,4 +1,6 @@
 -- See: http://man7.org/linux/man-pages/man1/tmux.1.html#STYLES
+let List/pkg = (./imports.dhall).Prelude.List
+
 let Optional/pkg = (./imports.dhall).Prelude.Optional
 
 let Optional/map = Optional/pkg.map
@@ -12,8 +14,6 @@ let SetCommand/tryRender = (./SetCommand.dhall).tryRender
 let Optional/ext = (./imports.dhall).Utils.Optional
 
 let Optional/concatSep = Optional/ext.concatSep
-
-let Optional/listWhereSome = Optional/ext.listWhereSome
 
 let Style =
       { comment : Optional Text
@@ -40,7 +40,7 @@ let tryRenderComment =
 
 let collectAttributes =
       λ(style : Style) →
-          Optional/listWhereSome
+          List/pkg.unpackOptionals
             Attribute
             [ Optional/map Text Attribute Attribute.bg style.bg
             , Optional/map Text Attribute Attribute.fg style.fg

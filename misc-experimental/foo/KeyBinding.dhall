@@ -1,8 +1,8 @@
 let Text/pkg =
       https://raw.githubusercontent.com/dhall-lang/dhall-lang/v19.0.0/Prelude/Text/package.dhall sha256:819a967038fbf6f28cc289fa2651e42835f70b326210c86e51acf48f46f913d8
 
-let Optional/listWhereSome =
-      https://raw.githubusercontent.com/awseward/dhall-utils/master/Optional/listWhereSome.dhall sha256:9cf3541b16e0c63fc1f1c6a16b69124523409e3801da0c27ee0029bf0ce13983
+let List/unpackOptionals =
+      https://raw.githubusercontent.com/dhall-lang/dhall-lang/v19.0.0/Prelude/List/unpackOptionals sha256:0cbaa920f429cf7fc3907f8a9143203fe948883913560e6e1043223e6b3d05e4
 
 let KeyBinding = { noPrefix : Bool, repeats : Bool, key : Text, command : Text }
 
@@ -20,7 +20,7 @@ let _tryRenderFlag1 = assert : tryRenderFlag False "a" ≡ None Text
 let renderTokens
     : ∀(binding : KeyBinding) → List Text
     = λ(binding : KeyBinding) →
-        Optional/listWhereSome
+        List/unpackOptionals
           Text
           [ Some "bind-key"
           , tryRenderFlag binding.noPrefix "n"
