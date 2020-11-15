@@ -2,7 +2,8 @@
 
 {
 
-  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = false;
+  system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = true;
+  system.defaults.NSGlobalDomain.AppleShowScrollBars = "Always";
   system.defaults.NSGlobalDomain.InitialKeyRepeat = 11;
   system.defaults.NSGlobalDomain.KeyRepeat = 2;
   system.defaults.NSGlobalDomain.NSAutomaticCapitalizationEnabled = false;
@@ -12,13 +13,20 @@
   system.defaults.NSGlobalDomain.NSAutomaticSpellingCorrectionEnabled = false;
   system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
   system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
+  system.defaults.NSGlobalDomain.NSTableViewDefaultSizeMode = 1;
+  system.defaults.NSGlobalDomain.PMPrintingExpandedStateForPrint = true;
+  system.defaults.NSGlobalDomain.PMPrintingExpandedStateForPrint2 = true;
 
+  system.defaults.dock.enable-spring-load-actions-on-all-items = true;
+  system.defaults.dock.mouse-over-hilite-stack = true;
   system.defaults.dock.mru-spaces = false;
+  system.defaults.dock.show-recents = false;
   system.defaults.dock.showhidden = true;
 
+  system.defaults.finder._FXShowPosixPathInTitle = true;
   system.defaults.finder.AppleShowAllExtensions = true;
-  system.defaults.finder.QuitMenuItem = true;
   system.defaults.finder.FXEnableExtensionChangeWarning = false;
+  system.defaults.finder.QuitMenuItem = true;
 
   system.defaults.trackpad.Clicking = true;
 
