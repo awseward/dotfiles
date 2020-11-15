@@ -49,9 +49,6 @@
     bats
     cloc
     cowsay
-    dhall
-    dhall-bash
-    dhall-json
     direnv
     dive
     entr
