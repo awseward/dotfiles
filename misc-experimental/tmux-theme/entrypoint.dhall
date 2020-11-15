@@ -1,1 +1,1 @@
-(./lib/Theme.dhall).show (./config/themes.dhall).hipster
+(./lib/Theme.dhall).show (./config/themes.dhall).tropic
