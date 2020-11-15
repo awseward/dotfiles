@@ -7,7 +7,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - uses: awseward/dhall-typecheck-action@master
+        with:
+          dhallVersion: 1.36.0
       - uses: awseward/dhall-lint-action@master
+        with:
+          dhallVersion: 1.36.0
 
   shell:
     runs-on: ubuntu-latest
