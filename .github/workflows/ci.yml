@@ -6,10 +6,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: awseward/dhall-typecheck-action@master
+      - uses: awseward/dhall-typecheck-action@1.1.0
         with:
           dhallVersion: 1.36.0
-      - uses: awseward/dhall-lint-action@master
+
+      - uses: awseward/dhall-lint-action@1.1.0
         with:
           dhallVersion: 1.36.0
 
