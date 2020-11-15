@@ -12,4 +12,4 @@ let Utils =
           https://raw.githubusercontent.com/awseward/dhall-utils/master/Optional/package.dhall sha256:9b722672ba0d809fb4c4d469cc80b1b83d4c68c9f3fec6d7cbadcadd87aa91bf
       }
 
-in  { Prelude = Prelude, Utils = Utils }
+in  { Prelude, Utils }

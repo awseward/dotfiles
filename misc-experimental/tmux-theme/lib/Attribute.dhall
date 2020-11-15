@@ -24,8 +24,8 @@ let Attribute =
 
 let show
     : Attribute → Text
-    =   λ(attr : Attribute)
-      → merge
+    = λ(attr : Attribute) →
+        merge
           { fg = λ(value : Text) → Misc/showKvp "fg" value
           , bg = λ(value : Text) → Misc/showKvp "bg" value
           , none = "none"
@@ -54,4 +54,4 @@ let _show2 = assert : show (Attribute.bg "foo") ≡ "bg='foo'"
 
 let _show3 = assert : show (Attribute.fg "foo") ≡ "fg='foo'"
 
-in  { Type = Attribute, show = show }
+in  { Type = Attribute, show }

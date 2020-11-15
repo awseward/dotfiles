@@ -32,16 +32,16 @@ let default =
       }
 
 let tryRenderComment =
-        λ(style : Style)
-      → Optional/map
+      λ(style : Style) →
+        Optional/map
           Text
           Text
           (λ(comment : Text) → "# ${comment}")
           style.comment
 
 let collectAttributes =
-        λ(style : Style)
-      →   Optional/listWhereSome
+      λ(style : Style) →
+          Optional/listWhereSome
             Attribute
             [ Optional/map Text Attribute Attribute.bg style.bg
             , Optional/map Text Attribute Attribute.fg style.fg
@@ -49,19 +49,19 @@ let collectAttributes =
         # style.attrs
 
 let tryRenderCommand =
-        λ(style : Style)
-      → let attributes = collectAttributes style
+      λ(style : Style) →
+        let attributes = collectAttributes style
 
         in  SetCommand/tryRender style.name attributes
 
 let tryShow
     : Style → Optional Text
-    =   λ(style : Style)
-      → Optional/map
+    = λ(style : Style) →
+        Optional/map
           Text
           Text
-          (   λ(command : Text)
-            → Optional/concatSep "\n" [ tryRenderComment style, Some command ]
+          ( λ(command : Text) →
+              Optional/concatSep "\n" [ tryRenderComment style, Some command ]
           )
           (tryRenderCommand style)
 
@@ -96,4 +96,4 @@ let _tryShow3 =
                 # this is a comment
                 set -g foo-style bg='bar',italics,underscore''
 
-in  { Type = Style, default = default, tryShow = tryShow }
+in  { Type = Style, default, tryShow }

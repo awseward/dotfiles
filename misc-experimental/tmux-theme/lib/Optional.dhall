@@ -9,11 +9,11 @@ let Text/concatSep = Text/pkg.concatSep
 let Optional/listWhereSome = (./imports.dhall).Utils.Optional.listWhereSome
 
 let tryConcatMapSep =
-        λ(separator : Text)
-      → λ(a : Type)
-      → λ(fn : a → Optional Text)
-      → λ(xs : List a)
-      → let mapped = List/map a (Optional Text) fn xs
+      λ(separator : Text) →
+      λ(a : Type) →
+      λ(fn : a → Optional Text) →
+      λ(xs : List a) →
+        let mapped = List/map a (Optional Text) fn xs
 
         let filtered = Optional/listWhereSome Text mapped
 
@@ -33,4 +33,4 @@ let _tryConcatMapSep1 =
       :   tryConcatMapSep " " Natural (λ(n : Natural) → None Text) [ 1, 2, 3 ]
         ≡ ""
 
-in  { tryConcatMapSep = tryConcatMapSep }
+in  { tryConcatMapSep }

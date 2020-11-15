@@ -4,4 +4,4 @@ let showKvp
 
 let _showKvp0 = assert : showKvp "foo" "bar" ≡ "foo='bar'"
 
-in  { showKvp = showKvp }
+in  { showKvp }

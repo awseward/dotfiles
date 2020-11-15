@@ -9,9 +9,9 @@ let KeyBinding = { noPrefix : Bool, repeats : Bool, key : Text, command : Text }
 let default = { noPrefix = False, repeats = False }
 
 let tryRenderFlag =
-        λ(on : Bool)
-      → λ(letter : Text)
-      → if on then Some "-${letter}" else None Text
+      λ(on : Bool) →
+      λ(letter : Text) →
+        if on then Some "-${letter}" else None Text
 
 let _tryRenderFlag0 = assert : tryRenderFlag True "a" ≡ Some "-a"
 
@@ -19,8 +19,8 @@ let _tryRenderFlag1 = assert : tryRenderFlag False "a" ≡ None Text
 
 let renderTokens
     : ∀(binding : KeyBinding) → List Text
-    =   λ(binding : KeyBinding)
-      → Optional/listWhereSome
+    = λ(binding : KeyBinding) →
+        Optional/listWhereSome
           Text
           [ Some "bind-key"
           , tryRenderFlag binding.noPrefix "n"
@@ -53,4 +53,4 @@ let _renderShow0 =
 
       in  assert : show binding ≡ "bind-key -r C-j resize-pane -D 2"
 
-in  { Type = KeyBinding, default = default, show = show }
+in  { Type = KeyBinding, default, show }

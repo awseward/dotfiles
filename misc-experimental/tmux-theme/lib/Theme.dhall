@@ -12,8 +12,8 @@ let default =
       { bg = "black", fg = "white", accent1 = "cyan", accent2 = "magenta" }
 
 let styles =
-        λ(theme : Theme)
-      → let accent1 = Some theme.accent1
+      λ(theme : Theme) →
+        let accent1 = Some theme.accent1
 
         let accent2 = Some theme.accent2
 
@@ -21,7 +21,7 @@ let styles =
 
         let bg = Some theme.bg
 
-        in  [ Style::{ name = "status", fg = fg, bg = bg }
+        in  [ Style::{ name = "status", fg, bg }
             , Style::{
               , name = "message"
               , fg = bg
@@ -29,7 +29,7 @@ let styles =
               , attrs = [ Attribute.bold ]
               }
             , Style::{ name = "pane-border", fg = bg }
-            , Style::{ name = "pane-active-border", fg = fg }
+            , Style::{ name = "pane-active-border", fg }
             , Style::{
               , comment = Some "Visually highlight current window"
               , name = "window-status-current"
@@ -51,8 +51,8 @@ let styles =
             ]
 
 let show =
-        λ(theme : Theme)
-      → ''
+      λ(theme : Theme) →
+        ''
         # WARNING: This file is generated. See Style.dhall to modify.
 
         # improve colors
@@ -68,4 +68,4 @@ let show =
             (styles theme)}
         ''
 
-in  { Type = Theme, default = default, styles = styles, show = show }
+in  { Type = Theme, default, styles, show }

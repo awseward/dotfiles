@@ -18,11 +18,9 @@ let Attribute/show = Attribute/pkg.show
 
 let tryCollectAttributes
     : List Attribute → Optional (List Attribute)
-    =   λ(attributes : List Attribute)
-      →       if List/null Attribute attributes
-
+    = λ(attributes : List Attribute) →
+        if    List/null Attribute attributes
         then  None (List Attribute)
-
         else  Some attributes
 
 let _tryCollectAttributes0 =
@@ -36,13 +34,13 @@ let _tryCollectAttributes1 =
 
 let tryRender
     : ∀(name : Text) → ∀(attributes : List Attribute) → Optional Text
-    =   λ(name : Text)
-      → λ(attributes : List Attribute)
-      → Optional/map
+    = λ(name : Text) →
+      λ(attributes : List Attribute) →
+        Optional/map
           (List Attribute)
           Text
-          (   λ(attributes : List Attribute)
-            → let attributesString =
+          ( λ(attributes : List Attribute) →
+              let attributesString =
                     Text/concatMapSep "," Attribute Attribute/show attributes
 
               in  "set -g ${name}-style ${attributesString}"
@@ -56,4 +54,4 @@ let _tryRender1 =
       :   tryRender "foo" [ Attribute.bold, Attribute.reverse ]
         ≡ Some "set -g foo-style bold,reverse"
 
-in  { tryRender = tryRender }
+in  { tryRender }
