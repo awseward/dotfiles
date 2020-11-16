@@ -1,5 +1,6 @@
 dhall 1.36.0
 idris 1.0
+kubectl 1.15.12
 nim 1.2.0
 postgres 12.4
 python 3.8.5
