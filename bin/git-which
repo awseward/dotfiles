@@ -5,15 +5,14 @@ set -euo pipefail
 _ensure_in_repo() { git rev-parse --git-dir > /dev/null; }
 
 _do() {
-  local which="$1"
+  local which="${1:-}"
 
   case "${which}" in
-    work)     git set-email-work     ;;
-    personal) git set-email-personal ;;
-    *)
-      >&2 echo "Invalid arg value: ${which}"
-      return 1
+    work)     git set-email-work                      ;;
+    personal) git set-email-personal                  ;;
+    '')       git config --get user.email && return 1 ;;
+    *)        >&2 echo "Invalid arg value: ${which}" && return 1
   esac
 }
 
-_ensure_in_repo && _do "$1"
+_ensure_in_repo && _do "${1:-}"
