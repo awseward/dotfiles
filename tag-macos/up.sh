@@ -69,12 +69,19 @@ _ensure_omz_installed() {
   rm "$install_file"
 }
 
+_ensure_asdf_deps_installed() {
+  # shellcheck source=/dev/null
+  source "${HOME}/.lib/functions/qwer.sh" && echo 'qwer-intsall' && qwer-install
+}
+
 main() {
   _ensure_brew_installed
   _ensure_brew_deps_installed
   _ensure_omz_installed
 
   export RCRC="$dotfiles/rcrc" && rcup -v -d "$dotfiles" -t "$tag"
+
+  _ensure_asdf_deps_installed
 }
 
 # ---
