@@ -4,11 +4,14 @@ qwer-install() {
   (
     set -euo pipefail
 
+    _hdr() { echo "=== $1" && echo ; }
+
     local tempdir; tempdir="$(mktemp -d)"
+    cd "${tempdir}"
 
     # ---
 
-    echo "Discovering \`.tool-versions\` files ..." && echo
+    _hdr "Discovering \`.tool-versions\` files..."
 
     # Temporary: `-print0` didn't work as expected, and I don't really want to
     #            use -exec
@@ -22,13 +25,13 @@ qwer-install() {
 
     # ---
 
-    echo && echo "Union of \`.tool-versions\` files: ${fpath}" && echo
+    _hdr "Union of \`.tool-versions\` files: ${fpath}"
     cat "${fpath}"
     echo
 
     # ---
 
-    echo "Adding plugins ..." && echo
+    _hdr "Adding plugins ..."
     # shellcheck disable=SC2002
     # Temporary ^^
     cat "${fpath}" | awk '{ print $1 }' | sort -u \
@@ -37,13 +40,13 @@ qwer-install() {
 
     # ---
 
-    echo "Updating plugins ..." && echo
+    _hdr "Updating plugins ..."
     asdf plugin-update --all
     echo
 
     # ---
 
-    echo "Installing versions ..." && echo
-    cd "${tempdir}" && asdf install
+    _hdr "Installing versions ..."
+    asdf install
   )
 }
