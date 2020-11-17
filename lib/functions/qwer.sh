@@ -8,7 +8,7 @@ qwer-install() {
 
     echo "Discovering \`.tool-versions\` files ..." && echo
 
-    find "${HOME}/projects" -type f -name '.tool-versions' \
+    find "${HOME}/projects" -type f -name '.tool-versions' -print0 \
       | xargs -t cat "${HOME}/.tool-versions" \
       | sort -u \
       > "${tempdir}/.tool-versions"
