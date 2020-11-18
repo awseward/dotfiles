@@ -28,7 +28,7 @@ let styles =
               , bg = accent1
               , attrs = [ Attribute.bold ]
               }
-            , Style::{ name = "pane-border", fg = bg }
+            , Style::{ name = "pane-border", fg = accent2 }
             , Style::{ name = "pane-active-border", fg }
             , Style::{
               , comment = Some "Visually highlight current window"
