@@ -1,52 +1,121 @@
 #!/usr/bin/env bash
 
-qwer-install() {
-  (
-    set -euo pipefail
+_qwer-header() { echo "=== $1" && echo; }
 
-    _hdr() { echo "=== $1" && echo ; }
+qwer-discover() { find "${HOME}/projects" -type f -name '.tool-versions' ; }
+
+qwer-union-all() {
+  ( set -euo pipefail
+
+    qwer-discover | xargs cat "${HOME}/.tool-versions" | sort -u
+  )
+}
+
+qwer-installed() {
+  ( set -euo pipefail
+
+    asdf list | ag '^[^ ]' | while read -r lang; do
+      asdf list "${lang}" | while read -r version; do
+        echo "${lang} ${version}"
+      done
+    done
+  )
+}
+
+qwer-latest() {
+  ( set -euo pipefail
+
+    asdf list | ag '^[^ ]' | while read -r lang; do
+      echo "${lang} $(asdf latest "${lang}")"
+    done
+  )
+}
+
+qwer-orphaned() {
+  ( set -euo pipefail
+
+    local tempdir; tempdir="$(mktemp -d)"
+    cd "${tempdir}"
+    local unioned; unioned="${tempdir}/.tool-versions"
+    local -r installed='installed.txt'
+
+    qwer-union-all > "${unioned}"
+    qwer-installed > "${installed}"
+
+    # Prints all lines present in left file, but not in right file
+    comm -23 'all_installed.txt' "${unioned}"
+  )
+}
+
+qwer-outdated() {
+  ( set -euo pipefail
 
     local tempdir; tempdir="$(mktemp -d)"
     cd "${tempdir}"
 
+    local -r discovered='discovered.txt'
+    local -r latest='latest.txt'
+
+    qwer-discover > "${discovered}"
+    qwer-latest > "${latest}"
+
+    while read -r unioned; do
+      echo "${unioned}"
+      comm -23 "${unioned}" 'latest.txt' | xargs -L1 -I{} echo '  {}'
+    done < "${discovered}"
+  )
+}
+
+qwer-cleanup() {
+  ( set -euo pipefail
+
+    qwer-orphaned | xargs -L1 -t asdf uninstall
+  )
+}
+
+qwer-cleanup-dryrun() {
+  ( set -euo pipefail
+
+    qwer-orphaned | xargs -L1 echo asdf uninstall
+  )
+}
+
+qwer-install() {
+  ( set -euo pipefail
+
+    local tempdir; tempdir="$(mktemp -d)"
+    cd "${tempdir}"
+    local unioned; unioned="${tempdir}/.tool-versions"
+
     # ---
 
-    _hdr "Discovering \`.tool-versions\` files..."
-
-    # Temporary: `-print0` didn't work as expected, and I don't really want to
-    #            use -exec
-    # shellcheck disable=SC2038
-    find "${HOME}/projects" -type f -name '.tool-versions' \
-      | xargs -t cat "${HOME}/.tool-versions" \
-      | sort -u \
-      > "${tempdir}/.tool-versions"
-
-    local fpath; fpath="${tempdir}/.tool-versions"
+    _qwer-header "Discovering \`.tool-versions\` files..."
+    qwer-union-all > "${unioned}"
 
     # ---
 
-    _hdr "Union of \`.tool-versions\` files: ${fpath}"
-    cat "${fpath}"
+    _qwer-header "Union of \`.tool-versions\` files: ${unioned}"
+    cat "${unioned}"
     echo
 
     # ---
 
-    _hdr "Adding plugins ..."
-    # shellcheck disable=SC2002
-    # Temporary ^^
-    cat "${fpath}" | awk '{ print $1 }' | sort -u \
-      | xargs -t -L1 asdf plugin-add || true
+    _qwer-header "Adding plugins..."
+    (
+      awk '{ print $1 }' | sort -u | xargs -t -L1 asdf plugin-add || true
+    ) < "${unioned}"
     echo
 
     # ---
 
-    _hdr "Updating plugins ..."
+    _qwer-header "Updating plugins..."
     asdf plugin-update --all
     echo
 
     # ---
 
-    _hdr "Installing versions ..."
+    _qwer-header "Installing versions..."
     asdf install
+    echo
   )
 }
