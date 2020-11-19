@@ -4,6 +4,7 @@ set -euo pipefail
 
 readonly blue="\e[0;34m"
 readonly green="\e[0;92m"
+readonly purple="\e[0;35m"
 readonly red="\e[0;91m"
 readonly reset="\e[0m"
 readonly yellow="\e[0;33m"
@@ -44,17 +45,20 @@ _assess() {
 
 _poll() {
   local -r sha="$1"
-  local short_sha; short_sha="$(cut -c1-8 <<< "${sha}")"; readonly short_sha
+  local short_sha; readonly short_sha="$(cut -c1-8 <<< "${sha}")"
 
-  local web_url; web_url=$(hub browse -u); readonly web_url
+  local web_url; readonly web_url="$(hub browse -u)"
+  local branch_name; readonly branch_name="$(git rev-parse --abbrev-ref HEAD)"
 
   local ci_status='pending'
-  until [ "${ci_status}" != 'pending' ]
-  do
-    echo -e "${yellow}$(date)${reset}"
-    echo -e "Checking CI status of ${blue}${web_url}/commit/${sha}${reset} ..."
+  until [ "${ci_status}" != 'pending' ]; do
+    echo -e "${purple}$(date)${reset}"
+    echo -ne "Checking CI status of ${blue}${web_url}/commit/${sha}${reset} ... "
     ci_status="$(hub ci-status "${sha}")" || true
-    [ "${ci_status}" = 'pending' ] && sleep 5
+    if [ "${ci_status}" = 'pending' ]; then
+      echo -e "${yellow}${ci_status}${reset}"
+      sleep 5
+    fi
   done
   readonly ci_status
 
@@ -65,10 +69,12 @@ _poll() {
   # Colorized banner
   _colorize "${ci_status}" "$(figlet "${ci_status}")"
   # Link(s)
-  echo -e "${blue}${web_url}${reset}"
-  echo -e "${blue}$(hub pr show -u -h "${sha}")${reset}"
+  echo 'Links:'
+  echo -e "→ ${blue}${web_url}${reset}"
+  echo -e "→ ${blue}$(hub pr show -u -h "${branch_name}")${reset}"
+  echo
   # Audio announcement
-  say -v Karen "${msg}"
+  say -v Karen "${msg}" &
 }
 
 _poll "${1:-"$(git rev-parse HEAD)"}"
