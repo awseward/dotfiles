@@ -57,7 +57,7 @@ _poll() {
     ci_status="$(hub ci-status "${sha}")" || true
     if [ "${ci_status}" = 'pending' ]; then
       echo -e "${yellow}${ci_status}${reset}"
-      echo 'Sleeping 5s ...' && sleep 5
+      sleep 5
     fi
   done
   readonly ci_status
