@@ -9,6 +9,14 @@ readonly red="\e[0;91m"
 readonly reset="\e[0m"
 readonly yellow="\e[0;33m"
 
+_in_color() {
+  local -r color="$1"
+  local msg; readonly msg="$(cat -)"
+  if [ "${msg}" != '' ]; then
+    echo -e "${color}${msg}${reset}"
+  fi
+}
+
 _colorize() {
   local -r ci_status="$1"
   local -r msg="$2"
@@ -66,13 +74,17 @@ _poll() {
 
   # Toast notification
   osascript -e "display notification \"${msg} ${short_sha}\""
+
   # Colorized banner
   _colorize "${ci_status}" "$(figlet "${ci_status}")"
+
   # Link(s)
   echo 'Links:'
-  echo -e "→ ${blue}${web_url}${reset}"
-  echo -e "→ ${blue}$(hub pr show -u -h "${branch_name}")${reset}"
+  echo -e "→ Browse:  ${blue}${web_url}${reset}"
+  echo -e "→ Compare: $(hub compare -u "${branch_name}" 1> >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
+  echo -e "→ PR:      $(hub pr show -u -h "${branch_name}" 1> >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
   echo
+
   # Audio announcement
   say -v Karen "${msg}" &
 }
