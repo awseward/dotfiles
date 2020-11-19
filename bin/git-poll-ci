@@ -51,11 +51,16 @@ _poll() {
   done
   readonly ci_status
 
-  # local -r msg="CI ${ci_status}: ${short_sha}"
   local msg; msg="CI ${ci_status}. $(_assess "${ci_status}")"
 
+  # Toast notification
   osascript -e "display notification \"${msg} ${short_sha}\""
+  # Colorized banner
   _colorize "${ci_status}" "$(figlet "${ci_status}")"
+  # Link(s)
+  echo -ne "\e[0;34m"; hub browse -u; echo -ne "\e[0m"
+  xargs -t hub pr show -u -h <<< "${sha}" || true
+  # Audio announcement
   say -v Karen "${msg}"
 }
 
