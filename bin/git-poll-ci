@@ -4,6 +4,7 @@ set -euo pipefail
 
 readonly blue="\e[0;34m"
 readonly green="\e[0;92m"
+readonly purple="\e[0;35m"
 readonly red="\e[0;91m"
 readonly reset="\e[0m"
 readonly yellow="\e[0;33m"
@@ -51,10 +52,13 @@ _poll() {
   local ci_status='pending'
   until [ "${ci_status}" != 'pending' ]
   do
-    echo -e "${yellow}$(date)${reset}"
-    echo -e "Checking CI status of ${blue}${web_url}/commit/${sha}${reset} ..."
+    echo -e "${purple}$(date)${reset}"
+    echo -ne "Checking CI status of ${blue}${web_url}/commit/${sha}${reset} ... "
     ci_status="$(hub ci-status "${sha}")" || true
-    [ "${ci_status}" = 'pending' ] && sleep 5
+    if [ "${ci_status}" = 'pending' ]; then
+      echo -e "${yellow}${ci_status}${reset}"
+      echo -e "Sleeping ${purple}5${reset}s ..." && sleep 5
+    fi
   done
   readonly ci_status
 
