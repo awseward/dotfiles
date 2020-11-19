@@ -62,11 +62,20 @@ _poll() {
   until [ "${ci_status}" != 'pending' ]; do
     echo -e "${purple}$(date)${reset}"
     echo -ne "Checking CI status of ${blue}${web_url}/commit/${sha}${reset} ... "
-    ci_status="$(hub ci-status "${sha}")" || true
-    if [ "${ci_status}" = 'pending' ]; then
-      echo -e "${yellow}${ci_status}${reset}"
-      sleep 5
-    fi
+    ci_status="$(hub ci-status "${sha}" 2>&1)" || true
+
+    case "${ci_status}" in
+      success|failure|error|action_required|cancelled|timed_out|'no status') :
+        ;;
+      pending)
+        echo -e "${yellow}${ci_status}${reset}"
+        sleep 5
+        ;;
+      *)
+        echo -e "${red}[ERROR!]${reset} ${ci_status}"
+        ci_status='pending'
+        sleep 5
+    esac
   done
   readonly ci_status
 
