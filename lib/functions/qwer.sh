@@ -43,7 +43,7 @@ qwer-orphaned() {
     qwer-installed > "${installed}"
 
     # Prints all lines present in left file, but not in right file
-    comm -23 'all_installed.txt' "${unioned}"
+    comm -23 "${installed}" "${unioned}"
   )
 }
 
