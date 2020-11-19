@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+_colorize() {
+  local -r ci_status="$1"
+  local -r msg="$2"
+
+  local -r green="\e[0;92m"
+  local -r red="\e[0;91m"
+  local -r reset="\e[0m"
+
+  case "${ci_status}" in
+    success)
+      echo -e "${green}${msg}${reset}"
+      ;;
+    failure|error|action_required|cancelled|timed_out)
+      echo -e "${red}${msg}${reset}"
+      ;;
+    *)
+      echo "${msg}"
+  esac
+}
+
+_assess() {
+  local -r ci_status="$1"
+
+  case "${ci_status}" in
+    success)
+      echo 'Super duper.'
+      ;;
+    failure|error|action_required|cancelled|timed_out)
+      echo 'Oh no.'
+      ;;
+    *)
+      echo "Not sure what that's about"
+  esac
+}
+
+_poll() {
+  local -r sha="$1"
+  local short_sha; short_sha="$(cut -c1-8 <<< "${sha}")"; readonly short_sha
+
+  local ci_status='pending'
+  until [ "${ci_status}" != 'pending' ]
+  do
+    echo -e "\e[0;33m$(date)\e[0m"
+    echo -e "Checking CI status of \e[0;34m${sha}\e[0m..."
+    ci_status="$(hub ci-status "${sha}")" || true
+    [ "${ci_status}" != 'pending' ] || sleep 5
+  done
+  readonly ci_status
+
+  # local -r msg="CI ${ci_status}: ${short_sha}"
+  local msg; msg="CI ${ci_status}. $(_assess "${ci_status}")"
+
+  osascript -e "display notification \"${msg} ${short_sha}\""
+  _colorize "${ci_status}" "$(figlet "${ci_status}")"
+  say -v Karen "${msg}"
+}
+
+_poll "${1:-"$(git rev-parse HEAD)"}"
