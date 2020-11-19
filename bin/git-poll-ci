@@ -90,8 +90,8 @@ _poll() {
   # Link(s)
   echo 'Links:'
   echo -e "→ Browse:  ${blue}${web_url}${reset}"
-  echo -e "→ Compare: $(hub compare -u "${branch_name}" 1> >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
-  echo -e "→ PR:      $(hub pr show -u -h "${branch_name}" 1> >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
+  echo -e "→ Compare: $(hub compare -u "${branch_name}" > >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
+  echo -e "→ PR:      $(hub pr show -u -h "${branch_name}" > >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
   echo
 
   # Audio announcement
