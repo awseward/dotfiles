@@ -34,6 +34,9 @@ _assess() {
     failure|error|action_required|cancelled|timed_out)
       echo 'Oh no.'
       ;;
+    'no status')
+      echo 'Did you remember to push to the remote?'
+      ;;
     *)
       echo "Not sure what that's about..."
   esac
