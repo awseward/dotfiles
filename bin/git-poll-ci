@@ -2,13 +2,15 @@
 
 set -euo pipefail
 
+readonly blue="\e[0;34m"
+readonly green="\e[0;92m"
+readonly red="\e[0;91m"
+readonly reset="\e[0m"
+readonly yellow="\e[0;33m"
+
 _colorize() {
   local -r ci_status="$1"
   local -r msg="$2"
-
-  local -r green="\e[0;92m"
-  local -r red="\e[0;91m"
-  local -r reset="\e[0m"
 
   case "${ci_status}" in
     success)
@@ -33,7 +35,7 @@ _assess() {
       echo 'Oh no.'
       ;;
     *)
-      echo "Not sure what that's about"
+      echo "Not sure what that's about..."
   esac
 }
 
@@ -41,13 +43,15 @@ _poll() {
   local -r sha="$1"
   local short_sha; short_sha="$(cut -c1-8 <<< "${sha}")"; readonly short_sha
 
+  local web_url; web_url=$(hub browse -u); readonly web_url
+
   local ci_status='pending'
   until [ "${ci_status}" != 'pending' ]
   do
-    echo -e "\e[0;33m$(date)\e[0m"
-    echo -e "Checking CI status of \e[0;34m${sha}\e[0m..."
+    echo -e "${yellow}$(date)${reset}"
+    echo -e "Checking CI status of ${blue}${web_url}/commit/${sha}${reset} ..."
     ci_status="$(hub ci-status "${sha}")" || true
-    [ "${ci_status}" != 'pending' ] || sleep 5
+    [ "${ci_status}" = 'pending' ] && sleep 5
   done
   readonly ci_status
 
@@ -58,8 +62,8 @@ _poll() {
   # Colorized banner
   _colorize "${ci_status}" "$(figlet "${ci_status}")"
   # Link(s)
-  echo -ne "\e[0;34m"; hub browse -u; echo -ne "\e[0m"
-  xargs -t hub pr show -u -h <<< "${sha}" || true
+  echo -e "${blue}${web_url}${reset}"
+  echo -e "${blue}$(hub pr show -u -h "${sha}")${reset}"
   # Audio announcement
   say -v Karen "${msg}"
 }
