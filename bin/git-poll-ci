@@ -94,7 +94,12 @@ _poll() {
   echo -e "→ PR:      $(hub pr show -u -h "${branch_name}" > >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
   echo
 
-  # Audio announcement
+  # Audio announcement(s)
+  if [ -f "${HOME}/.lib/functions/sox.sh" ]; then
+    # shellcheck source=/dev/null
+    source "${HOME}/.lib/functions/sox.sh"
+    sox_random_beep > /dev/null 2>&1 || true
+  fi
   say -v Karen "${msg}" &
 }
 
