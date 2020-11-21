@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+_delay()       { echo "$((RANDOM % 3)).$((RANDOM % 100))" ; }
+_figlet()      { figlet -w "$(tput cols)" -c "$1" ;         }
+_is_fast()     { [ "$((RANDOM % 2))" = 1 ] ;                }
+_random_name() { head -n1 /dev/random | cut -c1-8 ;         }
+_timed_run()   { time _run "$1" ;                           }
+
+readonly green="\e[0;92m"
+readonly red="\e[0;91m"
+readonly reset="\e[0m"
+
+_banner() {
+  local -r msg="$1"
+  local -r color="${2:-}"
+
+  echo -e "${color}$(_figlet "${msg}")${reset}"
+}
+
+_run() {
+  local -r name="$1"
+  local delay; readonly delay="$(_delay)"
+  local speed_flag=''
+  if _is_fast; then speed_flag='-w'; fi
+  readonly speed_flag
+
+  clear
+  _banner '3...' "${red}"
+  sleep 1; clear
+  _banner '2...' "${red}"
+  sleep 1; clear
+  _banner '1...' "${red}"
+  sleep 1; clear
+  _banner 'Gooooooo!!!' "${green}"
+  sleep "${delay}"; clear
+
+  sl -del "${speed_flag}" || true
+  echo "name: ${name}"
+}
+
+_timed_run "${1:-"$(_random_name)"}"
