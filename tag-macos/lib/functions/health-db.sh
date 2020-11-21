@@ -3,7 +3,7 @@
 hdb_dir="$HOME/.health-db"
 
 water() {
-  cd "$hdb_dir" || exit
+  cd "$hdb_dir" || return 1
   ./water_checkin.sh
 
   # shellcheck disable=SC2164
@@ -11,7 +11,7 @@ water() {
 }
 
 weight() {
-  cd "$hdb_dir" || exit
+  cd "$hdb_dir" || return 1
   ./weigh_in.sh
 
   # shellcheck disable=SC2164
