@@ -13,13 +13,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - uses: awseward/gh-actions-shell@0.1.0
 
   local:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: Run checks committed directly to repository
         run:  set -euo pipefail; find .checks -type f | while read -r check_file; do "${check_file}"; done
