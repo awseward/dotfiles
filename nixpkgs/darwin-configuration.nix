@@ -54,6 +54,7 @@
     entr
     exa
     figlet
+    hadolint
     htop
     jq
     redis
