@@ -43,7 +43,7 @@ endif
 if has('win16') || has('win32') || has('win64') || has('win32unix')
   Plug 'ctrlpvim/ctrlp.vim'
 else
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
 endif
 Plug 'benmills/vimux'
