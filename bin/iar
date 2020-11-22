@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly green="\e[0;92m"
+readonly red="\e[0;91m"
+readonly reset="\e[0m"
+
+_archive() {
+  curl --fail --head "https://web.archive.org/save/${url}" \
+    | grep -i '^location: '\
+    | head -n1 \
+    | sed -E 's/^[A-Za-z-]+: //g'
+}
+
+_error() {
+  >&2 echo -e "${red}Unable to save URL to Internet Archive:${reset} ${url}"
+  return 1
+}
+
+_run() {
+  # I'm super duper perplexed as to why this `|| return 1` is necessary,
+  # considering I've got `set -e` up top..
+  local archived_url; archived_url="$(_archive)" || return 1
+  echo -e "${green}Saved to clipboard:${reset} ${archived_url}"
+}
+
+# ---
+
+readonly url="$1"
+_run || _error
