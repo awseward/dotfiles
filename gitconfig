@@ -1,5 +1,6 @@
 [user]
-  name  = Andrew Seward
+  name = Andrew Seward
+  useConfigOnly = true
 
 [alias]
   ### Informational
