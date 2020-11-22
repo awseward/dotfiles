@@ -2,13 +2,17 @@
 
 set -euo pipefail
 
+readonly red="\e[31m"
+readonly green="\e[32m"
+readonly reset="\e[0m"
+
 echo_if_not_executable() {
   local file_path="${1}"
   if [ ! -x "${file_path}" ]; then
-    >&2 printf "\e[31mF\e[0m"
+    >&2 echo -ne "${red}F${reset}"
     echo "${file_path}";
   else
-    >&2 printf "\e[32m.\e[0m"
+    >&2 echo -ne "${green}.${reset}"
   fi
 }
 
@@ -17,10 +21,10 @@ error_if_any() {
   read -r -a arr <<< $(cat -)
 
   if [ ${#arr[@]} -gt 0 ]; then
-    >&2 echo -e "\n\n🚨 Found hook files which are not executable: ${arr[*]}"
+    >&2 echo -e "\n\n🚨 ${red}Found hook files which are not executable:${reset} ${arr[*]}"
     return 1
   else
-    >&2 echo -e "\n\n✅ All good!"
+    >&2 echo -e "\n\n✅ ${green}All good!${reset}"
   fi
 }
 
