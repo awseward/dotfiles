@@ -186,7 +186,6 @@ set nocursorcolumn
 set nocursorline
 
 " Misc
-set colorcolumn=80
 set virtualedit=block
 
 " Keep cursor centered when possible
@@ -336,3 +335,7 @@ nnor ,YF :let @"=expand("%:p")<CR> " Mnemonic: Yank File path
 nnor ,cf :let @*=expand("%p")<CR>  " Mnemonic: Copy File path
 nnor ,yf :let @"=expand("%p")<CR>  " Mnemonic: Yank File path
 nnor ,fn :let @"=expand("%")<CR>   " Mnemonic: yank File Name
+
+" colorscheme fight-in-the-shade
+let &colorcolumn=join(range(81,999),",")
+highlight ColorColumn ctermbg=235 guibg=#222222
