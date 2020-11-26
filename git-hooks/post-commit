@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+readonly origin_hook="$0"
+readonly track_hook="${HOME}/.git-hooks/track"
+
+if [ -f "${track_hook}" ]; then
+  "${track_hook}" "${origin_hook}"
+fi

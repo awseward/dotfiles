@@ -96,7 +96,8 @@
   pager      = less -F -X
   safecrlf   = warn
   trustctime = false
-  excludesfile = /Users/andrew/.gitignore
+  excludesfile = ~/.gitignore
+  hooksPath    = ~/.git-hooks
 
 [core.whitespace]
   tab-in-indent = true

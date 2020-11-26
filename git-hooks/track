@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+readonly hook_file="$1"
+readonly repo_dir="$(pwd)"
+
+( set -euo pipefail
+
+  readonly fmt_vsn='0.1.0'
+  readonly logfile="${HOME}/.git-events.log"
+  readonly timestamp="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+  readonly ref="$(git rev-parse --abbrev-ref HEAD)"
+
+  echo -e "${fmt_vsn}\t${timestamp}\t${hook_file}\t${repo_dir}\t${ref}" >> "${logfile}"
+
+) || true
+
+readonly standard_hook="${repo_dir}/.git/hooks/$(basename "${hook_file}")"
+
+>&2 echo "Checking for ${standard_hook} ..."
+if [ -x "${standard_hook}" ]; then
+  "${standard_hook}" "$@" <<< -
+fi
