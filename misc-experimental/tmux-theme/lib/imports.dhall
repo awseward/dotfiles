@@ -9,7 +9,7 @@ let Prelude =
 
 let Utils =
       { Optional =
-          https://raw.githubusercontent.com/awseward/dhall-utils/master/Optional/package.dhall sha256:358d2852ea28633a899f24a68c878c2676d17f59990c3f1ddcda863d20176aa4
+          https://raw.githubusercontent.com/awseward/dhall-utils/master/Optional/package.dhall sha256:a04aecb60adf73778ad136bf758017075c9f178932d228303c0027f52c768bd1
       }
 
 in  { Prelude, Utils }
