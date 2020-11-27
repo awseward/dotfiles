@@ -2,9 +2,8 @@
 
 {
 
-  # TODO: Uncomment pending https://github.com/LnL7/nix-darwin/pull/251
-  # system.defaults.NSGlobalDomain.AppleEnableSwipeNavigateWithScrolls = false;
-  # system.defaults.NSGlobalDomain.AppleEnableMouseSwipeNavigateWithScrolls = false;
+  system.defaults.NSGlobalDomain.AppleEnableSwipeNavigateWithScrolls = false;
+  system.defaults.NSGlobalDomain.AppleEnableMouseSwipeNavigateWithScrolls = false;
 
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = true;
