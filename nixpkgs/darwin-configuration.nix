@@ -1,20 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  # What a launchd service for https://github.com/awseward/git-events-collector
-  # based in nix might look like
-  #
-  # launchd.user.agents.foobar = {
-  #   script = ''
-  #     echo -n "[$(date)] " && echo 'something to process!!!'
-  #     tree /Users/andrew/.git-events
-  #     ls -lah /Users/andrew/.git-events/_outbox
-  #     echo
-  #   '';
-  #   serviceConfig.QueueDirectories = [ "/Users/andrew/.git-events/_outbox" ];
-  #   serviceConfig.StandardOutPath = "/var/log/foobar.log";
-  #   serviceConfig.StandardErrorPath = "/var/log/foobar.log";
-  # };
+  launchd.user.agents.foobar = (import ./foo);
 
   system.defaults.NSGlobalDomain.AppleEnableSwipeNavigateWithScrolls = false;
   system.defaults.NSGlobalDomain.AppleEnableMouseSwipeNavigateWithScrolls = false;
