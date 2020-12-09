@@ -63,6 +63,7 @@
     sox
     tmate
     tree
+    visidata
     wget
   ];
 
