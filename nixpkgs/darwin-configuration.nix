@@ -48,6 +48,7 @@
     bat
     bats
     cloc
+    coreutils
     cowsay
     direnv
     dive
