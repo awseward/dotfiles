@@ -2,6 +2,12 @@
 
 _qwer-header() { echo "=== $1" && echo; }
 
+_qwer-tempdir() {
+  local -r ts="$(date -u +%Y%m%d%H%M%S)"
+
+  mktemp -d -t "qwer-$1-${ts}-XXXX" | tee >( >&2 xargs -I{} echo 'Running in {} ...' )
+}
+
 qwer-discover() { find "${HOME}/projects" -type f -name '.tool-versions' ; }
 
 qwer-union-all() {
@@ -34,7 +40,7 @@ qwer-latest() {
 qwer-orphaned() {
   ( set -euo pipefail
 
-    local tempdir; tempdir="$(mktemp -d)"
+    local tempdir; tempdir="$(_qwer-tempdir orphaned)"
     cd "${tempdir}"
     local unioned; unioned="${tempdir}/.tool-versions"
     local -r installed='installed.txt'
@@ -50,7 +56,7 @@ qwer-orphaned() {
 qwer-outdated() {
   ( set -euo pipefail
 
-    local tempdir; tempdir="$(mktemp -d)"
+    local tempdir; tempdir="$(_qwer-tempdir outdated)"
     cd "${tempdir}"
 
     local -r discovered='discovered.txt'
@@ -83,7 +89,7 @@ qwer-cleanup-dryrun() {
 qwer-install() {
   ( set -euo pipefail
 
-    local tempdir; tempdir="$(mktemp -d)"
+    local tempdir; tempdir="$(_qwer-tempdir install)"
     cd "${tempdir}"
     local unioned; unioned="${tempdir}/.tool-versions"
 
