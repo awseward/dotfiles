@@ -330,11 +330,11 @@ let g:rainbow_active = 1
 au FileType diff call rainbow#clear()
 
 " Adapted from https://web.archive.org/save/https://vim.fandom.com/wiki/Copy_filename_to_clipboard
-nnor ,CF :let @*=expand("%:p")<CR> " Mnemonic: Copy File path
-nnor ,YF :let @"=expand("%:p")<CR> " Mnemonic: Yank File path
-nnor ,cf :let @*=expand("%p")<CR>  " Mnemonic: Copy File path
-nnor ,yf :let @"=expand("%p")<CR>  " Mnemonic: Yank File path
-nnor ,fn :let @"=expand("%")<CR>   " Mnemonic: yank File Name
+" also with some help from https://stackoverflow.com/a/36501915 as well...
+nnor ,cf :let @*=expand("%p")<CR>    " Copy file path      (relative)
+nnor ,CF :let @*=expand("%:p")<CR>   "   ...               (absolute)
+nnor ,cd :let @*=expand("%:.:h")<CR> " Copy directory path (relative)
+nnor ,CD :let @*=expand("%:p:h")<CR> "   ...               (absolute)
 
 " colorscheme fight-in-the-shade
 let &colorcolumn=join(range(81,999),",")
