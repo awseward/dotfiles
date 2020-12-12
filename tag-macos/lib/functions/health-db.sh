@@ -11,7 +11,7 @@ hdb_config() {
 DHALL
   }
 
-  local -r config_file="$HOME/.health-db.test.dhall"
+  local -r config_file="$HOME/.health-db.dhall"
 
   if [ -f "${config_file}" ]; then
     >&2 echo "File ${config_file} already exists; doing nothing"
