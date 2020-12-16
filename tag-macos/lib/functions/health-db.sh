@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-readonly hdb_dir="$HOME/.health-db"
+export HDB_DIR="$HOME/.health-db"
 
 hdb_config() {
   _generate_default_config() {
     cat <<DHALL
-      let Config = ${hdb_dir}/Config.dhall
+      let Config = ${HDB_DIR}/Config.dhall
 
       in Config::{=}
 DHALL
@@ -22,7 +22,7 @@ DHALL
 }
 
 water() {
-  cd "$hdb_dir" || return 1
+  cd "$HDB_DIR" || return 1
   ./water_checkin.sh
 
   # shellcheck disable=SC2164
@@ -30,7 +30,7 @@ water() {
 }
 
 weight() {
-  cd "$hdb_dir" || return 1
+  cd "$HDB_DIR" || return 1
   ./weigh_in.sh
 
   # shellcheck disable=SC2164

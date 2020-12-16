@@ -6,15 +6,19 @@ export TERM='xterm-256color'
 
 _source_file_if_present() {
   local file="$1"
-  [ -f "$file" ] && . "$file"
+  if [ -f "$file" ]; then
+    >&2 echo "Sourcing ${file}..."
+    . "$file"
+  fi
 }
 
 _source_dir_rec_if_present() {
   local dir="$1"
   if [ -d "$dir" ]; then
+    >&2 echo "Sourcing all files in ${dir}..."
     for file in "$dir"/**/*.sh; do
       # shellcheck disable=SC1090
-      . "$file"
+      _source_file_if_present "$file"
     done
   fi
 }
