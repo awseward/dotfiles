@@ -41,8 +41,8 @@ _ensure_brew_installed() {
 _ensure_brew_deps_installed() {
   local brewfile="$dotfiles/tag-$tag/Brewfile"
 
-  if ! brew bundle check --file="$brewfile"; then
-    brew bundle install --verbose --no-upgrade --file="$brewfile"
+  if ! brew bundle check --no-lock --no-upgrade --file="$brewfile"; then
+    brew bundle install --verbose --no-lock --no-upgrade --file="$brewfile"
   fi
 
   brew update --verbose && brew outdated --verbose
