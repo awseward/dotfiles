@@ -22,17 +22,17 @@ DHALL
 }
 
 water() {
-  cd "$HDB_DIR" || return 1
-  ./water_checkin.sh
+  ( set -euo pipefail
 
-  # shellcheck disable=SC2164
-  cd -
+    cd "$HDB_DIR" || return 1
+    ./water_consumption.sh
+  )
 }
 
 weight() {
-  cd "$HDB_DIR" || return 1
-  ./weigh_in.sh
+  ( set -euo pipefail
 
-  # shellcheck disable=SC2164
-  cd -
+    cd "$HDB_DIR" || return 1
+    ./bodyweight.sh
+  )
 }
