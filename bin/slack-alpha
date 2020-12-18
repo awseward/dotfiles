@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+# Usage:
+#
+#   slack-alpha Your message here
+#
+# * NOTE: If your message contains shell-significant characters, you may need
+# to quote it like so:
+#
+#   slack-alpha 'Super duper!'
+#
+
+TEXT = ARGV.join(' ').downcase
+CHARS = TEXT.split ''
+
+PUNCT_MAP = {
+  '!' => 'exclamation',
+  '#' => 'hash',
+  '?' => 'question',
+  '@' => 'at',
+}
+
+reduced = CHARS.reduce({ out: [], flipper: 0 }) do |agg, ch|
+  case ch
+  when ' '
+    agg.merge(
+      out: agg[:out] + [ch * 2]
+    )
+  when '!', '#', '?', '@'
+    flipper = agg[:flipper]
+    color = flipper % 2 == 0 ? 'yellow' : 'white'
+    next_ch = ":alphabet-#{color}-#{PUNCT_MAP[ch]}:"
+
+    agg.merge(
+      out: agg[:out] + [next_ch] ,
+      flipper: flipper + 1 % 2
+    )
+  when /[a-z]/
+    flipper = agg[:flipper]
+    color   = flipper % 2 == 0 ? 'yellow' : 'white'
+    next_ch = ":alphabet-#{color}-#{ch}:"
+
+    agg.merge(
+      out: agg[:out] + [next_ch],
+      flipper: flipper + 1 % 2
+    )
+  else
+    agg.merge(out: agg[:out] + [ch])
+  end
+end
+
+puts reduced[:out].join ''
