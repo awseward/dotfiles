@@ -13,6 +13,19 @@
 TEXT = ARGV.join(' ').downcase
 CHARS = TEXT.split ''
 
+NUM_WORDS = [
+  'zero',
+  'one',
+  'two',
+  'three',
+  'four',
+  'five',
+  'six',
+  'seven',
+  'eight',
+  'nine',
+]
+
 PUNCT_MAP = {
   '!' => 'exclamation',
   '#' => 'hash',
@@ -33,6 +46,15 @@ reduced = CHARS.reduce({ out: [], flipper: 0 }) do |agg, ch|
 
     agg.merge(
       out: agg[:out] + [next_ch] ,
+      flipper: flipper + 1 % 2
+    )
+  when /[0-9]/
+    flipper = agg[:flipper]
+    color   = flipper % 2 == 0 ? 'yellow' : 'white'
+    next_ch = ":#{NUM_WORDS[ch.to_i]}:"
+
+    agg.merge(
+      out: agg[:out] + [next_ch],
       flipper: flipper + 1 % 2
     )
   when /[a-z]/
