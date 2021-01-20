@@ -5,15 +5,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: awseward/gh-actions-dhall@0.2.2
+      - uses: awseward/gh-actions-dhall@0.2.9
         with:
-          dhallVersion: 1.36.0
+          dhallVersion: 1.37.1
 
   shell:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: awseward/gh-actions-shell@0.1.1
+      - uses: awseward/gh-actions-shell@0.1.5
 
   local:
     runs-on: ubuntu-latest
