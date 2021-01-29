@@ -121,7 +121,7 @@ endif
 
 au BufWritePost *.dhall silent! call _DhallFormat() | redraw!
 function _DhallFormat()
-  !dhall format --inplace=<afile>
+  !dhall --unicode format --inplace=<afile>
   :e
 endfunction
 
