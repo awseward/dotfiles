@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+hub ci-status -v -f "%S %t|" | awk 'BEGIN{RS="|"} {print}' | fzf
