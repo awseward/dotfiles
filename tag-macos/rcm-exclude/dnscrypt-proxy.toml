@@ -15,7 +15,6 @@
 
 # server_names = ['scaleway-fr', 'google', 'yandex', 'cloudflare']
 
-
 ## List of local addresses and ports to listen to. Can be IPv4 and/or IPv6.
 
 listen_addresses = ['127.0.0.1:53', '[::1]:53']
@@ -52,7 +51,7 @@ doh_servers = true
 ## Require servers defined by remote sources to satisfy specific properties
 
 # Server must support DNS security extensions (DNSSEC)
-require_dnssec = false
+require_dnssec = true
 
 # Server must not log user queries (declarative)
 require_nolog = true
