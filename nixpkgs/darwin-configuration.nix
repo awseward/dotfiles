@@ -1,20 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Added on advice from the following warning:
-  #
-  #   warning: Detected old style nixbld users
-  #   These can cause migration problems when upgrading to certain macOS versions
-  #   Running the installer again will remove and recreate the users in a way that avoids these problems
-  #
-  #   $ darwin-install
-  #
-  #   or enable to automatically manage the users
-  #
-  #       users.nix.configureBuildUsers = true;
-  #
-  users.nix.configureBuildUsers = true;
-
   launchd.user.agents.foobar = (import ./foo);
 
   system.defaults.NSGlobalDomain.AppleEnableSwipeNavigateWithScrolls = false;
