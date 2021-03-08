@@ -25,7 +25,7 @@ qwer-installed() {
         echo "${lang} ${version}"
       done
     done
-  )
+  ) | sort -u
 }
 
 qwer-latest() {
@@ -34,7 +34,7 @@ qwer-latest() {
     asdf list | ag '^[^ ]' | while read -r lang; do
       echo "${lang} $(asdf latest "${lang}")"
     done
-  )
+  ) | sort -u
 }
 
 qwer-orphaned() {
@@ -65,9 +65,13 @@ qwer-outdated() {
     qwer-discover > "${discovered}"
     qwer-latest > "${latest}"
 
-    while read -r unioned; do
-      echo "${unioned}"
-      comm -23 "${unioned}" 'latest.txt' | xargs -L1 -I{} echo '  {}'
+    while read -r origin; do
+      local origin_local="${tempdir}${origin}"
+      echo "${origin_local}" | xargs dirname | xargs mkdir -p
+      sort -u "${origin}" > "${origin_local}"
+
+      echo "${origin}"
+      comm -23 "${origin_local}" 'latest.txt' | xargs -L1 -I{} echo '  {}'
     done < "${discovered}"
   )
 }
