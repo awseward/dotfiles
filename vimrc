@@ -240,7 +240,8 @@ endfunction
 
 set t_Co=256
 
-colorscheme paramount
+" colorscheme paramount
+colorscheme srcery-drk
 
 if $LIGHT_SHELL != ""
   set background=light
@@ -339,3 +340,5 @@ nnor ,CD :let @*=expand("%:p:h")<CR> "   ...               (absolute)
 " colorscheme fight-in-the-shade
 let &colorcolumn=join(range(81,999),",")
 highlight ColorColumn ctermbg=235 guibg=#222222
+
+set encoding=utf-8

@@ -19,7 +19,7 @@ Plug 'owickstrom/vim-colors-paramount' " Current favorite
 
 " Editor Utils
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'zxqfl/tabnine-vim'
+" Plug 'zxqfl/tabnine-vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
