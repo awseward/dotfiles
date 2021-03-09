@@ -240,8 +240,7 @@ endfunction
 
 set t_Co=256
 
-" colorscheme paramount
-colorscheme srcery-drk
+colorscheme paramount
 
 if $LIGHT_SHELL != ""
   set background=light
