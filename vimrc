@@ -342,3 +342,9 @@ let &colorcolumn=join(range(81,999),",")
 highlight ColorColumn ctermbg=235 guibg=#222222
 
 set encoding=utf-8
+
+" https://apple.stackexchange.com/a/168871
+if &term =~ "xterm"
+    let &t_ti = "\<Esc>[?47h"
+    let &t_te = "\<Esc>[?47l"
+endif
