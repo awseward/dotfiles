@@ -70,6 +70,12 @@ __ensure_in_PATH                      \
   "${HOME}/.nimble/bin"               \
   "${HOME}/.local/bin"
 
+# ➜  ~ brew link --force sqlite3
+# Warning: Refusing to link macOS provided/shadowed software: sqlite
+# If you need to have sqlite first in your PATH, run:
+#   echo 'export PATH="/usr/local/opt/sqlite/bin:$PATH"' >> ~/.zshrc
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
 # Warning: Homebrew's sbin was not found in your PATH but you have installed
 # formulae that put executables in /usr/local/sbin.
 __ensure_in_PATH "/usr/local/sbin"
