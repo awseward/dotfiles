@@ -45,6 +45,6 @@ launchctl unload -w ~/Library/LaunchAgents/seward.andrew.backups_rsync_net.plist
 For the first run, you may need to run any of the following:
 
 ```sh
-mkdir -p ~/.local/shared/backups
-touch    ~/.local/shared/backups/rsync-net.log
+mkdir -p ~/.cache/backups
+touch    ~/.cache/backups/rsync-net.log
 ```
