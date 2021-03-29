@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>seward.andrew.backups_rsync_net</string>
+
+    <key>WorkingDirectory</key>
+    <string>FIXME__REPLACE_WITH_ABS_HOME_PATH</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>.config/backups/rsync-net.sh</string>
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>KeepAlive</key>
+    <false/>
+
+    <!-- Run hourly (3600s == 1hr) -->
+    <key>StartInterval</key>
+    <integer>3600</integer>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+      <key>PATH</key>
+      <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:</string>
+
+      <key>BORG_REMOTE_PATH</key>
+      <string>/usr/local/bin/borg1/borg1</string>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>.local/share/backups/rsync-net.log</string>
+    <key>StandardErrorPath</key>
+    <string>.local/share/backups/rsync-net.log</string>
+  </dict>
+</plist>
