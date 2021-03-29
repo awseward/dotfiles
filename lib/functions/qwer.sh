@@ -5,10 +5,10 @@ _qwer-header() { echo "=== $1" && echo; }
 _qwer-tempdir() {
   local -r ts="$(date -u +%Y%m%d%H%M%S)"
 
-  mktemp -d -t "qwer-$1-${ts}-XXXX" | tee >( >&2 xargs -I{} echo 'Running in {} ...' )
+  mktemp -d -t "qwer-$1-${ts}-XXXX" | tee >( >&2 xargs -I{} echo 'Running in {} …' )
 }
 
-qwer-discover() { find "${HOME}/projects" -type f -name '.tool-versions' ; }
+qwer-discover() { find "${HOME}/projects" -maxdepth 5 -type f -name '.tool-versions' ; }
 
 qwer-union-all() {
   ( set -euo pipefail
@@ -31,9 +31,9 @@ qwer-installed() {
 qwer-latest() {
   ( set -euo pipefail
 
-    asdf list | ag '^[^ ]' | while read -r lang; do
-      echo "${lang} $(asdf latest "${lang}")"
-    done
+    # shellcheck disable=SC2016
+    asdf list | ag '^[^ ]' \
+      | xargs -t -P8 -L1 -I{} /usr/bin/env bash -c 'echo {} "$(asdf latest {})"'
   ) | sort -u
 }
 
@@ -79,14 +79,14 @@ qwer-outdated() {
 qwer-cleanup() {
   ( set -euo pipefail
 
-    qwer-orphaned | xargs -L1 -t asdf uninstall
+    qwer-orphaned | xargs -t -L1 asdf uninstall
   )
 }
 
 qwer-cleanup-dryrun() {
   ( set -euo pipefail
 
-    qwer-orphaned | xargs -L1 echo asdf uninstall
+    qwer-orphaned | xargs -t -L1 echo asdf uninstall
   )
 }
 
@@ -99,7 +99,7 @@ qwer-install() {
 
     # ---
 
-    _qwer-header "Discovering \`.tool-versions\` files..."
+    _qwer-header "Discovering \`.tool-versions\` files…"
     qwer-union-all > "${unioned}"
 
     # ---
@@ -110,22 +110,22 @@ qwer-install() {
 
     # ---
 
-    _qwer-header "Adding plugins..."
+    _qwer-header "Adding plugins…"
     (
-      awk '{ print $1 }' | sort -u | xargs -t -L1 asdf plugin-add || true
+      awk '{ print $1 }' | sort -u | xargs -t -P8 -L1 asdf plugin-add || true
     ) < "${unioned}"
     echo
 
     # ---
 
-    _qwer-header "Updating plugins..."
-    asdf plugin-update --all
+    _qwer-header "Updating plugins…"
+    asdf plugin list | xargs -t -P8 -L1 asdf plugin-update
     echo
 
     # ---
 
-    _qwer-header "Installing versions..."
-    asdf install
+    _qwer-header "Installing versions…"
+    xargs -t -P8 -L1 asdf install < .tool-versions
     echo
   )
 }
