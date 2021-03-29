@@ -6,8 +6,8 @@
 # Setting this, so the repo does not need to be given on the commandline:
 export BORG_REPO='rsync-net:borg-test'
 
-# See the section "Passphrase notes" for more infos.
-export BORG_PASSPHRASE=''
+# Load passphrase from MacOS keychain
+export BORG_PASSCOMMAND="security find-generic-password -a ${USER} -s borg-passphrase -w"
 
 # This needs to be set to use borg 1.X on rsync.net
 export BORG_REMOTE_PATH='/usr/local/bin/borg1/borg1'

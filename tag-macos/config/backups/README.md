@@ -9,7 +9,17 @@ The stuff in here is based loosely on stuff found in:
 
 ## Setup
 
+#### Add passphrase to MacOS Keychain
+
+```sh
+security add-generic-password -D secret -U -a "${USER}" -s borg-passphrase -w '<FIXME__passphrase_here>'
+```
+
 #### Initialize Remote Repo
+
+Before doing this, it's a good idea to run lines from the top of `rsync-net.sh` which export the following environment variables:
+* `BORG_PASSCOMMAND`
+* `BORG_REMOTE_PATH`
 
 ```sh
 borg init --encryption=repokey rsync-net:borg-test
@@ -23,7 +33,6 @@ Host rsync-net
   HostName <rsync_hostname>
   IdentityFile ~/.ssh/id_ed25519
 ```
-
 
 #### Place LaunchAgent
 
