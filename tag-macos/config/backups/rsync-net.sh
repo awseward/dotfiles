@@ -30,9 +30,8 @@ borg create              \
                          \
     ::'{hostname}-{now}' \
                          \
-    ~/borg-test-source   \
-    ~/scans              \
     ~/books              \
+    ~/scans              \
 
 backup_exit=$?
 
