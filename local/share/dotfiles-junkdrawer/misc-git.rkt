@@ -1,7 +1,7 @@
 #!/usr/bin/env racket
 #lang racket/base
 
-(require "../lib/racket/git/remote.rkt")
+(require "./remote.rkt")
 
 (define (displayln-remote a-remote)
   (displayln (string-append "remote name: " (remote-name a-remote)))
