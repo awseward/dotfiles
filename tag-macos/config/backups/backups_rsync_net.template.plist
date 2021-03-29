@@ -33,8 +33,8 @@
     </dict>
 
     <key>StandardOutPath</key>
-    <string>.local/share/backups/rsync-net.log</string>
+    <string>.cache/backups/rsync-net.log</string>
     <key>StandardErrorPath</key>
-    <string>.local/share/backups/rsync-net.log</string>
+    <string>.cache/backups/rsync-net.log</string>
   </dict>
 </plist>
