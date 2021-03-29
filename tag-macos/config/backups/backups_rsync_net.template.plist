@@ -27,9 +27,6 @@
     <dict>
       <key>PATH</key>
       <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:</string>
-
-      <key>BORG_REMOTE_PATH</key>
-      <string>/usr/local/bin/borg1/borg1</string>
     </dict>
 
     <key>StandardOutPath</key>

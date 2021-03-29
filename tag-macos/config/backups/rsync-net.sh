@@ -10,7 +10,7 @@ export BORG_REPO='rsync-net:borg-test'
 export BORG_PASSPHRASE=''
 
 # This needs to be set to use borg 1.X on rsync.net
-export BORG_REMOTE_PATH=/usr/local/bin/borg1/borg1
+export BORG_REMOTE_PATH='/usr/local/bin/borg1/borg1'
 
 # some helpers and error handling:
 info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }
