@@ -12,6 +12,13 @@ export BORG_PASSCOMMAND="security find-generic-password -a ${USER} -s borg-passp
 # This needs to be set to use borg 1.X on rsync.net
 export BORG_REMOTE_PATH='/usr/local/bin/borg1/borg1'
 
+# Need to explicitly set this to `yes` if you ever move the location of the
+# repo, otherwise should keep it set to `no` just in case of funny business.
+#
+# FWIW, I'm fairly certain `no` is the default, but no harm in being explicit
+# in case that were ever to change.
+export BORG_RELOCATED_REPO_ACCESS_IS_OK='no'
+
 # some helpers and error handling:
 info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }
 trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
