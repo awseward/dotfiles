@@ -19,9 +19,12 @@
     <key>KeepAlive</key>
     <false/>
 
-    <!-- Run hourly (3600s == 1hr) -->
-    <key>StartInterval</key>
-    <integer>3600</integer>
+    <key>StartCalendarInterval</key>
+    <dict>
+      <!-- Run hourly @ XX:42 -->
+      <key>Minute</key>
+      <integer>42</integer>
+    </dict>
 
     <key>EnvironmentVariables</key>
     <dict>
