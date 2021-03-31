@@ -1,5 +1,8 @@
 #!/usr/bin/env zsh
 
+umask 077
+if [ $EUID = 0 ]; then umask 022; fi
+
 export EDITOR='vim'
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 export TERM='xterm-256color'
