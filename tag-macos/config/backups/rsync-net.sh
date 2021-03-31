@@ -4,7 +4,7 @@
 # https://borgbackup.readthedocs.io/en/stable/quickstart.html#automating-backups
 
 # Setting this, so the repo does not need to be given on the commandline:
-export BORG_REPO='rsync-net:borg-test'
+export BORG_REPO='rsync-net:main'
 
 # Load passphrase from MacOS keychain
 export BORG_PASSCOMMAND="security find-generic-password -a ${USER} -s borg-passphrase -w"
