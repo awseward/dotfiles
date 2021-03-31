@@ -4,8 +4,10 @@ _qwer-header() { echo "=== $1" && echo; }
 
 _qwer-tempdir() {
   local -r ts="$(date -u +%Y%m%d%H%M%S)"
+  local -r template="${XDG_CACHE_HOME:-${HOME}/.cache}/qwer/$1/${ts}-XXXXXXXX"
 
-  mktemp -d -t "qwer-$1-${ts}-XXXX" | tee >( >&2 xargs -I{} echo 'Running in {} …' )
+  >&2 mkdir -p "$(dirname "${template}")" >/dev/null
+  mktemp -d "${template}" | tee >( >&2 xargs -I{} echo 'Running in {} …' )
 }
 
 qwer-discover() { find "${HOME}/projects" -maxdepth 5 -type f -name '.tool-versions' ; }
