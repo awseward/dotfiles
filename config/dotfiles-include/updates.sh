@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 UPDATE_INTERVAL=$((60 * 60 * 24 * 5))
-TIMESTAMP_FILEPATH="${HOME}/.dotfiles-update-timestamp"
+TIMESTAMP_FILE_DIRPATH="${XDG_CACHE_HOME:-${HOME}/.cache}"
+mkdir -p "${TIMESTAMP_FILE_DIRPATH}"
+TIMESTAMP_FILEPATH="${TIMESTAMP_FILE_DIRPATH}/.dotfiles-update-timestamp"
 
 read_timestamp() {
   if timestamp_exists; then
