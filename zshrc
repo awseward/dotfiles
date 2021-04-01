@@ -49,7 +49,6 @@ _source_file_if_present "$HOME/.aliases.work"
 _source_file_if_present "$HOME/.fzf.zsh"
 
 _source_dir_rec_if_present "$HOME/.config/dotfiles-include"
-_source_dir_rec_if_present "$HOME/.completions"
 
 
 # _source_dir_rec_if_present "$HOME/.env-specific"
