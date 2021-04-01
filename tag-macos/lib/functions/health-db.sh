@@ -1,30 +1,33 @@
 #!/usr/bin/env bash
 
-export HDB_DIR="$HOME/.health-db"
+export HDB_SRC_DIR="$HOME/.health-db"
+export HDB_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}/health-db"
+export HDB_CONFIG_PATH="${HDB_CONFIG_HOME}/config.dhall"
 
 hdb_config() {
   _generate_default_config() {
     cat <<DHALL
-      let Config = ${HDB_DIR}/Config.dhall
+      let Config = ${HDB_SRC_DIR}/Config.dhall
 
       in Config::{=}
 DHALL
   }
 
-  local -r config_file="$HOME/.health-db.dhall"
+  local -r config_file="${HDB_CONFIG_PATH}"
 
   if [ -f "${config_file}" ]; then
     >&2 echo "File ${config_file} already exists; doing nothing"
     return
   fi
 
+  >&2 mkdir -p "${HDB_CONFIG_HOME}"
   _generate_default_config > "${config_file}"
 }
 
 water() {
   ( set -euo pipefail
 
-    cd "$HDB_DIR" || return 1
+    cd "$HDB_SRC_DIR" || return 1
     ./water_consumption.sh
   )
 }
@@ -32,7 +35,7 @@ water() {
 weight() {
   ( set -euo pipefail
 
-    cd "$HDB_DIR" || return 1
+    cd "$HDB_SRC_DIR" || return 1
     ./bodyweight.sh
   )
 }
