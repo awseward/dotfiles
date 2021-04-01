@@ -131,7 +131,7 @@ so it's still a bit manual for now.
 MSG
 }
 
-_configure_dnscrypt_proxy
+# _configure_dnscrypt_proxy
 _clone_iterm_color_schemes
 _set_up_ssh_keys
 _display_messages
