@@ -2,7 +2,7 @@
 
 (
   # shellcheck source=/dev/null
-  source "$HOME/.lib/functions/updates.sh"
+  source "$HOME/.config/dotfiles-include/updates.sh"
 
 
   _list_fns() {

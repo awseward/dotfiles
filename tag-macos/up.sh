@@ -71,7 +71,7 @@ _ensure_omz_installed() {
 
 _ensure_asdf_deps_installed() {
   # shellcheck source=/dev/null
-  source "${HOME}/.lib/functions/qwer.sh" && echo 'qwer-intsall' && qwer-install
+  source "${HOME}/.config/dotfiles-include/qwer.sh" && echo 'qwer-install' && qwer-install
 }
 
 main() {
