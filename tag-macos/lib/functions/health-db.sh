@@ -2,7 +2,6 @@
 
 export HDB_SRC_DIR="$HOME/.health-db"
 export HDB_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}/health-db"
-export HDB_CONFIG_PATH="${HDB_CONFIG_HOME}/config.dhall"
 
 hdb_config() {
   _generate_default_config() {
@@ -13,7 +12,7 @@ hdb_config() {
 DHALL
   }
 
-  local -r config_file="${HDB_CONFIG_PATH}"
+  local -r config_file="${HDB_CONFIG_HOME}/config.dhall"
 
   if [ -f "${config_file}" ]; then
     >&2 echo "File ${config_file} already exists; doing nothing"
