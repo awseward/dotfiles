@@ -2,6 +2,7 @@
 
 export HDB_SRC_DIR="$HOME/.health-db"
 export HDB_CONFIG_HOME="${XDG_CONFIG_HOME:-${HOME}/.config}/health-db"
+export HDB_CONFIG_PATH="${HDB_CONFIG_HOME}/config.dhall"
 
 hdb_config() {
   _generate_default_config() {
