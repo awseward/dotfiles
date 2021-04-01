@@ -95,9 +95,9 @@ _poll() {
   echo
 
   # Audio announcement(s)
-  if [ -f "${HOME}/.lib/functions/sox.sh" ]; then
+  if [ -f "${HOME}/.config/dotfiles-include/sox.sh" ]; then
     # shellcheck source=/dev/null
-    source "${HOME}/.lib/functions/sox.sh"
+    source "${HOME}/.config/dotfiles-include/sox.sh"
     sox_random_beep > /dev/null 2>&1 || true
   fi
   say -v Karen "${msg}" &
