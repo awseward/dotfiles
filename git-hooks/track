@@ -6,7 +6,7 @@ readonly repo_dir="$(pwd)"
 ( set -euo pipefail
 
   readonly fmt_vsn='0.1.0'
-  readonly logfile="${HOME}/.git-events.log"
+  readonly logfile="$(gec_path_active)"
   readonly timestamp="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
   readonly ref="$(git rev-parse --abbrev-ref HEAD)"
 
