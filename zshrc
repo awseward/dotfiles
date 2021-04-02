@@ -43,6 +43,7 @@ export ZSH_THEME="robbyrussell"
 plugins=(asdf)
 # See: https://github.com/ohmyzsh/ohmyzsh/issues/7332#issuecomment-687716303
 export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-${HOME}/.cache}/zsh"
+mkdir -p "${ZSH_CACHE_DIR}"
 export ZSH_COMPDUMP="${ZSH_CACHE_DIR}/.zcompdump-${HOST/.*/}-${ZSH_VERSION}"
 
 source "$ZSH/oh-my-zsh.sh"
