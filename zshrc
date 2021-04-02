@@ -7,6 +7,10 @@ export EDITOR='vim'
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 export TERM='xterm-256color'
 
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_DATA_HOME="${HOME}/.local/share"
+
 _source_file_if_present() {
   local file="$1"
   if [ -f "$file" ]; then
