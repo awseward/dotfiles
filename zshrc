@@ -41,9 +41,13 @@ export ZSH_THEME="robbyrussell"
 # Custom plugins in $ZSH/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(asdf)
-. "$ZSH/oh-my-zsh.sh"
+# See: https://github.com/ohmyzsh/ohmyzsh/issues/7332#issuecomment-687716303
+export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-${HOME}/.cache}/zsh"
+export ZSH_COMPDUMP="${ZSH_CACHE_DIR}/.zcompdump-${HOST/.*/}-${ZSH_VERSION}"
 
-. "$HOME/.aliases"
+source "$ZSH/oh-my-zsh.sh"
+
+source "$HOME/.aliases"
 
 _source_file_if_present "$HOME/.aliases.work"
 _source_file_if_present "$HOME/.fzf.zsh"
