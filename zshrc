@@ -54,8 +54,6 @@ export ZSH_COMPDUMP="${ZSH_CACHE_DIR}/.zcompdump-${HOST/.*/}-${ZSH_VERSION}"
 
 source "$ZSH/oh-my-zsh.sh"
 
-source "$HOME/.aliases"
-
 _source_file_if_present "$HOME/.aliases.work"
 _source_file_if_present "$HOME/.fzf.zsh"
 
