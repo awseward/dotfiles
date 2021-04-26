@@ -3,7 +3,7 @@ elasticsearch 5.6.4
 idris 1.0
 kibana 5.6.4
 kubectl 1.15.12
-nim 1.4.2
+nim 1.4.6
 nodejs 14.16.0
 postgres 13.1
 python 3.9.0
