@@ -70,7 +70,7 @@ __ensure_in_PATH                      \
   "$HOME/.asdf/completions/asdf.bash" \
   "$HOME/Library/Python/3.6/bin"      \
   "$RACKET_BIN_DIR"                   \
-  "$HOME/.nimble/bin"                 \
+  "$XDG_DATA_HOME/nimble/bin"         \
   "$HOME/.local/bin"                  \
 
 # Warning: Refusing to link macOS provided/shadowed software: sqlite
