@@ -2,6 +2,13 @@
 
 _gen_action() {
   local -r workflow_name="$1"
+
+  if [ "${workflow_name}" = '' ]; then
+    # shellcheck disable=SC2016
+    >&2 echo 'Missing required positional arg `$1` (`workflow_name`)'
+    return 1
+  fi
+
   local -r template_file_rel=".github/.workflow_templates/${workflow_name}.dhall"
   local -r output_file_rel=".github/workflows/${workflow_name}.yml"
 
