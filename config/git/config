@@ -35,7 +35,6 @@
   l10  = !git github-log -n10
   lbr  = !git local-branches
   lc   = !git last-commit
-  lm   = log master..
   msg  = !git message
   nd   = !git nuke-dry
   ni   = !git nuke-interactive
@@ -44,7 +43,8 @@
   pfoh = !git push-force origin HEAD
   pl   = !git prettylog
   poh  = push -u origin HEAD
-  puom = pull origin master
+  # TODO: Find a better way to detect the "main" branch
+  puom = !echo git pull origin "$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
   rbr  = !git remote-branches
   st   = status
   sum  = diff --shortstat

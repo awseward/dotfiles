@@ -15,7 +15,8 @@ alias rm='rm -Iv'
 
 ### git
 alias g='git'
-alias gm='git checkout master && git pull origin master'
+# TODO: Find a better way to detect the "main" branch
+alias gm='git checkout $(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@") && git pull origin $(git symbolic-ref refs/remotes/origin/HEAD | sed "s@^refs/remotes/origin/@@")'
 # Two shortcomings of this at the moment:
 # - It's super MacOS-specific
 # - The concept of "tee to clipboard" is probably a little more generalizable

@@ -7,7 +7,8 @@ ghv() {
   local git_sha="${1:-$(git_current_branch)}"
 
   cleanup() { rm -rf "${temp_dir}" >/dev/null 2>&1; }
-  changed_files() { git diff --name-only "origin/master...${git_sha}"; }
+  # TODO: Find a better way to detect the "main" branch
+  changed_files() { git diff --name-only "origin/$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')...${git_sha}"; }
   populate_local_disk() {
     changed_files | while read -r filename; do
       local ref_filename="${git_sha}:${filename}"
