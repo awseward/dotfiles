@@ -121,12 +121,12 @@ endif
 
 au BufWritePost *.dhall silent! call _DhallFormat() | redraw!
 function _DhallFormat()
-  !dhall --unicode format --inplace=<afile>
+  !dhall --unicode format <afile>
   :e
 endfunction
 
 function _DhallFreeze()
-  :silent exec "!dhall freeze --inplace %:p"
+  :silent exec "!dhall freeze %:p"
   :e!
   :redraw!
   :w
