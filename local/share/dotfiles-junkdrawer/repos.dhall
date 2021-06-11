@@ -1,5 +1,6 @@
 let fns =
-      https://raw.githubusercontent.com/awseward/repo-experimentation/781bb86deb91bea534611ca98263dab70dc5f44e/functions.dhall sha256:204347e133fc4b3559a19390ecd26db366d03f18656fba60c663b8fd0249aa65
+      https://raw.githubusercontent.com/awseward/repo-experimentation/781bb86deb91bea534611ca98263dab70dc5f44e/functions.dhall
+        sha256:204347e133fc4b3559a19390ecd26db366d03f18656fba60c663b8fd0249aa65
 
 let p = fns.buildRepo "awseward"
 

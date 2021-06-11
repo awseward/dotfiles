@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 ### general
 alias back='cd -'
 alias cp='cp -iv'

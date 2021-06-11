@@ -1,8 +1,10 @@
 let Text/pkg =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/v19.0.0/Prelude/Text/package.dhall sha256:819a967038fbf6f28cc289fa2651e42835f70b326210c86e51acf48f46f913d8
+      https://raw.githubusercontent.com/dhall-lang/dhall-lang/v20.2.0/Prelude/Text/package.dhall
+        sha256:17a0e0e881b05436d7e3ae94a658af9da5ba2a921fafa0d1d545890978853434
 
 let List/unpackOptionals =
-      https://raw.githubusercontent.com/dhall-lang/dhall-lang/v19.0.0/Prelude/List/unpackOptionals sha256:0cbaa920f429cf7fc3907f8a9143203fe948883913560e6e1043223e6b3d05e4
+      https://raw.githubusercontent.com/dhall-lang/dhall-lang/v20.2.0/Prelude/List/unpackOptionals
+        sha256:0cbaa920f429cf7fc3907f8a9143203fe948883913560e6e1043223e6b3d05e4
 
 let KeyBinding = { noPrefix : Bool, repeats : Bool, key : Text, command : Text }
 
