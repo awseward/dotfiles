@@ -219,7 +219,7 @@ map <leader>E :bufdo! :e!<CR><CR>
 map <leader>F :Filetypes<CR>
 map <leader>f :Rg<Space>
 map <leader>Q :bufdo! :bd!<CR><CR>
-map <leader>q :bd!<CR><CR>
+map <leader>q :bufdo :bd<CR><CR>
 map <leader>R :source ~/.vimrc<CR>
 map <leader>W :FixWhitespace<CR>:w<CR>
 map <leader>p :Commands<CR>
