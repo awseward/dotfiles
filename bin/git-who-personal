@@ -1,1 +1,5 @@
 git config user.email awswrd@gmail.com
+git config user.signingkey B4D9262075265D50
+# May want to just put this in the global account once set up for all git-who
+# "profiles" 🤷
+git config commit.gpgsign true
