@@ -1,22 +1,22 @@
 #!/usr/bin/env bash
 
 readonly hook_file="$1"
-readonly repo_dir="$(pwd)"
+repo_dir="$(pwd)"; readonly repo_dir
 
 ( set -euo pipefail
 
   readonly fmt_vsn='0.1.0'
-  readonly logfile="$(gec_path_active)"
-  readonly timestamp="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-  readonly ref="$(git rev-parse --abbrev-ref HEAD)"
+  logfile="$(gec_path_active)"; readonly logfile
+  timestamp="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"; readonly timestamp
+  ref="$(git rev-parse --abbrev-ref HEAD)"; readonly ref
 
   echo -e "${fmt_vsn}\t${timestamp}\t${hook_file}\t${repo_dir}\t${ref}" >> "${logfile}"
 
 ) || true
 
-readonly standard_hook="${repo_dir}/.git/hooks/$(basename "${hook_file}")"
+standard_hook="${repo_dir}/.git/hooks/$(basename "${hook_file}")"; readonly standard_hook
 
->&2 echo "Checking for ${standard_hook} ..."
+>&2 echo "Checking for ${standard_hook}…"
 if [ -x "${standard_hook}" ]; then
   "${standard_hook}" "$@" <<< -
 fi
