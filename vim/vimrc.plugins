@@ -38,9 +38,7 @@ if executable('ag')
   Plug 'rking/ag.vim'
 endif
 if executable('rg')
-  " See: https://github.com/jremmen/vim-ripgrep/pull/58#issuecomment-953343559
-  Plug 'lamchau/vim-ripgrep', { 'commit': '68ec5ba64d23212c5b3ae56599fb758254a2f435' }
-  " Plug 'jremmen/vim-ripgrep'
+  Plug 'jremmen/vim-ripgrep'
 endif
 if has('win16') || has('win32') || has('win64') || has('win32unix')
   Plug 'ctrlpvim/ctrlp.vim'
