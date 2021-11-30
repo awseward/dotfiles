@@ -1,4 +1,4 @@
-dhall 1.40.1
+dhall 1.40.2
 elasticsearch 5.6.4
 idris 1.0
 kibana 5.6.4
