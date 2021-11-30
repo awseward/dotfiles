@@ -28,6 +28,9 @@ _colorize() {
     failure|error|action_required|cancelled|timed_out)
       echo -e "${red}${msg}${reset}"
       ;;
+    pending)
+      echo -e "${yellow}${msg}${reset}"
+      ;;
     *)
       echo "${msg}"
   esac
@@ -68,7 +71,7 @@ _poll() {
       success|failure|error|action_required|cancelled|timed_out|'no status') :
         ;;
       pending)
-        echo -e "${yellow}${ci_status}${reset}"
+        _colorize "${ci_status}" "${ci_status}"
         sleep 5
         ;;
       *)
