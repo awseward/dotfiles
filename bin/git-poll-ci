@@ -11,7 +11,7 @@ readonly yellow="\e[0;33m"
 
 _in_color() {
   local -r color="$1"
-  local msg; readonly msg="$(cat -)"
+  local msg; msg="$(cat -)"; readonly msg
   if [ "${msg}" != '' ]; then
     echo -e "${color}${msg}${reset}"
   fi
@@ -53,10 +53,10 @@ _assess() {
 
 _poll() {
   local -r sha="$1"
-  local short_sha; readonly short_sha="$(cut -c1-8 <<< "${sha}")"
+  local short_sha; short_sha="$(cut -c1-8 <<< "${sha}")"; readonly short_sha
 
-  local commit_url; readonly commit_url="$(hub browse -u -- "commit/${sha}")"
-  local branch_name; readonly branch_name="$(git rev-parse --abbrev-ref HEAD)"
+  local commit_url; commit_url="$(hub browse -u -- "commit/${sha}")"; readonly commit_url
+  local branch_name; branch_name="$(git rev-parse --abbrev-ref HEAD)"; readonly branch_name
 
   local ci_status='pending'
   until [ "${ci_status}" != 'pending' ]; do
