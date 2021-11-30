@@ -47,7 +47,7 @@ _assess() {
       echo 'Did you remember to push to the remote?'
       ;;
     *)
-      echo "Not sure what that's about..."
+      echo "Not sure what that's about…"
   esac
 }
 
@@ -55,13 +55,13 @@ _poll() {
   local -r sha="$1"
   local short_sha; readonly short_sha="$(cut -c1-8 <<< "${sha}")"
 
-  local web_url; readonly web_url="$(hub browse -u)"
+  local commit_url; readonly commit_url="$(hub browse -u -- "commit/${sha}")"
   local branch_name; readonly branch_name="$(git rev-parse --abbrev-ref HEAD)"
 
   local ci_status='pending'
   until [ "${ci_status}" != 'pending' ]; do
-    echo -e "${purple}$(date)${reset}"
-    echo -ne "Checking CI status of ${blue}${web_url}/commit/${sha}${reset} ... "
+    echo -e "${purple}$(date)${reset} – CI Status"
+    echo -ne "Checking ${green}${branch_name}${reset} (${blue}${commit_url}${reset})… "
     ci_status="$(hub ci-status "${sha}" 2>&1)" || true
 
     case "${ci_status}" in
@@ -89,7 +89,7 @@ _poll() {
 
   # Link(s)
   echo 'Links:'
-  echo -e "→ Browse:  ${blue}${web_url}${reset}"
+  echo -e "→ Browse:  ${blue}${commit_url}${reset}"
   echo -e "→ Compare: $(hub compare -u "${branch_name}" > >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
   echo -e "→ PR:      $(hub pr show -u -h "${branch_name}" > >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
   echo
