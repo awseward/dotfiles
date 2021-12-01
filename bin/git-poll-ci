@@ -69,12 +69,16 @@ proc _try_pr_show(branch_name) {
   }
 }
 
+proc _toast(msg) { osascript -e "display notification \"${msg}\"" }
+
 proc _try_beeps(sox_include_file) {
   if ! test -f "${sox_include_file}" { return }
   # shellcheck source=/dev/null
   source "${sox_include_file}"
   sox_random_beep > /dev/null 2>&1 || true
 }
+
+proc _speak(msg) { say -v Karen "${msg}" }
 
 proc _poll(sha) {
   const branch_name = "$(git rev-parse --abbrev-ref HEAD)"
@@ -106,20 +110,17 @@ proc _poll(sha) {
 
   # Colorized banner
   _colorize "${ci_status}" $'\n'"$(figlet "${ci_status}")"
-
   # Link(s)
   echo 'Links:'
   echo -e "→ Browse:  $(_color blue <<< ${commit_url})"
   echo -e "→ Compare: $(hub compare -u "${branch_name}" | _color blue)"
   echo -e "→ PR:      $(_try_pr_show "${branch_name}")"
   echo
-
   # Toast notification
-  osascript -e "display notification \"${msg} ${short_sha}\""
-
+  _toast "${msg} sha: ${short_sha}"
   # Audio announcement(s)
   _try_beeps "${HOME}/.config/dotfiles-include/sox.sh"
-  say -v Karen "${msg}"
+  _speak "${msg}"
 }
 
 _poll "${1:-"$(git rev-parse HEAD)"}"
