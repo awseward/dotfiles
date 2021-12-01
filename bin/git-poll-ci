@@ -14,28 +14,31 @@ const colors = {
 
 proc _color(color_name) {
   const msg = "$(cat -)"
-  if test "$msg" != '' {
+  if test "$msg" = '' { return }
+
+  if test "$color_name" = '' {
+    echo -e "$msg"
+  } else {
     const color = colors[$color_name]
     const reset = colors['reset']
-
     echo -e "${color}${msg}${reset}"
   }
 }
 
 proc _colorize(ci_status, msg) {
+  var color_name = ''
   case "${ci_status}" in
     success)
-      _color 'green' <<< "${msg}"
+      setvar color_name = 'green'
       ;;
     failure|error|action_required|cancelled|timed_out)
-      _color 'red' <<< "${msg}"
+      setvar color_name = 'red'
       ;;
     pending)
-      _color 'yellow' <<< "${msg}"
+      setvar color_name = 'yellow'
       ;;
-    *)
-      echo -e "${msg}"
   esac
+  _color "${color_name}" <<< "${msg}"
 }
 
 proc _assess(ci_status) {
