@@ -19,7 +19,6 @@ const red    = colors['red']
 const reset  = colors['reset']
 const yellow = colors['yellow']
 
-
 proc _in_color(color_name) {
   const msg = "$(cat -)"
 
@@ -31,28 +30,23 @@ proc _in_color(color_name) {
   fi
 }
 
-_colorize() {
-  local -r ci_status="$1"
-  local -r msg="$2"
-
+proc _colorize(ci_status, msg) {
   case "${ci_status}" in
     success)
-      echo -e "${green}${msg}${reset}"
+      _in_color 'green' <<< "${msg}"
       ;;
     failure|error|action_required|cancelled|timed_out)
-      echo -e "${red}${msg}${reset}"
+      _in_color 'red' <<< "${msg}"
       ;;
     pending)
-      echo -e "${yellow}${msg}${reset}"
+      _in_color 'yellow' <<< "${msg}"
       ;;
     *)
       echo "${msg}"
   esac
 }
 
-_assess() {
-  local -r ci_status="$1"
-
+proc _assess(ci_status) {
   case "${ci_status}" in
     success)
       echo 'Super duper.'
@@ -68,14 +62,12 @@ _assess() {
   esac
 }
 
-_poll() {
-  local -r sha="$1"
-  local short_sha; short_sha="$(cut -c1-8 <<< "${sha}")"; readonly short_sha
+proc _poll(sha) {
+  const branch_name = "$(git rev-parse --abbrev-ref HEAD)"
+  const commit_url  = "$(hub browse -u -- "commit/${sha}")"
+  const short_sha   = "$(cut -c1-8 <<< "${sha}")"
 
-  local commit_url; commit_url="$(hub browse -u -- "commit/${sha}")"; readonly commit_url
-  local branch_name; branch_name="$(git rev-parse --abbrev-ref HEAD)"; readonly branch_name
-
-  local ci_status='pending'
+  var ci_status = 'pending'
   until [ "${ci_status}" != 'pending' ]; do
     echo -e "${purple}$(date)${reset} – CI Status"
     echo -ne "Checking ${green}${branch_name}${reset} (${blue}${commit_url}${reset})… "
@@ -94,15 +86,15 @@ _poll() {
         sleep 5
     esac
   done
-  readonly ci_status
+  const final_ci_status = "${ci_status}"
 
-  local msg; msg="CI ${ci_status}. $(_assess "${ci_status}")"
+  const msg = "CI ${final_ci_status}. $(_assess "${final_ci_status}")"
 
   # Toast notification
   osascript -e "display notification \"${msg} ${short_sha}\""
 
   # Colorized banner
-  _colorize "${ci_status}" "$(figlet "${ci_status}")"
+  _colorize "${final_ci_status}" "\n$(figlet "${final_ci_status}")"
 
   # Link(s)
   echo 'Links:'
