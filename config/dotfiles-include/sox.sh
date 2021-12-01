@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+_r_mod() {
+  local -r rand_val="${RANDOM:-$(shuf -i 0-32767 -n 1)}"
+  echo $((rand_val % $1))
+}
+
 sox_alarm() {
   play -n \
     synth 0.3 square 200-300 repeat 20 vol 0.5 \
@@ -35,7 +40,7 @@ sox_engine() {
 
 __sox_rnd_waveform() {
   local waveformIndex
-  waveformIndex="$((RANDOM % 5))"
+  waveformIndex="$(_r_mod 5)"
 
   case $waveformIndex in
     0)
@@ -59,19 +64,19 @@ __sox_rnd_waveform() {
 sox_random_beep() {
   local duration
   local repeatCount
-  duration="$((RANDOM % 1)).$((RANDOM % 3))$(((RANDOM % 1000) + 1))"
-  repeatCount="$(((RANDOM % 6)))"
+  duration="$(_r_mod 1).$(_r_mod 3)$(($(_r_mod 1000) + 1))"
+  repeatCount=$(_r_mod 6)
 
   local startPitch
   local endPitch
-  startPitch="$(((RANDOM % 500) + 1))"
-  endPitch="$(((RANDOM % 200) + 1))"
+  startPitch=$(($(_r_mod 500) + 1))
+  endPitch=$(($(_r_mod 200) + 1))
 
   # local duration2
   local startPitch2
   local endPitch2
-  startPitch2="$(((RANDOM % 1000) + 1))"
-  endPitch2="$(((RANDOM % 4000) + 1))"
+  startPitch2=$(($(_r_mod 1000) + 1))
+  endPitch2=$(($(_r_mod 4000) + 1))
 
   play -n \
     synth "$duration" \
