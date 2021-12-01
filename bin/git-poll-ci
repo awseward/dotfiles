@@ -12,35 +12,26 @@ const colors = {
   yellow: $'\e[0;33m'
 }
 
-# Mostly here for backwards compatibility… should probably just remove these…
-const blue   = colors['blue']
-const green  = colors['green']
-const purple = colors['purple']
-const red    = colors['red']
-const reset  = colors['reset']
-const yellow = colors['yellow']
-
-proc _in_color(color_name) {
+proc _color(color_name) {
   const msg = "$(cat -)"
-
-  if [ "${msg}" != '' ]; then
+  if test "$msg" != '' {
     const color = colors[$color_name]
     const reset = colors['reset']
 
     echo -e "${color}${msg}${reset}"
-  fi
+  }
 }
 
 proc _colorize(ci_status, msg) {
   case "${ci_status}" in
     success)
-      _in_color 'green' <<< "${msg}"
+      _color 'green' <<< "${msg}"
       ;;
     failure|error|action_required|cancelled|timed_out)
-      _in_color 'red' <<< "${msg}"
+      _color 'red' <<< "${msg}"
       ;;
     pending)
-      _in_color 'yellow' <<< "${msg}"
+      _color 'yellow' <<< "${msg}"
       ;;
     *)
       echo -e "${msg}"
@@ -64,17 +55,22 @@ proc _assess(ci_status) {
 }
 
 proc _try_status(sha) {
-  shopt --unset errexit {
-    hub ci-status "${sha}" 2>&1
-  }
+  shopt --unset errexit { hub ci-status "${sha}" 2>&1 }
 }
 
 proc _try_pr_show(branch_name) {
   shopt --unset errexit {
     hub pr show -u -h "${branch_name}" \
-       > >(_in_color blue) \
-      2> >(_in_color yellow)
+       > >(_color blue) \
+      2> >(_color yellow)
   }
+}
+
+proc _try_beeps(sox_include_file) {
+  if ! test -f "${sox_include_file}" { return }
+  # shellcheck source=/dev/null
+  source "${sox_include_file}"
+  sox_random_beep > /dev/null 2>&1 || true
 }
 
 proc _poll(sha) {
@@ -82,49 +78,45 @@ proc _poll(sha) {
   const commit_url  = "$(hub browse -u -- "commit/${sha}")"
   const short_sha   = "$(cut -c1-8 <<< "${sha}")"
 
-  var ci_status = 'pending'
-  until [ "${ci_status}" != 'pending' ]; do
-    echo -e "${purple}$(date)${reset} – CI Status"
-    echo -ne "Checking ${green}${branch_name}${reset} (${blue}${commit_url}${reset})… "
-    setvar ci_status = "$(_try_status "$sha")"
+  var status_output = 'pending'
+  until test "${status_output}" != 'pending'; do
+    echo -e "$(date | _color purple) – CI Status"
+    echo -ne "Checking $(_color green <<< "$branch_name") ($(_color blue <<< "$commit_url"))… "
+    setvar status_output = "$(_try_status "$sha")"
 
-    case "${ci_status}" in
+    case "${status_output}" in
       success|failure|error|action_required|cancelled|timed_out|'no status') :
         ;;
       pending)
-        _colorize "${ci_status}" "${ci_status}"
+        _colorize "${status_output}" "${status_output}"
         sleep 5
         ;;
       *)
-        echo -e "${red}[ERROR!]${reset} ${ci_status}"
-        ci_status='pending'
+        echo -e "$(_color red <<< '[ERROR!]') ${status_output}"
+        setvar status_output = 'pending'
         sleep 5
     esac
   done
-  const final_ci_status = "${ci_status}"
+  const ci_status = "${status_output}"
 
-  const msg = "CI ${final_ci_status}. $(_assess "${final_ci_status}")"
+  const msg = "CI ${ci_status}. $(_assess "${ci_status}")"
+
+  # Colorized banner
+  _colorize "${ci_status}" $'\n'"$(figlet "${ci_status}")"
+
+  # Link(s)
+  echo 'Links:'
+  echo -e "→ Browse:  $(_color blue <<< ${commit_url})"
+  echo -e "→ Compare: $(hub compare -u "${branch_name}" | _color blue)"
+  echo -e "→ PR:      $(_try_pr_show "${branch_name}")"
+  echo
 
   # Toast notification
   osascript -e "display notification \"${msg} ${short_sha}\""
 
-  # Colorized banner
-  _colorize "${final_ci_status}" "\n$(figlet "${final_ci_status}")"
-
-  # Link(s)
-  echo 'Links:'
-  echo -e "→ Browse:  ${blue}${commit_url}${reset}"
-  echo -e "→ Compare: $(hub compare -u "${branch_name}" | _in_color blue)"
-  echo -e "→ PR:      $(_try_pr_show "${branch_name}")"
-  echo
-
   # Audio announcement(s)
-  if [ -f "${HOME}/.config/dotfiles-include/sox.sh" ]; then
-    # shellcheck source=/dev/null
-    source "${HOME}/.config/dotfiles-include/sox.sh"
-    sox_random_beep > /dev/null 2>&1 || true
-  fi
-  say -v Karen "${msg}" &
+  _try_beeps "${HOME}/.config/dotfiles-include/sox.sh"
+  say -v Karen "${msg}"
 }
 
 _poll "${1:-"$(git rev-parse HEAD)"}"
