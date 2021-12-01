@@ -1,18 +1,32 @@
-#!/usr/bin/env bash
+#!/usr/bin/env osh
 
 set -euo pipefail
 
-readonly blue="\e[0;34m"
-readonly green="\e[0;92m"
-readonly purple="\e[0;35m"
-readonly red="\e[0;91m"
-readonly reset="\e[0m"
-readonly yellow="\e[0;33m"
+const colors = {
+  blue:   $'\e[0;34m',
+  green:  $'\e[0;92m',
+  purple: $'\e[0;35m',
+  red:    $'\e[0;91m',
+  reset:  $'\e[0m',
+  yellow: $'\e[0;33m'
+}
 
-_in_color() {
-  local -r color="$1"
-  local msg; msg="$(cat -)"; readonly msg
+# Mostly here for backwards compatibility… should probably just remove these…
+const blue   = colors['blue']
+const green  = colors['green']
+const purple = colors['purple']
+const red    = colors['red']
+const reset  = colors['reset']
+const yellow = colors['yellow']
+
+
+proc _in_color(color_name) {
+  const msg = "$(cat -)"
+
   if [ "${msg}" != '' ]; then
+    const color = colors[$color_name]
+    const reset = colors['reset']
+
     echo -e "${color}${msg}${reset}"
   fi
 }
@@ -93,8 +107,8 @@ _poll() {
   # Link(s)
   echo 'Links:'
   echo -e "→ Browse:  ${blue}${commit_url}${reset}"
-  echo -e "→ Compare: $(hub compare -u "${branch_name}" > >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
-  echo -e "→ PR:      $(hub pr show -u -h "${branch_name}" > >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
+  echo -e "→ Compare: $(hub compare -u "${branch_name}" > >(_in_color blue) 2> >(_in_color yellow))"
+  echo -e "→ PR:      $(hub pr show -u -h "${branch_name}" > >(_in_color blue) 2> >(_in_color yellow))"
   echo
 
   # Audio announcement(s)
