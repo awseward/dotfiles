@@ -1,6 +1,7 @@
 #!/usr/bin/env osh
 
 set -euo pipefail
+shopt --set oil:basic
 
 const colors = {
   blue:   $'\e[0;34m',
@@ -42,7 +43,7 @@ proc _colorize(ci_status, msg) {
       _in_color 'yellow' <<< "${msg}"
       ;;
     *)
-      echo "${msg}"
+      echo -e "${msg}"
   esac
 }
 
@@ -62,6 +63,20 @@ proc _assess(ci_status) {
   esac
 }
 
+proc _try_status(sha) {
+  shopt --unset errexit {
+    hub ci-status "${sha}" 2>&1
+  }
+}
+
+proc _try_pr_show(branch_name) {
+  shopt --unset errexit {
+    hub pr show -u -h "${branch_name}" \
+       > >(_in_color blue) \
+      2> >(_in_color yellow)
+  }
+}
+
 proc _poll(sha) {
   const branch_name = "$(git rev-parse --abbrev-ref HEAD)"
   const commit_url  = "$(hub browse -u -- "commit/${sha}")"
@@ -71,7 +86,7 @@ proc _poll(sha) {
   until [ "${ci_status}" != 'pending' ]; do
     echo -e "${purple}$(date)${reset} – CI Status"
     echo -ne "Checking ${green}${branch_name}${reset} (${blue}${commit_url}${reset})… "
-    ci_status="$(hub ci-status "${sha}" 2>&1)" || true
+    setvar ci_status = "$(_try_status "$sha")"
 
     case "${ci_status}" in
       success|failure|error|action_required|cancelled|timed_out|'no status') :
@@ -99,8 +114,8 @@ proc _poll(sha) {
   # Link(s)
   echo 'Links:'
   echo -e "→ Browse:  ${blue}${commit_url}${reset}"
-  echo -e "→ Compare: $(hub compare -u "${branch_name}" > >(_in_color blue) 2> >(_in_color yellow))"
-  echo -e "→ PR:      $(hub pr show -u -h "${branch_name}" > >(_in_color blue) 2> >(_in_color yellow))"
+  echo -e "→ Compare: $(hub compare -u "${branch_name}" | _in_color blue)"
+  echo -e "→ PR:      $(_try_pr_show "${branch_name}")"
   echo
 
   # Audio announcement(s)
