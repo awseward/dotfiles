@@ -15,7 +15,7 @@ const colors = {
 
 proc _color(color_name) {
   const msg = "$(cat -)"
-  if test "$msg" = '' { return }
+  if (msg ~== '') { return }
 
   const color = colors[$color_name]
   const reset = colors->reset
