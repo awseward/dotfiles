@@ -37,5 +37,4 @@ proc to_json_all() {
 
 proc usage() { echo 'Usage: TODO' }
 
-# TODO: Figure out what it takes to have a default if no arg is given
 "${@:-usage}"
