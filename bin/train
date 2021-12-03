@@ -21,7 +21,7 @@ _banner() {
 
 _run() {
   local -r name="$1"
-  local delay; readonly delay="$(_delay)"
+  local delay; delay="$(_delay)"; readonly delay
   local speed_flag=''
   if _is_fast; then speed_flag='-w'; fi
   readonly speed_flag
