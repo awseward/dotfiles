@@ -35,6 +35,20 @@ proc to_json_all() {
   json write d_outer
 }
 
-proc usage() { echo 'Usage: TODO' }
+proc help() {
+  var msg = """
+    Usage: TODO…
+      Sub-commands:
+      - discover
+      - file_to_csv
+      - file_to_json
+      - file_to_yaml
+      - to_csv
+      - to_json
+      - to_json_all
+      - to_yaml
+    """
+  echo $msg
+}
 
-"${@:-usage}"
+"${@:-help}"
