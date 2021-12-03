@@ -18,24 +18,24 @@ const green = $'\e[0;92m'
 const red   = $'\e[0;91m'
 const reset = $'\e[0m'
 
-proc _check(url, force='false') {
-  if test $force == 'true' {
+proc _check(url, skip_check='false') {
+  if (skip_check ~== 'true') {
     >&2 echo 'Archive forced; skipping check for existing capture…'
     return 1
   }
 
   >&2 echo "Checking for captures of ${url}…"
-  curl --fail --head "https://web.archive.org/web/${url}" \
-    | grep -i '^location: '\
-    | head -n1 \
+  ... curl --fail --head "https://web.archive.org/web/${url}"
+    | grep -i '^location: '
+    | head -n1
     | awk '{ print $2 }'
 }
 
 proc _archive(url) {
   >&2 echo "Creating a new capture of ${url}…"
-  curl --fail --head "https://web.archive.org/save/${url}" \
-    | grep -i '^location: '\
-    | head -n1 \
+  ... curl --fail --head "https://web.archive.org/save/${url}"
+    | grep -i '^location: '
+    | head -n1
     | awk '{ print $2 }'
 }
 
@@ -44,8 +44,8 @@ proc _error(url) {
   return 1
 }
 
-proc _run(url, force) {
-  const archived_url = $(try _check ${url} ${force} || _archive ${url})
+proc _run(url, skip_check='false') {
+  const archived_url = $(try _check ${url} ${skip_check} || _archive ${url})
   pbcopy <<< ${archived_url}
   echo -e "${green}Saved to clipboard:${reset} ${archived_url}"
 }
