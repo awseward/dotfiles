@@ -20,7 +20,7 @@ proc _color(color_name) {
     echo -e "$msg"
   } else {
     const color = colors[$color_name]
-    const reset = colors['reset']
+    const reset = colors->reset
     echo -e "${color}${msg}${reset}"
   }
 }
