@@ -46,7 +46,8 @@
   # TODO: Find a better way to detect the "main" branch
   puom = !git pull origin "$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
   rbr  = !git remote-branches
-  st   = status
+  st   = status --untracked-files=no
+  stu  = status
   sum  = diff --shortstat
 
   ### Potentially destructive
