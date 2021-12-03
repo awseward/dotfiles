@@ -1,44 +1,47 @@
-#!/usr/bin/env bash
+#!/usr/bin/env osh
 
 set -euo pipefail
+shopt --set oil:basic
 
-readonly blue="\e[0;34m"
-readonly green="\e[0;92m"
-readonly purple="\e[0;35m"
-readonly red="\e[0;91m"
-readonly reset="\e[0m"
-readonly yellow="\e[0;33m"
-
-_in_color() {
-  local -r color="$1"
-  local msg; msg="$(cat -)"; readonly msg
-  if [ "${msg}" != '' ]; then
-    echo -e "${color}${msg}${reset}"
-  fi
+const colors = {
+  blue:   $'\e[0;34m',
+  green:  $'\e[0;92m',
+  purple: $'\e[0;35m',
+  red:    $'\e[0;91m',
+  reset:  $'\e[0m',
+  yellow: $'\e[0;33m'
 }
 
-_colorize() {
-  local -r ci_status="$1"
-  local -r msg="$2"
+proc _color(color_name) {
+  const msg = "$(cat -)"
+  if test "$msg" = '' { return }
 
+  if test "$color_name" = '' {
+    echo -e "$msg"
+  } else {
+    const color = colors[$color_name]
+    const reset = colors['reset']
+    echo -e "${color}${msg}${reset}"
+  }
+}
+
+proc _colorize(ci_status, msg) {
+  var color_name = ''
   case "${ci_status}" in
     success)
-      echo -e "${green}${msg}${reset}"
+      setvar color_name = 'green'
       ;;
     failure|error|action_required|cancelled|timed_out)
-      echo -e "${red}${msg}${reset}"
+      setvar color_name = 'red'
       ;;
     pending)
-      echo -e "${yellow}${msg}${reset}"
+      setvar color_name = 'yellow'
       ;;
-    *)
-      echo "${msg}"
   esac
+  _color "${color_name}" <<< "${msg}"
 }
 
-_assess() {
-  local -r ci_status="$1"
-
+proc _assess(ci_status) {
   case "${ci_status}" in
     success)
       echo 'Super duper.'
@@ -54,56 +57,70 @@ _assess() {
   esac
 }
 
-_poll() {
-  local -r sha="$1"
-  local short_sha; short_sha="$(cut -c1-8 <<< "${sha}")"; readonly short_sha
+proc _try_status(sha) {
+  shopt --unset errexit { hub ci-status "${sha}" 2>&1 }
+}
 
-  local commit_url; commit_url="$(hub browse -u -- "commit/${sha}")"; readonly commit_url
-  local branch_name; branch_name="$(git rev-parse --abbrev-ref HEAD)"; readonly branch_name
+proc _try_pr_show(branch_name) {
+  shopt --unset errexit {
+    hub pr show -u -h "${branch_name}" \
+       > >(_color blue) \
+      2> >(_color yellow)
+  }
+}
 
-  local ci_status='pending'
-  until [ "${ci_status}" != 'pending' ]; do
-    echo -e "${purple}$(date)${reset} – CI Status"
-    echo -ne "Checking ${green}${branch_name}${reset} (${blue}${commit_url}${reset})… "
-    ci_status="$(hub ci-status "${sha}" 2>&1)" || true
+proc _toast(msg) { osascript -e "display notification \"${msg}\"" }
 
-    case "${ci_status}" in
+proc _try_beeps(sox_include_file) {
+  if ! test -f "${sox_include_file}" { return }
+  # shellcheck source=/dev/null
+  source "${sox_include_file}"
+  sox_random_beep > /dev/null 2>&1 || true
+}
+
+proc _speak(msg) { say -v Karen "${msg}" }
+
+proc _poll(sha) {
+  const branch_name = "$(git rev-parse --abbrev-ref HEAD)"
+  const commit_url  = "$(hub browse -u -- "commit/${sha}")"
+  const short_sha   = "$(cut -c1-8 <<< "${sha}")"
+
+  var status_output = 'pending'
+  until test "${status_output}" != 'pending'; do
+    echo -e "$(date | _color purple) – CI Status"
+    echo -ne "Checking $(_color green <<< "$branch_name") ($(_color blue <<< "$commit_url"))… "
+    setvar status_output = "$(_try_status "$sha")"
+
+    case "${status_output}" in
       success|failure|error|action_required|cancelled|timed_out|'no status') :
         ;;
       pending)
-        _colorize "${ci_status}" "${ci_status}"
+        _colorize "${status_output}" "${status_output}"
         sleep 5
         ;;
       *)
-        echo -e "${red}[ERROR!]${reset} ${ci_status}"
-        ci_status='pending'
+        echo -e "$(_color red <<< '[ERROR!]') ${status_output}"
+        setvar status_output = 'pending'
         sleep 5
     esac
   done
-  readonly ci_status
+  const ci_status = "${status_output}"
 
-  local msg; msg="CI ${ci_status}. $(_assess "${ci_status}")"
-
-  # Toast notification
-  osascript -e "display notification \"${msg} ${short_sha}\""
+  const msg = "CI ${ci_status}. $(_assess "${ci_status}")"
 
   # Colorized banner
-  _colorize "${ci_status}" "$(figlet "${ci_status}")"
-
+  _colorize "${ci_status}" $'\n'"$(figlet "${ci_status}")"
   # Link(s)
   echo 'Links:'
-  echo -e "→ Browse:  ${blue}${commit_url}${reset}"
-  echo -e "→ Compare: $(hub compare -u "${branch_name}" > >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
-  echo -e "→ PR:      $(hub pr show -u -h "${branch_name}" > >(_in_color "${blue}") 2> >(_in_color "${yellow}"))"
+  echo -e "→ Browse:  $(_color blue <<< ${commit_url})"
+  echo -e "→ Compare: $(hub compare -u "${branch_name}" | _color blue)"
+  echo -e "→ PR:      $(_try_pr_show "${branch_name}")"
   echo
-
+  # Toast notification
+  _toast "${msg} sha: ${short_sha}"
   # Audio announcement(s)
-  if [ -f "${HOME}/.config/dotfiles-include/sox.sh" ]; then
-    # shellcheck source=/dev/null
-    source "${HOME}/.config/dotfiles-include/sox.sh"
-    sox_random_beep > /dev/null 2>&1 || true
-  fi
-  say -v Karen "${msg}" &
+  _try_beeps "${HOME}/.config/dotfiles-include/sox.sh"
+  _speak "${msg}"
 }
 
 _poll "${1:-"$(git rev-parse HEAD)"}"
