@@ -1,0 +1,41 @@
+#!/usr/bin/env oil
+
+proc discover() {
+  find "${HOME}/projects" -maxdepth 5 -type f -name '.tool-versions'
+}
+
+# Does not include a header row
+proc to_csv() { sed -e 's/ /,/g' }
+proc file_to_csv(filepath) { to_csv < $filepath }
+
+proc to_yaml() {
+  ... sed -e 's/ /: /g'
+    # This janky `awk` bit is here to quote the version values; otherwise some
+    # tools like to do things like coerce `"1.0"` into an integer like `1`,
+    # which we don't want.
+    | awk '{ print $1, "\x22"$2"\x22" }'
+}
+proc file_to_yaml(filepath) { to_yaml < $filepath }
+
+proc to_json() { to_yaml | yq }
+proc file_to_json(filepath) { to_json < $filepath }
+
+proc to_json_all() {
+  var d_outer = {}
+
+  discover | while read -r filepath; do
+    var d_inner = {}
+    cat $filepath | while read -r line; do
+      var name, version = split(${line})
+      setvar d_inner[$name] = $version
+    done
+    setvar d_outer[$filepath] = d_inner
+  done
+
+  json write d_outer
+}
+
+proc usage() { echo 'Usage: TODO' }
+
+# TODO: Figure out what it takes to have a default if no arg is given
+"${@:-usage}"
