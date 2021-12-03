@@ -8,41 +8,41 @@ const colors = {
   green:  $'\e[0;92m',
   purple: $'\e[0;35m',
   red:    $'\e[0;91m',
-  reset:  $'\e[0m',
   yellow: $'\e[0;33m'
+  # ---
+  reset:  $'\e[0m',
 }
 
 proc _color(color_name) {
   const msg = "$(cat -)"
   if test "$msg" = '' { return }
 
-  if test "$color_name" = '' {
-    echo -e "$msg"
-  } else {
-    const color = colors[$color_name]
-    const reset = colors->reset
-    echo -e "${color}${msg}${reset}"
-  }
+  const color = colors[$color_name]
+  const reset = colors->reset
+  echo -e "${color}${msg}${reset}"
 }
 
-proc _colorize(ci_status, msg) {
+proc _colorize(status, msg) {
   var color_name = ''
-  case "${ci_status}" in
+  case "${status}" in
     success)
       setvar color_name = 'green'
+      ;;
+    pending|'no status')
+      setvar color_name = 'yellow'
       ;;
     failure|error|action_required|cancelled|timed_out)
       setvar color_name = 'red'
       ;;
-    pending)
-      setvar color_name = 'yellow'
+    *)
+      setvar color_name = 'reset'
       ;;
   esac
   _color "${color_name}" <<< "${msg}"
 }
 
-proc _assess(ci_status) {
-  case "${ci_status}" in
+proc _assess(status) {
+  case "${status}" in
     success)
       echo 'Super duper.'
       ;;
@@ -104,12 +104,12 @@ proc _poll(sha) {
         sleep 5
     esac
   done
-  const ci_status = "${status_output}"
+  const status = "${status_output}"
 
-  const msg = "CI ${ci_status}. $(_assess "${ci_status}")"
+  const msg = "CI ${status}. $(_assess "${status}")"
 
   # Colorized banner
-  _colorize "${ci_status}" $'\n'"$(figlet "${ci_status}")"
+  _colorize "${status}" $'\n'"$(figlet "${status}")"
   # Link(s)
   echo 'Links:'
   echo -e "→ Browse:  $(_color blue <<< ${commit_url})"
