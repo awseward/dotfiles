@@ -26,13 +26,13 @@ proc to_json_all() {
   discover | while read -r filepath; do
     var d_inner = {}
     cat $filepath | while read -r line; do
-      var name, version = split(${line})
+      var name, version = split($line)
       setvar d_inner[$name] = $version
     done
     setvar d_outer[$filepath] = d_inner
   done
 
-  json write d_outer
+  json write (d_outer)
 }
 
 proc help() {
