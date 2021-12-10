@@ -89,11 +89,4 @@ export_deduped_PATH
 warn_if_duplicates_in_PATH
 warn_if_dotfiles_update_check_recommended
 
-# Super unhappy to have to chuck this in here but upgrading broke things and
-# this is just to unblock me in the short term;
-#
-# tl;dr on the breakage is that `/usr/local/Cellar/asdf/0.9.0/libexec/bin/asdf`
-# is resolving the value to set for `$ASDF_DIR` incorrectly
-export ASDF_DIR='/usr/local/Cellar/asdf/0.9.0/libexec'
-
 eval "$(direnv hook zsh)"
