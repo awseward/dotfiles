@@ -1,8 +1,8 @@
-let Attribute = (./Attribute.dhall).Type
-
 let Style = ./Style.dhall
 
 let Optional/ext = ./Optional.dhall
+
+let Attribute = (./Attribute.dhall).Type
 
 let Optional/tryConcatMapSep = Optional/ext.tryConcatMapSep
 

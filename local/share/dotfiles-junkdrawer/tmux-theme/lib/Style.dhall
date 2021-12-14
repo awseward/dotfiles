@@ -1,11 +1,11 @@
 -- See: http://man7.org/linux/man-pages/man1/tmux.1.html#STYLES
+let Attribute/pkg = ./Attribute.dhall
+
 let List/pkg = (./imports.dhall).Prelude.List
 
 let Optional/pkg = (./imports.dhall).Prelude.Optional
 
 let Optional/map = Optional/pkg.map
-
-let Attribute/pkg = ./Attribute.dhall
 
 let Attribute = Attribute/pkg.Type
 

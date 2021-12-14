@@ -1,3 +1,5 @@
+let Attribute/pkg = ./Attribute.dhall
+
 let Optional/pkg = (./imports.dhall).Prelude.Optional
 
 let Optional/map = Optional/pkg.map
@@ -9,8 +11,6 @@ let Text/concatMapSep = Text/pkg.concatMapSep
 let List/pkg = (./imports.dhall).Prelude.List
 
 let List/null = List/pkg.null
-
-let Attribute/pkg = ./Attribute.dhall
 
 let Attribute = Attribute/pkg.Type
 
