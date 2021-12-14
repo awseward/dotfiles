@@ -5,12 +5,14 @@ repo_dir="$(pwd)"; readonly repo_dir
 
 ( set -euo pipefail
 
-  readonly fmt_vsn='0.1.0'
+  readonly fmt_vsn='0.1.1'
   logfile="$(gec_path_active)"; readonly logfile
   timestamp="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"; readonly timestamp
   ref="$(git rev-parse --abbrev-ref HEAD)"; readonly ref
+  remote="$(git remote get-url origin)"; readonly remote
 
-  echo -e "${fmt_vsn}\t${timestamp}\t${hook_file}\t${repo_dir}\t${ref}" >> "${logfile}"
+  echo -e "${fmt_vsn}\t${timestamp}\t${hook_file}\t${repo_dir}\t${ref}\t${remote}" \
+    >> "${logfile}"
 
 ) || true
 

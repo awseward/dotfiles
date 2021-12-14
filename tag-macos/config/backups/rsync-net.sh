@@ -39,6 +39,7 @@ borg create              \
                          \
     ~/books              \
     ~/scans              \
+    ~/unreviewed-scans   \
 
 backup_exit=$?
 
