@@ -59,6 +59,9 @@ _source_file_if_present "$HOME/.fzf.zsh"
 
 _source_dir_rec_if_present "$HOME/.config/dotfiles-include"
 
+# TODO: Look into ways to avoid needing this here
+export ASDF_DIR="$HOME/.asdf"
+
 __ensure_in_PATH                      \
   '/usr/local/bin'                    \
   '/usr/bin'                          \
@@ -66,8 +69,7 @@ __ensure_in_PATH                      \
   '/sbin'                             \
   "$HOME/bin"                         \
   "$HOME/.bin"                        \
-  "$HOME/.asdf/asdf.sh"               \
-  "$HOME/.asdf/completions/asdf.bash" \
+  "$ASDF_DIR/bin"                     \
   "$HOME/Library/Python/3.6/bin"      \
   "$RACKET_BIN_DIR"                   \
   "$XDG_DATA_HOME/nimble/bin"         \
@@ -88,12 +90,5 @@ export_deduped_PATH
 # Some checks
 warn_if_duplicates_in_PATH
 warn_if_dotfiles_update_check_recommended
-
-# Super unhappy to have to chuck this in here but upgrading broke things and
-# this is just to unblock me in the short term;
-#
-# tl;dr on the breakage is that `/usr/local/Cellar/asdf/0.9.0/libexec/bin/asdf`
-# is resolving the value to set for `$ASDF_DIR` incorrectly
-export ASDF_DIR='/usr/local/Cellar/asdf/0.9.0/libexec'
 
 eval "$(direnv hook zsh)"
