@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 
->&2 echo ">>>> $0 -- $*"
-
 readonly origin_hook="$0"
 readonly track_hook="${HOME}/.git-hooks/track"
 
-if [ -f "${track_hook}" ]; then
-  "${track_hook}" "${origin_hook}"
+if [ ! -f "${track_hook}" ]; then
+  >&2 echo "WARNING: $0 cannot find tracking hook: ${track_hook}"
+  exit 0
 fi
+
+standard_props="$(
+  jq -c --arg hook_args "$*" '. + { hook_args: $hook_args } ' <<< '{}'
+)"; readonly standard_props
+
+readonly props="${standard_props}"
+
+"${track_hook}" "${origin_hook}" "${props}"

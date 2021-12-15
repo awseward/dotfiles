@@ -3,7 +3,10 @@
 readonly origin_hook="$0"
 readonly track_hook="${HOME}/.git-hooks/track"
 
-[ -f "${track_hook}" ] || exit 0
+if [ ! -f "${track_hook}" ]; then
+  >&2 echo "WARNING: $0 cannot find tracking hook: ${track_hook}"
+  exit 0
+fi
 
 standard_props="$(
   jq -c --arg hook_args "$*" '. + { hook_args: $hook_args } ' <<< '{}'
