@@ -4,14 +4,5 @@ readonly origin_hook="$0"
 readonly track_hook="${HOME}/.git-hooks/track"
 
 if [ -f "${track_hook}" ]; then
-  commit_msg_length="$(git log --format=%B -n1 | wc -c)"; readonly commit_msg_length
-  props="$(
-    jq -c --argjson commit_msg_length ${commit_msg_length} '. +
-      {
-        commit_msg_length: $commit_msg_length
-      }
-    ' <<< '{}'
-  )"; readonly props
-
-  "${track_hook}" "${origin_hook}" "${props}"
+  "${track_hook}" "${origin_hook}"
 fi
