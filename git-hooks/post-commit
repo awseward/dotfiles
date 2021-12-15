@@ -1,19 +1,21 @@
 #!/usr/bin/env bash
 
->&2 echo ">>>> $0 -- $*"
-
 readonly origin_hook="$0"
 readonly track_hook="${HOME}/.git-hooks/track"
 
-if [ -f "${track_hook}" ]; then
-  commit_msg_length="$(git log --format=%B -n1 | wc -c)"; readonly commit_msg_length
-  props="$(
-    jq -c --argjson commit_msg_length "${commit_msg_length}" '. +
-      {
-        commit_msg_length: $commit_msg_length
-      }
-    ' <<< '{}'
-  )"; readonly props
+[ -f "${track_hook}" ] || exit 0
 
-  "${track_hook}" "${origin_hook}" "${props}"
-fi
+standard_props="$(
+  jq -c --arg hook_args "$*" '. + { hook_args: $hook_args } ' <<< '{}'
+)"; readonly standard_props
+
+commit_msg_length="$(git log --format=%B -n1 | wc -c)"; readonly commit_msg_length
+props="$(
+  jq -c --argjson commit_msg_length "${commit_msg_length}" '. +
+    {
+      commit_msg_length: $commit_msg_length
+    }
+  ' <<< "${standard_props}"
+)"; readonly props
+
+"${track_hook}" "${origin_hook}" "${props}"
