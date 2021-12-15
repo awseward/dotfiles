@@ -8,8 +8,13 @@ if [ ! -f "${track_hook}" ]; then
   exit 0
 fi
 
+hook_args_json_arr="$(
+  # Based on from https://stackoverflow.com/a/26809318
+  printf '%s\n' "$@" | jq -R . | jq -sc '. | map(select(length > 0))'
+)"; readonly hook_args_json_arr
+
 standard_props="$(
-  jq -c --arg hook_args "$*" '. + { hook_args: $hook_args } ' <<< '{}'
+  jq -c --argjson hook_args "$hook_args_json_arr" '. + { hook_args: $hook_args } ' <<< '{}'
 )"; readonly standard_props
 
 commit_msg_length="$(git log --format=%B -n1 | wc -c)"; readonly commit_msg_length
