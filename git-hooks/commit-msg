@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
->&2 echo ">>>> $0 -- $*"
-
 readonly origin_hook="$0"
+readonly script="${HOME}/.git-hooks/script.sh"
 readonly track_hook="${HOME}/.git-hooks/track"
 
 if [ ! -f "${track_hook}" ]; then
@@ -10,14 +9,13 @@ if [ ! -f "${track_hook}" ]; then
   exit 0
 fi
 
-hook_args_json_arr="$(
-  # Based on from https://stackoverflow.com/a/26809318
-  printf '%s\n' "$@" | jq -R . | jq -sc '. | map(select(length > 0))'
-)"; readonly hook_args_json_arr
-
-standard_props="$(
-  jq -c --argjson hook_args "$hook_args_json_arr" '. + { hook_args: $hook_args } ' <<< '{}'
-)"; readonly standard_props
+standard_props='{}'
+if [ ! -f "${script}" ]; then
+  >&2 echo "WARNING: $0 cannot find tracking hook: ${track_hook}"
+else
+  standard_props="$("${script}" fmt_standard_props "$@")"
+fi
+readonly standard_props
 
 readonly props="${standard_props}"
 
