@@ -7,7 +7,7 @@ repo_dir="$(pwd)"; readonly repo_dir
 ( set -euo pipefail
 
   readonly fmt_vsn='0.1.3'
-  logfile="$(gec_path_active)"; readonly logfile
+  logfile="$(gec active_log)"; readonly logfile
   timestamp="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"; readonly timestamp
   ref="$(git rev-parse --abbrev-ref HEAD)"; readonly ref
   remote="$(git remote get-url origin)"; readonly remote
