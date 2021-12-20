@@ -53,6 +53,7 @@ endif
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
+  autocmd Filetype sql setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
   " Enable file type detection.
   " Use the default filetype settings, so that mail gets 'tw' set to 72,
