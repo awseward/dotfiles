@@ -80,7 +80,9 @@ __ensure_in_PATH                      \
 # Warning: Refusing to link macOS provided/shadowed software: sqlite
 # If you need to have sqlite first in your PATH, run:
 #   echo 'export PATH="/usr/local/opt/sqlite/bin:$PATH"' >> ~/.zshrc
-__ensure_in_PATH '/usr/local/opt/sqlite/bin'
+#
+# Instead went with:
+#   ln -s /usr/local/opt/sqlite/bin/sqlite3 /usr/local/bin/sqlite3`
 
 # Warning: Homebrew's sbin was not found in your PATH but you have installed
 # formulae that put executables in /usr/local/sbin.
