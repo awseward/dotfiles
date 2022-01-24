@@ -3,62 +3,56 @@
   useConfigOnly = true
 
 [alias]
-  ### Informational
   # Long-form
-  alias            = !git config --get-regex '^alias\\.'
+  alias            = !git config --get-regex '^alias\\.' | sed -E 's/^alias\\.//'
   amend            = commit --amend
+  back             = checkout -
   blame-short      = blame -c
-  chart            = !git diff --stat=$(tput cols)
+  chart            = !git diff --stat="$(tput cols)"
   fetch-all        = !git remote -v | awk '{print $1}' | sort -u | xargs -L1 git fetch -v --progress
   files            = diff --name-only
-  github-log       = !git --no-pager prettylog --reverse
+  gh-log           = !git --no-pager prettylog --reverse
   info-pane        = !clear && git status && git stash list
   last-commit      = log -n 1
   local-branches   = branch -l
   message          = show -s --format=medium
+  nuke             = clean -xdf
   nuke-dry         = clean -xdfn
   nuke-interactive = clean -xdfi
   prettylog        = log --pretty=format:'%C(blue)%h%C(reset) %C(bold)%s%C(reset) %C(yellow)<%ae>%C(reset)' --abbrev-commit
   push-force       = push --force-with-lease
   remote-branches  = branch -r
+  submodule-update = submodule update --init --recursive
   summary          = diff --shortstat
   tags             = tag -l --sort=v:refname
   # Abbreviated
   br   = branch
-  bs   = !git blame-short
-  ch   = !git chart
+  bs   = blame-short
+  ch   = chart
+  cl   = clean -df
   cm   = commit
+  co   = checkout
   dc   = diff --cached
-  fa   = !git fetch-all
-  ghl  = !git github-log
-  l5   = !git github-log -n5
-  l10  = !git github-log -n10
-  lbr  = !git local-branches
-  lc   = !git last-commit
-  msg  = !git message
-  nd   = !git nuke-dry
-  ni   = !git nuke-interactive
+  fa   = fetch-all
+  ghl  = gh-log
+  l10  = gh-log -n10
+  l5   = gh-log -n5
+  lbr  = local-branches
+  lc   = last-commit
+  msg  = message
+  nd   = nuke-dry
+  ni   = nuke-interactive
   p    = push -u
-  pf   = !git push-force
-  pfoh = !git push-force origin HEAD
-  pl   = !git prettylog
+  pf   = push-force
+  pfoh = push-force origin HEAD
+  pl   = prettylog
   poh  = push -u origin HEAD
-  # TODO: Find a better way to detect the "main" branch
   puom = !git pull origin "$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
-  rbr  = !git remote-branches
+  rbr  = remote-branches
   st   = status --untracked-files=no
   stu  = status
+  sub  = submodule-update
   sum  = diff --shortstat
-
-  ### Potentially destructive
-  # Long-form
-  back             = checkout -
-  nuke             = clean -xdf
-  submodule-update = !git submodule update --init --recursive
-  # Abbreviated
-  cl  = clean -df
-  co  = checkout
-  sub = !git submodule-update
 
 [color]
   branch      = auto
