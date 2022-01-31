@@ -224,6 +224,7 @@ map <leader>q :bufdo :bd<CR><CR>
 map <leader>R :source ~/.vimrc<CR>
 map <leader>W :FixWhitespace<CR>:w<CR>
 map <leader>p :Commands<CR>
+map <leader>h :History<CR>
 
 "
 " Colors
