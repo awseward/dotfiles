@@ -215,7 +215,7 @@ else
   endif
 endif
 
-map <leader>B :Buffers<CR>
+map <leader>b :Buffers<CR>
 map <leader>E :bufdo! :e!<CR><CR>
 map <leader>F :Filetypes<CR>
 map <leader>f :Rg<Space>
