@@ -7,7 +7,7 @@ nim 1.6.0
 nodejs 16.7.0
 postgres 13.1
 python 3.9.0
-ruby 3.0.0
+ruby 3.1.1
 rust stable
 tmux 3.2a
 yarn 1.22.10
