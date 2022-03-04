@@ -44,7 +44,6 @@
   environment.systemPackages = with pkgs; [
     config.programs.vim.package
 
-    ag
     bat
     bats
     cloc
@@ -61,6 +60,7 @@
     redis
     ripgrep
     shellcheck
+    silver-searcher
     sox
     tmate
     tree
