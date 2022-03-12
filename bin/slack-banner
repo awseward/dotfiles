@@ -58,8 +58,7 @@ _ensure_colons() { sed -e 's/^:*// ; s/:*$//' | xargs -I{} echo ':{}:' ; }
 _render() {
   figlet -f banner "${msg}" \
     | grep -v -E '^\s*$' \
-    | awk '{ print "", $0 }' \
-    | sed -e "s/\#/${fg_emj}/g;s/\ /${bg_emj}/g"
+    | sed -e "s/\ \{1\}$// ; s/\#/${fg_emj}/g ; s/\ /${bg_emj}/g"
 }
 
 
