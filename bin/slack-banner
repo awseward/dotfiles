@@ -7,14 +7,10 @@
 #
 # Example usage:
 #
-# slack-banner 'hello' ':wave:' ':transparent:'
+# slack-banner build 'hello' ':wave:' ':transparent:'
 #
 
 set -euo pipefail
-
-message="${1}"
-fg_emoji="${2}"
-bg_emoji="${3}"
 
 _warn_if_too_long() {
   local result_length; result_length="$1"
@@ -32,12 +28,50 @@ ERR
   fi
 }
 
-_do_the_thing() {
-  local result
-  result="$(figlet -f banner "${message}" | sed -e "s/\#/${fg_emoji}/g;s/\ /${bg_emoji}/g")"
-  pbcopy <<< "${result}"
-  echo "Slack emoji banner of '${message}' spelled out with '${fg_emoji}' copied to clipboard!"
-  _warn_if_too_long ${#result}
+help() {
+  >&2 cat <<-MSG
+Usage:
+
+  $(basename "$0") build 'Hello!' ':simple_smile:' ':white_square:'
+
+MSG
+  exit 1
 }
 
-_do_the_thing
+_prompt() {
+  local -r varname="$1"
+  local -r default="${2:-}"
+
+  if [ "${default}" = '' ]; then
+    >&2 echo -n "Enter $varname: " && read -r val
+  else
+    >&2 echo -n "Enter $varname (default: '${default}'): " && read -r val
+    [ "${val}" = '' ] && val="${default}"
+  fi
+  readonly val
+
+  echo "${val}"
+}
+
+_ensure_colons() { sed -e 's/^:*// ; s/:*$//' | xargs -I{} echo ':{}:' ; }
+
+_render() {
+  figlet -f banner "${msg}" \
+    | grep -v -E '^\s*$' \
+    | awk '{ print "", $0 }' \
+    | sed -e "s/\#/${fg_emj}/g;s/\ /${bg_emj}/g"
+}
+
+
+build() {
+  msg="${1-"$(_prompt message)"}"
+  fg_emj="${2-"$(_prompt 'foreground emoji' | _ensure_colons)"}"
+  bg_emj="${3:-"$(_prompt 'background emoji' ':_:' | _ensure_colons)"}"
+
+  local result; result="$(_render "$msg" "$fg_emj" "$bg_emj")"; readonly result
+  _warn_if_too_long ${#result}
+  pbcopy <<< "${result}"
+  >&2 echo -e "\nSlack emoji banner of '${msg}' spelled out with '${fg_emj}' (background: '${bg_emj}') copied to clipboard!"
+}
+
+"${@:-build}"
