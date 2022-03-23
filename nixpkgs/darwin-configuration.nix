@@ -6,6 +6,7 @@
   system.defaults.NSGlobalDomain.AppleEnableSwipeNavigateWithScrolls = false;
   system.defaults.NSGlobalDomain.AppleEnableMouseSwipeNavigateWithScrolls = false;
 
+  system.defaults.NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
   system.defaults.NSGlobalDomain.AppleKeyboardUIMode = 3;
   system.defaults.NSGlobalDomain.ApplePressAndHoldEnabled = true;
   system.defaults.NSGlobalDomain.AppleShowScrollBars = "Always";
@@ -30,8 +31,12 @@
 
   system.defaults.finder._FXShowPosixPathInTitle = true;
   system.defaults.finder.AppleShowAllExtensions = true;
+  system.defaults.finder.AppleShowAllFiles = true;
+  system.defaults.finder.FXDefaultSearchScope = "SCcf"; # Current folder
   system.defaults.finder.FXEnableExtensionChangeWarning = false;
+  system.defaults.finder.FXPreferredViewStyle = "Nlsv"; # List view
   system.defaults.finder.QuitMenuItem = true;
+  system.defaults.finder.ShowPathbar = true;
 
   system.defaults.trackpad.Clicking = true;
 
