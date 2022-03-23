@@ -17,14 +17,21 @@
   system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode = true;
   system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
   system.defaults.NSGlobalDomain.NSTableViewDefaultSizeMode = 1;
+  system.defaults.NSGlobalDomain.NSUseAnimatedFocusRing = false;
+  system.defaults.NSGlobalDomain.NSWindowResizeTime = "0.01";
   system.defaults.NSGlobalDomain.PMPrintingExpandedStateForPrint = true;
   system.defaults.NSGlobalDomain.PMPrintingExpandedStateForPrint2 = true;
 
+  system.defaults.alf.stealthenabled = 1;
+
+  system.defaults.dock.autohide = false;
   system.defaults.dock.enable-spring-load-actions-on-all-items = true;
+  system.defaults.dock.launchanim = false;
   system.defaults.dock.mouse-over-hilite-stack = true;
   system.defaults.dock.mru-spaces = false;
   system.defaults.dock.show-recents = false;
   system.defaults.dock.showhidden = true;
+  system.defaults.dock.tilesize = 8;
 
   system.defaults.finder._FXShowPosixPathInTitle = true;
   system.defaults.finder.AppleShowAllExtensions = true;
