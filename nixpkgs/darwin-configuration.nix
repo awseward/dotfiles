@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  launchd.user.agents.foobar = (import ./foo);
-
   system.defaults.NSGlobalDomain.AppleEnableMouseSwipeNavigateWithScrolls = false;
   system.defaults.NSGlobalDomain.AppleEnableSwipeNavigateWithScrolls = false;
   system.defaults.NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
