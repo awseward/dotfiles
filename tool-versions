@@ -1,5 +1,4 @@
 dhall 1.41.0
-elasticsearch 5.6.4
 helm 3.4.1
 idris 1.0
 java openjdk-15
