@@ -63,6 +63,7 @@
     entr
     exa
     figlet
+    graphviz
     hadolint
     htop
     jq
