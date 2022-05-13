@@ -92,7 +92,6 @@
   programs.vim.package = pkgs.vim_configurable.override {
     darwinSupport = true;
     guiSupport = "no";
-    # python = pkgs.python3;
   };
 
   # Create /etc/zshrc that loads the nix-darwin environment.
