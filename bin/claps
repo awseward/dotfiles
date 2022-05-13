@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+# Usage:
+#
+#   claps Your message here
+#
+# * NOTE: If your message contains shell-significant characters, you may need
+# to quote it like so:
+#
+#   claps 'Your message here!'
+#
+
+puts ARGV.flat_map { |str| str.split ' ' }.join(' :clap: ')
