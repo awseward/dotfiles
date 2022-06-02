@@ -72,13 +72,17 @@ proc _try_pr_show(branch_name) {
 proc _toast(msg) { osascript -e "display notification \"${msg}\"" }
 
 proc _try_beeps(sox_include_file) {
+  if test "${MUTE_AUDIO:-false}" == 'true' { return }
   if ! test -f "${sox_include_file}" { return }
   # shellcheck source=/dev/null
   source "${sox_include_file}"
   sox_random_beep > /dev/null 2>&1 || true
 }
 
-proc _speak(msg) { say -v Karen "${msg}" }
+proc _speak(msg) {
+  if test "${MUTE_AUDIO:-false}" == 'true' { return }
+  say -v Karen "${msg}"
+}
 
 proc _poll(sha) {
   const branch_name = "$(git rev-parse --abbrev-ref HEAD)"
