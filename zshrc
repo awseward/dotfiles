@@ -76,6 +76,7 @@ __ensure_in_PATH                      \
   "$RACKET_BIN_DIR"                   \
   "$XDG_DATA_HOME/nimble/bin"         \
   "$HOME/.local/bin"                  \
+  "$HOME/.opam/default/bin"           \
 
 # Warning: Refusing to link macOS provided/shadowed software: sqlite
 # If you need to have sqlite first in your PATH, run:
