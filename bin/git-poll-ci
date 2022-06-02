@@ -84,10 +84,21 @@ proc _speak(msg) {
   say -v Karen "${msg}"
 }
 
-proc _poll(sha) {
+proc _link_commit(sha) { hub browse -u -- "commit/${sha}" }
+proc _link_compare(branch_name) { hub compare -u "${branch_name}" }
+proc _link_pr_show(branch_name) {
+  shopt --unset errexit {
+    hub pr show -u -h "${branch_name}" \
+       > >(_color blue) \
+      2> >(_color yellow)
+  }
+}
+
+proc _trunc_8 { cut -c1-8 }
+
+proc _poll(sox_include_file, sha) {
   const branch_name = "$(git rev-parse --abbrev-ref HEAD)"
-  const commit_url  = "$(hub browse -u -- "commit/${sha}")"
-  const short_sha   = "$(cut -c1-8 <<< "${sha}")"
+  const commit_url  = "$(_link_commit "${sha}")"
 
   var status_output = 'pending'
   until test "${status_output}" != 'pending'; do
@@ -117,14 +128,20 @@ proc _poll(sha) {
   # Link(s)
   echo 'Links:'
   echo -e "→ Browse:  $(_color blue <<< ${commit_url})"
-  echo -e "→ Compare: $(hub compare -u "${branch_name}" | _color blue)"
-  echo -e "→ PR:      $(_try_pr_show "${branch_name}")"
+  echo -e "→ Compare: $(_link_compare "${branch_name}" | _color blue)"
+  echo -e "→ PR:      $(_link_pr_show "${branch_name}")"
   echo
+
   # Toast notification
-  _toast "${msg} sha: ${short_sha}"
+  _toast "${msg} sha: $(_trunc_8 <<< "${sha}")"
+
   # Audio announcement(s)
-  _try_beeps "${HOME}/.config/dotfiles-include/sox.sh"
+  _try_beeps "${sox_include_file}"
   _speak "${msg}"
 }
 
-_poll "${1:-"$(git rev-parse HEAD)"}"
+# ---
+
+_poll \
+  "${HOME}/.config/dotfiles-include/sox.sh" \
+  "${1:-"$(git rev-parse HEAD)"}"
