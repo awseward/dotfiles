@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+_get_username() {
+  hub api | jq '.current_user_url' | xargs -t hub api | jq -r '.login'
+}
+
+_browse_closed_prs() {
+  xargs -I{} -t hub browse -- 'pulls?q=is:pr+is:closed+sort:updated-desc+author:{}'
+}
+
+main() { _get_username | _browse_closed_prs; }
+
+"${@:-main}"

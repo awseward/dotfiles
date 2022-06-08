@@ -3,9 +3,16 @@
 set -euo pipefail
 
 json() {
-  hub ci-status -f '{"status":"%S","name":"%t","url":"%U"}☆' \
+  timeout -v 5 hub ci-status -f '{"status":"%S","name":"%t","url":"%U"}☆' \
     | awk 'BEGIN{RS="☆"} {print}' \
     | jq "$@"
+}
+
+json_by_name() {
+  local -r name="$1"; shift
+
+  # shellcheck disable=SC2016
+  json --arg name "$name" "$@" 'select($name == .name)'
 }
 
 # I'm not really sure what this was supposed to be for, but here it is for
