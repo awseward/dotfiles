@@ -2,4 +2,16 @@
 
 set -euo pipefail
 
-hub ci-status -v -f "%S %t|" | awk 'BEGIN{RS="|"} {print}' | fzf
+json() {
+  hub ci-status -f '{"status":"%S","name":"%t","url":"%U"}☆' \
+    | awk 'BEGIN{RS="☆"} {print}' \
+    | jq "$@"
+}
+
+# I'm not really sure what this was supposed to be for, but here it is for
+# backwards compatibility
+legacy_() { json -r '.status + " " + .name' | fzf; }
+
+# ---
+
+"${@:-legacy_}"
