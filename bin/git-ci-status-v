@@ -64,7 +64,7 @@ foo2() {
       else
         {
           display: "jq",
-          content: map(select(.status != "success")) | group_by(.status) | map(sort_by(.name)) | .[]
+          content: map(select(.status != "success")) | group_by(.status) | map(sort_by(.name))
         }
       end
     '
