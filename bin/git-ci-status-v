@@ -20,19 +20,38 @@ by_name() {
 
 # Not sure about this but it could go somewhere
 foo() {
-  local -r name="$1"
+  local -r name="$1"; shift
   local start_s; start_s="$(date '+%s')"; readonly start_s
 
-  jq \
-    --argjson start_s "${start_s}" \
-    --argjson current  "$(by_name "$name")" \
-    -n '(now | floor) as $now_s | {
-      $start_s,
-      $now_s,
-      elapsed_s: ($now_s - $start_s),
-      $current
-    }'
-  # watch -cn1 "$0 by_name $*"
+  by_name "$name" \
+    | jq "$@" \
+        --argjson start_s "${start_s}" \
+        '(now | floor) as $now_s |
+        {
+          $start_s,
+          $now_s,
+          elapsed_s: ($now_s - $start_s),
+          current: .
+        }'
+}
+
+foo2() {
+  local output; output="$(
+    json -r -s "$@" '
+      group_by(.status) | map(sort_by(.name))[] |
+        if   all("success" == .status)
+        then "success"
+        else .
+        end
+    '
+  )"
+
+  if [ "${output}" = 'success' ]; then
+    output="\e[0;92m$(figlet "${output}")\e[0m"
+  fi
+  readonly output
+
+  echo -e "${output}"
 }
 
 by_status() {
