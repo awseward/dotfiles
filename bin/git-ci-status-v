@@ -35,22 +35,52 @@ foo() {
         }'
 }
 
+print_() {
+  local -r display="$1"
+  local -r input="$(cat -)"
+
+  case "$display" in
+    'figlet')
+      echo -e "\e[$(jq -r .color_code <<< "${input}")m$(figlet "$(jq -r .content <<< "${input}")")\e[0m"
+      ;;
+    'jq')
+      echo 'TODO'
+      ;;
+    *)
+      echo "FIXME: unrecognized display $display"
+      ;;
+  esac
+}
+
 foo2() {
   local output; output="$(
-    json -r -s "$@" '
-      if   all("success" == .status)
-      then "success"
-      else map(select(.status != "success")) | group_by(.status) | map(sort_by(.name)) | .[]
+    json -r -s '
+      if all("success" == .status) then
+        {
+          display: "figlet",
+          content: (first | .status),
+          color_code: "0;92"
+        }
+      else
+        {
+          display: "jq",
+          content: map(select(.status != "success")) | group_by(.status) | map(sort_by(.name)) | .[]
+        }
       end
     '
   )"
+  print_ "$(jq -r .display <<< "${output}")" <<< "${output}"
 
-  if [ "${output}" = 'success' ]; then
-    output="\e[0;92m$(figlet "${output}")\e[0m"
-  fi
-  readonly output
+  # # FIXME: This is just trying a quick little thing out
+  # if true; then
+  #   echo -e "\e[$(jq -r .color_code <<< "${output}")m$(figlet "$(jq -r .content <<< "${output}")")\e[0m"
+  # fi
+  # if [ "${output}" = 'success' ]; then
+  #   output="\e[0;92m$(figlet "${output}")\e[0m"
+  # fi
+  # readonly output
 
-  echo -e "${output}"
+  # echo -e "${output}"
 }
 
 by_status() {
