@@ -62,10 +62,11 @@ foo2() {
           color_code: "0;92"
         }
       else
-        {
-          display: "jq",
-          content: map(select(.status != "success")) | group_by(.status) | map(sort_by(.name))
-        }
+        .
+        # {
+        #   display: "jq",
+        #   content: map(select(.status != "success")) | group_by(.status) | map(sort_by(.name))
+        # }
       end
     '
   )"
