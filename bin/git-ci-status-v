@@ -69,18 +69,8 @@ foo2() {
       end
     '
   )"
+  >&2 echo "output: ${output}"
   print_ "$(jq -r .display <<< "${output}")" <<< "${output}"
-
-  # # FIXME: This is just trying a quick little thing out
-  # if true; then
-  #   echo -e "\e[$(jq -r .color_code <<< "${output}")m$(figlet "$(jq -r .content <<< "${output}")")\e[0m"
-  # fi
-  # if [ "${output}" = 'success' ]; then
-  #   output="\e[0;92m$(figlet "${output}")\e[0m"
-  # fi
-  # readonly output
-
-  # echo -e "${output}"
 }
 
 by_status() {
