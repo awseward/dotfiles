@@ -8,17 +8,44 @@ json() {
     | jq "$@"
 }
 
-json_by_name() {
+by_name() {
   local -r name="$1"; shift
 
   # shellcheck disable=SC2016
-  json --arg name "$name" "$@" 'select($name == .name)'
+  json --arg name "$name" "$@" -s '
+    map(select($name == .name))
+      | first // { status: "not_found", $name, url: null }
+  '
+}
+
+# Not sure about this but it could go somewhere
+foo() {
+  local -r name="$1"
+  local start_s; start_s="$(date '+%s')"; readonly start_s
+
+  jq \
+    --argjson start_s "${start_s}" \
+    --argjson current  "$(by_name "$name")" \
+    -n '(now | floor) as $now_s | {
+      $start_s,
+      $now_s,
+      elapsed_s: ($now_s - $start_s),
+      $current
+    }'
+  # watch -cn1 "$0 by_name $*"
+}
+
+by_status() {
+  local -r status="$1"; shift
+
+  # shellcheck disable=SC2016
+  json --arg status "$status" "$@" -s 'map(select($status == .status)) | sort_by(.name)[]'
 }
 
 # I'm not really sure what this was supposed to be for, but here it is for
 # backwards compatibility
-legacy_() { json -r '.status + " " + .name' | fzf; }
+legacy_() { json -r '"\(.status) \(.name)"' | fzf; }
 
 # ---
 
-"${@:-legacy_}"
+"${@:-json}"
