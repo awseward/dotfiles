@@ -38,11 +38,10 @@ foo() {
 foo2() {
   local output; output="$(
     json -r -s "$@" '
-      group_by(.status) | map(sort_by(.name))[] |
-        if   all("success" == .status)
-        then "success"
-        else .
-        end
+      if   all("success" == .status)
+      then "success"
+      else map(select(.status != "success")) | group_by(.status) | map(sort_by(.name)) | .[]
+      end
     '
   )"
 
