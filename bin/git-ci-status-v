@@ -5,6 +5,10 @@ set -euo pipefail
 json() {
   timeout -v 5 hub ci-status -f '{"status":"%S","name":"%t","url":"%U"}☆' \
     | awk 'BEGIN{RS="☆"} {print}' \
+    | jq '. + {
+        # This just strips all the `utm_*` garbage parameters off of CI urls
+        url: .url | gsub("utm_[a-z]+=[-a-zA-Z]+&?";"") | gsub("\\?$";"")
+      }' \
     | jq "$@"
 }
 
