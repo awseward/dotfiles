@@ -6,9 +6,7 @@
 
 set -euo pipefail
 
-fetch_event() {
-  hub ci-status-v by_name 'ci/circleci: build' | jq -c --monochrome-output
-}
+fetch_event() { hub ci-status-v by_name 'ci/circleci: build'; }
 
 render_event() { git ghl --color=always -n1 && echo && jq --color-output; }
 
