@@ -40,4 +40,6 @@ _run() {
   echo "name: ${name}"
 }
 
-_timed_run "${1:-"$(_random_name)"}"
+# ---
+
+type -f sl && _timed_run "${1:-"$(_random_name)"}"
