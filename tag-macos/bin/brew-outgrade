@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# The name of this, `brew-outgrade` is a portmanteau of outdated and upgrade,
+# since my usual workflow is:
+#
+# > brew update && brew outdated
+# > brew upgrade
+#
+# TODO: Call this from somewhere, plus the nix counterpart I regularly run:
+#
+# > nix-channel --update --verbose && darwin-rebuild changelog
+# > darwin-rebuild switch
+#
+
+# i – for interactive
+i() {
+  xargs -t brew <<< update
+  brew outdated | sed -E 's/[)(]//g' | column -t \
+    | fzf \
+        --bind 'ctrl-a:select-all' \
+        --reverse \
+        --multi \
+        --prompt='brew upgrade> ' \
+        --preview "echo {} | awk '{ print \$1 }' | xargs echo brew upgrade" \
+        --header 'Outdated brew packages (You can ^C if none show up):' \
+    | awk '{ print $1 }' \
+    | xargs -t brew upgrade
+}
+
+# a – for all
+a() {
+  xargs -t brew <<< update
+  xargs -t brew <<< outdated
+  xargs -t brew <<< upgrade
+}
+
+"${@:-i}"
