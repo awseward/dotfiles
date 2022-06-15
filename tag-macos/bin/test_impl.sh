@@ -34,7 +34,7 @@ announce() {
   sleep 0.3
   _status_assessment "${status}" | say -v "${voice}"
 
-  say -r 280 -v "${voice}" "This has been ${voice}, with your C I announcement for \"$(jq -r '.name' <<< "${event}")\"."
+  say -r 250 -v "${voice}" "This has been ${voice}, with your C I announcement for \"$(jq -r '.name' <<< "${event}")\"."
   say -v "${voice}" "That status again, was ${status}."
   sleep '0.15'
   say -v "${voice}" 'Have a nice day!'
