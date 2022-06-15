@@ -16,6 +16,20 @@ announce() {
   # Chooses a random English-speaking voice.
   local -r voice="$(say -v '?' | grep '# Hello' | awk '{ print $1 }' | shuf | head -n1)"
 
+  # This is a pleasant sounding chord, but we should probably have something a
+  # little spicier for error status
+  type -f play >/dev/null 2>/dev/null && play -n \
+    synth 5 sin %-12  sin %+0  sq %+4  sq %+7  sq %+9  sq %+14  sq %+16 \
+    delay   0         0.10     0.20    0.30    0.40    0.50     0.60    \
+    overdrive \
+    reverb \
+    lowpass 2600 \
+    fade 0 0 5 \
+    2>/dev/null \
+    &
+
+  sleep 1
+
   (
     jq '"C I status: \(.status)."' <<< "${event}"
     _status_assessment "${status}"
