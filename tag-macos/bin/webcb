@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+w_stdin() {
+  >&2 echo "curl -fsS --upload-file - $WEBCB_HOST"
+  curl -fsS --upload-file - "$WEBCB_HOST"
+}
+
+w_file() { xargs -t      curl -fsS "$WEBCB_HOST" --upload-file <<< "$1"; }
+
+r_id()   { xargs -t -I{} curl -fsS "$WEBCB_HOST/{}" <<< "$1"; }
+
+r_url()  { xargs -t      curl -fsS <<< "$1"; }
+
+help() {
+  local -r f_="$(basename "$0")"
+  local -r gh_link='https://github.com/awseward/dotfiles/bin/webcb.sh'
+
+  less -FIRX <<-TXT
+webcb
+
+A web clipboard CLI client.
+
+Callers MUST NOT expect anything uploaded using this tool to be encrypted.
+
+Try not to rely on the backend displayed below, as it is just an
+implementation detail and should not affect the behavior of this tool.
+
+Currently using backend: $WEBCB_HOST
+
+---
+
+Usages:
+
+  = Write from STDIN =
+  $f_ w_stdin <<< 'Your text here'
+
+  = From a file =
+  $f_ w_file /your/file/here
+
+  = Read by ID =
+  $f_ r_id abc123
+  -or-
+  $f_ r_id abc123.txt
+
+  = Read by URL =
+  $f_ r_url $WEBCB_HOST/abc123
+  -or-
+  $f_ r_url $WEBCB_HOST/abc123.txt
+
+  = Override the host =
+  WEBCB_HOST='https://your.own.instance.com' $f_ w_stdin <<< 'Your text here'
+
+---
+See also:
+- $gh_link
+- $WEBCB_HOST
+
+TXT
+}
+
+# ---
+
+WEBCB_HOST="${WEBCB_HOST:-https://p.mort.coffee}"
+
+"${@:-help}"
