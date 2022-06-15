@@ -2,6 +2,13 @@
 
 set -euo pipefail
 
+_summary() {
+  # TODO: Flesh this idea out a little more… the motivation is that I'd like
+  # for the summary status to have the same interface as the stuff broken out
+  # per task
+  echo "\"$(hub ci-status)\"" | jq -S '{ status: ., name: "_summary", url: null }'
+}
+
 json() {
   timeout -v 5 hub ci-status -f '{"status":"%S","name":"%t","url":"%U"}☆' \
     | awk 'BEGIN{RS="☆"} {print}' \

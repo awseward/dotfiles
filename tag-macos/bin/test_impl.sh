@@ -26,7 +26,6 @@ announce() {
       That status again, was ${status}.
     "
   sleep '0.15'
-
   say -v "${voice}" 'Have a nice day!'
 }
 
