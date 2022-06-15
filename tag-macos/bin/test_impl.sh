@@ -41,7 +41,7 @@ _sound() {
         tri %-3-%-10 \
         overdrive 60 \
         reverb \
-        fade 0 0 0.5 \
+        fade 0.2 0 0.5 \
         2>/dev/null \
         &
       ;;
