@@ -19,8 +19,8 @@ announce() {
   # This is a pleasant sounding chord, but we should probably have something a
   # little spicier for error status
   type -f play >/dev/null 2>/dev/null && play -n \
-    synth 5 sin %-31  sq %+0  sq %+4  sq %+7  sq %+9  sq %+14  sq %+16 \
-    delay   0         0.10    0.20    0.30    0.40    0.50     0.60    \
+    synth 5 sin %-31 sin %-19  sin %+0  sq %+4  sq %+7  sq %+9  sq %+14  sq %+16 \
+    delay   0        0         0.10     0.20    0.30    0.40    0.50     0.60    \
     overdrive \
     reverb \
     lowpass 2600 \
@@ -34,10 +34,8 @@ announce() {
   sleep 0.3
   _status_assessment "${status}" | say -v "${voice}"
 
-  say -r 350 -v "${voice}" "
-      This has been ${voice}, with your C I announcement for \"$(jq -r '.name' <<< "${event}")\".
-      That status again, was ${status}.
-    "
+  say -r 280 -v "${voice}" "This has been ${voice}, with your C I announcement for \"$(jq -r '.name' <<< "${event}")\"."
+  say -v "${voice}" "That status again, was ${status}."
   sleep '0.15'
   say -v "${voice}" 'Have a nice day!'
 }
