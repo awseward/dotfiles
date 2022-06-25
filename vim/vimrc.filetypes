@@ -1,3 +1,4 @@
+au Bufread,BufNewFile *.hurl                          set filetype=bash
 au Bufread,BufNewFile *flowconfig                     set filetype=config
 au Bufread,BufNewFile *npmrc                          set filetype=config
 au Bufread,BufNewFile *terminalrc                     set filetype=config
