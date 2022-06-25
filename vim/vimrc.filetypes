@@ -2,6 +2,7 @@ au Bufread,BufNewFile *.hurl                          set filetype=bash
 au Bufread,BufNewFile *flowconfig                     set filetype=config
 au Bufread,BufNewFile *npmrc                          set filetype=config
 au Bufread,BufNewFile *terminalrc                     set filetype=config
+au Bufread,BufNewFile .envrc*                         set filetype=direnv
 au Bufread,BufNewFile Dockerfile*                     set filetype=dockerfile
 au Bufread,BufNewFile *minttyrc                       set filetype=dosini
 au Bufread,BufNewFile *gitconfig                      set filetype=gitconfig
