@@ -1,5 +1,4 @@
 au Bufread,BufNewFile *.hurl                          set filetype=bash
-au Bufread,BufNewFile *flowconfig                     set filetype=config
 au Bufread,BufNewFile *npmrc                          set filetype=config
 au Bufread,BufNewFile *terminalrc                     set filetype=config
 au Bufread,BufNewFile .envrc*                         set filetype=direnv
@@ -15,6 +14,4 @@ au Bufread,BufNewFile *.jbuilder                      set filetype=ruby
 au Bufread,BufNewFile *.env                           set filetype=sh
 au Bufread,BufNewFile post-up,pre-down,*aliases,*rcrc set filetype=sh
 au Bufread,BufNewFile *tmux.conf*                     set filetype=tmux
-au Bufread,BufNewFile *.config                        set filetype=xml " (.NET)
-au Bufread,BufNewFile *.ux                            set filetype=xml " (Fuse)
 au Bufread,BufNewFile .gemrc                          set filetype=yaml
