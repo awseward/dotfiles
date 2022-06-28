@@ -159,9 +159,9 @@ set laststatus=2
 " File behavior
 set backupdir=~/.local/share/vim/backups
 if has('nvim')
-  set undodir=~/.local/share/vim/undofiles
-else
   set undodir=~/.local/share/nvim/undofiles
+else
+  set undodir=~/.local/share/vim/undofiles
 end
 set noswapfile
 set wildmenu
