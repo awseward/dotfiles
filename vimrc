@@ -345,3 +345,10 @@ nnor ,CD :let @*=expand("%:p:h")<CR> "   ...               (absolute)
 " colorscheme fight-in-the-shade
 let &colorcolumn=join(range(81,999),",")
 highlight ColorColumn ctermbg=235 guibg=#222222
+
+" TODO: Improve this
+" This line (https://github.com/codota/tabnine-vim/blob/e27face391a4d9a3e43ff251010f77deddf0c88d/autoload/youcompleteme.vim#L142)
+" causes the command-line buffer (`q:`) to be VERY slow to come up, so for now
+" all I''m doing is commenting it out in the location that vim-plug installs
+" it to. I'm doing this mainly because there's no good way I can discern to
+" just cleanly disable that one particular autocommand
