@@ -246,7 +246,8 @@ endfunction
 
 set t_Co=256
 
-colorscheme paramount
+" colorscheme paramount
+colorscheme gruvbox
 
 if $LIGHT_SHELL != ""
   set background=light
