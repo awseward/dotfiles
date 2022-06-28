@@ -86,7 +86,7 @@
 
 [core]
   autocrlf   = input
-  editor     = vim
+  editor     = nvim
   ignoreCase = true
   pager      = less -F -X
   safecrlf   = warn

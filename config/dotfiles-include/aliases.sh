@@ -14,6 +14,7 @@ alias mv='mv -iv'
 alias p='ps -a'
 alias path='pretty_path'
 alias rm='rm -Iv'
+alias vim='nvim'
 
 ### git
 alias g='git'

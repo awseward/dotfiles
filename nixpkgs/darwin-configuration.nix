@@ -67,6 +67,7 @@
     hadolint
     htop
     jq
+    neovim
     redis
     ripgrep
     shellcheck
