@@ -353,3 +353,7 @@ highlight ColorColumn ctermbg=235 guibg=#222222
 " all I''m doing is commenting it out in the location that vim-plug installs
 " it to. I'm doing this mainly because there's no good way I can discern to
 " just cleanly disable that one particular autocommand
+
+" Copied this from whatever old vim was defaulting to, but the height
+" modifiers don't seem to be working…
+set guicursor=n-v-c:block,o:hor50,i-ci:hor15,r-cr:hor30,sm:block
