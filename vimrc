@@ -108,7 +108,6 @@ if filereadable(expand("~/.vim/vimrc.filetypes"))
   source ~/.vim/vimrc.filetypes
 
   " Keep vimrc.filetypes file aligned, sorted
-  au BufWritePre vimrc.filetypes silent! call _CleanUpVimFiletypes() | redraw!
   function _CleanUpVimFiletypes()
     " align
     :1,$left
@@ -118,13 +117,41 @@ if filereadable(expand("~/.vim/vimrc.filetypes"))
     " remove blank lines
     :g/^\s*$/d
   endfunction
+
+  augroup FiletypesFileCleanup
+    au!
+    au BufWritePre vimrc.filetypes silent! call _CleanUpVimFiletypes() | redraw!
+  augroup END
 endif
 
-au BufWritePost *.dhall silent! call _DhallFormat() | redraw!
+if filereadable(expand("~/.vim/vimrc.languages"))
+  source ~/.vim/vimrc.languages
+
+  " " Keep vimrc.languages file aligned, sorted
+  function _CleanUpVimLanguages()
+    " align
+    :1,$left
+    :1,$EasyAlign *\
+    " sort
+    :sort iu
+    " remove blank lines
+    :g/^\s*$/d
+  endfunction
+
+  augroup LanguagesFileCleanup
+    au!
+    au BufWritePre *vimrc.languages silent! call _CleanUpVimLanguages() | redraw!
+  augroup END
+endif
+
 function _DhallFormat()
   !dhall --unicode format <afile>
   :e
 endfunction
+  augroup DhallFormat
+    au!
+    au BufWritePost *.dhall silent! call _DhallFormat() | redraw!
+  augroup END
 
 function _DhallFreeze()
   :silent exec "!dhall freeze %:p"
@@ -134,24 +161,6 @@ function _DhallFreeze()
 endfunction
 
 command DhFr call _DhallFreeze()
-
-if filereadable(expand("~/.vim/vimrc.languages"))
-  source ~/.vim/vimrc.languages
-
-  " NOTE: Commented this out because honestly it's a little bit much...
-  "
-  " " Keep vimrc.languages file aligned, sorted
-  " au BufWritePre *vimrc.languages silent! call _CleanUpVimLanguages() | redraw!
-  " function _CleanUpVimLanguages()
-  "   " align
-  "   :1,$left
-  "   :1,$EasyAlign *\
-  "   " sort
-  "   :sort iu
-  "   " remove blank lines
-  "   :g/^\s*$/d
-  " endfunction
-endif
 
 " Status bar
 set laststatus=2
@@ -198,17 +207,6 @@ set virtualedit=block
 
 " Keep cursor centered when possible
 " set scrolloff=999
-
-" TODO: Consider whether this is even necessary. Can't remember the last time
-"       I actually used `:grep`.
-" Use ag for things
-" if executable('rg')
-"   set grepprg=rg\ --vimgrep\ --no-heading
-"   " set grepformat=%f:%l:%c:%m,%f:%l:%m
-" elseif executable('ag')
-"   set grepprg=ag\ --nogroup\ --nocolor
-"   " set grepformat=%f:%l:%c:%m,%f:%l:%m
-" endif
 
 if has('win16') || has('win32') || has('win64') || has('win32unix')
   " Ignore .gitignore files
@@ -269,10 +267,7 @@ map <leader>m :call RandomColorSchemeWithOverrides()<CR>
 " Change colorschemes on `updatetime`ms of no input (normal & insert)
 " autocmd CursorHold,CursorHoldI * call RandomColorSchemeWithOverrides()
 
-" Enable vim-jsx
-let g:jsx_ext_required = 0
-
-" Rename current file (Gary Bernhardt)
+" Rename current file (Gary Bernhardt) – TODO: Find a source link for this
 function! RenameFile()
   let old_name = expand('%')
   let new_name = input('New file name: ', expand('%'), 'file')
@@ -283,9 +278,6 @@ function! RenameFile()
   endif
 endfunction
 map <Leader>n :call RenameFile()<cr>
-
-" Tell syntastic to use eslint for javascript
-let g:syntastic_javascript_checkers = ['eslint']
 
 " Always start at top of file in commit message editor
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
