@@ -11,5 +11,5 @@ postgres 13.1
 python 3.9.0
 ruby 3.1.1
 rust stable
-tmux 3.3
+tmux 3.2a
 yarn 1.22.10
