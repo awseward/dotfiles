@@ -14,16 +14,16 @@ set -euo pipefail
 # > darwin-rebuild switch
 #
 
-# i – for interactive
+# i – for interactive
 i() {
   xargs -t brew <<< update
-  brew outdated | sed -E 's/[)(]//g' | column -t \
+  c | awk '{ print $1, "#", $2, "→", $3 }' \
+    | column -t \
     | fzf \
         --bind 'ctrl-a:select-all' \
         --reverse \
         --multi \
         --prompt='brew upgrade> ' \
-        --preview "echo {} | awk '{ print \$1 }' | xargs echo brew upgrade" \
         --header 'Outdated brew packages (You can ^C if none show up):' \
     | awk '{ print $1 }' \
     | xargs -t brew upgrade
@@ -35,5 +35,24 @@ a() {
   xargs -t brew <<< outdated
   xargs -t brew <<< upgrade
 }
+
+# j – for json
+j() {
+  brew outdated --json | jq -c '(to_entries[] | .value)[] |
+    {
+      name,
+      installed: (
+      if   .installed_versions | type == "array"
+      then .installed_versions | first
+      else .installed_versions
+      end
+      ),
+      current: .current_version
+    }
+  '
+}
+
+# c – for columns
+c() { j | jq -r '"\(.name)\t\(.installed)\t\(.current)"' | column -t; }
 
 "${@:-i}"
