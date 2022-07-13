@@ -342,6 +342,12 @@ nnor ,CD :let @*=expand("%:p:h")<CR> "   ...               (absolute)
 let &colorcolumn=join(range(81,999),",")
 highlight ColorColumn ctermbg=235 guibg=#222222
 
+" ¯\_(ツ)_/¯ Might be good to have this as a foothold someday
+" See also: https://github.com/nanotee/nvim-lua-guide#using-lua-from-vimscript
+if has('nvim')
+  :lua require('placeholder')
+end
+
 " Copied this from whatever old vim was defaulting to, but the height
 " modifiers don't seem to be working…
 set guicursor=n-v-c:block,o:hor50,i-ci:hor15,r-cr:hor30,sm:block
