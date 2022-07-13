@@ -146,7 +146,7 @@ endif
 
 augroup BrewfileAutoFormat
   au!
-  au BufWritePre *Brewfile :%! ~/.bin/vim-misc.sh fmt_brewfile %:p
+  au BufWritePre *Brewfile* :%! ~/.bin/vim-misc.sh fmt_brewfile %:p
 augroup END
 
 function _DhallFormat()
