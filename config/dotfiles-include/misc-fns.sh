@@ -6,7 +6,7 @@ vhich() { vim "$(which "$1")"; }
 
 # Shamelessly stolen from here:
 # https://web.archive.org/web/20201119045842/https://lobste.rs/s/nawo6d/on_demand_linked_libraries_for_nix#c_m5fhl6
-using() { nix-shell -p "$1" --run zsh ; }
+using() { xargs -o -t nix-shell -p "$1" --run <<< 'zsh'; }
 
 fig_sample_fonts() {
   # shellcheck disable=SC2038
