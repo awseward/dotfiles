@@ -327,7 +327,9 @@ map <leader>e :set autoread <bar> :checktime <bar> :set noautoread<cr>
 set clipboard=unnamed
 
 " https://www.reddit.com/r/vim/comments/2om1ib/how_to_disable_sql_dynamic_completion/cmop4zh
+" https://stackoverflow.com/a/24931292/1148594
 let g:omni_sql_no_default_maps = 1
+let g:ftplugin_sql_omni_key = '<Plug>DisableSqlOmni'
 
 " https://vi.stackexchange.com/a/2956
 let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
