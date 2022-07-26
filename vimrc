@@ -153,10 +153,10 @@ function _DhallFormat()
   !dhall --unicode format <afile>
   :e
 endfunction
-  augroup DhallFormat
-    au!
-    au BufWritePost *.dhall silent! call _DhallFormat() | redraw!
-  augroup END
+augroup DhallFormat
+  au!
+  au BufWritePost *.dhall silent! call _DhallFormat() | redraw!
+augroup END
 
 function _DhallFreeze()
   :silent exec "!dhall freeze %:p"
@@ -164,7 +164,6 @@ function _DhallFreeze()
   :redraw!
   :w
 endfunction
-
 command DhFr call _DhallFreeze()
 
 " Status bar
