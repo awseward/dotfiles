@@ -64,6 +64,7 @@ Plug 'LnL7/vim-nix'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'raichoo/purescript-vim'
+Plug 'vim-ruby/vim-ruby'
 Plug 'vmchale/dhall-vim'
 Plug 'zah/nim.vim'
 

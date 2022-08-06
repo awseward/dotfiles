@@ -364,3 +364,7 @@ set guicursor=n-v-c:block,o:hor50,i-ci:hor15,r-cr:hor30,sm:block
 " all I''m doing is commenting it out in the location that vim-plug installs
 " it to. I'm doing this mainly because there's no good way I can discern to
 " just cleanly disable that one particular autocommand
+
+" https://github.com/vim-ruby/vim-ruby#usage
+:let g:ruby_indent_hanging_elements = 0
+:let g:ruby_indent_assignment_style = 'variable'
