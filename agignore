@@ -1,3 +1,6 @@
 .git/
+app/assets/
+hydra_clients/
 node_modules/
 packages/
+spec/vcr/
