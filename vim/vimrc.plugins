@@ -51,6 +51,7 @@ Plug 'benmills/vimux'
 " Language Plugins
 Plug 'aliou/bats.vim'
 Plug 'bfontaine/Brewfile.vim'
+Plug 'bfrg/vim-jq'
 Plug 'derekwyatt/vim-scala'
 Plug 'direnv/direnv.vim'
 Plug 'elixir-lang/vim-elixir'
