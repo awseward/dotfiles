@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# This is a shim for what I would like to have `uq` _actually_ do…
+
+explode() {
+  local -r input="$(cat -)"
+  local -r query_string="$(jq --raw-output --raw-input 'split("?")|.[1]' <<< "$input")"
+
+  # >&2 echo "query_string: ?$query_string"
+
+  uq fmt-shell <<< "$input" \
+  | jq --slurp --raw-input '
+      def trimstr(s): ltrimstr(s)|rtrimstr(s);
+
+      split("\n")[]
+      | select(. != "")
+      | ltrimstr("export URL_")
+      | split("=")
+      | { (.[0]|ascii_downcase): (.[1]|trimstr("'\''")) }
+    ' \
+  | jq --slurp --arg query_string "$query_string" 'add | . + { $query_string }'
+
+}
+
+implode() {
+  jq -r '
+    # This is not 100% correct, but is at least a start.
+
+    (
+      [(.login//""), (.password//"")] | map(select(. != ""))|join(":")
+    ) as $creds
+    | (
+      [($creds//""), (.host)] | map(select(. != ""))|join("@")
+    ) as $creds_and_host
+    | "\(.scheme)://\($creds_and_host):\(.port)\(.path)?\(.query_string//"")"
+  '
+}
+
+# Example:
+#
+#   uq2 mutate '
+#       setpath(["host"];     "\(.host).local")
+#     | setpath(["scheme"];   "http")
+#     | setpath(["password"];    null)
+#     | setpath(["path"];     "/_ingest/pipeline")
+#   ' <<< 'https://admin:pass@wut.com:8080/hah?hello=world&marco=polo'
+#
+mutate() { explode | jq "${1:-.}" | implode; }
+
+# Example:
+#
+#   uq2 merge '{
+#     host:     "\(.host).local",
+#     scheme:   "http",
+#     password: null,
+#     path:     "/_ingest/pipeline"
+#   }' <<< 'https://admin:pass@wut.com:9200/hah?hello=world&marco=polo'
+#
+merge() { explode | jq ". + ${1:-.}" | implode; }
+
+"$@"
