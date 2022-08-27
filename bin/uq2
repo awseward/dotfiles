@@ -6,9 +6,7 @@ set -euo pipefail
 
 explode() {
   local -r input="$(cat -)"
-  local -r query_string="$(jq --raw-output --raw-input 'split("?")|.[1]' <<< "$input")"
-
-  # >&2 echo "query_string: ?$query_string"
+  local -r query_string="$(jq --raw-input 'split("?")|.[1]' <<< "$input")"
 
   uq fmt-shell <<< "$input" \
   | jq --slurp --raw-input '
@@ -20,8 +18,17 @@ explode() {
       | split("=")
       | { (.[0]|ascii_downcase): (.[1]|trimstr("'\''")) }
     ' \
-  | jq --slurp --arg query_string "$query_string" 'add | . + { $query_string }'
-
+  | jq --slurp --argjson query_string "$query_string" 'add | . + { $query_string }' \
+  | jq '
+      . + {
+        query: (
+          .query_string
+          | split("&")
+          | map(split("=") | { (.[0]): .[1] })
+          | add
+        )
+      }
+    '
 }
 
 implode() {
