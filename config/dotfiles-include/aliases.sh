@@ -30,10 +30,6 @@ alias pbgs='git rev-parse HEAD | tee >(xargs echo -n | pbcopy)'
 alias hc='hub compare'
 alias hb='hub browse'
 
-### make
-alias m='make clean && make'
-alias mc='make clean'
-
 ### valgrind
 alias val='valgrind'
 alias valgrind='valgrind --leak-check=yes'
