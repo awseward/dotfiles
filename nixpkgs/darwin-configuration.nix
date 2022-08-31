@@ -18,7 +18,7 @@
   system.defaults.NSGlobalDomain.NSNavPanelExpandedStateForSaveMode2 = true;
   system.defaults.NSGlobalDomain.NSTableViewDefaultSizeMode = 1;
   system.defaults.NSGlobalDomain.NSUseAnimatedFocusRing = false;
-  system.defaults.NSGlobalDomain.NSWindowResizeTime = "0.01";
+  system.defaults.NSGlobalDomain.NSWindowResizeTime = 0.01;
   system.defaults.NSGlobalDomain.PMPrintingExpandedStateForPrint = true;
   system.defaults.NSGlobalDomain.PMPrintingExpandedStateForPrint2 = true;
 
