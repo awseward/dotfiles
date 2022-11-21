@@ -64,19 +64,20 @@ _source_dir_rec_if_present "$HOME/.config/dotfiles-include"
 # TODO: Look into ways to avoid needing this here
 export ASDF_DIR="$HOME/.asdf"
 
-__ensure_in_PATH                      \
-  '/usr/local/bin'                    \
-  '/usr/bin'                          \
-  '/bin'                              \
-  '/sbin'                             \
-  "$HOME/bin"                         \
-  "$HOME/.bin"                        \
-  "$ASDF_DIR/bin"                     \
-  "$HOME/Library/Python/3.6/bin"      \
-  "$RACKET_BIN_DIR"                   \
-  "$XDG_DATA_HOME/nimble/bin"         \
-  "$HOME/.local/bin"                  \
-  "$HOME/.opam/default/bin"           \
+__ensure_in_PATH                 \
+  '/usr/local/bin'               \
+  '/usr/bin'                     \
+  '/bin'                         \
+  '/sbin'                        \
+  '/opt/homebrew/bin'            \
+  "$HOME/bin"                    \
+  "$HOME/.bin"                   \
+  "$ASDF_DIR/bin"                \
+  "$HOME/Library/Python/3.6/bin" \
+  "$RACKET_BIN_DIR"              \
+  "$XDG_DATA_HOME/nimble/bin"    \
+  "$HOME/.local/bin"             \
+  "$HOME/.opam/default/bin"      \
 
 # Warning: Refusing to link macOS provided/shadowed software: sqlite
 # If you need to have sqlite first in your PATH, run:
