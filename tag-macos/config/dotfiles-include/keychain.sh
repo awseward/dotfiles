@@ -5,17 +5,10 @@
 keychain_get_env_var() {
   local var_name="$1"
 
-  lookup() {
-    security find-generic-password \
-      -w \
-      -a "${USER}" \
-      -D "environment variable" \
-      -s "${var_name}"
-  }
-
-  err_msg_hint() {
-    >&2 echo "└── keychain_get_env_var: ${var_name}"; return 1
-  }
-
-  lookup || err_msg_hint
+  >&2 echo "└── keychain_get_env_var: ${var_name}"
+  security find-generic-password \
+    -w \
+    -a "${USER}" \
+    -D "environment variable" \
+    -s "${var_name}"
 }
