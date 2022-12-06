@@ -9,7 +9,7 @@ export DOTFILES="${HOME}/.dotfiles"
 # repo hasn't been cloned yet 🤦...
 #
 # shellcheck disable=SC1091
-. lib/functions/interaction.sh
+. config/dotfiles-include/interaction.sh
 
 _resolve_rcm_tag() {
   case "${OSTYPE}" in

@@ -144,10 +144,11 @@ if filereadable(expand("~/.vim/vimrc.languages"))
   augroup END
 endif
 
-augroup BrewfileAutoFormat
-  au!
-  au BufWritePre *Brewfile* :%! ~/.bin/vim-misc.sh fmt_brewfile %:p
-augroup END
+" This is a little buggy, however well-intentioned it may be…
+" augroup BrewfileAutoFormat
+"   au!
+"   au BufWritePre *Brewfile* :%! ~/.bin/vim-misc.sh fmt_brewfile %:p
+" augroup END
 
 function _DhallFormat()
   !dhall --unicode format <afile>
