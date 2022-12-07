@@ -16,7 +16,7 @@ post-up() {
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   fi
 
-  nvim -u "$HOME/.vim/vimrc.plugins" +PlugInstall '+qa!'
+  vim -u "$HOME/.vim/vimrc.plugins" '+PlugInstall' '+qa!' - <<< _
 }
 
 pre-down() { _not_implemented pre-down "$@"; }

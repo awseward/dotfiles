@@ -2,17 +2,11 @@
 
 set -euo pipefail
 
->&2 echo "$0"
-
 # RCM executes everything in `hooks/<hook_type>/`, including "hidden" files, so
-# we need to exit if we detect that RCM called this script directly. For the
-# other files in the directory that that symlink to this one, $0 will have the
-# link's name.
-[ "$(basename "$0")" = '.generic.sh' ] && exit 0
+# we need to exit if we detect that RCM called this script directly.
+if [ "$(basename "$1")" = '.generic.sh' ]; then
+  >&2 echo "Caller is direct invocation of hook's .generic.sh; skipping…"
+  exit 0
+fi
 
-__script="$(dirname "$0")/../.scripts/$(basename "$0" | sed -E 's/^[a-z]+-//')"
-__hook_type='pre-up'
-
->&2 echo "$__script" "$__hook_type"
-
-"$__script" "$__hook_type"
+"$(realpath "$(dirname "$0")")/../.scripts/.generic.sh" "$1" 'pre-up'

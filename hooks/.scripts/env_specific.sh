@@ -7,9 +7,10 @@ set -euo pipefail
 
 _trigger_if_exists() {
   local -r hook_type="$1"
-  local -r hook_filepath="$HOME/.env-specific/$hook_type"
+  local -r target="$HOME/.env-specific/$hook_type"
 
-  test -e "$hook_filepath" && "$hook_filepath"
+  >&2 echo "Checking for ${target}…"
+  test -e "$target" && "$target"
 }
 
 pre-up()  { _trigger_if_exists pre-up  ; }
