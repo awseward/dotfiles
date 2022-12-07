@@ -2,4 +2,5 @@
 
 COPY_ALWAYS='**/rcm-copy-dir'
 EXCLUDES="README.md setup.sh teardown.sh up.sh down.sh *.bats *rcm-exclude* Brewfile.lock.json"
-UNDOTTED="Library/*"
+# This pattern isn't great, but preferable ones to it don't even seem to work
+UNDOTTED="*Library*"

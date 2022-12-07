@@ -24,27 +24,9 @@ Following slides contain futher information.
 
 ---
 
-# iTerm2 Configuration
+# iTerm2 Color Scheme import
 
-Please make sure iTerm2 is configured to load from \`~/.config/iterm2\`.
-
-That should look something like this:
-
-\` iTerm2 > Preferences > General > Preferences \`
-
-\`\`\`
-…
-…    _
-    [X] Load preferences from a custom folder or URL
-…    ___________________________
-    [_~/.config/iterm2__________] [Browse]
-…
-…
-\`\`\`
-
-## Color scheme import
-
-This happens in a dropdown at the bottom right corer of:
+This happens in a dropdown at the bottom right corner of:
 
 \` iTerm2 > Preferences > Profiles > [Profile Name] > Colors \`
 
