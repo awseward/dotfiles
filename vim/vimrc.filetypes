@@ -12,6 +12,6 @@ au Bufread,BufNewFile *.md                            set filetype=markdown
 au Bufread,BufNewFile RELEASE_EDITMSG                 set filetype=markdown
 au Bufread,BufNewFile *.jbuilder                      set filetype=ruby
 au Bufread,BufNewFile *.env                           set filetype=sh
-au Bufread,BufNewFile post-up,pre-down,*aliases,*rcrc set filetype=sh
+au Bufread,BufNewFile post-up,pre-down,*aliases,.rcrc set filetype=sh
 au Bufread,BufNewFile *tmux.conf*                     set filetype=tmux
 au Bufread,BufNewFile .gemrc                          set filetype=yaml

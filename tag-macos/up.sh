@@ -83,7 +83,7 @@ main() {
 
 dotfiles="$HOME/.dotfiles"
 tag="macos"
-export RCRC="$dotfiles/rcrc"
+export RCRC="$dotfiles/.rcrc"
 
 # ---
 "${@:-main}"

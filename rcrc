@@ -1,3 +1,0 @@
-# shellcheck disable=SC2034
-COPY_ALWAYS='**/rcm-copy-dir'
-EXCLUDES="README*.md setup.sh teardown.sh up.sh down.sh Shortcuts.json actions-* *.bats *rcm-exclude* Brewfile.lock.json com.knollsoft.Rectangle.plist rcrc"
