@@ -9,9 +9,9 @@ _trigger_if_exists() {
   local -r hook_type="$1"
   local -r target="$HOME/.env-specific/$hook_type"
 
-  >&2 echo "Checking for ${target}…"
 
   if test -e "$target"; then
+    >&2 echo "Executing ${target}…"
     "$target"
   else
     >&2 echo "Did not find $target; skipping…"
