@@ -6,6 +6,15 @@ readonly red="\e[31m"
 readonly green="\e[32m"
 readonly reset="\e[0m"
 
+_all_files() {
+  find . -type f -path './hooks/*' | grep -v \
+    -e 'lib.sh$' \
+    -e '\.dhall$'
+
+  # The `-e`'s here are exceptions; would sorta like to handle this a little
+  # better but that's alright for now.
+}
+
 echo_if_not_executable() {
   local file_path="${1}"
   if [ ! -x "${file_path}" ]; then
@@ -28,8 +37,14 @@ error_if_any() {
   fi
 }
 
->&2 echo "Checking for nonexecutable hook files:"
+_default() {
+  >&2 echo "Checking for nonexecutable hook files:"
 
-find . -type f -path '*hooks/*' \
-  | while read -r file_path; do echo_if_not_executable "${file_path}"; done \
-  | error_if_any
+  _all_files \
+    | while read -r file_path; do echo_if_not_executable "${file_path}"; done \
+    | error_if_any
+}
+
+# ---
+
+"${@:-_default}"
