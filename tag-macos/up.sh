@@ -2,11 +2,6 @@
 
 set -euo pipefail
 
-dotfiles="$HOME/.dotfiles"
-tag="macos"
-
-# ---
-
 _review() {
   local install_file
   install_file="$1"
@@ -79,11 +74,16 @@ main() {
   _ensure_brew_deps_installed
   _ensure_omz_installed
 
-  export RCRC="$dotfiles/rcrc" && rcup -v -d "$dotfiles" -t "$tag"
+  rcup -v -d "$dotfiles" -t "$tag"
 
   _ensure_asdf_deps_installed
 }
 
 # ---
 
-main
+dotfiles="$HOME/.dotfiles"
+tag="macos"
+export RCRC="$dotfiles/rcrc"
+
+# ---
+"${@:-main}"
