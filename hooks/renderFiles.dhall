@@ -10,7 +10,7 @@ let renderGeneric =
 
             # RCM executes everything in `hooks/<hook_type>/`, including "hidden" files, so
             # we need to exit if we detect that RCM called this script directly.
-            if [ "$(basename "$1")" = '.generic.sh' ]; then
+            if [ "''${1:-}" = ''' ]; then
               >&2 echo "Caller is direct invocation of hook's .generic.sh; skipping…"
               exit 0
             fi

@@ -10,7 +10,12 @@ _trigger_if_exists() {
   local -r target="$HOME/.env-specific/$hook_type"
 
   >&2 echo "Checking for ${target}…"
-  test -e "$target" && "$target"
+
+  if test -e "$target"; then
+    "$target"
+  else
+    >&2 echo "Did not find $target; skipping…"
+  fi
 }
 
 pre-up()  { _trigger_if_exists pre-up  ; }
