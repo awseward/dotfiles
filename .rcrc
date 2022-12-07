@@ -1,4 +1,4 @@
 # shellcheck disable=SC2034
 COPY_ALWAYS='**/rcm-copy-dir'
-EXCLUDES="README*.md setup.sh teardown.sh up.sh down.sh *.bats *rcm-exclude* Brewfile.lock.json"
+EXCLUDES="README.md setup.sh teardown.sh up.sh down.sh *.bats *rcm-exclude* Brewfile.lock.json"
 UNDOTTED="Library/*"
