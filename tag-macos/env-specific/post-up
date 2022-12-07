@@ -26,30 +26,45 @@ Following slides contain futher information.
 
 # iTerm2 Configuration
 
-Please make sure iTerm2 is configured to load from \`~/.iterm\`.
+Please make sure iTerm2 is configured to load from \`~/.config/iterm2\`.
 
-This can be configured by navigating to \`Preferences > General\` and then
-looking for the phrase (near the bottom):
+That should look something like this:
 
-\`Load preferences from a custom folder or URL\`
+\` iTerm2 > Preferences > General > Preferences \`
 
-Also, when importing color schemes from \`~/.iterm2-color-schemes\`, in case
-finder is not configured to show hidden files/folders, you can quickly toggle
-this with \`CMD + SHIFT + .\`.
+\`\`\`
+…
+…    _
+    [X] Load preferences from a custom folder or URL
+…    ___________________________
+    [_~/.config/iterm2__________] [Browse]
+…
+…
+\`\`\`
 
-Don't forget to not only import it, but then also configure it to be used as
-well.
+## Color scheme import
+
+This happens in a dropdown at the bottom right corer of:
+
+\` iTerm2 > Preferences > Profiles > [Profile Name] > Colors \`
+
+Typically, \`[Profile Name]\` will be \`Default\`, but not necessarily.
+
+There should be a bunch in \`~/.iterm2-color-schemes\`; it may be helpful to
+find this directory in the Finder dialog by showing hidden files with the
+keyboard shortcut \`CMD + SHIFT + .\`.
+
 
 ---
 
 # Shell Restart
 
-If this is the very first time running this on a given machine, you may want to
+If this is the very first time running this on a machine, you may want to
 restart the shell or just hop into a new tab from this point.
 
-I'd like to automate that, but in what I've tried so far, nothing has been
-able to do the final transition from macOS' very old bash to zsh automatically,
-so it's still a bit manual for now.
+I'd like to automate that, but nothing I've tried so far has been able to do
+the final transition from macOS' very old bash to zsh automatically, so it's
+still a bit manual for now.
 
 ---
 
