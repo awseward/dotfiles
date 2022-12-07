@@ -1,4 +1,3 @@
-brew "asdf"
 brew "automake"
 brew "avro-tools"
 brew "awseward/tap/call_status_checker"
