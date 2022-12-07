@@ -24,7 +24,7 @@ Following slides contain futher information.
 
 ---
 
-## iTerm2 Configuration
+# iTerm2 Configuration
 
 Please make sure iTerm2 is configured to load from \`~/.iterm\`.
 
@@ -42,7 +42,7 @@ well.
 
 ---
 
-## Shell Restart
+# Shell Restart
 
 If this is the very first time running this on a given machine, you may want to
 restart the shell or just hop into a new tab from this point.
@@ -51,10 +51,20 @@ I'd like to automate that, but in what I've tried so far, nothing has been
 able to do the final transition from macOS' very old bash to zsh automatically,
 so it's still a bit manual for now.
 
+---
+
+# That's It!
+
+You can exit by pressing 'q'.
+
 MSG
+}
+
+_default() {
+  _clone_iterm_color_schemes
+  _display_messages
 }
 
 # ---
 
-_clone_iterm_color_schemes
-_display_messages
+"${@:-_default}"
