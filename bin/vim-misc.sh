@@ -5,8 +5,8 @@
 
 set -euo pipefail
 
-fmt_brewfile() {
-  sort -iu "$1" | grep -vE '^$|^#.+' | awk '
+fmt_brewfile_content() {
+  sort -iu | grep -vE '^$|^#.+' | awk '
   {
     if (NR == 1) { type = $1; print $0; next }
 
@@ -14,5 +14,7 @@ fmt_brewfile() {
     print $0
   }'
 }
+
+fmt_brewfile() { fmt_brewfile_content < "$1"; }
 
 "$@"
