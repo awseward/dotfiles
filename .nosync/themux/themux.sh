@@ -41,11 +41,14 @@ choose() {
   local -r current_theme="$(_read_theme_name_config)"
   local choice; choice="$(
     list | fzf \
-      --bind   'ctrl-l:execute:('"$0"' apply {})' \
-      --header "Originally using: ${current_theme:-none}" \
+      --bind 'ctrl-l:execute:('"$0"' apply {})' \
+      --header 'Shortcuts:
+^j: up
+^k: down
+^l: preview selection:' \
       --height '50%' \
       --layout 'reverse' \
-      --prompt 'Choose a theme: '
+      --prompt "Theme (${current_theme:-none}): "
   )"; readonly choice
 
   apply "$choice"
