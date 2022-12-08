@@ -72,10 +72,13 @@ _ensure_asdf_deps_installed() {
 main() {
   _ensure_brew_installed
   _ensure_brew_deps_installed
+
+  # TODO: Consider moving this into a pre-up hook
   _ensure_omz_installed
 
-  rcup -v -d "$dotfiles" -t "$tag"
+  RCRC="$dotfiles/.rcrc" rcup -d "$dotfiles" -t "$tag"
 
+  # TODO: Consider moving this into a post-up hook
   _ensure_asdf_deps_installed
 }
 
@@ -83,7 +86,6 @@ main() {
 
 dotfiles="$HOME/.dotfiles"
 tag="macos"
-export RCRC="$dotfiles/.rcrc"
 
 # ---
 "${@:-main}"
