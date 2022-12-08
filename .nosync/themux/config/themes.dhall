@@ -15,7 +15,7 @@ in  { tropic =
             , accent1 = sharpYellow
             , accent2 = steelBlue
             }
-    , hipster =
+    , indie =
         let blue = "#1C4364"
 
         let pink = "#F69974"
@@ -23,7 +23,7 @@ in  { tropic =
         let seafoam = "#71EEB8"
 
         in  Theme::{ bg = blue, fg = seafoam, accent1 = pink, accent2 = pink }
-    , camo =
+    , smoke =
         let brown = "#837B68"
 
         let grey = "#454C4B"
@@ -34,6 +34,8 @@ in  { tropic =
 
         in  Theme::{ bg = grey, fg = olive, accent1 = white, accent2 = brown }
     , contrast =
+        -- TODO: This one could probably use a better name
+        --
         let purpleBlack = "#1A1423"
 
         let salmon = "#FF715B"

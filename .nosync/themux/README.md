@@ -4,10 +4,8 @@ A silly little thing for theming tmux (`theme + tmux = themux`) 🤷
 
 ### Basic usage
 
-- choose a "theme" in `entrypoint.dhall`
-- check it with `generate.sh`
-- apply it with `update.sh`
+`./themux.sh choose` will bring up an interactive experience choose a theme.
 
 Worth noting, if you don't have any Dhall Prelude stuff cached, the first time
-you run this it may appear to hang for a bit, but after that it should be
+you run this it may appear to hang for a bit but after that it should be
 pretty quick.
