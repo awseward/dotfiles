@@ -42,13 +42,13 @@ borg create              \
                          \
     ~/books              \
     ~/scans              \
-    ~/unreviewed-scans   \
+    ~/uncategorized      \
 
 backup_exit=$?
 
 info "Pruning repository"
 
-# FIXME: Warning: "--prefix" has been deprecated. Use "--glob-archives 'yourprefix*'" (-a) instead.
+# TODO: Warning: "--prefix" has been deprecated. Use "--glob-archives 'yourprefix*'" (-a) instead.
 borg prune                 \
     --list                 \
     --prefix '{hostname}-' \
