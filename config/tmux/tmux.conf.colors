@@ -6,18 +6,18 @@ set-option -g default-terminal 'screen-256color'
 # TODO: document reason why this is necessary
 set -g terminal-overrides ',xterm-256color:Tc'
 
-set -g status-style bg='#004445',fg='#FF2E63'
+set -g status-style bg='#1C4364',fg='#71EEB8'
 
-set -g message-style bg='#F8B400',fg='#004445',bold
+set -g message-style bg='#F69974',fg='#1C4364',bold
 
-set -g pane-border-style fg='#5B8C85'
+set -g pane-border-style fg='#F69974'
 
-set -g pane-active-border-style fg='#FF2E63'
+set -g pane-active-border-style fg='#71EEB8'
 
 # Visually highlight current window
-set -g window-status-current-style bg='#F8B400',fg='#004445',bold
+set -g window-status-current-style bg='#F69974',fg='#1C4364',bold
 
-set -g status-left-style fg='#5B8C85',bold
+set -g status-left-style fg='#F69974',bold
 
 # Currently shows local and UTC time
-set -g status-right-style fg='#F8B400',bold
+set -g status-right-style fg='#F69974',bold
