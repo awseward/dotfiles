@@ -21,10 +21,12 @@ i() {
     | column -t \
     | fzf \
         --bind 'ctrl-a:select-all' \
-        --reverse \
+        --layout 'reverse' \
+        --height '50%' \
         --multi \
+        --exit-0 \
         --prompt='brew upgrade> ' \
-        --header 'Outdated brew packages (You can ^C if none show up):' \
+        --header 'Outdated brew packages' \
     | awk '{ print $1 }' \
     | xargs -t brew upgrade
 }
