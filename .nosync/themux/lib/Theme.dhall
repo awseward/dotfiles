@@ -53,7 +53,7 @@ let styles =
 let show =
       λ(theme : Theme) →
         ''
-        # WARNING: This file is generated. See Style.dhall to modify.
+        # WARNING: This file is generated, direct modifications may be undone.
 
         # improve colors
         set-option -g default-terminal 'screen-256color'
