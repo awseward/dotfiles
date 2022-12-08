@@ -1,4 +1,6 @@
-# tmux-theme
+# themux
+
+A silly little thing for theming tmux (`theme + tmux = themux`) 🤷
 
 ### Basic usage
 
