@@ -41,6 +41,20 @@ _source_dir_rec_if_present() {
 
 _source_file_if_present "$HOME/.nix-profile/etc/profile.d/nix.sh"
 
+# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+# Most notably:
+#
+#   > This must be done before compinit is called. Note that if you are using
+#   > Oh My Zsh, it will call compinit for you when you source oh-my-zsh.sh.
+#
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
 # Need to disable this prompt here because nix.sh sets a prompt that interferes
 # with some things, i.e. cuts off the last line of some commands' output;
 # namely: `git l5`
