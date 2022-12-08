@@ -23,6 +23,9 @@ export BORG_RELOCATED_REPO_ACCESS_IS_OK='no'
 info() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }
 trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
 
+# Need to consider potential alternatives to this.
+eval "$(ssh-agent)" && ssh-add --apple-load-keychain
+
 info "Starting backup"
 
 # Backup the most important directories into an archive named after
@@ -45,14 +48,15 @@ backup_exit=$?
 
 info "Pruning repository"
 
+# FIXME: Warning: "--prefix" has been deprecated. Use "--glob-archives 'yourprefix*'" (-a) instead.
 borg prune                 \
     --list                 \
     --prefix '{hostname}-' \
     --show-rc              \
-    --keep-hourly   6      \
-    --keep-daily    7      \
-    --keep-weekly   8      \
-    --keep-monthly  9      \
+    --keep-hourly   7      \
+    --keep-daily    8      \
+    --keep-weekly   9      \
+    --keep-monthly 10      \
 
 prune_exit=$?
 
