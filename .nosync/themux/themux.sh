@@ -33,14 +33,14 @@ list() {
 }
 
 choose() {
-  local -r current_theme="$(_read_configured_theme_name)"
-  if [ "$current_theme" != '' ]; then
-    local -r prompt="Choose a theme (current: $current_theme): "
-  else
-    local -r prompt='Choose a theme: '
-  fi
-  local choice;
-  choice="$(list | fzf --prompt "$prompt")"; readonly choice
+  local -r current_theme="$(_read_configured_theme_name || echo 'none')"
+  local choice; choice="$(
+    list | fzf \
+      --header "Current: $current_theme" \
+      --height '50%'                     \
+      --layout 'reverse'                 \
+      --prompt 'Choose a theme: '
+  )"; readonly choice
 
   _write_theme_name_config <<< "$choice"
   _render_theme "$choice" | _write_tmux_colors_config
