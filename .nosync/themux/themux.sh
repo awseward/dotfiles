@@ -3,8 +3,8 @@
 set -euo pipefail
 
 # shellcheck disable=SC2120
-render_theme() {
-  local -r theme_name="${1:-"$(read_configured_theme_name)"}"
+_render_theme() {
+  local -r theme_name="${1:-"$(_read_configured_theme_name)"}"
   local -r theme_defn_filepath='./lib/Theme.dhall'
   local -r themes_filepath="./config/themes.dhall"
 
@@ -16,10 +16,15 @@ _get_theme_name_config_filepath() {
   echo "$HOME/.config/themux/theme_name"
 }
 
-read_configured_theme_name() {
+_write_tmux_colors_config() { cat - > "$HOME/.config/tmux/tmux.conf.colors"; }
+_write_theme_name_config()  { cat - > "$(_get_theme_name_config_filepath)";  }
+
+_read_configured_theme_name() {
   # TODO: Check XDG_CONFIG_HOME here, too.
   cat "$(_get_theme_name_config_filepath)"
 }
+
+_reload_tmux() { tmux source-file "${HOME}/.tmux.conf"; }
 
 list() {
   local -r themes_filepath="./config/themes.dhall"
@@ -28,21 +33,30 @@ list() {
 }
 
 choose() {
+  local -r current_theme="$(_read_configured_theme_name)"
+  if [ "$current_theme" != '' ]; then
+    local -r prompt="Choose a theme (current: $current_theme): "
+  else
+    local -r prompt='Choose a theme: '
+  fi
   local choice;
-  choice="$(list | fzf --prompt 'Theme name: ')"; readonly choice
+  choice="$(list | fzf --prompt "$prompt")"; readonly choice
 
   _write_theme_name_config <<< "$choice"
-  render_theme "$choice" | _write_tmux_colors_config
+  _render_theme "$choice" | _write_tmux_colors_config
   _reload_tmux
 }
 
-_write_tmux_colors_config() { cat - > "$HOME/.config/tmux/tmux.conf.colors"; }
-_write_theme_name_config() { cat - > "$(_get_theme_name_config_filepath)"; }
+help() {
+  echo "$0 help
 
-_reload_tmux() { tmux source-file "${HOME}/.tmux.conf"; }
-
-_help() { >&2 echo 'TODO: Write the help output'; }
+  Available subcommands
+  • choose
+  • help
+  • list
+  "
+}
 
 # ---
 
-"${@:-_help}"
+"${@:-choose}"
