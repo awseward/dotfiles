@@ -2,4 +2,4 @@
 
 set -euo pipefail
 
-dirname "${0}" | xargs -I{} echo '{}/entrypoint.dhall' | dhall text
+"$(dirname "$0")/themux.sh" generate
