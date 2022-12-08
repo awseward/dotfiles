@@ -11,7 +11,7 @@ _file_should_exist() {
 
 generate_sh="$(dirname "${0}")/generate.sh"
 main_conf="${HOME}/.tmux.conf"
-colors_conf="${HOME}/.config/dotfiles-ext/tmux/tmux.conf.colors"
+colors_conf="${HOME}/.config/tmux/tmux.conf.colors"
 
 _file_should_exist "${generate_sh}"
 _file_should_exist "${main_conf}"
