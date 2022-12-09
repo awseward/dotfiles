@@ -60,10 +60,10 @@ borg prune \
     --list                         \
     --glob-archives '{hostname}-*' \
     --show-rc                      \
-    --keep-hourly   7              \
-    --keep-daily    8              \
-    --keep-weekly   9              \
-    --keep-monthly 10              \
+    --keep-hourly   8              \
+    --keep-daily    7              \
+    --keep-weekly  12              \
+    --keep-monthly 18              \
 
 prune_exit=$?
 
