@@ -31,7 +31,7 @@ info "Starting backup"
 # Backup the most important directories into an archive named after
 # the machine this script is currently running on:
 
-borg create              \
+borg create \
     --verbose            \
     --list               \
     --stats              \
@@ -48,15 +48,14 @@ backup_exit=$?
 
 info "Pruning repository"
 
-# TODO: Warning: "--prefix" has been deprecated. Use "--glob-archives 'yourprefix*'" (-a) instead.
-borg prune                 \
-    --list                 \
-    --prefix '{hostname}-' \
-    --show-rc              \
-    --keep-hourly   7      \
-    --keep-daily    8      \
-    --keep-weekly   9      \
-    --keep-monthly 10      \
+borg prune \
+    --list                         \
+    --glob-archives '{hostname}-*' \
+    --show-rc                      \
+    --keep-hourly   7              \
+    --keep-daily    8              \
+    --keep-weekly   9              \
+    --keep-monthly 10              \
 
 prune_exit=$?
 
