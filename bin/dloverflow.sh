@@ -72,7 +72,6 @@ set_stale_perms() {
 }
 
 _try_signal_started()  {
-  return 0
   local -r url="$_ping_url/start"
   >&2 echo -n "Pinging ${url}… "
 
