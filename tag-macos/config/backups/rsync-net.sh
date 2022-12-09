@@ -43,6 +43,7 @@ borg create \
     ~/books              \
     ~/scans              \
     ~/uncategorized      \
+    ~/stale_downloads    \
 
 backup_exit=$?
 
