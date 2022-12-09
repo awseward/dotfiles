@@ -59,9 +59,10 @@ run() {
     return 1
   fi
 
+  local -r ts="$(date -u +%Y%m%d%H%M%S)"
   ensure_target_directory
   echo "$candidates" | while read -r filepath; do
-    mv -v "$filepath" "$_target_directory/$_ts-$(basename "$filepath")"
+    mv -v "$filepath" "$_target_directory/$ts-$(basename "$filepath")"
   done
   set_stale_perms
   _signal_finished "$mtime"
@@ -74,7 +75,7 @@ set_stale_perms() {
 _try_signal_started()  {
   jq -nc --arg mtime "$1" '{
     $mtime
-  }' | healthchecks.io.ping.sh start "$_ping_key" "$_run_id" || true
+  }' | healthchecks.io.ping.sh start "$_hcio_uuid" "$_hcio_run_id" || true
 
   # This `|| true` is so that we still do the thing even if there was an issue
   # with the request to the healthcheck endpoint; the start signal is best
@@ -83,7 +84,7 @@ _try_signal_started()  {
 _signal_finished() {
   jq -nc --arg mtime "$1" '{
     $mtime
-  }' | healthchecks.io.ping.sh success "$_ping_key" "$_run_id"
+  }' | healthchecks.io.ping.sh success "$_hcio_uuid" "$_hcio_run_id"
 }
 
 # ---
@@ -91,9 +92,8 @@ _signal_finished() {
 _downloads_directory="$HOME/Downloads"
 _target_directory="$HOME/stale_downloads"
 _default_find_mtime='+30d'
-_ping_key="$(jq -r .ping_key < "$HOME/.config/dloverflow/config.json")"; readonly _ping_key
-_ts="$(date -u +%Y%m%d%H%M%S)"; readonly _ts
-_run_id="$(uuidgen)"; readonly _run_id
+_hcio_uuid="$(cat "$HOME/.config/dloverflow/healthchecks.io.uuid")"; readonly _hcio_uuid
+_hcio_run_id="$(uuidgen)"; readonly _hcio_run_id
 
 
 "${@:-dry_run}"
