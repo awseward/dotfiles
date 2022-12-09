@@ -28,10 +28,11 @@ eval "$(ssh-agent)" && ssh-add --apple-load-keychain
 
 _hcio_uuid="$(cat ~/.config/backups/healthchecks.io.uuid)"; readonly _hcio_uuid
 _hcio_run_id="$(uuidgen)"; readonly _hcio_run_id
-# Set this up to call at the end
-hcio_exit() { healthchecks.io.ping.sh report_exit_status "$1" "$_hcio_uuid" "$_hcio_run_id" <<< ''; }
+# Set these up for calling at the end
+hcio() { healthchecks.io.ping.sh "$@" "$_hcio_uuid" "$_hcio_run_id"; }
+
 # Send start signal
-healthchecks.io.ping.sh start "$_hcio_uuid" "$_hcio_run_id" <<< ''
+hcio start <<< ''
 
 info "Starting backup"
 
@@ -73,11 +74,19 @@ global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
 hcio_exit $global_exit
 
 if [ ${global_exit} -eq 0 ]; then
-    info "Backup and Prune finished successfully"
+  info 'Backup and Prune finished successfully'
+  hcio success <<< ''
 elif [ ${global_exit} -eq 1 ]; then
-    info "Backup and/or Prune finished with warnings"
+  msg='Backup and/or Prune finished with warnings'
+  info "$msg"
+  hcio log <<< "$msg"
 else
-    info "Backup and/or Prune finished with errors"
+  msg='Backup and/or Prune finished with errors'
+  info "$msg"
+  # Not using `hcio failure` because we don't really need to cause
+  # notifications for every single time the job fails, but would still like to
+  # know about it.
+  hcio log <<< "$msg"
 fi
 
 exit ${global_exit}
