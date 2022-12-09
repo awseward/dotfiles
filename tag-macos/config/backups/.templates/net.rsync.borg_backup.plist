@@ -3,10 +3,10 @@
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>seward.andrew.backups_rsync_net</string>
+    <string>net.rsync.borg_backup</string>
 
     <key>WorkingDirectory</key>
-    <string>FIXME__REPLACE_WITH_ABS_HOME_PATH</string>
+    <string><!--$WORKING_DIRECTORY--></string>
 
     <key>ProgramArguments</key>
     <array>
@@ -29,7 +29,8 @@
     <key>EnvironmentVariables</key>
     <dict>
       <key>PATH</key>
-      <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:</string>
+      <string><!--$PATH_PRE-->/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:<!--$PATH_POST--></string>
+      <!--$ENV_KEYPAIRS_XML-->
     </dict>
 
     <key>StandardOutPath</key>

@@ -77,6 +77,7 @@
     cloc
     coreutils
     cowsay
+    curl
     direnv
     dive
     entr
