@@ -50,12 +50,12 @@ dry_run() {
 run() {
   local -r mtime="${1:-"$_default_find_mtime"}"
 
-  _try_signal_started "$mtime"
+  _try_sig_start "$mtime"
   local candidates; candidates="$(list_candidates "$mtime")"; readonly candidates
 
   if [ "$candidates" = '' ]; then
     >&2 echo 'Nothing to do… exiting.'
-    _signal_finished "$mtime"
+    _sig_success "$mtime"
     return 1
   fi
 
@@ -65,27 +65,21 @@ run() {
     mv -v "$filepath" "$_target_directory/$ts-$(basename "$filepath")"
   done
   set_stale_perms
-  _signal_finished "$mtime"
+  _sig_success "$mtime"
 }
 
 set_stale_perms() {
   find "$_target_directory" -type f -print0 | xargs -0 -t chmod 400
 }
 
-_try_signal_started()  {
-  jq -nc --arg mtime "$1" '{
-    $mtime
-  }' | healthchecks.io.ping.sh start "$_hcio_uuid" "$_hcio_run_id" || true
+_hcio() { healthchecks.io.ping.sh "$@" "$_hcio_uuid" "$_hcio_run_id"; }
 
-  # This `|| true` is so that we still do the thing even if there was an issue
-  # with the request to the healthcheck endpoint; the start signal is best
-  # effort, and if the finished signal comes through without it, that's fine.
-}
-_signal_finished() {
-  jq -nc --arg mtime "$1" '{
-    $mtime
-  }' | healthchecks.io.ping.sh success "$_hcio_uuid" "$_hcio_run_id"
-}
+# This `|| true` is so that we still do the thing even if there was an issue
+# with the request to the healthcheck endpoint; the start signal is best
+# effort, and if the finished signal comes through without it, that's fine.
+_try_sig_start() { jq -nc --arg mtime "$1" '{ $mtime }' | _hcio start || true; }
+
+_sig_success() { jq -nc --arg mtime "$1" '{ $mtime }' | _hcio success; }
 
 # ---
 
