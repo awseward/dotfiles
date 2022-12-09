@@ -72,27 +72,18 @@ set_stale_perms() {
 }
 
 _try_signal_started()  {
-  local -r url="$_ping_url/start"
-  >&2 echo -n "Pinging ${url}… "
+  jq -nc --arg mtime "$1" '{
+    $mtime
+  }' | healthchecks.io.ping.sh start "$_ping_key" "$_run_id" || true
 
-  jq -nc --arg mtime "$1" '{ $mtime }' \
-  | >&2 curl -fsS -XPOST "$url?rid=$_run_id" \
-      --data '@-' \
-      --header 'Content-Type: application/json' || true
   # This `|| true` is so that we still do the thing even if there was an issue
   # with the request to the healthcheck endpoint; the start signal is best
   # effort, and if the finished signal comes through without it, that's fine.
-  >&2 echo
 }
 _signal_finished() {
-  local -r url="$_ping_url"
-  >&2 echo -n "Pinging ${url}… "
-
-  jq -nc --arg mtime "$1" '{ $mtime }' \
-  | >&2 curl -fsS -XPOST "$url?rid=$_run_id" \
-      --data '@-' \
-      --header 'Content-Type: application/json'
-  >&2 echo
+  jq -nc --arg mtime "$1" '{
+    $mtime
+  }' | healthchecks.io.ping.sh success "$_ping_key" "$_run_id"
 }
 
 # ---
@@ -100,7 +91,7 @@ _signal_finished() {
 _downloads_directory="$HOME/Downloads"
 _target_directory="$HOME/stale_downloads"
 _default_find_mtime='+30d'
-_ping_url="$(jq -r '.ping_url' < "$HOME/.config/dloverflow/config.json")"; readonly _ping_url
+_ping_key="$(jq -r .ping_key < "$HOME/.config/dloverflow/config.json")"; readonly _ping_key
 _ts="$(date -u +%Y%m%d%H%M%S)"; readonly _ts
 _run_id="$(uuidgen)"; readonly _run_id
 

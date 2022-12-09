@@ -15,7 +15,7 @@ __post() {
     local -r query="?rid=$run_id"
   fi
 
-  >&2 echo -n "> POST ${path} …"
+  >&2 echo -n "> POST ${path} … "
   >&2 curl -XPOST "$_hcio_authority$path$query" \
     -fsS \
     --data '@-' \
