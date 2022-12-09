@@ -4,8 +4,6 @@
 
 set -euo pipefail
 
-_not_implemented() { >&2 echo "$0: TODO (not implemented): $*"; return 1; }
-
 __post() {
   local -r path="$1"
   local -r run_id="${2:-}"
@@ -19,6 +17,8 @@ __post() {
   >&2 echo -n "> POST $full_url … "
   >&2 curl -XPOST "$full_url" \
     -fsS \
+    --max-time 5 \
+    --retry 3 \
     --data '@-' \
     --header 'Content-Type: application/json'
   >&2 echo
