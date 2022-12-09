@@ -26,6 +26,13 @@ trap 'echo $( date ) Backup interrupted >&2; exit 2' INT TERM
 # Need to consider potential alternatives to this.
 eval "$(ssh-agent)" && ssh-add --apple-load-keychain
 
+_hcio_uuid="$(cat ~/.config/backups/healthchecks.io.uuid)"; readonly _hcio_uuid
+_hcio_run_id="$(uuidgen)"; readonly _hcio_run_id
+# Set this up to call at the end
+hcio_exit() { healthchecks.io.ping.sh report_exit_status "$1" "$_hcio_uuid" "$_hcio_run_id" <<< ''; }
+# Send start signal
+healthchecks.io.ping.sh start "$_hcio_uuid" "$_hcio_run_id" <<< ''
+
 info "Starting backup"
 
 # Backup the most important directories into an archive named after
@@ -62,6 +69,8 @@ prune_exit=$?
 
 # use highest exit code as global exit code
 global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
+
+hcio_exit $global_exit
 
 if [ ${global_exit} -eq 0 ]; then
     info "Backup and Prune finished successfully"
