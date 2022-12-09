@@ -49,7 +49,28 @@
   # defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
   # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
+  #
+  #   $ nix-env -qaP | grep wget
+  #
+  # It's pretty slow, so it will appear to hang, but you'll eventually get
+  # results back which will look something like this:
+  #
+  #   nixpkgs.python310Packages.wget    python3.10-wget-3.2
+  #   nixpkgs.python39Packages.wget     python3.9-wget-3.2
+  #   nixpkgs.wget                      wget-1.21.3
+  #   nixpkgs.wget2                     wget2-2.0.0
+  #   nixpkgs.wgetpaste                 wgetpaste-2.32
+  #
+  # The list of packages below takes values relative to `nixpkgs.` in that
+  # first column. I.e.:
+  #
+  #   • if you want `nixpkgs.wget2`, add just `wget2`
+  #
+  #   • if you want `nixpkgs.python310Packages.wget`, add just
+  #     `python310Packages.wget`
+  #
+  #   … etc.
+
   environment.systemPackages = with pkgs; [
     bat
     bats
