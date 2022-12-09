@@ -73,19 +73,20 @@ prune_exit=$?
 global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
 
 if [ ${global_exit} -eq 0 ]; then
-  info 'Backup and Prune finished successfully'
-  hcio success <<< ''
+  msg='Backup and/or Prune finished with warnings'
+  hcio success <<< "$msg"
+  info "$msg"
 elif [ ${global_exit} -eq 1 ]; then
   msg='Backup and/or Prune finished with warnings'
-  info "$msg"
   hcio log <<< "$msg"
+  info "$msg"
 else
   msg='Backup and/or Prune finished with errors'
-  info "$msg"
   # Not using `hcio failure` because we don't really need to cause
   # notifications for every single time the job fails, but would still like to
   # know about it.
   hcio log <<< "$msg"
+  info "$msg"
 fi
 
 exit ${global_exit}
