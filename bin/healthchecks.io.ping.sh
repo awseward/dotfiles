@@ -14,9 +14,10 @@ __post() {
   else
     local -r query="?rid=$run_id"
   fi
+  local -r full_url="$_hcio_authority$path$query"
 
-  >&2 echo -n "> POST ${path} … "
-  >&2 curl -XPOST "$_hcio_authority$path$query" \
+  >&2 echo -n "> POST $full_url … "
+  >&2 curl -XPOST "$full_url" \
     -fsS \
     --data '@-' \
     --header 'Content-Type: application/json'
