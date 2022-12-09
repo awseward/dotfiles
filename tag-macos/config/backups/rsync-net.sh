@@ -31,8 +31,9 @@ _hcio_run_id="$(uuidgen)"; readonly _hcio_run_id
 # Set these up for calling at the end
 hcio() { healthchecks.io.ping.sh "$@" "$_hcio_uuid" "$_hcio_run_id"; }
 
-# Send start signal
-hcio start <<< ''
+# Try sending start signal; this is okay to fail (the `|| true` doesn't
+# _actually_ matter without `set -e`, but I'm choosing to leave it in anyway)
+hcio start <<< '' || true
 
 info "Starting backup"
 
@@ -70,8 +71,6 @@ prune_exit=$?
 
 # use highest exit code as global exit code
 global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
-
-hcio_exit $global_exit
 
 if [ ${global_exit} -eq 0 ]; then
   info 'Backup and Prune finished successfully'
