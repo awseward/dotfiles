@@ -37,6 +37,7 @@ Host rsync-net
 #### Place LaunchAgent
 
 ```sh
+# !!! This is incorrect, but I haven't updated it yet.
 cp ~/.config/backups/backups_rsync_net.template.plist ~/Library/LaunchAgents/seward.andrew.backups_rsync_net.plist
 ```
 
@@ -45,6 +46,7 @@ After doing the above, you'll want to set a value for `WorkingDirectory`.
 #### Some Launchd snippets
 
 ```sh
+# !!! This is incorrect, but I haven't updated it yet.
 launchctl load   -w ~/Library/LaunchAgents/seward.andrew.backups_rsync_net.plist
 launchctl unload -w ~/Library/LaunchAgents/seward.andrew.backups_rsync_net.plist
 ```

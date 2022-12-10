@@ -29,7 +29,7 @@
     <key>EnvironmentVariables</key>
     <dict>
       <key>PATH</key>
-      <string><!--$PATH_PRE-->/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:<!--$PATH_POST--></string>
+      <string><!--$PATH_HEAD-->/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:<!--$PATH_TAIL--></string>
       <!--$ENV_KEYPAIRS_XML-->
     </dict>
 
