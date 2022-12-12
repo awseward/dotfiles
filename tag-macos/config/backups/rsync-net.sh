@@ -73,9 +73,8 @@ prune_exit=$?
 global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
 
 if [ ${global_exit} -eq 0 ]; then
-  msg='Backup and/or Prune finished with warnings'
-  hcio success <<< "$msg"
-  info "$msg"
+  hcio success
+  info 'Backup and Prune finished successfully'
 elif [ ${global_exit} -eq 1 ]; then
   msg='Backup and/or Prune finished with warnings'
   hcio log <<< "$msg"
