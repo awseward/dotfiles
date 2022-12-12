@@ -2,29 +2,62 @@
 
 set -euo pipefail
 
-_script_dir_abspath() { realpath "$(dirname "$0")"; }
-_in_script_dir() { echo "$(_script_dir_abspath)/$1"; }
+_in_prefixed() {
+  local -r base="${THEMUX_PREFIX:-/usr/local}/$1/themux"
+  local -r relpath="${2:-}"
 
-_themes_filepath() { _in_script_dir 'config/themes.dhall'; }
-
-_theme_name_config_filepath() {
-  # TODO: Check XDG_CONFIG_HOME here, too.
-  echo "$HOME/.config/themux/theme_name"
+  if [ "$relpath" = '' ]; then
+    echo "$base"
+  else
+    echo "$base/$relpath"
+  fi
 }
 
-_write_tmux_colors_config() { cat - > "$HOME/.config/tmux/tmux.conf.colors"; }
-_write_theme_name_config()  { cat - > "$(_theme_name_config_filepath)";  }
+_in_xdg_config() {
+  local -r base="${XDG_CONFIG_HOME:-$HOME/.config}/$1";
+  local -r relpath="${2:-}"
 
-_read_theme_name_config() { cat "$(_theme_name_config_filepath)"; }
+  if [ "$relpath" = '' ]; then
+    echo "$base"
+  else
+    echo "$base/$relpath"
+  fi
+}
+
+_bin_entrypoint() { _in_prefixed bin; }
+
+_dir_etc() { _in_prefixed etc; }
+_dir_lib() { _in_prefixed lib; }
+
+_dir_config_themux() { _in_xdg_config themux; }
+_dir_config_tmux()   { _in_xdg_config tmux;   }
+
+_write_tmux_colors_config() { cat - > "$(_dir_config_tmux)/tmux.conf.colors"; }
+
+_write_theme_name_config() { cat - > "$(_dir_config_themux)/theme_name"; }
+_read_theme_name_config()  { cat     "$(_dir_config_themux)/theme_name"; }
 
 _reload_tmux() { tmux source-file "${HOME}/.tmux.conf"; }
+
+deps() {
+  local -r deps_=(
+    dhall
+    dhall-to-json
+    fzf
+    jq
+    tmux
+  )
+
+  for dep in "${deps_[@]}"; do type -f "$dep" >/dev/null; done
+}
 
 # shellcheck disable=SC2120
 _render_theme() {
   local -r theme_name="${1:-"$(_read_theme_name_config)"}"
-  local -r module_filepath="$(_in_script_dir 'lib/Theme.dhall')"
 
-  dhall text <<< "($module_filepath).show ($(_themes_filepath)).$theme_name"
+  THEMES="$_filepath_themes" dhall text <<< "
+    (env:THEMUX_PACKAGE).Theme.show (env:THEMES).$theme_name
+  "
 }
 
 apply() {
@@ -35,7 +68,7 @@ apply() {
   _reload_tmux
 }
 
-list() { dhall-to-json <<< "$(_themes_filepath)" | jq -c -r 'keys[]'; }
+list() { dhall-to-json <<< "$_filepath_themes" | jq -c -r 'keys[]'; }
 
 choose() {
   local -r current_theme="$(_read_theme_name_config)"
@@ -65,5 +98,8 @@ help() {
 }
 
 # ---
+
+export THEMUX_PACKAGE="${THEMUX_PACKAGE:-$(_dir_lib)/package.dhall}"
+_filepath_themes="$(_in_prefixed etc themes.dhall)"; readonly _filepath_themes
 
 "${@:-choose}"

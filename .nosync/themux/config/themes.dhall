@@ -1,4 +1,4 @@
-let Theme = ../lib/Theme.dhall
+let Theme = (env:THEMUX_PACKAGE ? ../lib/package.dhall).Theme
 
 in  { tropic =
         let steelBlue = "#5B8C85"
