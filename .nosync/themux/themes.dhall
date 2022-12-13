@@ -50,4 +50,19 @@ in  { tropic =
             , accent1 = salmon
             , accent2 = teal
             }
+    , toad =
+        let green = "#3A4538"
+
+        let cream = "#E4DFA2"
+
+        let yellow = "#DD9C32"
+
+        let lightGreen = "#8B9B81"
+
+        in  Theme::{
+            , bg = green
+            , fg = cream
+            , accent1 = yellow
+            , accent2 = lightGreen
+            }
     }
