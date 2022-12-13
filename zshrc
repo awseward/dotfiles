@@ -78,20 +78,27 @@ _source_dir_rec_if_present "$HOME/.config/dotfiles-include"
 # TODO: Look into ways to avoid needing this here
 export ASDF_DIR="$HOME/.asdf"
 
+# TODO: Make this less of a special case
+type -f brew >/dev/null && __prepend_to_PATH "$(brew --prefix)/bin"
+
+local_bins=(
+  "$HOME/.bin"
+  "$HOME/.local/bin"
+)
+for local_bin in "${local_bins[@]}"; do __prepend_to_PATH "$local_bin"; done
+
+
+# TODO: Review these to see which are actually even necessary
 __ensure_in_PATH                 \
-  '/usr/local/bin'               \
-  '/usr/bin'                     \
-  '/bin'                         \
-  '/sbin'                        \
-  '/opt/homebrew/bin'            \
-  "$HOME/bin"                    \
-  "$HOME/.bin"                   \
   "$ASDF_DIR/bin"                \
   "$HOME/Library/Python/3.6/bin" \
   "$RACKET_BIN_DIR"              \
   "$XDG_DATA_HOME/nimble/bin"    \
-  "$HOME/.local/bin"             \
   "$HOME/.opam/default/bin"      \
+  '/usr/local/bin'               \
+  '/usr/bin'                     \
+  '/bin'                         \
+  '/sbin'                        \
 
 # Warning: Refusing to link macOS provided/shadowed software: sqlite
 # If you need to have sqlite first in your PATH, run:
