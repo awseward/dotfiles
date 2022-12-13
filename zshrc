@@ -79,7 +79,15 @@ _source_dir_rec_if_present "$HOME/.config/dotfiles-include"
 export ASDF_DIR="$HOME/.asdf"
 
 # TODO: Make this less of a special case
-type -f brew >/dev/null && __prepend_to_PATH "$(brew --prefix)/bin"
+# From the brew manpage:
+#
+# >   Display Homebrew´s install path. Default:
+# >   •   macOS Intel: /usr/local
+# >   •   macOS ARM: /opt/homebrew
+# >   •   Linux: /home/linuxbrew/.linuxbrew
+#
+__prepend_to_PATH '/usr/local/bin'
+__prepend_to_PATH '/opt/homebrew/bin'
 
 local_bins=(
   "$HOME/.bin"
