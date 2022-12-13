@@ -119,3 +119,7 @@ warn_if_duplicates_in_PATH
 warn_if_dotfiles_update_check_recommended
 
 eval "$(direnv hook zsh)"
+
+if [ -z "$TMUX" ]; then
+  eval "$(ssh-agent -s)" && ssh-add --apple-load-keychain && (tmux a || tmux)
+fi
