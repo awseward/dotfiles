@@ -147,7 +147,7 @@ endif
 " This is a little buggy, however well-intentioned it may be…
 " augroup BrewfileAutoFormat
 "   au!
-"   au BufWritePre *Brewfile* :%! ~/.bin/vim-misc.sh fmt_brewfile %:p
+"   au BufWritePre *Brewfile* :%! ~/.local/bin/vim-misc.sh fmt_brewfile %:p
 " augroup END
 
 function _DhallFormat()

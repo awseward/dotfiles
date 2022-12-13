@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# This is an attempt at modularizing ~/.bin/git-poll-ci a bit more to enable
+# This is an attempt at modularizing ~/.local/bin/git-poll-ci a bit more to enable
 # reuse of the core functionality in it for other status-polling type use cases
 # I would like to not have to reimplement.
 

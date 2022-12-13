@@ -14,7 +14,7 @@ warn_if_duplicates_in_PATH() {
 }
 
 warn_if_dotfiles_update_check_recommended() {
-  local -r fq_du="$HOME/.bin/dotfiles-update"
+  local -r fq_du="$HOME/.local/bin/dotfiles-update"
 
   if "$fq_du" is_time_to_check; then
     _warn "Please check for dotfile updates, then run \`$fq_du write_timestamp_file\`."
