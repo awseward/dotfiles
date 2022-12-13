@@ -7,6 +7,7 @@ let template =
       ? ./templates/net.rsync.borg_backup.plist as Text
 
 let replacements =
-      toMap env:PLIST_TEMPLATE_VALUES : List { mapKey : Text, mapValue : Text }
+        toMap env:PLIST_TEMPLATE_VALUES
+      ? (toMap {=} : List { mapKey : Text, mapValue : Text })
 
 in  render template replacements
