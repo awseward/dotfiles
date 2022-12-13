@@ -10,9 +10,9 @@ Worth noting, if you don't have any Dhall Prelude stuff cached, the first time
 you run this it may appear to hang for a bit but after that it should be
 pretty quick.
 
-#### Rough Deployment Notes
+#### Installation
 
-At the time of writing, I'm thinking this might not be terrible?
+Currently done with `qnd_setup.sh up`, it looks a little bit like this:
 
 ```
 .
@@ -31,6 +31,3 @@ At the time of writing, I'm thinking this might not be terrible?
 
 with per-user configuration @ ~/.config/themux/
 ```
-
-No real strong opinions, just sorta borrowing `/usr/local/` from the default
-value for `brew --prefix`.
