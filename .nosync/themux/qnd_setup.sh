@@ -15,7 +15,7 @@ up() {
 
   # Symlinks in /…/etc/…
   ln -v -s \
-    "$(_in_script_dir config/themes.dhall)" \
+    "$(_in_script_dir themes.dhall)" \
     "$("$_themux" _in_prefixed etc themes.dhall)" || true
 
   # Symlinks in /…/lib/…
