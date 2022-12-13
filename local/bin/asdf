@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# TODO:
+# - get this worked into PATH correctly
+# - square this away to play nicely with the other existing asdf "extensions"
+
+set -euo pipefail
+
+if [ "$#" -gt 0 ] && type -f "asdf-$1" >/dev/null; then
+  __fwd_target="asdf-$1"
+  shift
+  "$__fwd_target" "$@"
+else
+  # Forward to the actual tool itself
+  "$ASDF_DIR/bin/asdf" "$@"
+fi

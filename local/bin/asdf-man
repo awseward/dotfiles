@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# TODO: Solve the PATH issues so we can just have $(asdf manpath)
+man -M "$(~/.local/bin/asdf manpath)" "$@"

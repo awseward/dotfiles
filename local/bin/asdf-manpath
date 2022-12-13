@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# This is a little janky, but oh well
+find "$ASDF_DIR/installs" -mindepth 4 -maxdepth 4 -type d -name man -print0 \
+  | xargs -0 \
+  | sed -e 's/\/man /\/man:/g'
