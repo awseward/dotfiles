@@ -2,7 +2,7 @@ let home = env:HOME as Text
 
 in  { WORKING_DIRECTORY = home
     , PATH_PRE = "/run/current-system/sw/bin:"
-    , PATH_POST = ":${home}/.bin"
+    , PATH_POST = ":${home}/.local/bin:${home}/.bin"
     , ENV_KEYPAIRS_XML =
         ''
 
