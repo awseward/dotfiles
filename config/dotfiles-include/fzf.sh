@@ -5,8 +5,15 @@
 # NOTE: This assumes a convention of repositories being located in:
 #       `$HOME/projects/…`
 __bindkey_jr() {
-  git-fzf select_project_repo
-  zle reset-prompt
+  local repo; repo="$(git-fzf select_project_repo)"; readonly repo
+
+  if [ "$repo" != '' ]; then
+    cd "$repo" || return 1
+    pwd
+    echo -ne "→ "; pwd; echo '---'
+    exa -l 2>/dev/null || ls -l
+    zle reset-prompt
+  fi
 }
 zle -N __bindkey_jr
 bindkey '^J^R' __bindkey_jr
@@ -16,8 +23,12 @@ bindkey '^J^R' __bindkey_jr
 # NOTE: One big caveat of this is that with tmux in place, you have to do the
 #       `^B` part twice, since that's the tmux prefix key.
 __bindkey_gb() {
-  git-fzf select_branch
-  zle reset-prompt
+  local branch; branch="$(git-fzf select_branch)"; readonly branch
+
+  if [ "$branch" != '' ]; then
+    git checkout "$branch"
+    zle reset-prompt
+  fi
 }
 zle -N __bindkey_gb
 bindkey '^G^B' __bindkey_gb

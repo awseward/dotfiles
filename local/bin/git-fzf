@@ -2,41 +2,26 @@
 
 set -euo pipefail
 
-select_project_repo() {
-  local repo; repo="$(
-    find -H "$HOME/projects" -maxdepth 2 -type d -or -type l \
-      | fzf \
-        --border                        \
-        --header 'Project Repositories' \
-        --height '25%'                  \
-        --prompt 'cd '                  \
-        --reverse                       \
-        --exit-0
-  )"; readonly repo
+_fzf() {
+  fzf              \
+    --border       \
+    --height '25%' \
+    --reverse      \
+    --exit-0       \
+    "$@"
+}
 
-  if [ "$repo" != '' ]; then
-    cd "$repo"
-    echo -ne "→ "; pwd; echo '---'
-    exa -l 2>/dev/null || ls -l
-  fi
+select_project_repo() {
+  find -H "$HOME/projects" -maxdepth 2 -type d -or -type l \
+  | _fzf --header 'Project Repositories' --prompt 'cd '
 }
 
 select_branch() {
-  local branch; branch="$(
-    git branch -a \
-      | sed -E 's/remotes\/[^\/]*\///g; /(\*|HEAD).*$/d' \
-      | sort -u \
-      | awk '{$1=$1};1' \
-      | fzf \
-        --border \
-        --header 'Branches' \
-        --height 25% \
-        --prompt 'git checkout ' \
-        --reverse \
-        --exit-0
-  )"; readonly branch
-
-  [ "$branch" != '' ] && git checkout "$branch"
+  git branch -a \
+  | sed -E 's/remotes\/[^\/]*\///g; /(\*|HEAD).*$/d' \
+  | sort -u \
+  | awk '{$1=$1};1' \
+  | fzf --header 'Branches' --prompt 'git checkout '
 }
 
 "$@"
