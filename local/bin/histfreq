@@ -1,13 +1,22 @@
 #!/usr/bin/env bash
 
+# TODO: Make this handle multiline commands better if possible
+
 set -euo pipefail
 
+# sort: string comparison failed: Illegal byte sequence
+# sort: Set LC_ALL='C' to work around the problem.
+_sort() { LC_ALL='C' sort "$@"; }
+
 lines() {
-  cat "${HISTFILE:-$HOME/.zsh_history}" \
-  | sed -E 's/^: [0-9]+:[0-9]+;//' \
-  | LC_ALL='C' sort \
+  local -r hfile="${HISTFILE:-$HOME/.zsh_history}"
+
+  >&2 echo "Reading history from $hfile …"
+
+  sed -E 's/^: [0-9]+:[0-9]+;//' < "$hfile" \
+  | _sort \
   | uniq -c \
-  | LC_ALL='C' sort -nr \
+  | _sort -nr \
   | sed -E 's/^\ +//'
 }
 
