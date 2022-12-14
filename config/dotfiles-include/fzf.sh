@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# (jr: [J]ump to [R]epo)
+# jr: [J]ump to [R]epo
 #
 # NOTE: This assumes a convention of repositories being located in:
 #       `$HOME/projects/…`
@@ -9,6 +9,7 @@ __bindkey_jr() {
   zle reset-prompt
 }
 zle -N __bindkey_jr
+bindkey '^J^R' __bindkey_jr
 
 # gb: [G]it [B]ranch
 #
@@ -19,9 +20,36 @@ __bindkey_gb() {
   zle reset-prompt
 }
 zle -N __bindkey_gb
-
-bindkey '^J^R' __bindkey_jr
 bindkey '^G^B' __bindkey_gb
-# shellcheck disable=SC2016
+
 # ew: [E]dit [W]hich
+#
+# shellcheck disable=SC2016
 bindkey -s '\ee\ew' '"$EDITOR" "$(which ^I)"^J'
+
+# rl: [R]eload [L]aunchAgent
+__bindkey_rl() {
+  local target; target="$(
+    find "$HOME/Library/LaunchAgents" -type f -name '*.plist' \
+      | fzf \
+        --border                     \
+        --header 'LaunchAgents'      \
+        --height '25%'               \
+        --prompt 'launchctl reload ' \
+        --reverse                    \
+        --exit-0
+  )";
+
+  # shellcheck disable=SC2181
+  if [ $? != 0 ]; then
+    zle reset-prompt
+    return
+  fi
+
+  readonly target
+  # shellcheck disable=SC2034
+  RBUFFER+="launchctl unload -w $target; launchctl load -w $target"
+  zle accept-line
+}
+zle -N __bindkey_rl
+bindkey '\er\el' __bindkey_rl
