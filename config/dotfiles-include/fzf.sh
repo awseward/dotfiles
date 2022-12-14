@@ -1,40 +1,19 @@
 #!/usr/bin/env bash
 
-g_repo() {
-  local repo
-  repo="$(find -H "$HOME/projects" -maxdepth 2 -type d -or -type l | fzf --height 25% --reverse --border --header='Repositories:')"
-  if [ "$repo" != '' ]; then
-    cd "$repo" && echo -ne "\n→ " && pwd && echo '---' && l
-  fi
-}
-
-g_branch() {
-  local branches
-  branches=$(git branch -a | sed -E 's/remotes\/[^\/]*\///g; /(\*|HEAD).*$/d' | sort -u | awk '{$1=$1};1')
-  local branch
-  branch="$(echo "$branches" | fzf --height 25% --reverse --border --header='Branches:')"
-
-  if [ "$branch" != '' ]; then
-    git checkout "$branch"
-  fi
-}
-
-# (jr for 'Jump to Repo')
+# (jr: [J]ump to [R]epo)
 #
 # NOTE: This assumes a convention of repositories being located in:
-#       `$HOME/projects/$LANG_OR_CONTEXT/`
+#       `$HOME/projects/…`
 _keybind_g_repo() {
-  g_repo
+  git-fzf select_project_repo
   zle reset-prompt
-}
-zle -N _keybind_g_repo && bindkey '^j^r' _keybind_g_repo
+}; zle -N _keybind_g_repo && bindkey '^J^R' _keybind_g_repo
 
-# (gh not for any real reason other than making it work)
+# gb: [G]it [B]ranch
 #
-# I wanted to use jb or gb for 'Jump to Branch' or `Git Branch', but neither
-# of those wanted to work. TODO: Figure out exactly why that is.
+# NOTE: One big caveat of this is that with tmux in place, you have to do the
+#       `^B` part twice, since that's the tmux prefix key.
 _keybind_g_branch() {
-  g_branch
+  git-fzf select_branch
   zle reset-prompt
-}
-zle -N _keybind_g_branch && bindkey '^g^h' _keybind_g_branch
+}; zle -N _keybind_g_branch && bindkey '^G^B' _keybind_g_branch
