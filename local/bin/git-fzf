@@ -2,14 +2,7 @@
 
 set -euo pipefail
 
-_fzf() {
-  fzf              \
-    --border       \
-    --height '25%' \
-    --reverse      \
-    --exit-0       \
-    "$@"
-}
+_fzf() { fzf --border --height '25%' --reverse --exit-0 "$@"; }
 
 select_project_repo() {
   find -H "$HOME/projects" -maxdepth 2 -type d -or -type l \
