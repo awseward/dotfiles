@@ -64,6 +64,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
 plugins=(
   asdf
+  colored-man-pages
   fzf-tab
 )
 # See: https://github.com/ohmyzsh/ohmyzsh/issues/7332#issuecomment-687716303
