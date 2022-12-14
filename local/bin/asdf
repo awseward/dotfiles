@@ -12,5 +12,11 @@ if [ "$#" -gt 0 ] && type -f "asdf-$1" &>/dev/null; then
   "$__fwd_target" "$@"
 else
   # Forward to the actual tool itself
-  "$ASDF_DIR/bin/asdf" "$@"
+  if [ -f "$ASDF_DIR/bin/asdf" ]
+  then
+    "$ASDF_DIR/bin/asdf" "$@"
+  else
+    >&2 echo "$0: Could not find a suitable asdf binary to forward \`$0\` to"
+    exit 1
+  fi
 fi
