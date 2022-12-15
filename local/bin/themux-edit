@@ -13,6 +13,24 @@ edit_and_reload() {
 
   edit "$s_id"
   reload "$s_id"
+
+  # ---
+
+  # It's a little weird that the session's lifespan is tied to this function
+  # like this, would like to maybe have a different version of this that's
+  # "linked" that way. I'm just putting it here for convenience right now.
+
+  timeout_s=3
+  >&2 echo "Waiting ${timeout_s}s before killing session $s_id and cleaning up this host tmux window…"
+
+  for remaining_s in $(seq 1 $timeout_s | sort -rn); do
+    >&2 echo "${remaining_s}s remaining… (^C to prevent)"
+    sleep 1
+  done
+
+  tmux \
+    kill-session -t "$s_id" \; \
+    kill-window
 }
 
 edit() {
@@ -43,29 +61,19 @@ setup() {
   # likely miss the `-g` part, but I haven't run into that yet, so.
   cat | sed -e 's/ -g / /g' > "$conf"
 
-  tmux split-window -v -d "
-    TMUX= tmux -f '$conf' \
-      new-session -s '$s_id'       \; \
-      set-option remain-on-exit on \; \
-      split-pane -v                \; \
-      split-pane -h
-  "
-  # Everything from here onward should probably make its way into other
-  # functions…
-
-  tmux split-window -v -d -- "entr -p -- '$0' reload '$s_id' <<< '$conf'"
-
-  edit_and_reload "$s_id"
-
-  timeout_s=3
-  >&2 echo "Waiting ${timeout_s}s before killing session $s_id …"
-
-  for remaining_s in $(seq 1 $timeout_s | sort -rn); do
-    >&2 echo "${remaining_s}s remaining… (^C to prevent)"
-    sleep 1
-  done
-
-  tmux kill-session -t "$s_id"
+  tmux \
+    new-window "
+      TMUX= tmux -f '$conf' \
+        new-session -s '$s_id' -- neofetch \; \
+        set-option remain-on-exit on \; \
+        split-pane -v -- neofetch \; \
+        split-pane -h -- neofetch
+    " \; \
+    split-window -v -- "'$0' 'edit_and_reload' '$s_id'" \; \
+    split-window -v -d -- "entr -p -- '$0' reload '$s_id' <<< '$conf'" \; \
+    select-layout main-vertical \; \
+    resize-pane -t 0 -R 40 \; \
+    resize-pane -t 2 -D 10
 }
 
 # ---
