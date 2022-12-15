@@ -11,8 +11,9 @@ let Theme = { bg : Text, fg : Text, accent1 : Text, accent2 : Text }
 let default =
       { bg = "black", fg = "white", accent1 = "cyan", accent2 = "magenta" }
 
-let styles =
-      λ(theme : Theme) →
+let styles
+    : Theme → List Style.Type
+    = λ(theme : Theme) →
         let accent1 = Some theme.accent1
 
         let accent2 = Some theme.accent2
@@ -50,22 +51,32 @@ let styles =
               }
             ]
 
-let show =
-      λ(theme : Theme) →
-        ''
-        # WARNING: This file is generated, direct modifications may be undone.
+let show_ =
+      λ(t : Type) →
+      λ(s : Type) →
+      λ(module : { toStyles : t → List s, renderConf : List s → Text }) →
+      λ(theme : t) →
+        module.renderConf (module.toStyles theme)
 
-        # improve colors
-        set-option -g default-terminal 'screen-256color'
+let show
+    : Theme → Text
+    = show_
+        Theme
+        Style.Type
+        { toStyles = styles
+        , renderConf =
+            λ(xs : List Style.Type) →
+              ''
+              # WARNING: This file is generated, direct modifications may be undone.
 
-        # TODO: document reason why this is necessary
-        set -g terminal-overrides ',xterm-256color:Tc'
+              # improve colors
+              set-option -g default-terminal 'screen-256color'
 
-        ${Optional/tryConcatMapSep
-            "\n\n"
-            Style.Type
-            Style.tryShow
-            (styles theme)}
-        ''
+              # TODO: document reason why this is necessary
+              set -g terminal-overrides ',xterm-256color:Tc'
+
+              ${Optional/tryConcatMapSep "\n\n" Style.Type Style.tryShow xs}
+              ''
+        }
 
 in  { Type = Theme, default, styles, show }
