@@ -2,10 +2,7 @@
 
 set -euo pipefail
 
-conf_file_for_session_id() {
-  local -r s_id="$1"
-  echo "$HOME/.cache/$s_id.tmux.conf"
-}
+conf_for_session() { echo "$HOME/.cache/$1.tmux.conf"; }
 
 edit_and_reload() {
   >&2 echo "$0 $*"
@@ -20,13 +17,13 @@ edit_and_reload() {
   # like this, would like to maybe have a different version of this that's
   # "linked" that way. I'm just putting it here for convenience right now.
 
-  timeout_s=3
-  >&2 echo "Waiting ${timeout_s}s before killing session $s_id and cleaning up this host tmux window…"
+  # timeout_s=3
+  # >&2 echo "Waiting ${timeout_s}s before killing session $s_id and cleaning up this host tmux window…"
 
-  for remaining_s in $(seq 1 $timeout_s | sort -rn); do
-    >&2 echo "${remaining_s}s remaining… (^C to prevent)"
-    sleep 1
-  done
+  # for remaining_s in $(seq 1 $timeout_s | sort -rn); do
+  #   >&2 echo "${remaining_s}s remaining… (^C to prevent)"
+  #   sleep 1
+  # done
 
   tmux \
     kill-session -t "$s_id" \; \
@@ -35,7 +32,7 @@ edit_and_reload() {
 
 edit() {
   local -r s_id="$1"
-  local conf; conf="$(conf_file_for_session_id "$s_id")"; readonly conf
+  local conf; conf="$(conf_for_session "$s_id")"; readonly conf
 
   >&2 echo "Editing $conf …"
   "$EDITOR" "$conf"
@@ -43,7 +40,7 @@ edit() {
 
 reload() {
   local -r s_id="$1"
-  local conf; conf="$(conf_file_for_session_id "$s_id")"; readonly conf
+  local conf; conf="$(conf_for_session "$s_id")"; readonly conf
 
   >&2 echo "Applying ${conf}…"
   # shellcheck disable=SC2016
@@ -55,7 +52,7 @@ reload() {
 
 setup() {
   local s_id; s_id="$(uuidgen)"; s_id="${s_id,,}"; readonly s_id
-  local conf; conf="$(conf_file_for_session_id "$s_id")"; readonly conf
+  local conf; conf="$(conf_for_session "$s_id")"; readonly conf
 
   # This regex replace isn't quite perfect; if any flags are grouped it will
   # likely miss the `-g` part, but I haven't run into that yet, so.
@@ -64,16 +61,18 @@ setup() {
   tmux \
     new-window "
       TMUX= tmux -f '$conf' \
-        new-session -s '$s_id' -- neofetch \; \
+        new-session -n 'example window 0' -s '$s_id' \; \
+        new-window  -n 'example window 1' -- neofetch \; \
         set-option remain-on-exit on \; \
+        set-option pane-border-format '#{pane_index} #{pane_pid} (#{pane_height}x#{pane_height}) - #{pane_current_command}' \; \
         split-pane -v -- neofetch \; \
         split-pane -h -- neofetch
     " \; \
     split-window -v -- "'$0' 'edit_and_reload' '$s_id'" \; \
     split-window -v -d -- "entr -p -- '$0' reload '$s_id' <<< '$conf'" \; \
     select-layout main-vertical \; \
-    resize-pane -t 0 -R 40 \; \
-    resize-pane -t 2 -D 10
+    resize-pane -t 0 -R 42 \; \
+    resize-pane -t 2 -D 15
 }
 
 # ---
