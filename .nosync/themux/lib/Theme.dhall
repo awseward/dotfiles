@@ -70,7 +70,7 @@ let show
               # WARNING: This file is generated, direct modifications may be undone.
 
               # improve colors
-              set-option -g default-terminal 'screen-256color'
+              set -g default-terminal 'screen-256color'
 
               # TODO: document reason why this is necessary
               set -g terminal-overrides ',xterm-256color:Tc'
