@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+conf_file_for_session_id() {
+  local -r s_id="$1"
+  echo "$HOME/.cache/$s_id.tmux.conf"
+}
+
+edit_and_reload() {
+  >&2 echo "$0 $*"
+  local -r s_id="$1"
+
+  edit "$s_id"
+  reload "$s_id"
+}
+
+edit() {
+  local -r s_id="$1"
+  local conf; conf="$(conf_file_for_session_id "$s_id")"; readonly conf
+
+  >&2 echo "Editing $conf …"
+  "$EDITOR" "$conf"
+}
+
+reload() {
+  local -r s_id="$1"
+  local conf; conf="$(conf_file_for_session_id "$s_id")"; readonly conf
+
+  >&2 echo "Applying ${conf}…"
+  # shellcheck disable=SC2016
+  tmux \
+    set-option -t "$s_id" remain-on-exit off \; \
+    new-window -t "$s_id" -- "tmux source-file '$conf'; tmux kill-window" \; \
+    set-option -t "$s_id" remain-on-exit on
+}
+
+setup() {
+  local s_id; s_id="$(uuidgen)"; s_id="${s_id,,}"; readonly s_id
+  local conf; conf="$(conf_file_for_session_id "$s_id")"; readonly conf
+
+  # This regex replace isn't quite perfect; if any flags are grouped it will
+  # likely miss the `-g` part, but I haven't run into that yet, so.
+  cat | sed -e 's/ -g / /g' > "$conf"
+
+  tmux split-window -v -d "
+    TMUX= tmux -f '$conf' \
+      new-session -s '$s_id'       \; \
+      set-option remain-on-exit on \; \
+      split-pane -v                \; \
+      split-pane -h
+  "
+  # Everything from here onward should probably make its way into other
+  # functions…
+
+  tmux split-window -v -d -- "entr -p -- '$0' reload '$s_id' <<< '$conf'"
+
+  edit_and_reload "$s_id"
+
+  timeout_s=3
+  >&2 echo "Waiting ${timeout_s}s before killing session $s_id …"
+
+  for remaining_s in $(seq 1 $timeout_s | sort -rn); do
+    >&2 echo "${remaining_s}s remaining… (^C to prevent)"
+    sleep 1
+  done
+
+  tmux kill-session -t "$s_id"
+}
+
+# ---
+
+"$@"
