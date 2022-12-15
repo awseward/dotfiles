@@ -59,15 +59,19 @@ setup() {
   local conf; conf="$(conf_for "$s_id")"; readonly conf
   local conf_dhall; conf_dhall="$(conf_dhall_for "$s_id")"; readonly conf_dhall
 
-  # TODO: Do a prompt to pick which theme to load instead of this default one
-  echo '
-  let Theme = (env:THEMUX_PACKAGE).Theme in Theme.show Theme::{
-    , bg      = "#000000"
-    , fg      = "#FFFFFF"
-    , accent1 = "#FF0000"
-    , accent2 = "#0000FF"
-    }
-  ' | dhall format > "$conf_dhall"
+  local theme_name; theme_name="$(
+    themux list-fzf --header $'Shortcuts:\n^j: up\n^k: down'
+  )"; readonly theme_name
+
+  local theme_rendered; theme_rendered="$(
+    THEMES="$(themux _in_prefixed etc 'themes.dhall')" \
+      THEMUX_PACKAGE="$(themux _in_prefixed lib package.dhall)" \
+      dhall <<< "(env:THEMES).$theme_name"
+  )"; readonly theme_rendered
+
+  echo 'let Theme = (env:THEMUX_PACKAGE).Theme in Theme.show Theme::'"$theme_rendered" \
+  | THEMUX_PACKAGE="$(themux _in_prefixed lib package.dhall)" dhall format \
+  > "$conf_dhall"
 
   render "$s_id"
 

@@ -34,8 +34,8 @@ _dir_config_tmux()   { _in_xdg_config tmux;   }
 
 _write_tmux_colors_config() { cat - > "$(_dir_config_tmux)/tmux.conf.colors"; }
 
-_write_theme_name_config() { cat - > "$(_dir_config_themux)/theme_name"; }
-_read_theme_name_config()  { cat     "$(_dir_config_themux)/theme_name"; }
+_write_theme_name() { cat - > "$(_dir_config_themux)/theme_name"; }
+_read_theme_name()  { cat     "$(_dir_config_themux)/theme_name"; }
 
 _reload_tmux() { tmux source-file "${HOME}/.tmux.conf"; }
 
@@ -53,7 +53,7 @@ deps() {
 
 # shellcheck disable=SC2120
 _render_theme() {
-  local -r theme_name="${1:-"$(_read_theme_name_config)"}"
+  local -r theme_name="${1:-"$(_read_theme_name)"}"
 
   THEMES="$_filepath_themes" dhall text <<< "
     (env:THEMUX_PACKAGE).Theme.show (env:THEMES).$theme_name
@@ -63,25 +63,34 @@ _render_theme() {
 apply() {
   local -r name="$1"
 
-  _write_theme_name_config <<< "$name"
+  _write_theme_name <<< "$name"
   _render_theme "$name" | _write_tmux_colors_config
   _reload_tmux
 }
 
 list() { dhall-to-json <<< "$_filepath_themes" | jq -c -r 'keys[]'; }
 
+list-fzf() {
+  list | fzf \
+    --header 'Shortcuts:
+^j: up
+^k: down
+^l: preview selection:' \
+    --height '50%' \
+    --layout 'reverse' \
+    --prompt "Theme (${current_theme:-none}): " \
+    "$@"
+}
+
 choose() {
-  local -r current_theme="$(_read_theme_name_config)"
+  local -r current_theme="$(_read_theme_name)"
   local choice; choice="$(
-    list | fzf \
+    list-fzf \
       --bind 'ctrl-l:execute:('"$0"' apply {})' \
       --header 'Shortcuts:
 ^j: up
 ^k: down
-^l: preview selection:' \
-      --height '50%' \
-      --layout 'reverse' \
-      --prompt "Theme (${current_theme:-none}): "
+^l: preview selection:'
   )"; readonly choice
 
   apply "$choice"
