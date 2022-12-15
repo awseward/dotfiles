@@ -2,13 +2,6 @@
 
 set -euo pipefail
 
-# TODO: Get rid of the nested tmux thing going on here and just have it load
-# in-place; this is due to  some fiddliness with how `set …` vs `set -g …`
-# behave.
-#
-# More specifically, see the `sed` command in here that removes the `-g` from
-# the dhall-rendered tmux config snippet.
-
 session_dir() {
   local -r dirpath="$HOME/.cache/themux-edit/$1"
   mkdir -p "$dirpath"
@@ -24,14 +17,6 @@ conf_for() {
 conf_dhall_for() {
   local dirpath; dirpath="$(session_dir "$1")"; readonly dirpath
   echo "$dirpath/theme.dhall"
-}
-
-edit() {
-  local -r s_id="$1"
-  local conf; conf="$(conf_for "$s_id")"; readonly conf
-
-  >&2 echo "Editing $conf …"
-  "$EDITOR" "$conf"
 }
 
 render() {
@@ -53,17 +38,13 @@ source() {
 
   >&2 echo "Applying ${conf}…"
   # shellcheck disable=SC2016
-  tmux \
-    set-option -t "$s_id" remain-on-exit off \; \
-    new-window -t "$s_id" -- "tmux source-file '$conf'; tmux kill-window" \; \
-    set-option -t "$s_id" remain-on-exit on
+  tmux source-file "$conf"
 }
 
 render_and_source() { render "$1" && "$0" source "$1"; }
 
 setup() {
   local s_id; s_id="$(uuidgen)"; s_id="${s_id,,}"; readonly s_id
-  local conf; conf="$(conf_for "$s_id")"; readonly conf
   local conf_dhall; conf_dhall="$(conf_dhall_for "$s_id")"; readonly conf_dhall
 
   local theme_name; theme_name="$(
@@ -76,36 +57,32 @@ setup() {
       dhall <<< "(env:THEMES).$theme_name"
   )"; readonly theme_rendered
 
-  echo 'let Theme = (env:THEMUX_PACKAGE).Theme in Theme.show Theme::'"$theme_rendered" \
+  echo '
+--
+--
+-- Save this file to render and apply new tmux config.
+-- Exit the editor to close this tmux window.
+--
+--
+let Theme = (env:THEMUX_PACKAGE).Theme in Theme.show Theme::'"$theme_rendered" \
   | THEMUX_PACKAGE="$(themux _in_prefixed lib package.dhall)" dhall format \
   > "$conf_dhall"
 
   render "$s_id"
 
   tmux \
-    new-window "
-      TMUX= tmux -f '$conf' \
-        new-session -n 'example window 0' -s '$s_id' \; \
-        new-window  -n 'example window 1' -- 'tmux source-file $conf && neofetch' \; \
-        set-option remain-on-exit on \; \
-        set-option pane-border-format '#{pane_index} #{pane_pid} (#{pane_height}x#{pane_height}) - #{pane_current_command}' \; \
-        split-pane -v -- neofetch \; \
-        split-pane -h -- neofetch
-    " \; \
-    split-window -v    -- "'$EDITOR' '$conf_dhall' && '$0' teardown '$s_id'" \; \
+    new-window -n 'example window' -- "'$0' source '$s_id' && neofetch && read -r _" \; \
+    set-option pane-border-format '#{pane_index} #{pane_pid} (#{pane_height}x#{pane_height}) - #{pane_current_command}' \; \
+    split-window -v    -- "'$EDITOR' '$conf_dhall' && '$0' teardown" \; \
     split-window -v -d -- "entr -p -- '$0' render_and_source '$s_id' <<< '$conf_dhall'" \; \
     select-layout main-vertical \; \
-    resize-pane -t 0 -R 42 \; \
-    resize-pane -t 2 -D 20
+    resize-pane -t 0 -R 9999 \; resize-pane -t 0 -L 80 \; \
+    resize-pane -t 2 -D 9999 \; resize-pane -t 2 -U 10
 }
 
 # This makes a pretty crucial assumption that the current window is the
 # temporary one, so it can be killed.
-teardown() {
-  tmux \
-    kill-session -t "$1" \; \
-    kill-window
-}
+teardown() { tmux kill-window; }
 
 # ---
 
