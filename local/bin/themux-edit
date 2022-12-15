@@ -2,6 +2,13 @@
 
 set -euo pipefail
 
+# TODO: Get rid of the nested tmux thing going on here and just have it load
+# in-place; this is due to  some fiddliness with how `set …` vs `set -g …`
+# behave.
+#
+# More specifically, see the `sed` command in here that removes the `-g` from
+# the dhall-rendered tmux config snippet.
+
 session_dir() {
   local -r dirpath="$HOME/.cache/themux-edit/$1"
   mkdir -p "$dirpath"
