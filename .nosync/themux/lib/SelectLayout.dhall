@@ -31,17 +31,20 @@ let Flags =
 
 let renderTokens =
       λ(flags : Flags.Type) →
-      λ(layoutName : Text) →
-        Prelude.List.concat
-          Text
-          [ [ "select-layout" ]
-          , Flags.renderTokens flags
-          , [ "--", layoutName ]
-          ]
+      λ(layoutName : Optional Text) →
+        let enquote = Prelude.Optional.map Text Text (λ(v : Text) → "'${v}'")
+
+        in  Prelude.List.concat
+              Text
+              [ [ "select-layout" ]
+              , Flags.renderTokens flags
+              , [ "--" ]
+              , Prelude.Optional.toList Text (enquote layoutName)
+              ]
 
 let show =
       λ(flags : Flags.Type) →
-      λ(layoutName : Text) →
+      λ(layoutName : Optional Text) →
         Prelude.Text.concatSep " " (renderTokens flags layoutName)
 
 in  { renderTokens, show, Flags }
