@@ -19,27 +19,26 @@ let Flags =
       let renderTokens
           : T_ → List Text
           = λ(flags : T_) →
-              let nullaries =
-                    Flags_.renderNullaryTokensCollapsed
-                      (toMap flags.{ E, n, o, p })
-
-              let unaries = Flags_.renderUnaryTokens (toMap flags.{ t })
-
-              in  Prelude.List.concat Text [ nullaries, unaries ]
+              Prelude.List.concat
+                Text
+                [ Flags_.renderNullaryTokensCollapsed
+                    (toMap flags.{ E, n, o, p })
+                , Flags_.renderUnaryTokens (toMap flags.{ t })
+                ]
 
       in  { Type = T_, default, renderTokens }
 
-let ShellCommand = ./ShellCommand.dhall
-
-let OptionalArg = ./OptionalArg.dhall
-
 let renderTokens =
-      λ(flags : Flags.Type) →
-      λ(layoutName : Optional Text) →
-        ShellCommand.renderTokens
-          "select-layout"
-          (Flags.renderTokens flags)
-          (OptionalArg.renderTokens layoutName)
+      let ShellCommand = ./ShellCommand.dhall
+
+      let OptionalArg = ./OptionalArg.dhall
+
+      in  λ(flags : Flags.Type) →
+          λ(layoutName : Optional Text) →
+            ShellCommand.renderTokens
+              "select-layout"
+              (Flags.renderTokens flags)
+              (OptionalArg.renderTokens layoutName)
 
 let show =
       λ(flags : Flags.Type) →

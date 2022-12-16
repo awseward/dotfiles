@@ -37,14 +37,14 @@ let Flags =
 
       in  { Type = T_, default, renderTokens }
 
-let ShellCommand = ./ShellCommand.dhall
-
 let renderTokens =
-      λ(flags : Flags.Type) →
-        ShellCommand.renderTokens
-          "detach-client"
-          (Flags.renderTokens flags)
-          ([] : List Text)
+      let ShellCommand = ./ShellCommand.dhall
+
+      in  λ(flags : Flags.Type) →
+            ShellCommand.renderTokens
+              "detach-client"
+              (Flags.renderTokens flags)
+              ([] : List Text)
 
 let show =
       λ(flags : Flags.Type) →
