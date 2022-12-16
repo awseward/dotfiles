@@ -1,14 +1,7 @@
 let Prelude =
-      { List =
-          https://raw.githubusercontent.com/dhall-lang/dhall-lang/v20.2.0/Prelude/List/package.dhall
-            sha256:11081c23436cb9c5fa60d53416e62845071990b43b3c48973cb2f19f5d5adbee
-      , Text =
-          https://raw.githubusercontent.com/dhall-lang/dhall-lang/v20.2.0/Prelude/Text/package.dhall
-            sha256:17a0e0e881b05436d7e3ae94a658af9da5ba2a921fafa0d1d545890978853434
-      , Optional =
-          https://raw.githubusercontent.com/dhall-lang/dhall-lang/v20.2.0/Prelude/Optional/package.dhall
-            sha256:37b84d6fe94c591d603d7b06527a2d3439ba83361e9326bc7b72517c7dc54d4e
-      }
+      ( https://raw.githubusercontent.com/dhall-lang/dhall-lang/v21.1.0/Prelude/package.dhall
+          sha256:0fed19a88330e9a8a3fbe1e8442aa11d12e38da51eb12ba8bcb56f3c25d0854a
+      ).{ List, Text, Optional, Natural }
 
 let Utils =
       { Optional =
