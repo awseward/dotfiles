@@ -29,18 +29,38 @@ let Flags =
 
       in  { Type = T_, default, renderTokens }
 
+let ShellCommand =
+      { renderTokens =
+          λ(command : Text) →
+          λ(flagTokens : List Text) →
+          λ(argTokens : List Text) →
+            Prelude.List.concat
+              Text
+              [ [ command ]
+              , flagTokens
+              , if    Prelude.Natural.equal 0 (List/length Text argTokens)
+                then  argTokens
+                else  Prelude.List.concat Text [ [ "--" ], argTokens ]
+              ]
+      }
+
+let OptionalArg =
+      { renderTokens =
+          Prelude.Function.compose
+            (Optional Text)
+            (Optional Text)
+            (List Text)
+            (Prelude.Optional.map Text Text (λ(v : Text) → "'${v}'"))
+            (Prelude.Optional.toList Text)
+      }
+
 let renderTokens =
       λ(flags : Flags.Type) →
       λ(layoutName : Optional Text) →
-        let enquote = Prelude.Optional.map Text Text (λ(v : Text) → "'${v}'")
-
-        in  Prelude.List.concat
-              Text
-              [ [ "select-layout" ]
-              , Flags.renderTokens flags
-              , [ "--" ]
-              , Prelude.Optional.toList Text (enquote layoutName)
-              ]
+        ShellCommand.renderTokens
+          "select-layout"
+          (Flags.renderTokens flags)
+          (OptionalArg.renderTokens layoutName)
 
 let show =
       λ(flags : Flags.Type) →
