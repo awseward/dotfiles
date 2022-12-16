@@ -29,6 +29,8 @@
 --     Will result in a red background and blue foreground.  Without -a, the result
 --     would be the default background and a blue foreground.
 --
+let Flags = ./Flags.dhall
+
 let T_ =
       { a : Bool
       , F : Bool
@@ -71,41 +73,13 @@ let Natural_ = Prelude.Natural
 let renderTokens
     : T_ → List Text
     = λ(flags : T_) →
-        let NullaryKvp = { mapKey : Text, mapValue : Bool }
+        let nullaries =
+              Flags.renderNullaryTokensCollapsed
+                (toMap flags.{ a, F, g, o, p, q, s, u, U, w })
 
-        let renderNullaries =
-              λ(map : List NullaryKvp) →
-                let filterByVal =
-                      List_.filter
-                        NullaryKvp
-                        (λ(kvp : NullaryKvp) → kvp.mapValue)
+        let unaries = Flags.renderUnaryTokens (toMap flags.{ t })
 
-                let mapKeys =
-                      List_.map
-                        NullaryKvp
-                        Text
-                        (λ(kvp : NullaryKvp) → kvp.mapKey)
-
-                let isEmpty =
-                      λ(t : Type) →
-                      λ(xs : List t) →
-                        Natural_.equal 0 (List/length t xs)
-
-                let nullaries
-                    : List Text
-                    = mapKeys (filterByVal map)
-
-                in  if    isEmpty Text nullaries
-                    then  None Text
-                    else  Some "-${Text_.concat nullaries}"
-
-        in  List_.unpackOptionals
-              Text
-              [ renderNullaries (toMap flags.{ a, F, g, o, p, q, s, u, U, w })
-              , Optional_.map Text Text (λ(v : Text) → "-t '${v}'") flags.t
-              ]
-
-let show = λ(flags : T_) → Text_.concatSep " " (renderTokens flags)
+        in  List_.concat Text [ nullaries, unaries ]
 
 let _test_renderTokens =
         assert
@@ -117,6 +91,8 @@ let _test_renderTokens =
             , t = Some "23"
             }
         ≡ [ "-Fgu", "-t '23'" ]
+
+let show = λ(flags : T_) → Text_.concatSep " " (renderTokens flags)
 
 let _test_show =
         assert
