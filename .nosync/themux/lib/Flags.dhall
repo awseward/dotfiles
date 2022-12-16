@@ -77,7 +77,14 @@ let _test_renderUnaryTokens =
       :   renderUnaryTokens (toMap { s = Some "https", h = Some "localhost" })
         ≡ [ "-h 'localhost'", "-s 'https'" ]
 
+let show =
+      λ(t : Type) →
+      λ(renderTokens : t → List Text) →
+      λ(flags : t) →
+        Text_.concatSep " " (renderTokens flags)
+
 in  { renderNullaryTokensCollapsed
     , renderNullaryTokensSeparated
     , renderUnaryTokens
+    , show
     }
