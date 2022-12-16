@@ -5,6 +5,7 @@
 --         kills all but the client given with -t.  If -P is given, send SIGHUP to the
 --         parent process of the client, typically causing it to exit.  With -E, run
 --         shell-command to replace the client.
+--
 let Prelude = (./imports.dhall).Prelude
 
 let Flags =
@@ -37,18 +38,19 @@ let Flags =
 
       in  { Type = T_, default, renderTokens }
 
-let renderTokens =
-      let ShellCommand = ./ShellCommand.dhall
+let M_ =
+      { Flags } ⫽ ./noArgs.dhall Flags.Type Flags.renderTokens "detach-client"
 
-      in  λ(flags : Flags.Type) →
-            ShellCommand.renderTokens
-              "detach-client"
-              (Flags.renderTokens flags)
-              ([] : List Text)
+let _test_show =
+        assert
+      :   M_.show
+            M_.Flags::{
+            , a = True
+            , P = True
+            , E = Some "foo"
+            , s = Some "bar"
+            , t = Some "baz"
+            }
+        ≡ "detach-client -Pa -E 'foo' -s 'bar' -t 'baz'"
 
-let show =
-      λ(flags : Flags.Type) →
-      λ(layoutName : Optional Text) →
-        Prelude.Text.concatSep " " (renderTokens flags)
-
-in  { renderTokens, show, Flags }
+in  M_
