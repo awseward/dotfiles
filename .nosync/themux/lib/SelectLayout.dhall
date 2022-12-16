@@ -8,9 +8,9 @@
 --
 let Prelude = (./imports.dhall).Prelude
 
-let Flags_ = ./Flags.dhall
-
 let Flags =
+      let Flags_ = ./Flags.dhall
+
       let T_ = { E : Bool, n : Bool, o : Bool, p : Bool, t : Optional Text }
 
       let default =

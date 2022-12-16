@@ -31,14 +31,6 @@
 let Prelude = (./imports.dhall).Prelude
 
 let Flags =
-      let List_ = Prelude.List
-
-      let Optional_ = Prelude.Optional
-
-      let Text_ = Prelude.Text
-
-      let Natural_ = Prelude.Natural
-
       let Flags_ = ./Flags.dhall
 
       let T_ =
@@ -79,7 +71,7 @@ let Flags =
 
               let unaries = Flags_.renderUnaryTokens (toMap flags.{ t })
 
-              in  List_.concat Text [ nullaries, unaries ]
+              in  Prelude.List.concat Text [ nullaries, unaries ]
 
       let _test_renderTokens =
               assert
