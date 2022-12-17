@@ -8,11 +8,14 @@ let create =
       λ(Flags : MFlags TFlags) →
         { command, Flags } : T_ TFlags
 
-let _fns =
-      { show =
-          λ(TFlags : Type) →
-          λ(command : T_ TFlags) →
-            "${command.command} RESTOFTHEOWL"
-      }
+let FlagRenderConfig = ./FlagRenderConfig.dhall
+
+let show =
+      λ(flagRenderConfig : FlagRenderConfig.Type) →
+      λ(TFlags : Type) →
+      λ(command : T_ TFlags) →
+        "${command.command} RESTOFTHEOWL"
+
+let _fns = { show = show FlagRenderConfig::{=} }
 
 in  { Type = T_, create, _fns }
