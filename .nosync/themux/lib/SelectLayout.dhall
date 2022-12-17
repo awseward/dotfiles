@@ -28,21 +28,15 @@ let Flags =
 
       in  { Type = T_, default, renderTokens }
 
-let renderTokens =
-      let ShellCommand = ./ShellCommand.dhall
+let M_ =
+        { Flags }
+      ⫽ ./oneOptionalArg.dhall Flags.Type Flags.renderTokens "select-layout"
 
-      let OptionalArg = ./OptionalArg.dhall
+let _test_show =
+        assert
+      :   M_.show
+            M_.Flags::{ E = True, n = True, o = True, p = True, t = Some "foo" }
+            (Some "bar")
+        ≡ "select-layout -Enop -t 'foo' -- 'bar'"
 
-      in  λ(flags : Flags.Type) →
-          λ(layoutName : Optional Text) →
-            ShellCommand.renderTokens
-              "select-layout"
-              (Flags.renderTokens flags)
-              (OptionalArg.renderTokens layoutName)
-
-let show =
-      λ(flags : Flags.Type) →
-      λ(layoutName : Optional Text) →
-        Prelude.Text.concatSep " " (renderTokens flags layoutName)
-
-in  { renderTokens, show, Flags }
+in  M_

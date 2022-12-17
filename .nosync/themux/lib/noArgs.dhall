@@ -13,6 +13,14 @@ in  λ(TFlags : Type) →
                 ([] : List Text)
 
       let show =
-            λ(flags : TFlags) → Prelude.Text.concatSep " " (renderTokens flags)
+            let spaced = Prelude.Text.concatSep " "
 
-      in  { renderTokens, show }
+            in  Prelude.Function.compose
+                  TFlags
+                  (List Text)
+                  Text
+                  renderTokens
+                  spaced
+
+      in    { renderTokens, show }
+          : { renderTokens : TFlags → List Text, show : TFlags → Text }

@@ -65,13 +65,12 @@ let Flags =
       let renderTokens
           : T_ → List Text
           = λ(flags : T_) →
-              let nullaries =
-                    Flags_.renderNullaryTokensCollapsed
-                      (toMap flags.{ a, F, g, o, p, q, s, u, U, w })
-
-              let unaries = Flags_.renderUnaryTokens (toMap flags.{ t })
-
-              in  Prelude.List.concat Text [ nullaries, unaries ]
+              Prelude.List.concat
+                Text
+                [ Flags_.renderNullaryTokensCollapsed
+                    (toMap flags.{ a, F, g, o, p, q, s, u, U, w })
+                , Flags_.renderUnaryTokens (toMap flags.{ t })
+                ]
 
       let _test_renderTokens =
               assert
@@ -86,38 +85,29 @@ let Flags =
 
       in  { Type = T_, default, renderTokens }
 
-let renderTokens =
-      λ(flags : Flags.Type) →
-      λ(option : Text) →
-      λ(value : Text) →
-        Prelude.List.concat
-          Text
-          [ [ "set" ]
-          , Flags.renderTokens flags
-          , [ "--", "'${option}'", "'${value}'" ]
-          ]
+let M_ = { Flags } ⫽ ./twoArgs.dhall Flags.Type Flags.renderTokens "set-option"
 
-let _test =
+let _test_show =
+      assert : M_.show M_.Flags::{=} "foo" "bar" ≡ "set-option -- 'foo' 'bar'"
+
+let _test_show =
         assert
-      :   renderTokens Flags::{ a = True, t = Some "beep" } "foo" "bar"
-        ≡ [ "set", "-a", "-t 'beep'", "--", "'foo'", "'bar'" ]
+      :   M_.show
+            M_.Flags::{
+            , a = True
+            , F = True
+            , g = True
+            , o = True
+            , p = True
+            , q = True
+            , s = True
+            , u = True
+            , U = True
+            , w = True
+            , t = Some "foo"
+            }
+            "bar"
+            "baz"
+        ≡ "set-option -FUagopqsuw -t 'foo' -- 'bar' 'baz'"
 
-let show =
-      λ(flags : Flags.Type) →
-      λ(option : Text) →
-      λ(value : Text) →
-        Prelude.Text.concatSep " " (renderTokens flags option value)
-
-let _test =
-        assert
-      :   show Flags::{ a = True, t = Some "beep" } "foo" "bar"
-        ≡ "set -a -t 'beep' -- 'foo' 'bar'"
-
-let _test =
-        assert
-      :   show Flags::{ t = Some "beep", g = True, a = True } "foo" "bar"
-        ≡ "set -ag -t 'beep' -- 'foo' 'bar'"
-
-let _test = assert : show Flags::{=} "foo" "bar" ≡ "set -- 'foo' 'bar'"
-
-in  { renderTokens, show, Flags }
+in  M_
