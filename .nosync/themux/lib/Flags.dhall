@@ -39,15 +39,23 @@ let collectAndRenderNullaries
         (List Text)
         collectNullaries
 
-let test_collectAndRenderNullaries_collapse =
-      let fn = collectAndRenderNullaries (./FlagRenderConfig.dhall).collapse
+let _test_collectAndRenderNullaries =
+      let fns = (./FlagRenderConfig.dhall).nullary
 
-      in  assert : fn (toMap { c = True, a = False, b = True }) ≡ [ "-bc" ]
+      let _test_collapse =
+            let subject = collectAndRenderNullaries fns.collapse
 
-let test_collectAndRenderNullaries_separate =
-      let fn = collectAndRenderNullaries (./FlagRenderConfig.dhall).separate
+            in    assert
+                : subject (toMap { c = True, a = False, b = True }) ≡ [ "-bc" ]
 
-      in  assert : fn (toMap { c = True, a = False, b = True }) ≡ [ "-b", "-c" ]
+      let _test_separate =
+            let subject = collectAndRenderNullaries fns.separate
+
+            in    assert
+                :   subject (toMap { c = True, a = False, b = True })
+                  ≡ [ "-b", "-c" ]
+
+      in  <>
 
 let renderUnaryTokens
     : Unaries → List Text
@@ -117,4 +125,4 @@ let show =
       λ(flags : t) →
         Text_.concatSep " " (renderTokens flags)
 
-in  { ModuleBase, Module, mkModule, mkRenderTokens, renderUnaryTokens, show }
+in  { ModuleBase, Module, mkModule, mkRenderTokens, show }

@@ -27,4 +27,4 @@ let default
     : T_
     = { renderNullary = collapse }
 
-in  { Type = T_, default, separate, collapse }
+in  { Type = T_, default, nullary = { separate, collapse } }
