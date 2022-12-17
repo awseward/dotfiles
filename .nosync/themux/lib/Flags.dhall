@@ -6,8 +6,6 @@ let Map_ = Prelude.Map
 
 let Text_ = Prelude.Text
 
-let Natural_ = Prelude.Natural
-
 let Entry = Map_.Entry Text
 
 let Nullary = Entry Bool
@@ -22,59 +20,49 @@ let Unaries = List Unary
 
 let collectNullaries
     : Nullaries → List Text
-    = λ(map : Nullaries) →
-        let filter = List_.filter Nullary (λ(kvp : Nullary) → kvp.mapValue)
+    = let filter = List_.filter Nullary (λ(kvp : Nullary) → kvp.mapValue)
 
-        let render = List_.map Nullary Text (λ(kvp : Nullary) → kvp.mapKey)
+      let map = List_.map Nullary Text (λ(kvp : Nullary) → kvp.mapKey)
 
-        in  render (filter map)
+      in  Prelude.Function.compose Nullaries Nullaries (List Text) filter map
 
 let _test_collectNullaries =
         assert
       :   collectNullaries (toMap { c = True, a = False, b = True })
         ≡ [ "b", "c" ]
 
-let renderNullaryTokensSeparated
-    : Nullaries → List Text
-    = λ(map : Nullaries) →
-        let nullaries = collectNullaries map
+let collectAndRenderNullaries
+    : (List Text → List Text) → Nullaries → List Text
+    = Prelude.Function.compose
+        Nullaries
+        (List Text)
+        (List Text)
+        collectNullaries
 
-        in  List_.map Text Text (λ(t : Text) → "-${t}") nullaries
+let test_collectAndRenderNullaries_collapse =
+      let fn = collectAndRenderNullaries (./FlagRenderConfig.dhall).collapse
 
-let _test_renderNullaryTokensSeparated =
-        assert
-      :   renderNullaryTokensSeparated (toMap { c = True, a = False, b = True })
-        ≡ [ "-b", "-c" ]
+      in  assert : fn (toMap { c = True, a = False, b = True }) ≡ [ "-bc" ]
 
-let renderNullaryTokensCollapsed
-    : Nullaries → List Text
-    = λ(map : Nullaries) →
-        let isEmpty =
-              λ(t : Type) → λ(xs : List t) → Natural_.equal 0 (List/length t xs)
+let test_collectAndRenderNullaries_separate =
+      let fn = collectAndRenderNullaries (./FlagRenderConfig.dhall).separate
 
-        let nullaries = collectNullaries map
-
-        in  if    isEmpty Text nullaries
-            then  [] : List Text
-            else  [ "-${Text_.concat nullaries}" ]
-
-let _test_renderNullaryTokensCollapsed =
-        assert
-      :   renderNullaryTokensCollapsed (toMap { c = True, a = False, b = True })
-        ≡ [ "-bc" ]
+      in  assert : fn (toMap { c = True, a = False, b = True }) ≡ [ "-b", "-c" ]
 
 let renderUnaryTokens
     : Unaries → List Text
-    = λ(map : Unaries) →
-        let filter = Map_.unpackOptionals Text Text
+    = let filter = Map_.unpackOptionals Text Text
 
-        let render =
-              List_.map
-                (Entry Text)
-                Text
-                (λ(kvp : Entry Text) → "-${kvp.mapKey} '${kvp.mapValue}'")
+      let render = λ(kvp : Entry Text) → "-${kvp.mapKey} '${kvp.mapValue}'"
 
-        in  render (filter map)
+      let map = List_.map (Entry Text) Text render
+
+      in  Prelude.Function.compose
+            Unaries
+            (Map_.Type Text Text)
+            (List Text)
+            filter
+            map
 
 let _test_renderUnaryTokens =
         assert
@@ -89,7 +77,10 @@ let mkRenderTokens =
           }
         ) →
       λ(flags : t) →
-        let renderNullaryTokens = renderNullaryTokensCollapsed
+        let renderNullaryTokens =
+            -- TODO: Parameterize this
+              collectAndRenderNullaries
+                ((./FlagRenderConfig.dhall)::{=}).renderNullary
 
         in  Prelude.List.concat
               Text
@@ -126,12 +117,4 @@ let show =
       λ(flags : t) →
         Text_.concatSep " " (renderTokens flags)
 
-in  { ModuleBase
-    , Module
-    , mkModule
-    , mkRenderTokens
-    , renderNullaryTokensCollapsed
-    , renderNullaryTokensSeparated
-    , renderUnaryTokens
-    , show
-    }
+in  { ModuleBase, Module, mkModule, mkRenderTokens, renderUnaryTokens, show }

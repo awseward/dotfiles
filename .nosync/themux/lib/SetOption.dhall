@@ -29,6 +29,8 @@
 --         be the default background and a blue foreground.
 --
 let Flags =
+      let Flags_ = ./Flags.dhall
+
       let T_ =
             { a : Bool
             , F : Bool
@@ -57,8 +59,6 @@ let Flags =
             , w = False
             , t = None Text
             }
-
-      let Flags_ = ./Flags.dhall
 
       in  Flags_.mkModule
             T_

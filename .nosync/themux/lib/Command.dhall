@@ -1,5 +1,3 @@
-let Prelude = (./imports.dhall).Prelude
-
 let MFlags = λ(TFlags : Type) → (./Flags.dhall).ModuleBase TFlags
 
 let T_ = λ(TFlags : Type) → { Flags : MFlags TFlags, command : Text }

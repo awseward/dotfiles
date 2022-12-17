@@ -7,12 +7,12 @@
 --         any panes next to it out evenly.
 --
 let Flags =
+      let Flags_ = ./Flags.dhall
+
       let T_ = { E : Bool, n : Bool, o : Bool, p : Bool, t : Optional Text }
 
       let default =
             { E = False, n = False, o = False, p = False, t = None Text }
-
-      let Flags_ = ./Flags.dhall
 
       in  Flags_.mkModule
             T_

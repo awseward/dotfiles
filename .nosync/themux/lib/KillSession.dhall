@@ -5,11 +5,11 @@
 --         silence) in all windows linked to the session.
 --
 let Flags =
+      let Flags_ = ./Flags.dhall
+
       let T_ = { a : Bool, C : Bool, t : Optional Text }
 
       let default = { a = False, C = False, t = None Text }
-
-      let Flags_ = ./Flags.dhall
 
       in  Flags_.mkModule
             T_

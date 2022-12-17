@@ -6,8 +6,6 @@ in  λ(TFlags : Type) →
       let renderTokens =
             let ShellCommand = ./ShellCommand.dhall
 
-            let OptionalArg = ./OptionalArg.dhall
-
             in  λ(flags : TFlags) →
                 λ(arg1 : Text) →
                 λ(arg2 : Text) →
