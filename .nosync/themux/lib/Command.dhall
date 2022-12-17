@@ -10,4 +10,11 @@ let create =
       λ(Flags : MFlags TFlags) →
         { command, Flags } : T_ TFlags
 
-in  { Type = T_, create }
+let _fns =
+      { show =
+          λ(TFlags : Type) →
+          λ(command : T_ TFlags) →
+            "${command.command} RESTOFTHEOWL"
+      }
+
+in  { Type = T_, create, _fns }
