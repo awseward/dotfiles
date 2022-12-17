@@ -28,11 +28,7 @@
 --         Will result in a red background and blue foreground.  Without -a, the result would
 --         be the default background and a blue foreground.
 --
-let Prelude = (./imports.dhall).Prelude
-
 let Flags =
-      let Flags_ = ./Flags.dhall
-
       let T_ =
             { a : Bool
             , F : Bool
@@ -62,28 +58,16 @@ let Flags =
             , t = None Text
             }
 
-      let renderTokens
-          : T_ → List Text
-          = λ(flags : T_) →
-              Prelude.List.concat
-                Text
-                [ Flags_.renderNullaryTokensCollapsed
-                    (toMap flags.{ a, F, g, o, p, q, s, u, U, w })
-                , Flags_.renderUnaryTokens (toMap flags.{ t })
-                ]
+      let Flags_ = ./Flags.dhall
 
-      let _test_renderTokens =
-              assert
-            :   renderTokens
-                  { Type = T_, default }::{
-                  , g = True
-                  , F = True
-                  , u = True
-                  , t = Some "23"
-                  }
-              ≡ [ "-Fgu", "-t '23'" ]
-
-      in  { Type = T_, default, renderTokens }
+      in  Flags_.mkModule
+            T_
+            { Type = T_
+            , default
+            , nullary =
+                λ(flags : T_) → toMap flags.{ a, F, g, o, p, q, s, u, U, w }
+            , unary = λ(flags : T_) → toMap flags.{ t }
+            }
 
 let M_ = { Flags } ⫽ ./twoArgs.dhall Flags.Type Flags.renderTokens "set-option"
 

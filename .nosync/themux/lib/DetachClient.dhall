@@ -6,40 +6,12 @@
 --         parent process of the client, typically causing it to exit.  With -E, run
 --         shell-command to replace the client.
 --
-let Prelude = (./imports.dhall).Prelude
+let Command = ./DetachClient2.dhall
 
-let Flags =
-      let Flags_ = ./Flags.dhall
-
-      let T_ =
-            { a : Bool
-            , P : Bool
-            , E : Optional Text
-            , s : Optional Text
-            , t : Optional Text
-            }
-
-      let default =
-            { a = False
-            , P = False
-            , E = None Text
-            , s = None Text
-            , t = None Text
-            }
-
-      let renderTokens
-          : T_ → List Text
-          = λ(flags : T_) →
-              Prelude.List.concat
-                Text
-                [ Flags_.renderNullaryTokensCollapsed (toMap flags.{ a, P })
-                , Flags_.renderUnaryTokens (toMap flags.{ E, s, t })
-                ]
-
-      in  { Type = T_, default, renderTokens }
+let Flags = (./Flags.dhall).mkModule Command.Flags.Type Command.Flags
 
 let M_ =
-      { Flags } ⫽ ./noArgs.dhall Flags.Type Flags.renderTokens "detach-client"
+      { Flags } ⫽ ./noArgs.dhall Flags.Type Flags.renderTokens Command.command
 
 let _test_show =
         assert

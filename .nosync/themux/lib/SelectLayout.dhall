@@ -6,27 +6,21 @@
 --         possible (undoes the most recent layout change).  -E spreads the current pane and
 --         any panes next to it out evenly.
 --
-let Prelude = (./imports.dhall).Prelude
-
 let Flags =
-      let Flags_ = ./Flags.dhall
-
       let T_ = { E : Bool, n : Bool, o : Bool, p : Bool, t : Optional Text }
 
       let default =
             { E = False, n = False, o = False, p = False, t = None Text }
 
-      let renderTokens
-          : T_ → List Text
-          = λ(flags : T_) →
-              Prelude.List.concat
-                Text
-                [ Flags_.renderNullaryTokensCollapsed
-                    (toMap flags.{ E, n, o, p })
-                , Flags_.renderUnaryTokens (toMap flags.{ t })
-                ]
+      let Flags_ = ./Flags.dhall
 
-      in  { Type = T_, default, renderTokens }
+      in  Flags_.mkModule
+            T_
+            { Type = T_
+            , default
+            , nullary = λ(flags : T_) → toMap flags.{ E, n, o, p }
+            , unary = λ(flags : T_) → toMap flags.{ t }
+            }
 
 let M_ =
         { Flags }

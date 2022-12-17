@@ -12,13 +12,17 @@ let Entry = Map_.Entry Text
 
 let Nullary = Entry Bool
 
-let Unary -- Just taking a stance that any unary flag is Text
-          =
+let Unary =
+    -- Just taking a stance that any unary flag is Text
       Entry (Optional Text)
 
+let Nullaries = List Nullary
+
+let Unaries = List Unary
+
 let collectNullaries
-    : List Nullary → List Text
-    = λ(map : List Nullary) →
+    : Nullaries → List Text
+    = λ(map : Nullaries) →
         let filter = List_.filter Nullary (λ(kvp : Nullary) → kvp.mapValue)
 
         let render = List_.map Nullary Text (λ(kvp : Nullary) → kvp.mapKey)
@@ -31,8 +35,8 @@ let _test_collectNullaries =
         ≡ [ "b", "c" ]
 
 let renderNullaryTokensSeparated
-    : List Nullary → List Text
-    = λ(map : List Nullary) →
+    : Nullaries → List Text
+    = λ(map : Nullaries) →
         let nullaries = collectNullaries map
 
         in  List_.map Text Text (λ(t : Text) → "-${t}") nullaries
@@ -43,8 +47,8 @@ let _test_renderNullaryTokensSeparated =
         ≡ [ "-b", "-c" ]
 
 let renderNullaryTokensCollapsed
-    : List Nullary → List Text
-    = λ(map : List Nullary) →
+    : Nullaries → List Text
+    = λ(map : Nullaries) →
         let isEmpty =
               λ(t : Type) → λ(xs : List t) → Natural_.equal 0 (List/length t xs)
 
@@ -60,8 +64,8 @@ let _test_renderNullaryTokensCollapsed =
         ≡ [ "-bc" ]
 
 let renderUnaryTokens
-    : List Unary → List Text
-    = λ(map : List Unary) →
+    : Unaries → List Text
+    = λ(map : Unaries) →
         let filter = Map_.unpackOptionals Text Text
 
         let render =
@@ -77,13 +81,56 @@ let _test_renderUnaryTokens =
       :   renderUnaryTokens (toMap { s = Some "https", h = Some "localhost" })
         ≡ [ "-h 'localhost'", "-s 'https'" ]
 
+let mkRenderTokens =
+      λ(t : Type) →
+      λ ( pick
+        : { nullary : t → List (Prelude.Map.Entry Text Bool)
+          , unary : t → List (Prelude.Map.Entry Text (Optional Text))
+          }
+        ) →
+      λ(flags : t) →
+        let renderNullaryTokens = renderNullaryTokensCollapsed
+
+        in  Prelude.List.concat
+              Text
+              [ renderNullaryTokens (pick.nullary flags)
+              , renderUnaryTokens (pick.unary flags)
+              ]
+
+let ModuleBase =
+      λ(TFlags : Type) →
+        { Type : Type
+        , default : TFlags
+        , nullary : TFlags → Nullaries
+        , unary : TFlags → Unaries
+        }
+
+let Module =
+      λ(TFlags : Type) →
+        { Type : Type
+        , default : TFlags
+        , nullary : TFlags → Nullaries
+        , unary : TFlags → Unaries
+        , renderTokens : TFlags → List Text
+        }
+
+let mkModule =
+      λ(TFlags : Type) →
+      λ(i : ModuleBase TFlags) →
+          i ⫽ { renderTokens = mkRenderTokens TFlags i.{ nullary, unary } }
+        : Module TFlags
+
 let show =
       λ(t : Type) →
       λ(renderTokens : t → List Text) →
       λ(flags : t) →
         Text_.concatSep " " (renderTokens flags)
 
-in  { renderNullaryTokensCollapsed
+in  { ModuleBase
+    , Module
+    , mkModule
+    , mkRenderTokens
+    , renderNullaryTokensCollapsed
     , renderNullaryTokensSeparated
     , renderUnaryTokens
     , show

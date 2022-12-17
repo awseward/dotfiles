@@ -1,7 +1,9 @@
 :let Prelude = (./imports.dhall).Prelude
-:let SetOption = ./SetOption.dhall
-:let SelectLayout = ./SelectLayout.dhall
+
+:let DetachClient = ./DetachClient.dhall
 :let KillSession = ./KillSession.dhall
+:let SelectLayout = ./SelectLayout.dhall
+:let SetOption = ./SetOption.dhall
 
 :let set-option = SetOption.show SetOption.Flags::{=} "foo" "bar"
 
