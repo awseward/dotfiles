@@ -30,44 +30,59 @@ let _examples =
       in  <>
 
 let DetachClientFlags =
-      let someLib =
-            let types_ =
+      let ValueTypeConfig =
+            let Arity = ./Arity.dhall
+
+            let ValueTypes = { nullary : Type, unary : Type, multiary : Type }
+
+            let typeForArity =
+                  λ(valueTypes : ValueTypes) →
+                  λ(arity : Arity.Type) →
+                    merge valueTypes arity
+
+            let configure =
                   λ(TNullary : Type) →
                   λ(TNonNullary : Type) →
-                    { nullary = TNullary
-                    , unary = Optional TNonNullary
-                    , multiary = List TNonNullary
-                    }
+                    let valueTypes
+                        : ValueTypes
+                        = { nullary = TNullary
+                          , unary = Optional TNonNullary
+                          , multiary = List TNonNullary
+                          }
 
-            let types = types_ Bool Text
+                    let T_ =
+                          { nullary : valueTypes.nullary
+                          , unary : valueTypes.unary
+                          , multiary : valueTypes.multiary
+                          }
 
-            let defaults
-                         -- TODO: Might be interesting to annotate this
-                         =
-                  { nullary = False
-                  , unary = None Text
-                  , multiary = [] : List Text
-                  }
+                    in  λ(default : T_) → { Type = T_, default, valueTypes }
 
-            in  { types, defaults }
+            in  { typeForArity, configure }
+
+      let x =
+            ValueTypeConfig.configure
+              Bool
+              Text
+              { nullary = False, unary = None Text, multiary = [] : List Text }
 
       let T_ =
-            { a : someLib.types.nullary
-            , P : someLib.types.nullary
-            , E : someLib.types.unary
-            , s : someLib.types.unary
-            , t : someLib.types.unary
+            { a : x.valueTypes.nullary
+            , P : x.valueTypes.nullary
+            , E : x.valueTypes.unary
+            , s : x.valueTypes.unary
+            , t : x.valueTypes.unary
             }
 
       let default
           : T_
-          = { a = someLib.defaults.nullary
-            , P = someLib.defaults.nullary
-            , E = someLib.defaults.unary
-            , s = someLib.defaults.unary
-            , t = someLib.defaults.unary
+          = { a = x.default.nullary
+            , P = x.default.nullary
+            , E = x.default.unary
+            , s = x.default.unary
+            , t = x.default.unary
             }
 
-      in  { Type = T_, default }
+      in  { Type = T_, default, x }
 
 in  DetachClientFlags
