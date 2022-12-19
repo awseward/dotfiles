@@ -1,0 +1,11 @@
+-- Current env vars in themux.sh:
+--
+-- + HOME
+-- + THEMES
+-- + THEMUX_PACKAGE
+-- + THEMUX_PREFIX
+-- + XDG_CONFIG_HOME
+--
+-- Not exactly sure which ones to incorporate here, or how…
+--
+{ Type = {}, default = {=} }
