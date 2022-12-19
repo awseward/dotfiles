@@ -1,11 +1,13 @@
--- Current env vars in themux.sh:
---
--- + HOME
--- + THEMES
--- + THEMUX_PACKAGE
--- + THEMUX_PREFIX
--- + XDG_CONFIG_HOME
---
--- Not exactly sure which ones to incorporate here, or how…
---
-{ Type = {}, default = {=} }
+let create =
+      λ(prefix : Text) →
+        { Type = { prefix : Text, libPackage : Text, themes : Text }
+        , default =
+          { prefix
+          , libPackage = "${prefix}/lib/themux/package.dhall"
+          , themes = "${prefix}/etc/themux/themes.dhall"
+          }
+        }
+
+let prefix = env:THEMUX_PREFIX as Text ? "/usr/local"
+
+in  create prefix
