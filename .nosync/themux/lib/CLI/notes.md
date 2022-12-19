@@ -1,3 +1,5 @@
+### Use Cases
+
 ### Flags
 
 ```
@@ -13,3 +15,4 @@ length: < short | long >
 | unary    | long   | n            |
 | multiary | short  | values maybe |
 | multiary | long   | n            |
+

@@ -7,20 +7,22 @@
 --         shell-command to replace the client.
 --
 let Flags =
+      let config = ./CLI/config.dhall
+
       let T_ =
-            { a : Bool
-            , P : Bool
-            , E : Optional Text
-            , s : Optional Text
-            , t : Optional Text
+            { a : config.valueTypes.nullary
+            , P : config.valueTypes.nullary
+            , E : config.valueTypes.unary
+            , s : config.valueTypes.unary
+            , t : config.valueTypes.unary
             }
 
       let default =
-            { a = False
-            , P = False
-            , E = None Text
-            , s = None Text
-            , t = None Text
+            { a = config.values.nullary
+            , P = config.values.nullary
+            , E = config.values.unary
+            , s = config.values.unary
+            , t = config.values.unary
             }
 
       in    { Type = T_

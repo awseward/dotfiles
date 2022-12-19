@@ -29,60 +29,19 @@ let _examples =
 
       in  <>
 
-let DetachClientFlags =
-      let ValueTypeConfig =
-            let Arity = ./Arity.dhall
+let TypedArity =
+      λ(TNullary : Type) →
+      λ(T : Type) →
+        let types =
+              { nullary = TNullary, unary = Optional T, multiary = List T }
 
-            let ValueTypes = { nullary : Type, unary : Type, multiary : Type }
+        let union =
+              < nullary : types.nullary
+              | unary : types.unary
+              | multiary : types.multiary
+              >
 
-            let typeForArity =
-                  λ(valueTypes : ValueTypes) →
-                  λ(arity : Arity.Type) →
-                    merge valueTypes arity
+        in  λ(renderTokens : List union → List Text) →
+              { types, union, renderTokens }
 
-            let configure =
-                  λ(TNullary : Type) →
-                  λ(TNonNullary : Type) →
-                    let valueTypes
-                        : ValueTypes
-                        = { nullary = TNullary
-                          , unary = Optional TNonNullary
-                          , multiary = List TNonNullary
-                          }
-
-                    let T_ =
-                          { nullary : valueTypes.nullary
-                          , unary : valueTypes.unary
-                          , multiary : valueTypes.multiary
-                          }
-
-                    in  λ(default : T_) → { Type = T_, default, valueTypes }
-
-            in  { typeForArity, configure }
-
-      let x =
-            ValueTypeConfig.configure
-              Bool
-              Text
-              { nullary = False, unary = None Text, multiary = [] : List Text }
-
-      let T_ =
-            { a : x.valueTypes.nullary
-            , P : x.valueTypes.nullary
-            , E : x.valueTypes.unary
-            , s : x.valueTypes.unary
-            , t : x.valueTypes.unary
-            }
-
-      let default
-          : T_
-          = { a = x.default.nullary
-            , P = x.default.nullary
-            , E = x.default.unary
-            , s = x.default.unary
-            , t = x.default.unary
-            }
-
-      in  { Type = T_, default, x }
-
-in  DetachClientFlags
+in  TypedArity
