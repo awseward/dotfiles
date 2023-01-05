@@ -14,7 +14,7 @@ select_branch() {
   | sed -E 's/remotes\/[^\/]*\///g; /(\*|HEAD).*$/d' \
   | sort -u \
   | awk '{$1=$1};1' \
-  | fzf --header 'Branches' --prompt 'git checkout '
+  | _fzf --header 'Branches' --prompt 'git checkout '
 }
 
 "$@"
