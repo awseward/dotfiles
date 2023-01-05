@@ -41,18 +41,19 @@ info "Starting backup"
 # the machine this script is currently running on:
 
 borg create \
-    --verbose            \
-    --list               \
-    --stats              \
-    --show-rc            \
-    --exclude-caches     \
-                         \
-    ::'{hostname}-{now}' \
-                         \
-    ~/books              \
-    ~/scans              \
-    ~/uncategorized      \
-    ~/stale_downloads    \
+    --verbose                 \
+    --list                    \
+    --stats                   \
+    --show-rc                 \
+    --exclude-caches          \
+    --checkpoint-interval 300 \
+                              \
+    ::'{hostname}-{now}'      \
+                              \
+    ~/books                   \
+    ~/scans                   \
+    ~/uncategorized           \
+    ~/stale_downloads         \
 
 backup_exit=$?
 
