@@ -225,6 +225,9 @@ else
   endif
 endif
 
+" TODO: (See if this can be sped up a bit, it's suuuper slow)
+let g:rg_command = 'rg --sort-files --vimgrep'
+
 map <leader>b :Buffers<CR>
 map <leader>E :bufdo! :e!<CR><CR>
 map <leader>F :Filetypes<CR>
