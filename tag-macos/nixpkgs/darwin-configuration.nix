@@ -44,8 +44,20 @@
 
   system.defaults.trackpad.Clicking = true;
 
+  # Added in https://github.com/LnL7/nix-darwin/pull/557
+  system.defaults.CustomUserPreferences = {
+    # Based on https://github.com/mathiasbynens/dotfiles/issues/701#issuecomment-1205951860
+    #
+    # > defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool true
+    # > defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool false
+    #
+    # TODO: Figure out why this doesn't work; might have something to do with
+    # https://github.com/nix-community/home-manager/commit/572f348a10826b2207caaf394e9ad2e9ffc6ffa7
+    #
+    "com.apple.controlcenter.plist" = { "BatteryShowPercentage" = false; };
+  };
+
   # TODO: Something like this:
-  # defaults write com.apple.menuextra.battery ShowPercent -string "NO"
   # defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
   # List packages installed in system profile. To search by name, run:
