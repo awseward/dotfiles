@@ -69,7 +69,7 @@ run() {
 }
 
 set_stale_perms() {
-  find "$_target_directory" -type f -print0 | xargs -0 -t chmod 400
+  find "$_target_directory" -type f -print0 | xargs -0 -t -n 1000 chmod 400
 }
 
 _hcio() { healthchecks.io.ping.sh "$@" "$_hcio_uuid" "$_hcio_run_id"; }
