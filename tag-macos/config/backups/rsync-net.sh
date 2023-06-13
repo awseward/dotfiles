@@ -31,11 +31,18 @@ _hcio_run_id="$(uuidgen)"; readonly _hcio_run_id
 # Set these up for calling at the end
 hcio() { healthchecks.io.ping.sh "$@" "$_hcio_uuid" "$_hcio_run_id"; }
 
+info_and_hcio() {
+  local -r hcio_level="${1:-log}"
+  local -r msg="$(cat -)"
+
+  info "${msg}"
+  hcio "${hcio_level}" <<< "${msg}"
+}
+
+
 # Try sending start signal; this is okay to fail (the `|| true` doesn't
 # _actually_ matter without `set -e`, but I'm choosing to leave it in anyway)
-hcio start <<< '' || true
-
-info "Starting backup"
+info_and_hcio start <<< 'Starting backup'
 
 # Backup the most important directories into an archive named after
 # the machine this script is currently running on:
@@ -57,7 +64,7 @@ borg create \
 
 backup_exit=$?
 
-info "Pruning repository"
+info_and_hcio <<< 'Pruning repository'
 
 borg prune \
     --list                         \
@@ -74,19 +81,14 @@ prune_exit=$?
 global_exit=$(( backup_exit > prune_exit ? backup_exit : prune_exit ))
 
 if [ ${global_exit} -eq 0 ]; then
-  hcio success
-  info 'Backup and Prune finished successfully'
+  info_and_hcio success <<< 'Backup and Prune finished successfully'
 elif [ ${global_exit} -eq 1 ]; then
-  msg='Backup and/or Prune finished with warnings'
-  hcio log <<< "$msg"
-  info "$msg"
+  info_and_hcio log <<< 'Backup and/or Prune finished with warnings'
 else
-  msg='Backup and/or Prune finished with errors'
   # Not using `hcio failure` because we don't really need to cause
   # notifications for every single time the job fails, but would still like to
   # know about it.
-  hcio log <<< "$msg"
-  info "$msg"
+  info_and_hcio log <<< 'Backup and/or Prune finished with errors'
 fi
 
 exit ${global_exit}
