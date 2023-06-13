@@ -19,7 +19,7 @@ __post() {
     -fsS \
     --max-time 5 \
     --retry 3 \
-    --data '@-' \
+    --data-binary '@-' \
     --header 'Content-Type: application/json'
   >&2 echo
 }

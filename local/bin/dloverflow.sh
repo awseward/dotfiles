@@ -23,8 +23,6 @@ list_candidates() {
   find "$_downloads_directory" -maxdepth 1 -mindepth 1 -mtime "$mtime" "$@"
 }
 
-_not_implemented() { >&2 echo "$0: TODO (not implemented): $*"; return 1; }
-
 ensure_target_directory() { mkdir -v -p "$_target_directory"; }
 
 dry_run() {
@@ -54,8 +52,9 @@ run() {
   local candidates; candidates="$(list_candidates "$mtime")"; readonly candidates
 
   if [ "$candidates" = '' ]; then
-    >&2 echo 'Nothing to do… exiting.'
-    _sig_success "$mtime"
+    msg='Nothing to do… exiting.'
+    >&2 echo "$msg"
+    _sig_success <<< "$msg"
     return 1
   fi
 
@@ -65,7 +64,7 @@ run() {
     mv -v "$filepath" "$_target_directory/$ts-$(basename "$filepath")"
   done
   set_stale_perms
-  _sig_success "$mtime"
+  _sig_success <<< "$candidates"
 }
 
 set_stale_perms() {
@@ -77,9 +76,9 @@ _hcio() { healthchecks.io.ping.sh "$@" "$_hcio_uuid" "$_hcio_run_id"; }
 # This `|| true` is so that we still do the thing even if there was an issue
 # with the request to the healthcheck endpoint; the start signal is best
 # effort, and if the finished signal comes through without it, that's fine.
-_try_sig_start() { jq -nc --arg mtime "$1" '{ $mtime }' | _hcio start || true; }
+_try_sig_start() { jq -nc --arg find_mtime "$1" '{ $find_mtime }' | _hcio start || true; }
 
-_sig_success() { jq -nc --arg mtime "$1" '{ $mtime }' | _hcio success; }
+_sig_success() { _hcio success; }
 
 # ---
 
