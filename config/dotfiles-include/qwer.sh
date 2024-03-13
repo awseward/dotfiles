@@ -24,7 +24,10 @@ qwer-installed() {
 
     asdf list | ag '^[^ ]' | while read -r lang; do
       asdf list "${lang}" | while read -r version; do
-        echo "${lang} ${version}"
+        # The format we're parsing puts a leading `*` on active versions so we
+        # need to remove that if comparisons which rely on this function are to
+        # succeed.
+        echo "${lang} ${version//\*/}"
       done
     done
   ) | sort -u
