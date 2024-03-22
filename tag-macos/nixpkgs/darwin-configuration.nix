@@ -96,6 +96,7 @@
     exa
     figlet
     graphviz
+    gron
     hadolint
     htop
     jq
