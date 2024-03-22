@@ -1,3 +1,1 @@
-# POSTGRES_EXTRA_CONFIGURE_OPTIONS='--with-openssl --with-libraries=/usr/local/lib:/usr/local/opt/openssl@1.1/lib --with-includes=/usr/local/include:/usr/local/opt/openssl@1.1/include'
-# Not really sure why homebrew puts stuff under a different path now…
 POSTGRES_EXTRA_CONFIGURE_OPTIONS='--with-openssl --with-libraries=/usr/local/lib:/opt/homebrew/opt/openssl/lib --with-includes=/usr/local/include:/opt/homebrew/opt/openssl/include'
