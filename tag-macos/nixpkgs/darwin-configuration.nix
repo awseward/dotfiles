@@ -100,6 +100,7 @@
     hadolint
     htop
     jq
+    neofetch
     neovim
     redis
     ripgrep
