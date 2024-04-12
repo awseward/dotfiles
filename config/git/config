@@ -92,7 +92,6 @@
   safecrlf   = warn
   trustctime = false
   excludesfile = ~/.gitignore
-  hooksPath    = ~/.git-hooks
 
 [core.whitespace]
   tab-in-indent = true
