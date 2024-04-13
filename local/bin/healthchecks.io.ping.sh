@@ -66,7 +66,7 @@ help() {
     string.
 
     To send requests somewhere other than the default https://hc-ping.com, you
-    can set the environment variable HEALTHCAREIO_AUTHORITY.
+    can set the environment variable HEALTHCHECKSIO_AUTHORITY.
 
     • success <key> [run_id]
 
@@ -93,6 +93,6 @@ help() {
 
 # ---
 
-_hcio_authority="${HEALTHCAREIO_AUTHORITY:-https://hc-ping.com}"
+_hcio_authority="${HEALTHCHECKSIO_AUTHORITY:-https://hc-ping.com}"
 
 "${@:-help}"
