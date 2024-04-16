@@ -4,7 +4,6 @@
 alias back='cd -'
 alias cp='cp -iv'
 alias gr='grep -Irisn --color=auto'
-alias hk='heroku'
 alias l='exa -l'
 alias ll='exa -la'
 alias ln='ln -v'

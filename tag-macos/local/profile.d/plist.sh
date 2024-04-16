@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# TODO: Probably move this under tag-macos…
+
 plist_to_envrc() {
   local -r plist_file="$1"
 

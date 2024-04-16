@@ -30,9 +30,7 @@ status() {
   fi
 }
 
-timestamp_exists() {
-  [ -f "${TIMESTAMP_FILEPATH}" ]
-}
+timestamp_exists() { [ -f "${TIMESTAMP_FILEPATH}" ] ; }
 
 # Pure
 
