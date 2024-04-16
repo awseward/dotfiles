@@ -91,7 +91,6 @@
   pager      = less -F -X
   safecrlf   = warn
   trustctime = false
-  excludesfile = ~/.gitignore
 
 [core.whitespace]
   tab-in-indent = true
