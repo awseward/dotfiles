@@ -2,7 +2,7 @@
 
 (
   # shellcheck source=/dev/null
-  source "$HOME/.config/dotfiles-include/updates.sh"
+  source "$HOME/.local/profile.d/updates.sh"
 
 
   _list_fns() {

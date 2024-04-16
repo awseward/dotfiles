@@ -143,5 +143,5 @@ proc _poll(sox_include_file, sha) {
 # ---
 
 _poll \
-  "${HOME}/.config/dotfiles-include/sox.sh" \
+  "${HOME}/.local/profile.d/sox.sh" \
   "${1:-"$(git rev-parse HEAD)"}"

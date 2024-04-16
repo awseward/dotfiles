@@ -77,7 +77,7 @@ source "$ZSH/oh-my-zsh.sh"
 _source_file_if_present "$HOME/.aliases.work"
 _source_file_if_present "$HOME/.fzf.zsh"
 
-_source_dir_rec_if_present "$HOME/.config/dotfiles-include"
+_source_dir_rec_if_present "$HOME/.local/profile.d"
 
 # TODO: Look into ways to avoid needing this here
 export ASDF_DIR="$HOME/.asdf"
