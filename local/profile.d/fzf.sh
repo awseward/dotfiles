@@ -9,9 +9,8 @@ __bindkey_jr() {
 
   if [ "$repo" != '' ]; then
     cd "$repo" || return 1
-    pwd
+    echo
     echo -ne "→ "; pwd; echo '---'
-    exa -l 2>/dev/null || ls -l
     zle reset-prompt
   fi
 }

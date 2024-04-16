@@ -1,2 +1,7 @@
-.envrc
+# System junk
 .DS_Store
+
+# Stuff I use
+.envrc
+.scratch/
+scratch.rb

@@ -22,16 +22,13 @@ export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}"
 
 _source_file_if_present() {
   local file="$1"
-  if [ -f "$file" ]; then
-    >&2 echo "Sourcing ${file}..."
-    . "$file"
-  fi
+  if [ -f "$file" ]; then . "$file"; fi
 }
 
 _source_dir_rec_if_present() {
   local dir="$1"
   if [ -d "$dir" ]; then
-    >&2 echo "Sourcing all files in ${dir}..."
+    >&2 echo "Sourcing all files recursively in ${dir} …"
     for file in "$dir"/**/*.sh; do
       # shellcheck disable=SC1090
       _source_file_if_present "$file"
