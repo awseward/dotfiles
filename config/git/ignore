@@ -1,7 +1,6 @@
 # System junk
 .DS_Store
 
-# Stuff I use
+# Stuff I use but don't ever want to commit
 .envrc
-.scratch/
-scratch.rb
+.local/
