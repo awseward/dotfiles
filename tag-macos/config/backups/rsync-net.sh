@@ -48,19 +48,19 @@ info_and_hcio start <<< 'Starting backup'
 # the machine this script is currently running on:
 
 borg create \
-    --verbose                 \
-    --list                    \
-    --stats                   \
-    --show-rc                 \
-    --exclude-caches          \
-    --checkpoint-interval 300 \
-                              \
-    ::'{hostname}-{now}'      \
-                              \
-    ~/books                   \
-    ~/scans                   \
-    ~/uncategorized           \
-    ~/stale_downloads         \
+    --verbose                                              \
+    --list                                                 \
+    --stats                                                \
+    --show-rc                                              \
+    --exclude-caches                                       \
+    --checkpoint-interval 300                              \
+    --pattern '! **/Library/Application Support/Fusetools' \
+    --pattern '! **/*Cache*'                               \
+    --pattern '! **/*cache*'                               \
+                                                           \
+    ::'{hostname}-{now}'                                   \
+                                                           \
+    ~                                                      \
 
 backup_exit=$?
 
@@ -74,6 +74,7 @@ borg prune \
     --keep-daily    7              \
     --keep-weekly  12              \
     --keep-monthly 18              \
+    && borg compact --verbose
 
 prune_exit=$?
 
