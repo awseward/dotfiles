@@ -63,12 +63,7 @@ run() {
   echo "$candidates" | while read -r filepath; do
     mv -v "$filepath" "$_target_directory/$ts-$(basename "$filepath")"
   done
-  set_stale_perms
   _sig_success <<< "$candidates"
-}
-
-set_stale_perms() {
-  find "$_target_directory" -type f -print0 | xargs -0 -t -n 1000 chmod 400
 }
 
 _hcio() { healthchecks.io.ping.sh "$@" "$_hcio_uuid" "$_hcio_run_id"; }

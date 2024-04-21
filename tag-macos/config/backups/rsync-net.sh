@@ -48,19 +48,31 @@ info_and_hcio start <<< 'Starting backup'
 # the machine this script is currently running on:
 
 borg create \
-    --verbose                                              \
-    --list                                                 \
-    --stats                                                \
-    --show-rc                                              \
-    --exclude-caches                                       \
-    --checkpoint-interval 300                              \
-    --pattern '! **/Library/Application Support/Fusetools' \
-    --pattern '! **/*Cache*'                               \
-    --pattern '! **/*cache*'                               \
-                                                           \
-    ::'{hostname}-{now}'                                   \
-                                                           \
-    ~                                                      \
+    --verbose                             \
+    --stats                               \
+    --show-rc                             \
+    --checkpoint-interval 300             \
+    --exclude-caches                      \
+    --pattern '! **/*[Cc]ache*'           \
+    --pattern '! **/.git/objects'         \
+    --pattern '! **/node_modules'         \
+    --pattern '! /Users/*/.asdf/installs' \
+    --pattern '! /Users/*/.espressif'     \
+    --pattern '! /Users/*/.cache'         \
+    --pattern '! /Users/*/.local/share'   \
+    --pattern '! /Users/*/.vim/plugged'   \
+    --pattern '! /Users/*/.stack'         \
+    --pattern '! /Users/*/Library'        \
+    --pattern '! /Users/*/VirtualBox VMs' \
+                                          \
+    --pattern '! /Users/*/Documents'      \
+    --pattern '! /Users/*/Downloads'      \
+    --pattern '! /Users/*/Desktop'        \
+    --pattern '! /Users/*/Pictures'       \
+    --pattern '! /Users/*/.Trash'         \
+                                          \
+    ::'{hostname}-{now}'                  \
+    ~                                     \
 
 backup_exit=$?
 
