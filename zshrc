@@ -125,9 +125,6 @@ warn_if_duplicates_in_PATH
 warn_if_dotfiles_update_check_recommended
 
 eval "$(direnv hook zsh)"
-# TODO: Do something better here
-ssh-add --apple-load-keychain 2>/dev/null \
-  && eval "$(ssh-agent -s)" && ssh-add --apple-load-keychain
 
 if [ -z "$TMUX" ]; then
   tmux a || tmux
