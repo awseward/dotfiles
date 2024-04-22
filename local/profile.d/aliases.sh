@@ -44,7 +44,6 @@ alias be='bundle exec'
 ### OS-specific
 case "$OSTYPE" in
   (darwin*)
-    alias ls="ls -hFG"
     alias rm="rm -dv"
   ;;
   (cygwin*)
