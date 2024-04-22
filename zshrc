@@ -52,7 +52,7 @@ fi
 # Need to disable this prompt here because nix.sh sets a prompt that interferes
 # with some things, i.e. cuts off the last line of some commands' output;
 # namely: `git l5`
-prompt off
+type -f prompt >/dev/null 2>&1 && prompt off
 
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME="robbyrussell"
