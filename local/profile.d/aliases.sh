@@ -12,7 +12,7 @@ alias ls='eza -hF --color=auto'
 alias mv='mv -iv'
 alias p='ps -a'
 alias path='pretty_path'
-alias rm='rm -Iv'
+alias rm='rm -iv'
 alias vim='nvim'
 
 ### git
