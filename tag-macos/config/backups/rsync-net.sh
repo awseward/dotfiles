@@ -49,6 +49,7 @@ info_and_hcio start <<< 'Starting backup'
 
 borg create \
     --verbose                             \
+    --list                                \
     --stats                               \
     --show-rc                             \
     --checkpoint-interval 300             \
@@ -82,10 +83,10 @@ borg prune \
     --list                         \
     --glob-archives '{hostname}-*' \
     --show-rc                      \
-    --keep-hourly   8              \
-    --keep-daily    7              \
-    --keep-weekly  12              \
-    --keep-monthly 18              \
+    --keep-hourly  16              \
+    --keep-daily   14              \
+    --keep-weekly  24              \
+    --keep-monthly 36              \
     && borg compact --verbose
 
 prune_exit=$?
