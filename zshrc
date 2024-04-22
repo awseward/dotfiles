@@ -55,7 +55,7 @@ fi
 type -f prompt >/dev/null 2>&1 && prompt off
 
 export ZSH="$HOME/.oh-my-zsh"
-export ZSH_THEME="essembeh"
+export ZSH_THEME="gallifrey"
 plugins=(
   asdf
   colored-man-pages
@@ -129,3 +129,4 @@ eval "$(direnv hook zsh)"
 if [ -z "$TMUX" ]; then
   tmux a || tmux
 fi
+
