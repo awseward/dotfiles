@@ -1,1 +1,9 @@
-eval "$(ssh-agent -s)" && ssh-add --apple-load-keychain
+# TODO: Consider trying this out so that we may potentially have just one agent
+# process per session (i.e. by moving this to ~/.zprofile) instead of one per
+# split (like currently):
+#
+# https://blog.testdouble.com/posts/2016-11-18-reconciling-tmux-and-ssh-agent-forwarding/
+#
+if [ -z "$SSH_AGENT_PID" ]; then
+  eval "$(ssh-agent -s)" && ssh-add --apple-load-keychain
+fi
