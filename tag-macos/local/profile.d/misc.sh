@@ -5,5 +5,7 @@
 # shellcheck source=/dev/null
 test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
-HOMEBREW_GITHUB_API_TOKEN="$(keychain_get_env_var 'HOMEBREW_GITHUB_API_TOKEN')"
-export HOMEBREW_GITHUB_API_TOKEN
+if [ -z "$HOMEBREW_GITHUB_API_TOKEN" ]; then
+  HOMEBREW_GITHUB_API_TOKEN="$(keychain_get_env_var 'HOMEBREW_GITHUB_API_TOKEN')"
+  export HOMEBREW_GITHUB_API_TOKEN
+fi
