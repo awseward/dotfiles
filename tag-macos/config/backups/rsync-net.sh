@@ -57,25 +57,24 @@ borg create \
     --pattern '! **/*[Cc]ache*'           \
     --pattern '! **/.git/objects'         \
     --pattern '! **/node_modules'         \
-    --pattern '! /Users/*/.DS_Store'      \
-    --pattern '! /Users/*/.asdf'          \
-    --pattern '! /Users/*/.cache'         \
-    --pattern '! /Users/*/.espressif'     \
-    --pattern '! /Users/*/.local/share'   \
-    --pattern '! /Users/*/.luarocks'      \
-    --pattern '! /Users/*/.opam'          \
-    --pattern '! /Users/*/.rustup'        \
-    --pattern '! /Users/*/.stack'         \
-    --pattern '! /Users/*/.vim/plugged'   \
-    --pattern '! /Users/*/.zcompdump*'    \
-    --pattern '! /Users/*/Library'        \
-    --pattern '! /Users/*/VirtualBox VMs' \
+    --pattern '- **/.DS_Store'            \
                                           \
+    --pattern '.sqliterc'                 \
+    --pattern '+ Users/*/.config'         \
+    --pattern '+ Users/*/.dotfiles'       \
+    --pattern '+ Users/*/.nix*'           \
+    --pattern '+ /Users/*/.ssh'           \
+    --pattern '! /Users/*/.*'             \
+                                          \
+    --pattern '! /Users/*/projects'       \
+    --pattern '! /Users/*/.Trash'         \
+    --pattern '! /Users/*/Desktop'        \
     --pattern '! /Users/*/Documents'      \
     --pattern '! /Users/*/Downloads'      \
-    --pattern '! /Users/*/Desktop'        \
+    --pattern '! /Users/*/Library'        \
+    --pattern '! /Users/*/Movies'         \
     --pattern '! /Users/*/Pictures'       \
-    --pattern '! /Users/*/.Trash'         \
+    --pattern '! /Users/*/VirtualBox VMs' \
                                           \
     ::'{hostname}-{now}'                  \
     ~                                     \
