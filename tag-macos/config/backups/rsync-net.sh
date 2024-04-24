@@ -57,12 +57,17 @@ borg create \
     --pattern '! **/*[Cc]ache*'           \
     --pattern '! **/.git/objects'         \
     --pattern '! **/node_modules'         \
-    --pattern '! /Users/*/.asdf/installs' \
-    --pattern '! /Users/*/.espressif'     \
+    --pattern '! /Users/*/.DS_Store'      \
+    --pattern '! /Users/*/.asdf'          \
     --pattern '! /Users/*/.cache'         \
+    --pattern '! /Users/*/.espressif'     \
     --pattern '! /Users/*/.local/share'   \
-    --pattern '! /Users/*/.vim/plugged'   \
+    --pattern '! /Users/*/.luarocks'      \
+    --pattern '! /Users/*/.opam'          \
+    --pattern '! /Users/*/.rustup'        \
     --pattern '! /Users/*/.stack'         \
+    --pattern '! /Users/*/.vim/plugged'   \
+    --pattern '! /Users/*/.zcompdump*'    \
     --pattern '! /Users/*/Library'        \
     --pattern '! /Users/*/VirtualBox VMs' \
                                           \
