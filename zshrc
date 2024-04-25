@@ -55,7 +55,7 @@ fi
 type -f prompt >/dev/null 2>&1 && prompt off
 
 export ZSH="$HOME/.oh-my-zsh"
-export ZSH_THEME="gallifrey"
+export ZSH_THEME="andrewseward"
 plugins=(
   asdf
   colored-man-pages
