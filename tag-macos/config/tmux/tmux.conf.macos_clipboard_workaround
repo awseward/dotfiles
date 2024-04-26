@@ -1,5 +1,5 @@
 # macOS clipboard fix (https://github.com/tmux/tmux/issues/543#issuecomment-248980734)
-set -g default-shell $SHELL
+# set -g default-shell $SHELL
 
 # NOTE: I don't think this line is required beyond MacOS Sierra, which I've got
 #       no machines running on...
