@@ -59,11 +59,12 @@ borg create \
     --pattern '! **/node_modules'         \
     --pattern '- **/.DS_Store'            \
                                           \
-    --pattern '.sqliterc'                 \
-    --pattern '+ Users/*/.config'         \
-    --pattern '+ Users/*/.dotfiles'       \
-    --pattern '+ Users/*/.nix*'           \
+    --pattern '+ /Users/*/.sqliterc'      \
+    --pattern '+ /Users/*/.config'        \
+    --pattern '+ /Users/*/.dotfiles'      \
+    --pattern '+ /Users/*/.nix*'          \
     --pattern '+ /Users/*/.ssh'           \
+    --pattern '+ /Users/*/.*shrc'         \
     --pattern '! /Users/*/.*'             \
                                           \
     --pattern '! /Users/*/projects'       \
