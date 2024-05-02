@@ -51,7 +51,6 @@ brew "utf8proc"
 brew "watch"
 brew "xsv"
 brew "yq"
-brew "zsh"
 
 cask "1password-cli"
 cask "alacritty" # See: https://github.com/alacritty/alacritty/issues/6500#issuecomment-1356318595
