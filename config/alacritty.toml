@@ -1,5 +1,10 @@
+import = [
+  "~/.config/alacritty/iTerm2-Afterglow.toml"
+]
+
 [window]
   decorations = "None"
+  startup_mode = "Maximized"
 
 [font]
   size = 14
@@ -12,35 +17,5 @@
   duration  = 20
   color     = "#550000"
 
-### Afterglow
-#
-# This config was pulled from https://github.com/shuhei/colortty, and it's
-# close but not quite 100% right…
-#
-[colors.primary]
-    background = "0x202020"
-    foreground = "0xd0d0d0"
-
-[colors.cursor]
-  text   = "0x151515"
-  cursor = "0xd0d0d0"
-
-[colors.normal]
-  black   = "0x151515"
-  red     = "0xac4142"
-  green   = "0x7e8d50"
-  yellow  = "0xe5b567"
-  blue    = "0x6c99bb"
-  magenta = "0x9e4e85"
-  cyan    = "0x7dd5cf"
-  white   = "0xd0d0d0"
-
-[colors.bright]
-  black   = "0x505050"
-  red     = "0xac4142"
-  green   = "0x7e8d50"
-  yellow  = "0xe5b567"
-  blue    = "0x6c99bb"
-  magenta = "0x9e4e85"
-  cyan    = "0x7dd5cf"
-  white   = "0xf5f5f5"
+[colors]
+  draw_bold_text_with_bright_colors = true
