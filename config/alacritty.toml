@@ -1,0 +1,13 @@
+[window]
+  decorations = "None"
+
+[font]
+  size = 16
+
+[cursor]
+  blink_interval = 150
+
+[bell]
+  animation = "Linear"
+  duration = 20
+  color = "#550000"
