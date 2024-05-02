@@ -33,11 +33,6 @@ alias hb='hub browse'
 alias val='valgrind'
 alias valgrind='valgrind --leak-check=yes'
 
-### rcm
-alias mkrc='mkrc -v'
-alias rcdn='rcdn -v'
-alias rcup='rcup -v'
-
 ### ruby
 alias be='bundle exec'
 
