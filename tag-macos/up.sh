@@ -70,16 +70,18 @@ _ensure_asdf_deps_installed() {
 }
 
 main() {
-  _ensure_brew_installed
-  _ensure_brew_deps_installed
+  >&2 echo "FIXME: Rework this script ($0)"
 
-  # TODO: Consider moving this into a pre-up hook
-  _ensure_omz_installed
+  # _ensure_brew_installed
+  # _ensure_brew_deps_installed
 
-  RCRC="$dotfiles/.rcrc" rcup -d "$dotfiles" -t "$tag"
+  # # TODO: Consider moving this into a pre-up hook
+  # _ensure_omz_installed
 
-  # TODO: Consider moving this into a post-up hook
-  _ensure_asdf_deps_installed
+  # RCRC="$dotfiles/.rcrc" rcup -d "$dotfiles" -t "$tag"
+
+  # # TODO: Consider moving this into a post-up hook
+  # _ensure_asdf_deps_installed
 }
 
 # ---
