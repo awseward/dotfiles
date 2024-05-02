@@ -1,5 +1,5 @@
 import = [
-  "~/.config/alacritty/iTerm2-Afterglow.toml"
+  "~/.config/alacritty/colors.toml"
 ]
 
 [window]
