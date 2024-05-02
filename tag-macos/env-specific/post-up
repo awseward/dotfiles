@@ -2,15 +2,6 @@
 
 set -euo pipefail
 
-_clone_iterm_color_schemes() {
-  local schemes_repo='git@github.com:mbadolato/iTerm2-Color-Schemes.git'
-  local schemes_dir="$HOME/.iterm2-color-schemes"
-
-  if [ ! -d "$schemes_dir" ]; then
-    git clone --depth=1 "$schemes_repo" "$schemes_dir"
-  fi
-}
-
 _display_messages() {
   if [ -z ${TERM+x} ] || [ "$TERM" = 'dumb' ]; then
     export TERM='xterm-256color'
@@ -76,7 +67,6 @@ MSG
 }
 
 _default() {
-  _clone_iterm_color_schemes
   _display_messages
 }
 
