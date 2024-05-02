@@ -29,16 +29,16 @@ let entrypointContent =
 
 let renderBase =
       λ(hookType : Text) →
-        renderGeneric hookType ⫽ { `zzz-env_specific.sh` = entrypointContent }
+        renderGeneric hookType ⫽ { `999-env_specific.sh` = entrypointContent }
 
 in  { pre-up = renderBase "pre-up"
     , post-up =
           renderBase "post-up"
-        ⫽ { `aaa-symlink_dotfiles_dir.sh` = entrypointContent
-          , `aab-vim_plugins.sh` = entrypointContent
+        ⫽ { `000-symlink_dotfiles_dir.sh` = entrypointContent
+          , `001-vim_plugins.sh` = entrypointContent
           }
     , pre-down =
           renderBase "pre-down"
-        ⫽ { `aaa-symlink_dotfiles_dir.sh` = entrypointContent }
+        ⫽ { `000-symlink_dotfiles_dir.sh` = entrypointContent }
     , post-down = renderBase "post-down"
     }

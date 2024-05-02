@@ -171,14 +171,12 @@ command DhFr call _DhallFreeze()
 set laststatus=2
 
 " File behavior
-set backupdir=~/.local/share/vim/backups
 if has('nvim')
-  " If you don't separate these, they each complain about the others' undofiles
-  " as incompatible — probably only keeping this until I end up committing
-  " fully to neovim.
-  set undodir=~/.local/share/nvim/undofiles
+  set backupdir=~/.local/share/nvim/backups
+  set   undodir=~/.local/share/nvim/undofiles
 else
-  set undodir=~/.local/share/vim/undofiles
+  set backupdir=~/.local/share/vim/backups
+  set   undodir=~/.local/share/vim/undofiles
 end
 set noswapfile
 set wildmenu
