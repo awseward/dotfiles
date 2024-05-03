@@ -6,5 +6,5 @@ set -euo pipefail
 #   echo 'Put some sentence here' | mobsay.sh
 msg="$(cat -)"
 
-say -v '?' | grep '# Hello' | awk '{ print $1 }' | shuf | head -n2 \
+say -v '?' | grep -E ' en[-_][a-zA-Z]{2}' | awk '{ print $1 }' | shuf | head -n2 \
   | while read -r voice; do say -r140 -v "${voice}" "${msg}" & done
