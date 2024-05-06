@@ -1,1 +1,1 @@
-POSTGRES_EXTRA_CONFIGURE_OPTIONS='--with-openssl --with-libraries=/usr/local/lib:/opt/homebrew/opt/openssl/lib --with-includes=/usr/local/include:/opt/homebrew/opt/openssl/include'
+POSTGRES_EXTRA_CONFIGURE_OPTIONS='--with-openssl --with-libraries=/usr/local/lib:/opt/homebrew/opt/openssl/lib --with-includes=/usr/local/include:/opt/homebrew/opt/openssl/include --with-icu'
