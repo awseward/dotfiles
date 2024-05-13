@@ -21,6 +21,7 @@ Plug 'owickstrom/vim-colors-paramount' " Current favorite
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'zxqfl/tabnine-vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
