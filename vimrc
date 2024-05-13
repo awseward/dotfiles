@@ -370,3 +370,5 @@ set guicursor=n-v-c:block,o:hor50,i-ci:hor15,r-cr:hor30,sm:block
 " https://github.com/vim-ruby/vim-ruby#usage
 :let g:ruby_indent_hanging_elements = 0
 :let g:ruby_indent_assignment_style = 'variable'
+
+let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'bash', 'shell', 'sh']
