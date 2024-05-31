@@ -7,7 +7,7 @@ import = [
   startup_mode = "Maximized"
 
 [font]
-  normal = { family = "Comic Mono" }
+  normal = { family = "PT Mono" }
   size = 14
 
 [cursor]
