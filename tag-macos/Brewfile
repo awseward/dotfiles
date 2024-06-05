@@ -8,6 +8,7 @@ ENV['XDG_CONFIG_HOME'].
 brew "automake"
 brew "binutils"
 brew "borgbackup"
+brew "btop"
 brew "cmake"
 brew "coreutils"
 brew "curl"
@@ -61,6 +62,7 @@ brew "yq"
 
 cask "1password-cli"
 cask "alacritty" # See: https://github.com/alacritty/alacritty/issues/6500#issuecomment-1356318595
+cask "alfred"
 cask "docker"
 cask "rectangle"
 cask "vlc"
