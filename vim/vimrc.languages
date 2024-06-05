@@ -1,6 +1,3 @@
-au Filetype diff      colorscheme gruvbox
-au Filetype gitcommit colorscheme gruvbox
-au Filetype haskell   colorscheme gruvbox
-au FileType python    setlocal    softtabstop=2 shiftwidth=2 tabstop=2 expandtab
-au Filetype ruby      setlocal    softtabstop=2 shiftwidth=2 tabstop=2 expandtab
-au Filetype sql       setlocal    softtabstop=2 shiftwidth=2 tabstop=2 expandtab
+au FileType python setlocal softtabstop=4 shiftwidth=4 tabstop=4 expandtab
+au Filetype ruby   setlocal softtabstop=2 shiftwidth=2 tabstop=2 expandtab
+au Filetype sql    setlocal softtabstop=2 shiftwidth=2 tabstop=2 expandtab
