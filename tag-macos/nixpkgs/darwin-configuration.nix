@@ -86,6 +86,7 @@
   environment.systemPackages = with pkgs; [
     bat
     bats
+    btop
     cloc
     coreutils
     cowsay

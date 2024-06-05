@@ -8,7 +8,6 @@ ENV['XDG_CONFIG_HOME'].
 brew "automake"
 brew "binutils"
 brew "borgbackup"
-brew "btop"
 brew "cmake"
 brew "coreutils"
 brew "curl"
