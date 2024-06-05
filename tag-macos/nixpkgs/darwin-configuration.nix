@@ -93,7 +93,7 @@
     direnv
     dive
     entr
-    exa
+    eza
     figlet
     graphviz
     gron
