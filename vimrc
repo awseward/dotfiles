@@ -240,21 +240,9 @@ map <leader>h :History<CR>
 "
 " Colors
 "
-function! ApplyColorOverrides()
-  if filereadable(expand("~/.vim/vimrc.color-overrides"))
-    source ~/.vim/vimrc.color-overrides
-  endif
-endfunction
-
-function! RandomColorSchemeWithOverrides()
-  RandomColorScheme
-  call ApplyColorOverrides()
-endfunction
-
 set t_Co=256
 
-" colorscheme paramount
-colorscheme gruvbox
+colorscheme noclown
 
 if $LIGHT_SHELL != ""
   set background=light
@@ -262,16 +250,17 @@ else
   set background=dark
 end
 
-call ApplyColorOverrides()
-
 " https://www.reddit.com/r/vim/comments/5416d0/true_colors_in_vim_under_tmux/
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-map <leader>m :call RandomColorSchemeWithOverrides()<CR>
-" Change colorschemes on `updatetime`ms of no input (normal & insert)
-" autocmd CursorHold,CursorHoldI * call RandomColorSchemeWithOverrides()
+let &colorcolumn=join(range(81,999),",")
+highlight ColorColumn ctermbg=235 guibg=#222222
+
+" Line numbers
+hi LineNr ctermbg=none
+hi LineNr ctermfg=248
 
 " Rename current file (Gary Bernhardt) – TODO: Find a source link for this
 function! RenameFile()
@@ -345,10 +334,6 @@ nnor ,cf :let @*=expand("%p")<CR>    " Copy file path      (relative)
 nnor ,CF :let @*=expand("%:p")<CR>   "   ...               (absolute)
 nnor ,cd :let @*=expand("%:.:h")<CR> " Copy directory path (relative)
 nnor ,CD :let @*=expand("%:p:h")<CR> "   ...               (absolute)
-
-" colorscheme fight-in-the-shade
-let &colorcolumn=join(range(81,999),",")
-highlight ColorColumn ctermbg=235 guibg=#222222
 
 " ¯\_(ツ)_/¯ Might be good to have this as a foothold someday
 " See also: https://github.com/nanotee/nvim-lua-guide#using-lua-from-vimscript

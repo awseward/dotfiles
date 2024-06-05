@@ -4,18 +4,14 @@ filetype off
 call plug#begin()
 
 " Colors
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'chriskempson/base16-vim'
 Plug 'croaky/vim-colors-github'
 Plug 'flazz/vim-colorschemes'
 Plug 'w0ng/vim-hybrid'
-Plug 'xolox/vim-colorscheme-switcher'
 Plug 'frazrepo/vim-rainbow'
 Plug 'cideM/yui'
 Plug 'aditya-azad/candle-grey'
 Plug 'nikolvs/vim-sunbather'
-Plug 'reedes/vim-colors-pencil'
-Plug 'owickstrom/vim-colors-paramount' " Current favorite
 
 " Editor Utils
 Plug 'bronson/vim-trailing-whitespace'
@@ -26,12 +22,10 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
-" Plug 'vim-scripts/paredit.vim'
 Plug 'troydm/zoomwintab.vim'
 
 " Misc
 Plug 'scrooloose/syntastic'
-Plug 'xolox/vim-misc' " <-- req'd dep'cy of `xolox/vim-colorscheme-switcher`
 Plug 'junegunn/goyo.vim'
 
 " Shell Utils
@@ -41,12 +35,8 @@ endif
 if executable('rg')
   Plug 'jremmen/vim-ripgrep'
 endif
-if has('win16') || has('win32') || has('win64') || has('win32unix')
-  Plug 'ctrlpvim/ctrlp.vim'
-else
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-  Plug 'junegunn/fzf.vim'
-endif
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'benmills/vimux'
 
 " Language Plugins
