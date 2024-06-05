@@ -144,29 +144,6 @@ if filereadable(expand("~/.vim/vimrc.languages"))
   augroup END
 endif
 
-" This is a little buggy, however well-intentioned it may be…
-" augroup BrewfileAutoFormat
-"   au!
-"   au BufWritePre *Brewfile* :%! ~/.local/bin/vim-misc.sh fmt_brewfile %:p
-" augroup END
-
-function _DhallFormat()
-  !dhall --unicode format <afile>
-  :e
-endfunction
-augroup DhallFormat
-  au!
-  au BufWritePost *.dhall silent! call _DhallFormat() | redraw!
-augroup END
-
-function _DhallFreeze()
-  :silent exec "!dhall freeze %:p"
-  :e!
-  :redraw!
-  :w
-endfunction
-command DhFr call _DhallFreeze()
-
 " Status bar
 set laststatus=2
 
@@ -242,13 +219,7 @@ map <leader>h :History<CR>
 "
 set t_Co=256
 
-colorscheme noclown
-
-if $LIGHT_SHELL != ""
-  set background=light
-else
-  set background=dark
-end
+colorscheme photon
 
 " https://www.reddit.com/r/vim/comments/5416d0/true_colors_in_vim_under_tmux/
 set termguicolors
@@ -257,10 +228,6 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 let &colorcolumn=join(range(81,999),",")
 highlight ColorColumn ctermbg=235 guibg=#222222
-
-" Line numbers
-hi LineNr ctermbg=none
-hi LineNr ctermfg=248
 
 " Rename current file (Gary Bernhardt) – TODO: Find a source link for this
 function! RenameFile()

@@ -4,14 +4,7 @@ filetype off
 call plug#begin()
 
 " Colors
-Plug 'chriskempson/base16-vim'
-Plug 'croaky/vim-colors-github'
-Plug 'flazz/vim-colorschemes'
-Plug 'w0ng/vim-hybrid'
-Plug 'frazrepo/vim-rainbow'
-Plug 'cideM/yui'
-Plug 'aditya-azad/candle-grey'
-Plug 'nikolvs/vim-sunbather'
+Plug 'awseward/colors.vim'
 
 " Editor Utils
 Plug 'bronson/vim-trailing-whitespace'
