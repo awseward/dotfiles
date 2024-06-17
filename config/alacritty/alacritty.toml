@@ -8,7 +8,7 @@ import = [
 
 [font]
   normal = { family = "PT Mono" }
-  size = 14
+  size = 16
 
 [cursor]
   blink_interval = 150
