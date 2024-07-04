@@ -64,6 +64,7 @@ cask "alacritty" # See: https://github.com/alacritty/alacritty/issues/6500#issue
 cask "alfred"
 cask "docker"
 cask "rectangle"
+cask "signal"
 cask "vlc"
 
 # These can probably be split out to a different file
