@@ -6,7 +6,7 @@ kubectl 1.15.12
 nim 1.6.6
 nodejs 16.7.0
 opam 2.1.2
-postgres 13.1
+postgres 16.3
 python 3.12.0
 ruby 3.3.0
 rust stable
