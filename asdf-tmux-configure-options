@@ -1,0 +1,1 @@
+TMUX_EXTRA_CONFIGURE_OPTIONS='--enable-utf8proc'
