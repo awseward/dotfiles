@@ -5,9 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: awseward/gh-actions-dhall@0.4
+      - uses: awseward/gh-actions-dhall@0.4.1
         with:
-          dhallVersion: 1.40.2
+          dhallVersion: 1.42.0
 
   shell:
     runs-on: ubuntu-latest
