@@ -1,13 +1,13 @@
 name: CI
 on: [push]
 jobs:
-  dhall:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: awseward/gh-actions-dhall@0.4.1
-        with:
-          dhallVersion: 1.42.0
+  # dhall:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: awseward/gh-actions-dhall@0.4.1
+  #       with:
+  #         dhallVersion: 1.42.0
 
   shell:
     runs-on: ubuntu-latest
