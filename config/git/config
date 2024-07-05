@@ -47,6 +47,9 @@
   pfoh = push-force origin HEAD
   pl   = prettylog
   poh  = push -u origin HEAD
+  # This may need "repairing" on newer repos; run this:
+  #   git symbolic-ref refs/remotes/origin/HEAD refs/remotes/origin/main
+  #
   puom = !git pull origin "$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')"
   rbr  = remote-branches
   st   = status --untracked-files=no
