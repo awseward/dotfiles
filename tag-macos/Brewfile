@@ -60,8 +60,15 @@ brew "xsv"
 brew "yq"
 
 cask "1password-cli"
-cask "alacritty" # See: https://github.com/alacritty/alacritty/issues/6500#issuecomment-1356318595
-cask "alfred"
+# At the time of writing, macOS will try to prevent Alacritty from starting up.
+# For the workaround, see the following GitHub link:
+# https://github.com/alacritty/alacritty/issues/6500#issuecomment-1356318595
+# ---
+# tl;dr: Right click + Open in finder -- feels a little like security
+# through obscurity if you ask me, but okay Tim Apple 🙄.
+cask "alacritty"
+# # This is commented out for the same reason as Signal is below.
+# cask "alfred"
 cask "docker"
 cask "rectangle"
 # # I had Signal already installed on a machine and homebrew doesn't seem to
