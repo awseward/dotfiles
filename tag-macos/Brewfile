@@ -64,7 +64,11 @@ cask "alacritty" # See: https://github.com/alacritty/alacritty/issues/6500#issue
 cask "alfred"
 cask "docker"
 cask "rectangle"
-cask "signal"
+# # I had Signal already installed on a machine and homebrew doesn't seem to
+# # gracefully handle that, so I'm leaving it out of the bundle for now as
+# # preferable to uninstalling Signal on said machine and losing whatever subset
+# # of message history may be unique to that particular install.
+# cask "signal"
 cask "vlc"
 
 # These can probably be split out to a different file
