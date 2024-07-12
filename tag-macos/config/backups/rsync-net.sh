@@ -60,6 +60,7 @@ borg create \
     --pattern '- **/.DS_Store'            \
                                           \
     --pattern '+ /Users/*/.sqliterc'      \
+    --pattern '- /Users/*/.config/borg/security/*/nonce' \
     --pattern '+ /Users/*/.config'        \
     --pattern '+ /Users/*/.dotfiles'      \
     --pattern '+ /Users/*/.nix*'          \
