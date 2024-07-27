@@ -1,4 +1,4 @@
-#!/usr/bin/env oil
+#!/usr/bin/env ruby
 
 # USAGE
 #
@@ -14,42 +14,56 @@
 #     already exist
 #
 
-const green = $'\e[0;92m'
-const red   = $'\e[0;91m'
-const reset = $'\e[0m'
+require 'bundler/inline'
 
-proc _check(url, skip_check='false') {
-  if (skip_check ~== 'true') {
-    >&2 echo 'Archive forced; skipping check for existing capture…'
-    return 1
-  }
+gemfile do
+  source 'https://rubygems.org'
 
-  >&2 echo "Checking for captures of ${url}…"
-  ... curl --fail --head "https://web.archive.org/web/${url}"
-    | grep -i '^location: '
-    | head -n1
-    | awk '{ print $2 }'
-}
+  # gem 'pry'
+  gem 'colorize'
+  gem 'faraday'
+end
 
-proc _archive(url) {
-  >&2 echo "Creating a new capture of ${url}…"
-  ... curl --fail --head "https://web.archive.org/save/${url}"
-    | grep -i '^location: '
-    | head -n1
-    | awk '{ print $2 }'
-}
+def info(msg) = STDERR.puts "[#{'INFO'.colorize :blue}] #{msg}"
 
-proc _error(url) {
-  >&2 echo -e "${red}Unable to save URL to Internet Archive:${reset} ${url}"
-  return 1
-}
+def error(msg) = STDERR.puts "[#{'ERROR'.colorize :red}] #{msg}"
 
-proc _run(url, skip_check='false') {
-  const archived_url = $(try _check ${url} ${skip_check} || _archive ${url})
-  pbcopy <<< ${archived_url}
-  echo -e "${green}Saved to clipboard:${reset} ${archived_url}"
-}
+def redirect?(response)
+  status = response.status
+  yield status if block_given?
+
+  (300..399).cover? status
+end
+
+def location(response) = response.headers['Location']
+
+def perform(url, force:)
+  iar_url = if !force
+    info "Checking for existing Internet Archive captures of #{url.colorize :yellow}"
+    response = Faraday.head "https://web.archive.org/web/#{url}"
+
+    location response if redirect?(response)
+  end
+
+  iar_url ||= begin
+    info "Creating a new Internet Archive capture of #{url.colorize :yellow}"
+    response = Faraday.head "https://web.archive.org/save/#{url}"
+
+    location response if redirect?(response) { error "Should have been a redirect, but got status: #{_1.to_s.colorize :red}"; exit 1 }
+  end
+
+  STDOUT.puts iar_url unless iar_url.nil?
+rescue StandardError => e
+  error "Something went wrong attempting to resolve Internet Archive capture of #{url.colorize :yellow}"
+  exit 1
+end
 
 # ---
 
-try _run $1 "${FORCE:-}" || _error $1
+case ARGV
+in [url]
+  perform url, force: ENV['FORCE'] == 'true'
+else
+  error "Invalid args: #{ARGV.inspect}. See #{__FILE__.colorize :cyan} for usage."
+  exit 1
+end
