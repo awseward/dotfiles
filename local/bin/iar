@@ -28,11 +28,12 @@ def info(msg) = STDERR.puts "[#{'INFO'.colorize :blue}] #{msg}"
 
 def error(msg) = STDERR.puts "[#{'ERROR'.colorize :red}] #{msg}"
 
-def redirect?(response)
-  status = response.status
-  yield status if block_given?
+def redirect?(response) = (300..399).cover? response.status
 
-  (300..399).cover? status
+def redirect_or?(response)
+  # We're using the block as a kind of "or else" option. It's a little weird,
+  # but oh well.
+  redirect?(response).tap { yield response.status if !_1 }
 end
 
 def location(response) = response.headers['Location']
@@ -49,7 +50,7 @@ def perform(url, force:)
     info "Creating a new Internet Archive capture of #{url.colorize :yellow}"
     response = Faraday.head "https://web.archive.org/save/#{url}"
 
-    location response if redirect?(response) { error "Should have been a redirect, but got status: #{_1.to_s.colorize :red}"; exit 1 }
+    location response if redirect_or?(response) { error "Should have been a redirect, but got status: #{_1.to_s.colorize :red}"; exit 1 }
   end
 
   STDOUT.puts iar_url unless iar_url.nil?
