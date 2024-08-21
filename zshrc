@@ -101,6 +101,7 @@ __ensure_in_PATH                 \
   "$RACKET_BIN_DIR"              \
   "$XDG_DATA_HOME/nimble/bin"    \
   "$HOME/.opam/default/bin"      \
+  "$HOME/.ghcup/env"             \
   '/usr/local/bin'               \
   '/usr/bin'                     \
   '/bin'                         \
@@ -129,4 +130,3 @@ eval "$(direnv hook zsh)"
 if [ -z "$TMUX" ]; then
   tmux a || tmux
 fi
-
