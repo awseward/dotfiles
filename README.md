@@ -1,7 +1,7 @@
 # dotfiles [![actions-badge](https://github.com/awseward/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/awseward/dotfiles/actions)
 
 > [!IMPORTANT]
-> Test `foo bar` **baz**
+> Test `foo bar` **baz**[^1]
 
 ### Notes from last fresh install
 
@@ -36,3 +36,5 @@ Installing vim-plug by instructions in its README worked, but I forgot to
 symlink my vimrc to the location nvim wants to look in for init.vim when
 starting up. I should probably just update that in this repo so it gets put
 there automatically.
+
+[^1]: Do footnotes work inside alerts?
