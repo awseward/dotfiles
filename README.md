@@ -1,5 +1,8 @@
 # dotfiles [![actions-badge](https://github.com/awseward/dotfiles/actions/workflows/ci.yml/badge.svg)](https://github.com/awseward/dotfiles/actions)
 
+> [!IMPORTANT]
+> Test `foo bar` **baz**
+
 ### Notes from last fresh install
 
 On MacOS Sonoma, completely brand new machine, set the following up in order
