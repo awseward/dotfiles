@@ -103,6 +103,7 @@
     jq
     neofetch
     neovim
+    oils-for-unix
     redis
     ripgrep
     shellcheck
