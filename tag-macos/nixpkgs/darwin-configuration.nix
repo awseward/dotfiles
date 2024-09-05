@@ -91,6 +91,7 @@
     coreutils
     cowsay
     curl
+    delta
     direnv
     dive
     entr
