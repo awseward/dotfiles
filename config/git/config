@@ -91,7 +91,7 @@
   autocrlf   = input
   editor     = nvim
   ignoreCase = true
-  pager      = less -F -X
+  pager      = delta
   safecrlf   = warn
   trustctime = false
 
@@ -102,6 +102,13 @@
   algorithm           = patience
   compactionHeuristic = true
   renames             = copies
+
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  line-numbers = true
+
+[interactive]
+  diffFilter = delta --color-only
 
 [merge]
   verbosity = 5
