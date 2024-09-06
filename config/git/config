@@ -102,16 +102,19 @@
   algorithm           = patience
   compactionHeuristic = true
   renames             = copies
+  colorMoved          = default
 
 [delta]
-  navigate = true  # use n and N to move between diff sections
+  syntax-theme = Nord
   line-numbers = true
+  navigate     = true # use n and N to move between diff sections
 
 [interactive]
   diffFilter = delta --color-only
 
 [merge]
-  verbosity = 5
+  verbosity     = 5
+  conflictstyle = diff3
 
 [push]
   default = current
