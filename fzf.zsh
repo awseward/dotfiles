@@ -1,13 +1,6 @@
-# Setup fzf
-# ---------
-if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
+# See https://nixos.wiki/wiki/Fzf
+
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
 fi
-
-# Auto-completion
-# ---------------
-[[ $- == *i* ]] && source "/opt/homebrew/opt/fzf/shell/completion.zsh" 2> /dev/null
-
-# Key bindings
-# ------------
-source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"

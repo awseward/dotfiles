@@ -86,6 +86,7 @@
   environment.systemPackages = with pkgs; [
     bat
     bats
+    borgbackup
     btop
     cloc
     coreutils
@@ -96,24 +97,37 @@
     dive
     entr
     eza
+    fdupes
     figlet
+    fortune
+    fx
+    fzf
     graphviz
     gron
+    gzip
     hadolint
     htop
     jq
+    mdp
+    mosquitto
     neofetch
     neovim
+    nmap
     oils-for-unix
+    rcm
     redis
     ripgrep
     shellcheck
     silver-searcher
+    speedtest-cli
     sox
     tmate
     tree
     visidata
+    wakeonlan
     wget
+    xsv
+    yq-go
   ];
 
   # Auto upgrade nix package and the daemon service.
