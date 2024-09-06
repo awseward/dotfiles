@@ -24,7 +24,7 @@ else
   set backup      " keep a backup file (restore to previous version)
   set undofile    " keep an undo file (undo changes after closing)
 endif
-set history=150   " keep 150 lines of command line history
+set history=500   " keep 500 lines of command line history
 set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
