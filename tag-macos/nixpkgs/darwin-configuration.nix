@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
-{
+let
+  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
+in {
   system.defaults.NSGlobalDomain.AppleEnableMouseSwipeNavigateWithScrolls = false;
   system.defaults.NSGlobalDomain.AppleEnableSwipeNavigateWithScrolls = false;
   system.defaults.NSGlobalDomain.AppleInterfaceStyleSwitchesAutomatically = true;
@@ -62,7 +64,7 @@
 
   # List packages installed in system profile. To search by name, run:
   #
-  #   $ nix-env -qaP | grep wget
+  #   $ nix-env -qaP | fzf
   #
   # It's pretty slow, so it will appear to hang, but you'll eventually get
   # results back which will look something like this:
@@ -91,7 +93,6 @@
     cloc
     coreutils
     cowsay
-    curl
     delta
     direnv
     dive
@@ -101,12 +102,12 @@
     figlet
     fortune
     fx
-    fzf
     graphviz
     gron
     gzip
     hadolint
     htop
+    iperf
     jq
     mdp
     mosquitto
@@ -114,13 +115,14 @@
     neovim
     nmap
     oils-for-unix
+    pwgen
     rcm
     redis
     ripgrep
     shellcheck
     silver-searcher
-    speedtest-cli
     sox
+    speedtest-cli
     tmate
     tree
     visidata
@@ -128,6 +130,10 @@
     wget
     xsv
     yq-go
+
+    unstable.curl
+    unstable.fzf
+    unstable.git
   ];
 
   # Auto upgrade nix package and the daemon service.
