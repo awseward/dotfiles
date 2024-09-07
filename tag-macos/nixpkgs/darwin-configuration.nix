@@ -88,7 +88,7 @@ in {
   environment.systemPackages = with pkgs; [
     bat
     bats
-    borgbackup
+    # borgbackup # Issues on Monterey
     btop
     cloc
     coreutils
