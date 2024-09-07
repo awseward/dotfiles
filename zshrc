@@ -57,7 +57,6 @@ type -f prompt >/dev/null 2>&1 && prompt off
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_THEME="andrewseward"
 plugins=(
-  asdf
   colored-man-pages
   fzf-tab
 )
@@ -97,6 +96,7 @@ for local_bin in "${local_bins[@]}"; do __prepend_to_PATH "$local_bin"; done
 # TODO: Review these to see which are actually even necessary
 __ensure_in_PATH                 \
   "$ASDF_DIR/bin"                \
+  "$ASDF_DIR/shims"              \
   "$HOME/Library/Python/3.6/bin" \
   "$RACKET_BIN_DIR"              \
   "$XDG_DATA_HOME/nimble/bin"    \

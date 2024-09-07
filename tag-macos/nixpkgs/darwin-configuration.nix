@@ -123,6 +123,7 @@ in {
     silver-searcher
     sox
     speedtest-cli
+    sqlite
     tmate
     tree
     visidata
