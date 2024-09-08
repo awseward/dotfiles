@@ -192,7 +192,8 @@ if has('win16') || has('win32') || has('win64') || has('win32unix')
 else
   map <C-p> :Files<CR>
   if executable('rg')
-    let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
+    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden'
+    " let $FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
   elseif executable('ag')
     let $FZF_DEFAULT_COMMAND = 'ag --files-with-matches --hidden -g ""'
   endif

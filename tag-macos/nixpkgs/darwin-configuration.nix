@@ -119,6 +119,7 @@ in {
     rcm
     redis
     ripgrep
+    rlwrap
     shellcheck
     silver-searcher
     sox

@@ -42,6 +42,7 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'evanleck/vim-svelte', { 'branch': 'main' }
 Plug 'fatih/vim-go'
 Plug 'gisphm/vim-gitignore'
+Plug 'gleam-lang/gleam.vim'
 Plug 'gutenye/json5.vim'
 Plug 'idris-hackers/idris-vim'
 Plug 'kongo2002/fsharp-vim'
