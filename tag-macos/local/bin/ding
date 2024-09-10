@@ -1,0 +1,25 @@
+#!/bin/bash
+
+play_sound() {
+  local -r exit="$1"; shift
+
+  if ! command -v afplay &>/dev/null; then
+    echo >&2 "ding: cannot play sound!"
+    return
+  fi
+
+  if [ "$exit" -eq 0 ]; then
+    afplay "/System/Library/Sounds/Glass.aiff" &
+    return
+  fi
+
+  for _run in {1..2}; do
+    afplay "/System/Library/Sounds/Sosumi.aiff" &
+  done
+}
+
+"$@"
+lastexit=$?
+
+play_sound "$lastexit" "$@" &
+exit "$lastexit"
