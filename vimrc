@@ -325,13 +325,13 @@ set guicursor=n-v-c:block,o:hor50,i-ci:hor15,r-cr:hor30,sm:block
 let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'bash', 'shell', 'sh']
 set shiftround
 
-" Move lines around (https://vimtricks.com/p/vimtrick-moving-lines/)
-nnoremap <c-j> :m .+1<CR>==
-nnoremap <c-k> :m .-2<CR>==
-inoremap <c-j> <Esc>:m .+1<CR>==gi
-inoremap <c-k> <Esc>:m .-2<CR>==gi
-vnoremap <c-j> :m '>+1<CR>gv=gv
-vnoremap <c-k> :m '<-2<CR>gv=gv
+" " Move lines around (https://vimtricks.com/p/vimtrick-moving-lines/)
+" nnoremap <c-j> :m .+1<CR>==
+" nnoremap <c-k> :m .-2<CR>==
+" inoremap <c-j> <Esc>:m .+1<CR>==gi
+" inoremap <c-k> <Esc>:m .-2<CR>==gi
+" vnoremap <c-j> :m '>+1<CR>gv=gv
+" vnoremap <c-k> :m '<-2<CR>gv=gv
 
 " Not sure why I have had to add this in explicitly (it used to just work),
 " but I grabbed it from here: https://github.com/vim/vim/blob/66f65a46c5d169f20f780721d4f74d4729855b96/runtime/syntax/gitcommit.vim#L108C2-L108C38
