@@ -60,4 +60,4 @@ cask "vlc"
 
 # These can probably be split out to a different file
 cask "basictex"
-cask "calibre"
+# cask "calibre"
