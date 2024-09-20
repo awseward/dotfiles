@@ -8,14 +8,16 @@ Plug 'awseward/colors.vim'
 
 " Editor Utils
 Plug 'bronson/vim-trailing-whitespace'
-Plug 'zxqfl/tabnine-vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'troydm/zoomwintab.vim'
+Plug 'zxqfl/tabnine-vim'
 
 " Misc
 Plug 'scrooloose/syntastic'
@@ -42,7 +44,6 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'evanleck/vim-svelte', { 'branch': 'main' }
 Plug 'fatih/vim-go'
 Plug 'gisphm/vim-gitignore'
-Plug 'gleam-lang/gleam.vim'
 Plug 'gutenye/json5.vim'
 Plug 'idris-hackers/idris-vim'
 Plug 'kongo2002/fsharp-vim'

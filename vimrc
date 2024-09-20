@@ -199,6 +199,8 @@ else
   endif
 endif
 
+nnoremap <silent> ca <cmd>lua vim.lsp.buf.code_action()<CR>
+
 " TODO: (See if this can be sped up a bit, it's suuuper slow)
 let g:rg_command = 'rg --sort-files --vimgrep'
 
@@ -304,7 +306,7 @@ nnor ,CD :let @*=expand("%:p:h")<CR> "   ...               (absolute)
 " ¯\_(ツ)_/¯ Might be good to have this as a foothold someday
 " See also: https://github.com/nanotee/nvim-lua-guide#using-lua-from-vimscript
 if has('nvim')
-  :lua require('placeholder')
+  :lua require('init')
 end
 
 " Copied this from whatever old vim was defaulting to, but the height
