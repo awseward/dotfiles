@@ -92,6 +92,8 @@ local_bins=(
 )
 for local_bin in "${local_bins[@]}"; do __prepend_to_PATH "$local_bin"; done
 
+__prepend_to_PATH "$ASDF_DIR/bin"
+__prepend_to_PATH "$ASDF_DIR/shims"
 
 # TODO: Review these to see which are actually even necessary
 __ensure_in_PATH                 \
