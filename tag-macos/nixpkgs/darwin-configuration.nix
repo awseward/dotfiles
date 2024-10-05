@@ -157,4 +157,15 @@ in {
   # Used for backwards compatibility, please read the changelog before changing.
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
+
+  # See: https://github.com/LnL7/nix-darwin/issues/659#issuecomment-1813204545
+  system.activationScripts.preActivation = {
+    enable = true;
+    text = ''
+      if [ ! -d "/var/lib/redis/" ]; then
+      echo "creating Redis data directory..."
+      sudo mkdir -m 755 -p /var/lib/redis/
+      fi
+    '';
+  };
 }
