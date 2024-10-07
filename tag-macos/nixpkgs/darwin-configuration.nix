@@ -155,6 +155,22 @@ in {
     '';
   };
 
+  # NOTE: This is commented out; presumably there is some work required to
+  #       setup the right launchagent stuff to support something like this.
+  #
+  #       Might be able to follow the pattern that redis uses here if it's
+  #       worth doing:
+  #
+  #       https://github.com/LnL7/nix-darwin/blob/master/modules/services/redis/default.nix
+  #
+  # > error: The option `services.mosquitto' does not exist. Definition values:
+  # > - In `/Users/andrew/.nixpkgs/darwin-configuration.nix':
+  # >   {
+  # >     enable = true;
+  # >   }
+  #
+  # services.mosquitto.enable = true;
+
   # Create /etc/zshrc that loads the nix-darwin environment.
   programs.zsh.enable = true; # default shell on catalina
 
