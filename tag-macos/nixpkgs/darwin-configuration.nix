@@ -137,6 +137,7 @@ in {
     tree
     visidata
     wakeonlan
+    watch
     wget
     xsv
     yq-go

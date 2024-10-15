@@ -35,7 +35,6 @@ brew "pkg-config"
 brew "readline"
 brew "rename"
 brew "utf8proc"
-brew "watch"
 
 cask "1password-cli"
 # At the time of writing, macOS will try to prevent Alacritty from starting up.
