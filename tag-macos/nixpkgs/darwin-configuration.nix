@@ -188,8 +188,8 @@ in {
     enable = true;
     text = ''
       if [ ! -d "/var/lib/redis/" ]; then
-      echo "creating Redis data directory..."
-      sudo mkdir -m 755 -p /var/lib/redis/
+        echo "creating Redis data directory..."
+        sudo mkdir -m 755 -p /var/lib/redis/
       fi
     '';
   };
