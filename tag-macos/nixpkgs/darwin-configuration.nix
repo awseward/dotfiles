@@ -100,8 +100,10 @@ in {
     eza
     fdupes
     figlet
+    findutils
     fortune
     fx
+    gawk
     graphviz
     gron
     gzip
