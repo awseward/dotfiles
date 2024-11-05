@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
@@ -197,7 +197,8 @@ in {
   # > can disable this check by setting:
   # >
   #
-  ids.uids.nixbld = 300;
+  # TODO: Change this `mkIf` condition to check hostname or something like that
+  ids.uids = lib.mkIf false { nixbld = 300; };
 
   # See: https://github.com/LnL7/nix-darwin/issues/659#issuecomment-1813204545
   system.activationScripts.preActivation = {
