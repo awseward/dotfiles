@@ -135,7 +135,7 @@ in {
     sqlite
     tmate
     tree
-    visidata
+    # visidata
     wakeonlan
     watch
     wget
