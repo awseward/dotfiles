@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=SC2317
+
 (
   # shellcheck source=/dev/null
   source "$HOME/.local/profile.d/updates.sh"
-
+  # shellcheck source=/dev/null
+  source "$HOME/.local/profile.d/interaction.sh"
 
   _list_fns() {
     case "$OSTYPE" in
@@ -58,11 +61,23 @@
     echo
   }
 
-  print_usage_and_status() {
+  help() {
     print_usage
     print_status
   }
 
-  # Run command or print usage and status
-  "${1:-print_usage_and_status}"
+  interactive() {
+    help
+    2>&1 echo '---'
+
+    # shellcheck disable=SC2016
+    if _prompt_yn 'Run `write_timestamp_file` now' 'n'; then
+      write_timestamp_file
+    else
+      return 1
+    fi
+  }
+
+  # Run command or print usage and status, then prompt to touch timestamp
+  "${1:-interactive}"
 )
