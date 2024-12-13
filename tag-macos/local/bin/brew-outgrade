@@ -28,7 +28,7 @@ i() {
         --prompt='brew upgrade> ' \
         --header 'Outdated brew packages' \
     | awk '{ print $1 }' \
-    | xargs -t brew upgrade
+    | xargs --no-run-if-empty -t brew upgrade
 }
 
 # a – for all
