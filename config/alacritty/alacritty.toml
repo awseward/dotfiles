@@ -5,6 +5,7 @@ import = [
 
 [window]
   decorations = "None"
+  level = "AlwaysOnTop"
   startup_mode = "Maximized"
 
 [font]
