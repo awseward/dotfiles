@@ -18,7 +18,7 @@ Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'troydm/zoomwintab.vim'
 Plug 'yssl/QFEnter'
-Plug 'zxqfl/tabnine-vim'
+" Plug 'zxqfl/tabnine-vim'
 
 " Misc
 Plug 'scrooloose/syntastic'
