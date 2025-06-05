@@ -1,4 +1,8 @@
-#!/usr/bin/env bash
+#!/usr/bin/env osh
+# shellcheck shell=bash
+
+# https://web.archive.org/web/20250514000439/https://oils.pub/osh.html#4-strict-mode-improves-shell-scripts
+shopt --set strict:all
 
 set -euo pipefail
 
