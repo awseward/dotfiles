@@ -14,6 +14,7 @@
 #     already exist
 #
 
+require 'uri'
 require 'bundler/inline'
 
 gemfile do
@@ -24,9 +25,14 @@ gemfile do
   gem 'faraday'
 end
 
-def info(msg) = STDERR.puts "[#{'INFO'.colorize :blue}] #{msg}"
+def blue(x)   = x.colorize :blue
+def red(x)    = x.colorize :red
+def yellow(x) = x.colorize :yellow
+def cyan(x)   = x.colorize :cyan
 
-def error(msg) = STDERR.puts "[#{'ERROR'.colorize :red}] #{msg}"
+def info(msg) = STDERR.puts "[#{blue 'INFO'}] #{msg}"
+
+def error(msg) = STDERR.puts "[#{red 'ERROR'}] #{msg}"
 
 def redirect?(response) = (300..399).cover? response.status
 
@@ -36,26 +42,40 @@ def redirect_or?(response)
   redirect?(response).tap { yield response.status if !_1 }
 end
 
+def head(...) = Faraday.head(...)
+
 def location(response) = response.headers['Location']
 
-def perform(url, force:)
-  iar_url = if !force
-    info "Checking for existing Internet Archive captures of #{url.colorize :yellow}"
-    response = Faraday.head "https://web.archive.org/web/#{url}"
+def without_fragment(uri)
+  fragment = uri.fragment
+
+  uri.dup.
+    tap  { _1.fragment = nil }.
+    then { yield _1.to_s }.
+    then { URI.parse _1 }.
+    tap  { _1.fragment = fragment }
+end
+
+def perform(uri, force:)
+  iar_url = without_fragment(uri) do |url|
+    break nil if !!force
+
+    info "Checking for existing Internet Archive captures of #{yellow url}"
+    response = head "https://web.archive.org/web/#{url}"
 
     location response if redirect?(response)
   end
 
-  iar_url ||= begin
-    info "Creating a new Internet Archive capture of #{url.colorize :yellow}"
-    response = Faraday.head "https://web.archive.org/save/#{url}"
+  iar_url ||= without_fragment(uri) do |url|
+    info "Creating a new Internet Archive capture of #{yellow url}"
+    response = head "https://web.archive.org/save/#{url}"
 
-    location response if redirect_or?(response) { error "Should have been a redirect, but got status: #{_1.to_s.colorize :red}"; exit 1 }
+    location response if redirect_or?(response) { error "Should have been a redirect, but got status: #{red _1.to_s}"; exit 1 }
   end
 
   STDOUT.puts iar_url unless iar_url.nil?
 rescue StandardError => e
-  error "Something went wrong attempting to resolve Internet Archive capture of #{url.colorize :yellow}"
+  error "Something went wrong attempting to resolve Internet Archive capture of #{yellow url}"
   exit 1
 end
 
@@ -63,8 +83,8 @@ end
 
 case ARGV
 in [url]
-  perform url, force: ENV['FORCE'] == 'true'
+  URI.parse(url).freeze.then { perform _1, force: ENV['FORCE'] == 'true' }
 else
-  error "Invalid args: #{ARGV.inspect}. See #{__FILE__.colorize :cyan} for usage."
+  error "Invalid args: #{ARGV.inspect}. See #{cyan __FILE__} for usage."
   exit 1
 end
