@@ -122,7 +122,6 @@ in {
     neofetch
     neovim
     nmap
-    oils-for-unix
     pwgen
     rcm
     redis
@@ -145,6 +144,7 @@ in {
     unstable.curl
     unstable.fzf
     unstable.git
+    unstable.oils-for-unix
   ];
 
   # Auto upgrade nix package and the daemon service.
