@@ -127,6 +127,7 @@ in {
     redis
     ripgrep
     rlwrap
+    rsync # Keep rsync instead of openrsync
     shellcheck
     silver-searcher
     sox
