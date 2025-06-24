@@ -1,0 +1,55 @@
+#!/usr/bin/env ysh
+
+proc upgrade {
+  _tell 'mscp.sh'
+  mscp.sh
+
+  _tell 'nix-channel --update --verbose && darwin-rebuild switch'
+  nix-channel --update --verbose && darwin-rebuild switch
+
+  _tell 'brew-outgrade'
+  brew-outgrade
+}
+
+proc prune {
+  _tell 'nix-collect-garbage --delete-older-than 14d'
+  nix-collect-garbage --delete-old
+
+  _tell 'brew cleanup'
+  brew cleanup
+}
+
+proc _tell { >&2 echo ">>> $*"; }
+
+proc help {
+  var f_ = $(basename "$0")
+
+  cat <<-TXT
+
+=== Hygiene Script (daily) ===
+
+This is a script of hygiene tasks to be run regularly. Things like upgrading
+and pruning dependencies, mostly.
+
+Currently its main motivation is to encapsulate a system that is split between
+homebrew and nix.
+
+Usages:
+
+  = Upgrade =
+  $f_ upgrade
+
+  = Prune =
+  $f_ prune
+
+TXT
+}
+
+# ---
+
+#
+# TODO: Probably would be better to just check the length of ARGV, otherwise
+#       printing the help dialog if there's an actual error in `upgrade` or
+#       `prune` could be confusing.
+#
+try { runproc @ARGV }; if failed { help }
