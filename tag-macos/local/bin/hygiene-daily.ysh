@@ -1,55 +1,51 @@
 #!/usr/bin/env ysh
 
 proc upgrade {
-  _tell 'mscp.sh'
-  mscp.sh
+  _p 'mscp.sh'
+      mscp.sh
 
-  _tell 'nix-channel --update --verbose && darwin-rebuild switch'
-  nix-channel --update --verbose && darwin-rebuild switch
+  _p 'nix-channel --update --verbose && darwin-rebuild switch'
+      nix-channel --update --verbose && darwin-rebuild switch
 
-  _tell 'brew-outgrade'
-  brew-outgrade
+  _p 'brew-outgrade'
+      brew-outgrade
 }
 
 proc prune {
-  _tell 'nix-collect-garbage --delete-older-than 14d'
-  nix-collect-garbage --delete-old
+  _p 'nix-collect-garbage --delete-older-than 14d'
+      nix-collect-garbage --delete-older-than 14d
 
-  _tell 'brew cleanup'
-  brew cleanup
+  _p 'brew cleanup'
+      brew cleanup
 }
-
-proc _tell { >&2 echo ">>> $*"; }
 
 proc help {
-  var f_ = $(basename "$0")
+  var f_ = $(basename $0)
+  write -- """
 
-  cat <<-TXT
+  === Hygiene Script (daily) ===
 
-=== Hygiene Script (daily) ===
+  This is a script of hygiene tasks to be run regularly. Things like upgrading
+  and pruning dependencies, mostly.
 
-This is a script of hygiene tasks to be run regularly. Things like upgrading
-and pruning dependencies, mostly.
+  Currently its main motivation is to encapsulate a system that is split between
+  homebrew and nix.
 
-Currently its main motivation is to encapsulate a system that is split between
-homebrew and nix.
+  Usages:
 
-Usages:
+    = Upgrade =
+    $f_ upgrade
 
-  = Upgrade =
-  $f_ upgrade
+    = Prune =
+    $f_ prune
 
-  = Prune =
-  $f_ prune
-
-TXT
+  """
 }
+
+proc _p (...args) { redir >&2 { write -- ">>> $[join(args, ' ')]"; } }
 
 # ---
 
-#
-# TODO: Probably would be better to just check the length of ARGV, otherwise
-#       printing the help dialog if there's an actual error in `upgrade` or
-#       `prune` could be confusing.
-#
-try { runproc @ARGV }; if failed { help }
+if (ARGV === []) { help; exit 1  }
+
+runproc @ARGV
