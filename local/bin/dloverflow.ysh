@@ -145,6 +145,5 @@ var config = {
   src: "$[ENV.HOME]/Downloads", dst: "$[ENV.HOME]/stale_downloads"
   hcio: { check_id, run_id: $(uuidgen) }
 }
-= config
 
 runproc @ARGV
