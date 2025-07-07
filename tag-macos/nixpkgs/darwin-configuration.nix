@@ -109,16 +109,12 @@ in {
     gzip
     hadolint
     htop
+    hut
     iperf
     jq
     mdp
     mosquitto
-    # # NOTE: ncdu gives:
-    # # > error: unable to find dynamic system library 'ncursesw' using strategy
-    # # > 'paths_first'. searched paths: none
-    # #
-    # # Will continue using it from homebrew in the meantime.
-    # ncdu
+    ncdu
     neofetch
     neovim
     nmap
