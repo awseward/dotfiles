@@ -34,10 +34,12 @@ proc run(mtime=_default_mtime) {
 }
 
 proc help {
+  var f_ = $(basename $0)
+
   redir >&2 {
     write -- """
 
-    dloverflow.ysh
+    === Downloads Overflow ===
 
     This script sweeps files over a certain age (using mtime) into a target
     directory.
@@ -49,13 +51,13 @@ proc help {
 
     USAGES
 
-      ° run [mtime]
+      • $f_ run [mtime]
 
-        This will move all files matching the given mtime value.
+        Move all files matching the given mtime value.
 
-      ° dry_run [mtime]
+      • $f_ dry_run [mtime]
 
-        This will just describe what run would do if given the same arguments.
+        Describe what run would do if given the same arguments.
     """
   }
 

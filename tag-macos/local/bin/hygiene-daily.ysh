@@ -21,25 +21,29 @@ proc prune {
 
 proc help {
   var f_ = $(basename $0)
-  write -- """
 
-  === Hygiene Script (daily) ===
+  redir >&2 {
+    write -- """
 
-  This is a script of hygiene tasks to be run regularly. Things like upgrading
-  and pruning dependencies, mostly.
+    === Hygiene Script ===
 
-  Currently its main motivation is to encapsulate a system that is split between
-  homebrew and nix.
+    This is a script of hygiene tasks to be run regularly. Things like upgrading
+    and pruning dependencies, mostly.
 
-  Usages:
+    Currently its main motivation is to encapsulate a system that is split between
+    homebrew and nix.
 
-    = Upgrade =
-    $f_ upgrade
+    USAGES
 
-    = Prune =
-    $f_ prune
+      • $f_ upgrade
 
-  """
+        Upgrade dependencies.
+
+      • $f_ prune
+
+        Clean up leftover cruft from dependency tools.
+    """
+  }
 }
 
 proc _p (...args) { redir >&2 { write -- ">>> $[join(args, ' ')]"; } }
