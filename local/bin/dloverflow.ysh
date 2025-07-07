@@ -49,11 +49,11 @@ proc help {
 
     USAGES
 
-    ° run [mtime]
+      ° run [mtime]
 
         This will move all files matching the given mtime value.
 
-    ° dry_run [mtime]
+      ° dry_run [mtime]
 
         This will just describe what run would do if given the same arguments.
     """
