@@ -12,8 +12,8 @@ proc upgrade {
 }
 
 proc prune {
-  _p 'nix-collect-garbage --delete-older-than 14d'
-      nix-collect-garbage --delete-older-than 14d
+  _p 'nix-collect-garbage --delete-older-than 30d'
+      nix-collect-garbage --delete-older-than 30d
 
   _p 'brew cleanup'
       brew cleanup
