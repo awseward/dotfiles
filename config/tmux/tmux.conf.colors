@@ -20,4 +20,5 @@ set -g window-status-current-style bg='#DD9C32',fg='#3A4538',bold
 set -g status-left-style fg='#8B9B81',bold
 
 # Currently shows local and UTC time
-set -g status-right-style fg='#DD9C32',bold
+# set -g status-right-style fg='#DD9C32',bold
+set -g status-right-style bold
