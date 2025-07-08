@@ -12,15 +12,11 @@ set -euo pipefail
 # > brew update && brew outdated
 # > brew upgrade
 #
-# TODO: Call this from somewhere, plus the nix counterpart I regularly run:
-#
-# > nix-channel --update --verbose && darwin-rebuild changelog
-# > darwin-rebuild switch
-#
 
 # i – for interactive
 i() {
   xargs -t brew <<< update
+
   c | awk '{ print $1, "#", $2, "→", $3 }' \
     | column -t \
     | fzf \
