@@ -46,7 +46,7 @@ let styles
             , Style::{
               , comment = Some "Currently shows local and UTC time"
               , name = "status-right"
-              , fg = accent1
+              -- , fg = accent1
               , attrs = [ Attribute.bold ]
               }
             ]
