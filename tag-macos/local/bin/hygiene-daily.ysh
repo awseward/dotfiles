@@ -7,8 +7,8 @@ proc upgrade {
   _p 'nix-channel --update --verbose && darwin-rebuild switch'
       nix-channel --update --verbose && darwin-rebuild switch
 
-  _p 'brew-outgrade'
-      brew-outgrade
+  _p 'brew-outgrade a'
+      brew-outgrade a
 }
 
 proc prune {
