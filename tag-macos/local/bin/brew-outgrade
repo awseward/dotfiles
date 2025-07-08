@@ -17,6 +17,13 @@ set -euo pipefail
 i() {
   xargs -t brew <<< update
 
+  shopt --unset strict:all
+  if [ $(brew outdated | wc -l) -eq 0 ]; then
+    >&2 echo 'No outdated brew dependencies; nothing to do…'
+    return 0
+  fi
+  shopt --set strict:all
+
   c | awk '{ print $1, "#", $2, "→", $3 }' \
     | column -t \
     | fzf \
@@ -44,10 +51,11 @@ j() {
     {
       name,
       installed: (
-      if   .installed_versions | type == "array"
-      then .installed_versions | first
-      else .installed_versions
-      end
+        if (.installed_versions | type == "array") then
+          .installed_versions | first
+        else
+          .installed_versions
+        end
       ),
       current: .current_version
     }
