@@ -1,13 +1,13 @@
 let Theme = (env:THEMUX_PACKAGE ? ../lib/package.dhall).Theme
 
 in  { tropic =
-        let steelBlue = "#5B8C85"
+        let steelBlue = "#5b8c85"
 
-        let neonPink = "#FF2E63"
+        let neonPink = "#ff2e63"
 
         let richBlue = "#004445"
 
-        let sharpYellow = "#F8B400"
+        let sharpYellow = "#f8b400"
 
         in  Theme::{
             , bg = richBlue
@@ -16,33 +16,33 @@ in  { tropic =
             , accent2 = steelBlue
             }
     , indie =
-        let blue = "#1C4364"
+        let blue = "#1c4364"
 
-        let pink = "#F69974"
+        let pink = "#f69974"
 
-        let seafoam = "#71EEB8"
+        let seafoam = "#71eeb8"
 
         in  Theme::{ bg = blue, fg = seafoam, accent1 = pink, accent2 = pink }
     , smoke =
-        let brown = "#837B68"
+        let brown = "#837b68"
 
-        let grey = "#454C4B"
+        let grey = "#454c4b"
 
-        let olive = "#6F7B76"
+        let olive = "#6f7b76"
 
-        let white = "#C8CACF"
+        let white = "#c8cacf"
 
         in  Theme::{ bg = grey, fg = olive, accent1 = white, accent2 = brown }
     , contrast =
         -- TODO: This one could probably use a better name
         --
-        let purpleBlack = "#1A1423"
+        let purpleBlack = "#1a1423"
 
-        let salmon = "#FF715B"
+        let salmon = "#ff715b"
 
-        let teal = "#1EA896"
+        let teal = "#1ea896"
 
-        let white = "#FFFFFF"
+        let white = "#ffffff"
 
         in  Theme::{
             , bg = purpleBlack
@@ -51,13 +51,13 @@ in  { tropic =
             , accent2 = teal
             }
     , toad =
-        let green = "#3A4538"
+        let green = "#3a4538"
 
-        let cream = "#E4DFA2"
+        let cream = "#e4dfa2"
 
-        let yellow = "#DD9C32"
+        let yellow = "#dd9c32"
 
-        let lightGreen = "#8B9B81"
+        let lightGreen = "#8b9b81"
 
         in  Theme::{
             , bg = green
