@@ -89,9 +89,9 @@ borg prune \
     --list                         \
     --glob-archives '{hostname}-*' \
     --show-rc                      \
-    --keep-hourly  16              \
+    --keep-hourly  24              \
     --keep-daily   14              \
-    --keep-weekly  24              \
+    --keep-weekly  26              \
     --keep-monthly 36              \
     && borg compact --verbose
 
