@@ -90,6 +90,7 @@ borg prune \
     --list                         \
     --glob-archives '{hostname}-*' \
     --show-rc                      \
+    --keep-within  2d              \
     --keep-hourly  24              \
     --keep-daily    7              \
     --keep-weekly   8              \
