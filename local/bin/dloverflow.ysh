@@ -11,7 +11,10 @@ proc dry_run(mtime=_default_mtime) {
     exit 0
   }
 
-  write -n -- 'Will move the following: '; = plan
+  redir >&2 {
+    write -n -- 'Will move the following: '; = plan
+    write -- 'Use `run` command to actually move these files.'
+  }
 }
 
 proc run(mtime=_default_mtime) {
@@ -140,23 +143,35 @@ proc _collect_plan(mtime; out) {
 
 proc _init_config (; out) {
   var config_home = get(dict(ENV), 'XDG_CONFIG_HOME', "$[ENV.HOME]/.config")
-  read --raw-line (&check_id) < "$config_home/dloverflow/healthchecks.io.uuid"
+  var check_id_filepath = "$config_home/dloverflow/healthchecks.io.uuid"
 
-  call out->setValue({
+  redir >&2 { write -- "Loading healthchecks.io check id from $check_id_filepath …" }
+  read --raw-line (&check_id) < $check_id_filepath
+
+  var config = {
     src: "$[ENV.HOME]/Downloads",
     dst: "$[ENV.HOME]/stale_downloads",
     hcio: {
       check_id,
       run_id: ($(uuidgen) => lower())
     }
-  })
+  }
+
+  redir >&2 {
+    write -n -- "Config: "; = config
+    write    -- ''
+  }
+
+  call out->setValue(config)
 }
 
 
 # ---
 
-if ([] === ARGV) { help; exit 1 }
+if (['help'] === ARGV) { help; exit 0 }
 
 _init_config (&config)
+
+if ([] === ARGV) { dry_run; exit 0 }
 
 runproc @ARGV
