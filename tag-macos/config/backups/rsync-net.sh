@@ -93,6 +93,7 @@ borg prune \
     --keep-daily    7              \
     --keep-weekly   8              \
     --keep-monthly 12              \
+    --keep-yearly   5              \
     && borg compact --verbose
 
 prune_exit=$?
