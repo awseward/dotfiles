@@ -88,7 +88,7 @@ in {
   environment.systemPackages = with pkgs; [
     bat
     bats
-    # borgbackup # Issues on Monterey
+    borgbackup
     btop
     cloc
     coreutils
@@ -114,7 +114,7 @@ in {
     jq
     mdp
     mosquitto
-    ncdu
+    # ncdu
     neofetch
     neovim
     nmap
