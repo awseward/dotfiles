@@ -1,0 +1,37 @@
+# Values of a would-be configuration which reflect tag-macos/config/backups/rsync-net.sh
+---
+create:
+  archive_name: '::{hostname}-{now}'
+  # Alternatively, consider using the `--patterns-from` option
+  patterns:
+      - '! **/*[Cc]ache*'
+      - '! **/.git/objects'
+      - '! **/node_modules'
+      - '- **/.DS_Store'
+
+      - '+ /Users/*/.sqliterc'
+      - '- /Users/*/.config/borg/security/*/nonce'
+      - '+ /Users/*/.config'
+      - '+ /Users/*/.dotfiles'
+      - '+ /Users/*/.nix*'
+      - '+ /Users/*/.ssh'
+      - '+ /Users/*/.*shrc'
+      - '! /Users/*/.*'
+
+      - '! /Users/*/projects'
+      - '! /Users/*/.Trash'
+      - '! /Users/*/Desktop'
+      - '! /Users/*/Documents'
+      - '! /Users/*/Downloads'
+      - '! /Users/*/Library'
+      - '! /Users/*/Movies'
+      - '! /Users/*/Pictures'
+      - '! /Users/*/VirtualBox VMs'
+
+prune:
+  glob_archives: '{hostname}-*'
+  keep_hourly:  24
+  keep_daily:    7
+  keep_weekly:   8
+  keep_monthly: 12
+  keep_yearly:   5
