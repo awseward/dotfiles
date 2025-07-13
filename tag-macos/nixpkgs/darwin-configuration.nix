@@ -141,7 +141,12 @@ in {
     unstable.curl
     unstable.fzf
     unstable.git
-    unstable.oils-for-unix
+
+    # Not updated, can uncomment once nixpkgs gets a fresher version…
+    #
+    # In the meantime, just install manually via steps here: https://oils.pub/release/latest/
+    #
+    # unstable.oils-for-unix
   ];
 
   # Auto upgrade nix package and the daemon service.
