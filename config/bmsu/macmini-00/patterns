@@ -1,0 +1,11 @@
+- **/*.nosync
+- **/.dummy
+- **/.DS_Store
+
++ /Users/andrew/Calibre Library
++ /Users/andrew/Music/GarageBand
++ /Users/andrew/stale_downloads
+
+# Make sure to default to exclusion, in case anything gets added to the roots
+# that wasn't intended…
+- /Users/*/*
