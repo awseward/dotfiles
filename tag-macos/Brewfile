@@ -30,6 +30,7 @@ brew "libxslt"
 brew "libyaml"
 brew "msgpack"
 brew "ncurses"
+brew "oils-for-unix"
 brew "pkg-config"
 brew "readline"
 brew "rename"
@@ -45,7 +46,6 @@ cask "1password-cli"
 cask "alacritty"
 # # This is commented out for the same reason as Signal is below.
 # cask "alfred"
-cask "docker"
 cask "rectangle"
 # # I had Signal already installed on a machine and homebrew doesn't seem to
 # # gracefully handle that, so I'm leaving it out of the bundle for now as

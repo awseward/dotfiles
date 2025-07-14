@@ -88,6 +88,7 @@ in {
   environment.systemPackages = with pkgs; [
     bat
     bats
+    bkt
     borgbackup
     btop
     cloc
