@@ -1,0 +1,8 @@
+{
+  "start_interval_comment_xml": "<!-- 1200(sec) = 60(sec) * 20(min) -->",
+  "start_interval_s": 1200,
+
+  "path_prepend": "/run/current-system/sw/bin:/opt/homebrew/bin:",
+
+  "env_tags": "<!-- Needed by nixpkgs' curl -->\n<key>NIX_SSL_CERT_FILE</key>\n<string>/etc/ssl/certs/ca-certificates.crt</string>"
+}
