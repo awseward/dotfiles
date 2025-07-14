@@ -59,9 +59,9 @@ borg create \
     --pattern '! **/node_modules'         \
     --pattern '- **/.DS_Store'            \
                                           \
-    --pattern '- /Users/*/go'             \
+    --pattern '! /Users/*/go'             \
     --pattern '+ /Users/*/.sqliterc'      \
-    --pattern '- /Users/*/.config/borg/security/*/nonce' \
+    --pattern '! /Users/*/.config/borg'   \
     --pattern '+ /Users/*/.config'        \
     --pattern '+ /Users/*/.dotfiles'      \
     --pattern '+ /Users/*/.nix*'          \
