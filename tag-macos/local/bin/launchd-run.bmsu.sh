@@ -2,8 +2,11 @@
 
 set -euo pipefail
 
-# Should probably just make this $1
-repo_name='macmini-00'
+>&2 echo ''
+>&2 echo "; $0 $*"
+>&2 echo ''
+
+repo_name="$1"
 
 ( # TODO: Respect XDG_RUNTIME_DIR from
   # https://web.archive.org/web/20250624041402/https://specifications.freedesktop.org/basedir-spec/0.8/
@@ -31,7 +34,6 @@ repo_name='macmini-00'
   touch      "$HOME/.local/tmp/bmsu/$repo_name.pid"
 ); echo $$ > "$HOME/.local/tmp/bmsu/$repo_name.pid"
 
->&2 echo "$HOME/.local/tmp/bmsu/$repo_name.pid"
->&2 cat  "$HOME/.local/tmp/bmsu/$repo_name.pid"
+>&2 echo -n "$HOME/.local/tmp/bmsu/$repo_name.pid: "; >&2 cat "$HOME/.local/tmp/bmsu/$repo_name.pid"
 
 yes $'\n' | exec backup "$repo_name"
