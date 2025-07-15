@@ -6,5 +6,9 @@
 + /Users/andrew/Music/GarageBand
 + /Users/andrew/stale_downloads
 
+# Might as well grab rotated logs
++ /Users/andrew/.local/state/bmsu/*.gz
+- /Users/andrew/.local/state/bmsu/*
+
 # Make sure to default to exclusion, in case anything gets added to the roots that wasn't intended…
 - /Users/*/*
