@@ -38,9 +38,13 @@ repo_name="$1"
 
 >&2 echo ''
 >&2 echo "; bmsu launchd_diff $repo_name"
+>&2 echo ''
 set +e;     bmsu launchd_diff "$repo_name"; set -e
 >&2 echo ''
 
 eval "$(ssh-agent)" && ssh-add --apple-load-keychain
 
+>&2 echo ''
+>&2 echo "; backup $repo_name"
+>&2 echo ''
 yes $'\n' | exec backup "$repo_name"
