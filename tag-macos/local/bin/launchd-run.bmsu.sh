@@ -36,6 +36,11 @@ repo_name="$1"
 
 >&2 echo -n "$HOME/.local/tmp/bmsu/$repo_name.pid: "; >&2 cat "$HOME/.local/tmp/bmsu/$repo_name.pid"
 
+>&2 echo ''
+>&2 echo "; bmsu launchd_diff $repo_name"
+set +e;     bmsu launchd_diff "$repo_name"; set -e
+>&2 echo ''
+
 eval "$(ssh-agent)" && ssh-add --apple-load-keychain
 
 yes $'\n' | exec backup "$repo_name"
