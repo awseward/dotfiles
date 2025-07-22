@@ -2,9 +2,13 @@
 - **/.dummy
 - **/.DS_Store
 
+! /Users/andrew/projects/**/node_modules
+! /Users/andrew/projects/gleam/**/build
+
 + /Users/andrew/Calibre Library
 + /Users/andrew/Music/Ableton
 + /Users/andrew/Music/GarageBand
++ /Users/andrew/projects
 + /Users/andrew/stale_downloads
 
 # Might as well grab rotated logs
