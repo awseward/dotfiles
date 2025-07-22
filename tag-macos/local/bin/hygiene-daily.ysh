@@ -7,16 +7,16 @@ proc upgrade {
   _p 'nix-channel --update --verbose && darwin-rebuild switch'
       nix-channel --update --verbose && darwin-rebuild switch
 
-  _p 'brew-outgrade'
-      brew-outgrade
+  _p  'brew-outgrade'
+  exec brew-outgrade
 }
 
 proc prune {
   _p 'nix-collect-garbage --delete-older-than 30d'
       nix-collect-garbage --delete-older-than 30d
 
-  _p 'brew cleanup'
-      brew cleanup
+  _p  'brew cleanup'
+  exec brew cleanup
 }
 
 proc help {
@@ -46,7 +46,7 @@ proc help {
   }
 }
 
-proc _p (...args) { redir >&2 { write -- ">>> $[join(args, ' ')]"; } }
+proc _p (...args) { redir >&2 { write -- "; $[join(args, ' ')]"; } }
 
 # ---
 
