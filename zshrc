@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+### echo "$HOME/.zshrc"
+
 export EDITOR='nvim'
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 export TERM='xterm-256color'
@@ -19,7 +21,10 @@ export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}"
 
 _source_file_if_present() {
   local file="$1"
-  if [ -f "$file" ]; then . "$file"; fi
+  if [ -f "$file" ]; then
+    echo "source $file"
+    . "$file"
+  fi
 }
 
 _source_dir_rec_if_present() {
@@ -41,13 +46,13 @@ _source_file_if_present "$HOME/.nix-profile/etc/profile.d/nix.sh"
 #   > This must be done before compinit is called. Note that if you are using
 #   > Oh My Zsh, it will call compinit for you when you source oh-my-zsh.sh.
 #
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-  autoload -Uz compinit
-  compinit
-fi
+### echo 'brew thing'
+### if type brew &>/dev/null
+### then
+###   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+###   # autoload -Uz compinit
+###   # compinit
+### fi
 
 # Need to disable this prompt here because nix.sh sets a prompt that interferes
 # with some things, i.e. cuts off the last line of some commands' output;
@@ -65,7 +70,7 @@ export ZSH_CACHE_DIR="${XDG_CACHE_HOME:-${HOME}/.cache}/zsh"
 mkdir -p "${ZSH_CACHE_DIR}"
 export ZSH_COMPDUMP="${ZSH_CACHE_DIR}/.zcompdump-${HOST/.*/}-${ZSH_VERSION}"
 
-source "$ZSH/oh-my-zsh.sh"
+_source_file_if_present "$ZSH/oh-my-zsh.sh"
 
 _source_file_if_present "$HOME/.aliases.work"
 _source_file_if_present "$HOME/.fzf.zsh"
@@ -121,11 +126,15 @@ __ensure_in_PATH                 \
 __ensure_in_PATH "/usr/local/sbin"
 
 # Some cleanup
-export_deduped_PATH
+### echo 'export_deduped_PATH'
+### export_deduped_PATH
 
 # Some checks
-warn_if_duplicates_in_PATH
-warn_if_dotfiles_update_check_recommended
+### echo 'warn_if_duplicates_in_PATH'
+### warn_if_duplicates_in_PATH
+###
+### echo 'warn_if_dotfiles_update_check_recommended'
+### warn_if_dotfiles_update_check_recommended
 
 eval "$(direnv hook zsh)"
 
