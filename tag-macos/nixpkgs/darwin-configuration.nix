@@ -186,23 +186,6 @@ in {
   # $ darwin-rebuild changelog
   system.stateVersion = 4;
 
-  # NOTE: This is now divergent between my MBP and Mac Mini (since the mini has
-  # done the Sequoia migration, but the MBP currently cannot); figure out how
-  # to resolve this maybe…
-  #
-  # > CHANGELOG
-  # >
-  # > 2024-09-10
-  # > …
-  # >
-  # > If you have no intention of upgrading to macOS Sequoia 15, or already
-  # > have a custom UID range that you know is compatible with Sequoia, you
-  # > can disable this check by setting:
-  # >
-  #
-  # TODO: Change this `mkIf` condition to check hostname or something like that
-  ids.uids = lib.mkIf false { nixbld = 300; };
-
   # See: https://github.com/LnL7/nix-darwin/issues/659#issuecomment-1813204545
   system.activationScripts.preActivation = {
     enable = true;
