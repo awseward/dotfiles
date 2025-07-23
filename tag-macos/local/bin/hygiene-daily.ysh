@@ -4,8 +4,8 @@ proc upgrade {
   _p 'mscp.sh'
       mscp.sh
 
-  _p 'nix-channel --update --verbose && darwin-rebuild switch'
-      nix-channel --update --verbose && darwin-rebuild switch
+  _p "nix-channel --update --verbose && darwin-rebuild switch -I darwin-config=$[ENV.HOME]/.nixpkgs/darwin-configuration.nix"
+      nix-channel --update --verbose && darwin-rebuild switch -I "darwin-config=$[ENV.HOME]/.nixpkgs/darwin-configuration.nix"
 
   _p  'brew-outgrade'
   exec brew-outgrade
