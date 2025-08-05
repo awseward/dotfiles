@@ -1,7 +1,5 @@
 #!/usr/bin/env zsh
 
-### echo "$HOME/.zshrc"
-
 export EDITOR='nvim'
 export DOTNET_CLI_TELEMETRY_OPTOUT="true"
 export TERM='xterm-256color'
@@ -21,10 +19,7 @@ export XDG_DATA_DIRS="${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}"
 
 _source_file_if_present() {
   local file="$1"
-  if [ -f "$file" ]; then
-    echo "source $file"
-    . "$file"
-  fi
+  if [ -f "$file" ]; then . "$file"; fi
 }
 
 _source_dir_rec_if_present() {
@@ -39,20 +34,6 @@ _source_dir_rec_if_present() {
 }
 
 _source_file_if_present "$HOME/.nix-profile/etc/profile.d/nix.sh"
-
-# https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-# Most notably:
-#
-#   > This must be done before compinit is called. Note that if you are using
-#   > Oh My Zsh, it will call compinit for you when you source oh-my-zsh.sh.
-#
-### echo 'brew thing'
-### if type brew &>/dev/null
-### then
-###   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-###   # autoload -Uz compinit
-###   # compinit
-### fi
 
 # Need to disable this prompt here because nix.sh sets a prompt that interferes
 # with some things, i.e. cuts off the last line of some commands' output;
@@ -126,15 +107,12 @@ __ensure_in_PATH                 \
 __ensure_in_PATH "/usr/local/sbin"
 
 # Some cleanup
-### echo 'export_deduped_PATH'
-### export_deduped_PATH
+export_deduped_PATH
 
 # Some checks
-### echo 'warn_if_duplicates_in_PATH'
-### warn_if_duplicates_in_PATH
-###
-### echo 'warn_if_dotfiles_update_check_recommended'
-### warn_if_dotfiles_update_check_recommended
+warn_if_duplicates_in_PATH
+
+warn_if_dotfiles_update_check_recommended
 
 eval "$(direnv hook zsh)"
 

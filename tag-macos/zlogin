@@ -1,5 +1,3 @@
-echo "$HOME/.zlogin"
-
 # TODO: Consider trying this out so that we may potentially have just one agent
 # process per session (i.e. by moving this to ~/.zprofile) instead of one per
 # split (like currently):
