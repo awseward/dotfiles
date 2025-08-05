@@ -111,7 +111,6 @@ export_deduped_PATH
 
 # Some checks
 warn_if_duplicates_in_PATH
-
 warn_if_dotfiles_update_check_recommended
 
 eval "$(direnv hook zsh)"
