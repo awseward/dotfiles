@@ -99,6 +99,7 @@ in {
     dive
     entr
     eza
+    fastfetch
     fdupes
     figlet
     findutils
