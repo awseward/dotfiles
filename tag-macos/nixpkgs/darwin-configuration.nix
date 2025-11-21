@@ -115,6 +115,7 @@ in {
     iperf
     jq
     mdp
+    moreutils
     mosquitto
     # ncdu
     neofetch
