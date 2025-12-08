@@ -1,24 +1,21 @@
-#!/usr/bin/env osh
-
-set -euo pipefail
-shopt --set oil:basic
+#!/usr/bin/env ysh
 
 const colors = {
-  blue:   $'\e[0;34m',
-  green:  $'\e[0;92m',
-  purple: $'\e[0;35m',
-  red:    $'\e[0;91m',
-  yellow: $'\e[0;33m'
+  blue:   b'\y1b[0;34m',
+  green:  b'\y1b[0;92m',
+  purple: b'\y1b[0;35m',
+  red:    b'\y1b[0;91m',
+  yellow: b'\y1b[0;33m'
   # ---
-  reset:  $'\e[0m',
+  reset:  b'\y1b[0m',
 }
 
 proc _color(color_name) {
-  const msg = "$(cat -)"
+  var msg = "$(cat -)"
   if (msg ~== '') { return }
 
-  const color = colors[$color_name]
-  const reset = colors->reset
+  var color = colors[color_name]
+  var reset = colors->reset
   echo -e "${color}${msg}${reset}"
 }
 
@@ -97,8 +94,8 @@ proc _link_pr_show(branch_name) {
 proc _trunc_8 { cut -c1-8 }
 
 proc _poll(sox_include_file, sha) {
-  const branch_name = "$(git rev-parse --abbrev-ref HEAD)"
-  const commit_url  = "$(_link_commit "${sha}")"
+  var branch_name = "$(git rev-parse --abbrev-ref HEAD)"
+  var commit_url  = "$(_link_commit "${sha}")"
 
   var status_output = 'pending'
   until test "${status_output}" != 'pending'; do
@@ -119,12 +116,12 @@ proc _poll(sox_include_file, sha) {
         sleep 5
     esac
   done
-  const status = "${status_output}"
+  var status = "${status_output}"
 
-  const msg = "CI ${status}. $(_assess "${status}")"
+  var msg = "CI ${status}. $(_assess "${status}")"
 
   # Colorized banner
-  _colorize "${status}" $'\n'"$(figlet "${status}")"
+  _colorize "${status}" "\\n$(figlet "${status}")"
   # Link(s)
   echo 'Links:'
   echo -e "→ Browse:  $(_color blue <<< ${commit_url})"
@@ -143,5 +140,5 @@ proc _poll(sox_include_file, sha) {
 # ---
 
 _poll \
-  "${HOME}/.local/profile.d/sox.sh" \
+  "$[ENV.HOME]/.local/profile.d/sox.sh" \
   "${1:-"$(git rev-parse HEAD)"}"
