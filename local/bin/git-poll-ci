@@ -1,144 +1,185 @@
 #!/usr/bin/env ysh
 
-const colors = {
-  blue:   b'\y1b[0;34m',
-  green:  b'\y1b[0;92m',
-  purple: b'\y1b[0;35m',
-  red:    b'\y1b[0;91m',
-  yellow: b'\y1b[0;33m'
-  # ---
-  reset:  b'\y1b[0m',
+const color_codes = {
+  fg: { black:   30,
+        red:     31,
+        green:   32,
+        yellow:  33,
+        blue:    34,
+        magenta: 35,
+        cyan:    36,
+        white:   37,
+        default: 39, },
+  bg: { black:   40,
+        red:     41,
+        green:   42,
+        yellow:  43,
+        blue:    44,
+        magenta: 45,
+        cyan:    46,
+        white:   47,
+        default: 49, }
 }
 
-proc _color(color_name) {
-  var msg = "$(cat -)"
-  if (msg ~== '') { return }
+func ansiStr (str, ansi_codes=null) {
+  setvar ansi_codes = ansi_codes or []
+  if ([] === ansi_codes) { return (str) }
 
-  var color = colors[color_name]
-  var reset = colors->reset
-  echo -e "${color}${msg}${reset}"
+  return (join([b'\y1b[', join(ansi_codes, ';'), 'm', str, b'\y1b[0m']))
 }
 
-proc _colorize(status, msg) {
-  var color_name = ''
-  case "${status}" in
-    success)
-      setvar color_name = 'green'
-      ;;
-    pending|'no status')
-      setvar color_name = 'yellow'
-      ;;
-    failure|error|action_required|cancelled|timed_out)
-      setvar color_name = 'red'
-      ;;
-    *)
-      setvar color_name = 'reset'
-      ;;
-  esac
-  _color "${color_name}" <<< "${msg}"
-}
+# const colors = {
+#   blue:   b'\y1b[0;34m',
+#   green:  b'\y1b[0;92m',
+#   purple: b'\y1b[0;35m',
+#   red:    b'\y1b[0;91m',
+#   yellow: b'\y1b[0;33m'
+#   # ---
+#   reset:  b'\y1b[0m',
+# }
 
-proc _assess(status) {
-  case "${status}" in
-    success)
-      echo 'Super duper.'
-      ;;
-    failure|error|action_required|cancelled|timed_out)
-      echo 'Oh no.'
-      ;;
-    'no status')
-      echo 'Did you remember to push to the remote?'
-      ;;
-    *)
-      echo "Not sure what that's about…"
-  esac
-}
+# proc _color(color_name) {
+#   var msg = "$(cat -)"
+#   if (msg ~== '') { return }
 
-proc _try_status(sha) {
-  shopt --unset errexit { hub ci-status "${sha}" 2>&1 }
-}
+#   var color = colors[color_name]
+#   var reset = colors->reset
+#   echo -e "${color}${msg}${reset}"
+# }
 
-proc _try_pr_show(branch_name) {
-  shopt --unset errexit {
-    hub pr show -u -h "${branch_name}" \
-       > >(_color blue) \
-      2> >(_color yellow)
-  }
-}
+# proc _colorize(status, msg) {
+#   var color_name = ''
+#   case "${status}" in
+#     success)
+#       setvar color_name = 'green'
+#       ;;
+#     pending|'no status')
+#       setvar color_name = 'yellow'
+#       ;;
+#     failure|error|action_required|cancelled|timed_out)
+#       setvar color_name = 'red'
+#       ;;
+#     *)
+#       setvar color_name = 'reset'
+#       ;;
+#   esac
+#   _color "${color_name}" <<< "${msg}"
+# }
 
-proc _toast(msg) { osascript -e "display notification \"${msg}\"" }
+# proc _assess(status) {
+#   case "${status}" in
+#     success)
+#       echo 'Super duper.'
+#       ;;
+#     failure|error|action_required|cancelled|timed_out)
+#       echo 'Oh no.'
+#       ;;
+#     'no status')
+#       echo 'Did you remember to push to the remote?'
+#       ;;
+#     *)
+#       echo "Not sure what that's about…"
+#   esac
+# }
 
-proc _try_beeps(sox_include_file) {
-  if test "${MUTE_AUDIO:-false}" == 'true' { return }
-  if ! test -f "${sox_include_file}" { return }
+# proc _try_status(sha) {
+#   shopt --unset errexit { hub ci-status "${sha}" 2>&1 }
+# }
 
-  source "${sox_include_file}"
-  sox_random_beep > /dev/null 2>&1 || true
-}
+# proc _try_pr_show(branch_name) {
+#   shopt --unset errexit {
+#     hub pr show -u -h "${branch_name}" \
+#        > >(_color blue) \
+#       2> >(_color yellow)
+#   }
+# }
 
-proc _speak(msg) {
-  if test "${MUTE_AUDIO:-false}" == 'true' { return }
-  say -v Karen "${msg}"
-}
+# proc _toast(msg) { osascript -e "display notification \"${msg}\"" }
 
-proc _link_commit(sha) { hub browse -u -- "commit/${sha}" }
-proc _link_compare(branch_name) { hub compare -u "${branch_name}" }
-proc _link_pr_show(branch_name) {
-  shopt --unset errexit {
-    hub pr show -u -h "${branch_name}" \
-       > >(_color blue) \
-      2> >(_color yellow)
-  }
-}
+# proc _try_beeps(sox_include_file) {
+#   if test "${MUTE_AUDIO:-false}" == 'true' { return }
+#   if ! test -f "${sox_include_file}" { return }
 
-proc _trunc_8 { cut -c1-8 }
+#   source "${sox_include_file}"
+#   sox_random_beep > /dev/null 2>&1 || true
+# }
 
-proc _poll(sox_include_file, sha) {
-  var branch_name = "$(git rev-parse --abbrev-ref HEAD)"
-  var commit_url  = "$(_link_commit "${sha}")"
+# proc _speak(msg) {
+#   if test "${MUTE_AUDIO:-false}" == 'true' { return }
+#   say -v Karen "${msg}"
+# }
 
-  var status_output = 'pending'
-  until test "${status_output}" != 'pending'; do
-    echo -e "$(date | _color purple) – CI Status"
-    echo -ne "Checking $(_color green <<< "$branch_name") ($(_color blue <<< "$commit_url"))… "
-    setvar status_output = "$(_try_status "$sha")"
+# proc _link_commit(sha) { hub browse -u -- "commit/${sha}" }
+# proc _link_compare(branch_name) { hub compare -u "${branch_name}" }
+# proc _link_pr_show(branch_name) {
+#   shopt --unset errexit {
+#     hub pr show -u -h "${branch_name}" \
+#        > >(_color blue) \
+#       2> >(_color yellow)
+#   }
+# }
 
-    case "${status_output}" in
-      success|failure|error|action_required|cancelled|timed_out|'no status') :
-        ;;
-      pending)
-        _colorize "${status_output}" "${status_output}"
-        sleep 5
-        ;;
-      *)
-        echo -e "$(_color red <<< '[ERROR!]') ${status_output}"
-        setvar status_output = 'pending'
-        sleep 5
-    esac
-  done
-  var status = "${status_output}"
+# proc _trunc_8 { cut -c1-8 }
 
-  var msg = "CI ${status}. $(_assess "${status}")"
+# proc _poll(sox_include_file, sha) {
+#   var branch_name = "$(git rev-parse --abbrev-ref HEAD)"
+#   var commit_url  = "$(_link_commit "${sha}")"
 
-  # Colorized banner
-  _colorize "${status}" "\\n$(figlet "${status}")"
-  # Link(s)
-  echo 'Links:'
-  echo -e "→ Browse:  $(_color blue <<< ${commit_url})"
-  echo -e "→ Compare: $(_link_compare "${branch_name}" | _color blue)"
-  echo -e "→ PR:      $(_link_pr_show "${branch_name}")"
-  echo
+#   var status_output = 'pending'
+#   until test "${status_output}" != 'pending'; do
+#     echo -e "$(date | _color purple) – CI Status"
+#     echo -ne "Checking $(_color green <<< "$branch_name") ($(_color blue <<< "$commit_url"))… "
+#     setvar status_output = "$(_try_status "$sha")"
 
-  # Toast notification
-  _toast "${msg} sha: $(_trunc_8 <<< "${sha}")"
+#     case "${status_output}" in
+#       success|failure|error|action_required|cancelled|timed_out|'no status') :
+#         ;;
+#       pending)
+#         _colorize "${status_output}" "${status_output}"
+#         sleep 5
+#         ;;
+#       *)
+#         echo -e "$(_color red <<< '[ERROR!]') ${status_output}"
+#         setvar status_output = 'pending'
+#         sleep 5
+#     esac
+#   done
+#   var status = "${status_output}"
 
-  # Audio announcement(s)
-  _try_beeps "${sox_include_file}"
-  _speak "${msg}"
-}
+#   var msg = "CI ${status}. $(_assess "${status}")"
+
+#   # Colorized banner
+#   _colorize "${status}" "\\n$(figlet "${status}")"
+#   # Link(s)
+#   echo 'Links:'
+#   echo -e "→ Browse:  $(_color blue <<< ${commit_url})"
+#   echo -e "→ Compare: $(_link_compare "${branch_name}" | _color blue)"
+#   echo -e "→ PR:      $(_link_pr_show "${branch_name}")"
+#   echo
+
+#   # Toast notification
+#   _toast "${msg} sha: $(_trunc_8 <<< "${sha}")"
+
+#   # Audio announcement(s)
+#   _try_beeps "${sox_include_file}"
+#   _speak "${msg}"
+# }
 
 # ---
 
-_poll \
-  "$[ENV.HOME]/.local/profile.d/sox.sh" \
-  "${1:-"$(git rev-parse HEAD)"}"
+# _poll \
+#   "$[ENV.HOME]/.local/profile.d/sox.sh" \
+#   "${1:-"$(git rev-parse HEAD)"}"
+
+setvar segments = [
+  ansiStr('FIXME',                          [color_codes.fg.red]),
+  ansiStr(': Implement for Oils v0.37.0 (', []),
+  ansiStr('https://oils.pub/',              [color_codes.fg.blue]),
+  ansiStr(')',                              []),
+]
+
+write
+write -- $[join(segments, '')]
+write
+
+exit 1
