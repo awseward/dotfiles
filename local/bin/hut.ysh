@@ -1,0 +1,37 @@
+#!/usr/bin/env ysh
+
+proc help {
+  var f_ = $(basename $0)
+
+  redir >&2 {
+    write -- """
+      $f_
+
+      TODO: Document Me
+
+      """
+  }
+}
+
+proc builds_list_json {
+  bkt --ttl 10m -- hut builds list \
+  | grep -A8 -E '(✔ SUCCESS|✗ FAILED)$' \
+  | jq --raw-input --slurp -C --compact-output '
+    split("\n--\n")
+    | map(
+          sub("\n+"; " "; "g")
+        | capture("^#(?<build_id>[0-9]+).*?(✔|✗) (?<status>[A-Z]+).*?\\[(?<commit_sha>[0-9a-f]+)\\]\\[\\d+\\].*?\\[(?<author>.*?)\\]\\[\\d+\\].*?\\[\\d+\\]: (?<commit_url>https://.*?) .*?\\[\\d+\\]: mailto:(?<mailto>.*)\\b")
+        | .status |= ascii_downcase
+
+      )
+    | .[]
+  '
+}
+
+case (ARGV) {
+  (['--help']) { runproc help }
+  (['-h'])     { runproc help }
+  ([])         { runproc help }
+
+  (else) { runproc @ARGV }
+}
