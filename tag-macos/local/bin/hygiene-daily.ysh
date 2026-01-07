@@ -1,11 +1,16 @@
 #!/usr/bin/env ysh
 
 proc upgrade {
-  _p 'mscp.sh'
-      mscp.sh
+  # This command may not exist on some machines…
+  if boolstatus command -v mscp.sh {
+    _p 'mscp.sh'
+    mscp.sh
+  }
 
-  _p "nix-channel --update --verbose && darwin-rebuild switch -I darwin-config=$[ENV.HOME]/.nixpkgs/darwin-configuration.nix"
-      nix-channel --update --verbose && darwin-rebuild switch -I "darwin-config=$[ENV.HOME]/.nixpkgs/darwin-configuration.nix"
+  var darwin_config = "$[ENV.HOME]/.nixpkgs/darwin-configuration.nix"
+
+  _p "nix-channel --update --verbose && darwin-rebuild switch -I darwin-config=$[darwin_config]"
+      nix-channel --update --verbose && darwin-rebuild switch -I "darwin-config=$[darwin_config]"
 
   _p  'brew-outgrade'
   exec brew-outgrade
