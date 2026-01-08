@@ -6,8 +6,7 @@ proc dry_run(mtime=_default_mtime) {
   _collect_plan $mtime (&plan)
 
   if (plan === {}) {
-    var msg =  'Nothing to do… exiting.'
-    redir >&2 { write -- $msg }
+    redir >&2 { write -- 'Nothing to do… exiting.' }
     exit 0
   }
 
@@ -67,14 +66,14 @@ proc help {
   exit 1
 }
 
-proc _p(...args) { redir >&2 { write -- ">>> $[join(args, ' ')]" } }
+proc _p(...args) { redir >&2 { write -- "; $[join(args, ' ')]" } }
 
-proc _ensure_target_directory { mkdir -v -p $[config['dst']] }
+proc _ensure_target_directory { mkdir -v -p $[config.dst] }
 
 proc _hcio (...args) {
-  var hcio = config['hcio']
+  var hcio = config.hcio
 
-  healthchecks.io.ping.sh @args $[hcio['check_id']] $[hcio['run_id']]
+  healthchecks.io.ping.sh @args $[hcio.check_id] $[hcio.run_id]
 }
 
 # NOTE re: BSD vs GNU find
@@ -127,51 +126,48 @@ proc _hcio (...args) {
 # anyway.
 #
 proc _collect_plan(mtime; out) {
-  _p                "find $[config['src']] -maxdepth 1 -mindepth 1 -mtime $mtime"
-  var candidates = @(find $[config['src']] -maxdepth 1 -mindepth 1 -mtime $mtime)
+  _p                "find $[config.src] -maxdepth 1 -mindepth 1 -mtime $mtime"
+  var candidates = @(find $[config.src] -maxdepth 1 -mindepth 1 -mtime $mtime)
   var plan = {}
 
   if (candidates !== []) {
     var ts = $(date -u '+%Y%m%d%H%M%S')
     for filepath in (candidates) {
-      setvar plan[filepath] = "$[config['dst']]/$ts-$(basename $filepath)"
+      setvar plan[filepath] = "$[config.dst]/$ts-$(basename $filepath)"
     }
   }
 
   call out->setValue(plan)
 }
 
-proc _init_config (; out) {
-  var config_home = get(dict(ENV), 'XDG_CONFIG_HOME', "$[ENV.HOME]/.config")
+func _loadHcio(env=ENV) {
+  var config_home = get(env, 'XDG_CONFIG_HOME', "$[env.HOME]/.config")
   var check_id_filepath = "$config_home/dloverflow/healthchecks.io.uuid"
 
   redir >&2 { write -- "Loading healthchecks.io check id from $check_id_filepath …" }
   read --raw-line (&check_id) < $check_id_filepath
 
+  return ({ check_id, run_id: ($(uuidgen) => lower()) })
+}
+
+proc _init_config(; out) {
   var config = {
     src: "$[ENV.HOME]/Downloads",
     dst: "$[ENV.HOME]/stale_downloads",
-    hcio: {
-      check_id,
-      run_id: ($(uuidgen) => lower())
-    }
+    hcio: _loadHcio(ENV)
   }
-
-  redir >&2 {
-    write -n -- "Config: "; = config
-    write    -- ''
-  }
+  redir >&2 { pp (config) }
 
   call out->setValue(config)
 }
 
-
 # ---
 
-if (['help'] === ARGV) { help; exit 0 }
+case (ARGV) {
+  (['help']) | (['--help']) | (['h']) | (['-h']) | ([]) { help }
 
-_init_config (&config)
-
-if ([] === ARGV) { dry_run; exit 0 }
-
-runproc @ARGV
+  (else) {
+    _init_config (&config)
+    runproc @ARGV
+  }
+}
