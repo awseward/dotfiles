@@ -23,16 +23,24 @@ func ansiStr (str, codes=null) {
   setvar codes = codes or []
   if ([] === codes) { return (str) }
 
-  return (join([b'\y1b[', join(codes, ';'), 'm', str, b'\y1b[0m']))
+  return (
+    [
+      b'\y1b[', join(codes, ';'), 'm',
+      str,
+      b'\y1b[0m'
+    ]
+    => join()
+  )
 }
 
 func renderPrompt(io) {
-  var parts = [
-    '[', ansiStr(io.promptVal('s'), [color_codes.fg.red]), '] ',
-    ansiStr(join(['@', io.promptVal('h'), ':']), [color_codes.fg.green]),
-    ansiStr(io.promptVal('W'), [color_codes.fg.blue]), u'\n',
-    '; '
-  ]
-
-  return (join(parts))
+  return (
+    [
+      '[', ansiStr(io.promptVal('s'),   [color_codes.fg.red]), '] ',
+      ansiStr("@$[io.promptVal('h')]:", [color_codes.fg.green]),
+      ansiStr(io.promptVal('W'),        [color_codes.fg.blue]),
+      u'\n', '; '
+    ]
+    => join()
+  )
 }
