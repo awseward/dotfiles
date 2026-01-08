@@ -36,9 +36,9 @@ func ansiStr (str, codes=null) {
 func renderPrompt(io) {
   return (
     [
-      '[', ansiStr(io.promptVal('s'),   [color_codes.fg.red]), '] ',
+      '[', ansiStr("$[io.promptVal('s')]-$[OILS_VERSION]", [color_codes.fg.red]), '] ',
       ansiStr("@$[io.promptVal('h')]:", [color_codes.fg.green]),
-      ansiStr(io.promptVal('W'),        [color_codes.fg.blue]),
+      ansiStr(io.promptVal('W'), [color_codes.fg.blue]),
       u'\n', '; '
     ]
     => join()
