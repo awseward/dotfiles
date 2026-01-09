@@ -1,4 +1,9 @@
 const color_codes = {
+  style: { bold:      1,
+           faint:     2,
+           italic:    3,
+           underline: 4, },
+
   fg: { black:   30,
         red:     31,
         green:   32,
@@ -8,6 +13,7 @@ const color_codes = {
         cyan:    36,
         white:   37,
         default: 39, },
+
   bg: { black:   40,
         red:     41,
         green:   42,
@@ -44,3 +50,7 @@ func renderPrompt(io) {
     => join()
   )
 }
+
+# ---
+
+setvar ENV['YSH_HISTFILE'] = "$[ENV.HOME]/.ysh_history"
