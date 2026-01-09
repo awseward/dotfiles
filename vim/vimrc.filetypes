@@ -15,3 +15,4 @@ au Bufread,BufNewFile *.env                           set filetype=sh
 au Bufread,BufNewFile post-up,pre-down,*aliases,.rcrc set filetype=sh
 au Bufread,BufNewFile *tmux.conf*                     set filetype=tmux
 au Bufread,BufNewFile .gemrc                          set filetype=yaml
+au Bufread,BufNewFile yshrc                           set filetype=ysh
