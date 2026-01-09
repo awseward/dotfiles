@@ -3,7 +3,7 @@
 const _default_mtime = '+30'
 
 proc dry_run(mtime=_default_mtime) {
-  _collect_plan $mtime (&plan)
+  var plan = _collectPlan(mtime)
 
   if (plan === {}) {
     redir >&2 { write -- 'Nothing to do… exiting.' }
@@ -19,7 +19,7 @@ proc dry_run(mtime=_default_mtime) {
 proc run(mtime=_default_mtime) {
   try { json write -- ({ mtime }) | _hcio start }
 
-  _collect_plan $mtime (&plan)
+  var plan = _collectPlan(mtime)
   if (plan === {}) {
     var msg =  'Nothing to do… exiting.'
 
@@ -125,7 +125,7 @@ proc _hcio (...args) {
 # man page's text, but it's potentially worth highlighting for clarity's sake
 # anyway.
 #
-proc _collect_plan(mtime; out) {
+func _collectPlan(mtime) {
   _p                "find $[config.src] -maxdepth 1 -mindepth 1 -mtime $mtime"
   var candidates = @(find $[config.src] -maxdepth 1 -mindepth 1 -mtime $mtime)
   var plan = {}
@@ -137,11 +137,11 @@ proc _collect_plan(mtime; out) {
     }
   }
 
-  call out->setValue(plan)
+  return (plan)
 }
 
 func _loadHcio(env=ENV) {
-  var config_home = get(env, 'XDG_CONFIG_HOME', "$[env.HOME]/.config")
+  var config_home = env => get('XDG_CONFIG_HOME', "$[env.HOME]/.config")
   var check_id_filepath = "$config_home/dloverflow/healthchecks.io.uuid"
 
   redir >&2 { write -- "Loading healthchecks.io check id from $check_id_filepath …" }
@@ -150,15 +150,15 @@ func _loadHcio(env=ENV) {
   return ({ check_id, run_id: ($(uuidgen) => lower()) })
 }
 
-proc _init_config(; out) {
+func _init_config(env=ENV) {
   var config = {
-    src: "$[ENV.HOME]/Downloads",
-    dst: "$[ENV.HOME]/stale_downloads",
-    hcio: _loadHcio(ENV)
+    src: "$[env.HOME]/Downloads",
+    dst: "$[env.HOME]/stale_downloads",
+    hcio: _loadHcio(env)
   }
   redir >&2 { pp (config) }
 
-  call out->setValue(config)
+  return (config)
 }
 
 # ---
@@ -167,7 +167,8 @@ case (ARGV) {
   (['help']) | (['--help']) | (['h']) | (['-h']) | ([]) { help }
 
   (else) {
-    _init_config (&config)
+    const config = _init_config(ENV)
+
     runproc @ARGV
   }
 }
