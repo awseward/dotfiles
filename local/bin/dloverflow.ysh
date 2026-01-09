@@ -22,7 +22,6 @@ proc run(mtime=_default_mtime) {
   var plan = _collectPlan(mtime)
   if (plan === {}) {
     var msg =  'Nothing to do… exiting.'
-
     redir >&2 { write -- $msg }
     _hcio success <<< $msg
     exit 0
@@ -152,8 +151,7 @@ func _loadHcio(env=ENV) {
 
 func _init_config(env=ENV) {
   var config = {
-    src: "$[env.HOME]/Downloads",
-    dst: "$[env.HOME]/stale_downloads",
+    src: "$[env.HOME]/Downloads", dst: "$[env.HOME]/stale_downloads",
     hcio: _loadHcio(env)
   }
   redir >&2 { pp (config) }
