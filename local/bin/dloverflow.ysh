@@ -128,13 +128,13 @@ proc _hcio (...args) {
 func _collectPlan(mtime) {
   _p                "find $[config.src] -maxdepth 1 -mindepth 1 -mtime $mtime"
   var candidates = @(find $[config.src] -maxdepth 1 -mindepth 1 -mtime $mtime)
-  var plan = {}
+  if (candidates === []) { return ({}) }
 
-  if (candidates !== []) {
-    var ts = $(date -u '+%Y%m%d%H%M%S')
-    for filepath in (candidates) {
-      setvar plan[filepath] = "$[config.dst]/$ts-$(basename $filepath)"
-    }
+  var ts = $(date -u '+%Y%m%d%H%M%S')
+
+  var plan = {}
+  for filepath in (candidates) {
+    setvar plan[filepath] = "$[config.dst]/$ts-$(basename $filepath)"
   }
 
   return (plan)
