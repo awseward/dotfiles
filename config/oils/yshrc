@@ -53,4 +53,6 @@ func renderPrompt(io) {
 
 # ---
 
-setvar ENV['YSH_HISTFILE'] = "$[ENV.HOME]/.ysh_history"
+# Not entirely sure why this is necessary… maybe it's some non-obvious way to
+# make history opt-in that you have to set it?
+setvar ENV['YSH_HISTFILE'] = __defaults__.YSH_HISTFILE
