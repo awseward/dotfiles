@@ -40,14 +40,12 @@ func ansiStr (str, codes=null) {
 }
 
 func currentlyInGitRepo() {
-  var result = true
-
   try {
     redir >/dev/null { redir 2>&1 { git rev-parse --git-dir } }
   }
-  if failed { setvar result = false }
+  if failed { return (false) }
 
-  return (result)
+  return (true)
 }
 
 func isGitDirty() {
