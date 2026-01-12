@@ -39,15 +39,63 @@ func ansiStr (str, codes=null) {
   )
 }
 
+func currentlyInGitRepo() {
+  var result = true
+
+  try {
+    redir >/dev/null { redir 2>&1 { git rev-parse --git-dir } }
+  }
+  if failed { setvar result = false }
+
+  return (result)
+}
+
 func renderPrompt(io) {
+  var sh_exit = int($?)
+
+  var first_line_parts = []
+
+  # Shell & version
+  var shellPart = "$[io.promptVal('s')]-$[OILS_VERSION]" => ansiStr([
+    color_codes.fg.black,
+    color_codes.style.bold
+  ])
+  call first_line_parts->append(shellPart)
+  call first_line_parts->append(' ')
+
+  # Host & working directory
+  var wd_parts = $(pwd).split('/')
+  var wd = wd_parts[-2:] => join('/')
+  call first_line_parts->append(ansiStr("@$[io.promptVal('h')]:", [color_codes.fg.green]))
+  call first_line_parts->append(ansiStr(wd, [color_codes.fg.blue]))
+
+  # Git info
+  if (currentlyInGitRepo()) {
+    # TODO: Reflect dirty status (I believe this is where slowdown sneaks in…)
+    var gitPart = $(git branch --show-current) => ansiStr([color_codes.fg.magenta])
+
+    call first_line_parts->append(' [')
+    call first_line_parts->append(gitPart)
+    call first_line_parts->append(']')
+  }
+
+  # Shell exit code
+  if (sh_exit !== 0) {
+    call first_line_parts->append(' ')
+    call first_line_parts->append(
+      sh_exit => ansiStr([
+        color_codes.bg.red,
+        color_codes.fg.yellow,
+        color_codes.style.bold
+      ])
+    )
+  }
+
   return (
     [
-      '[', ansiStr("$[io.promptVal('s')]-$[OILS_VERSION]", [color_codes.fg.red]), '] ',
-      ansiStr("@$[io.promptVal('h')]:", [color_codes.fg.green]),
-      ansiStr(io.promptVal('W'), [color_codes.fg.blue]),
-      u'\n', '; '
-    ]
-    => join()
+      first_line_parts => join(),
+      '; '
+    ] => join(u'\n')
   )
 }
 
