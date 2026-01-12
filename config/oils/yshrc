@@ -75,11 +75,10 @@ func renderPrompt(io) {
   )
 
   # Host & working directory
-  var wd_parts = $(pwd).split('/')
   call first_line_parts->append(' ')
   call first_line_parts->append("@$[io.promptVal('h')]"    => ansiStr([color_codes.fg.green]))
   call first_line_parts->append(':')
-  call first_line_parts->append(wd_parts[-2:] => join('/') => ansiStr([color_codes.fg.blue]))
+  call first_line_parts->append($(pwd).split('/')[-2:] => join('/') => ansiStr([color_codes.fg.blue]))
 
   # Git info
   if (currentlyInGitRepo()) {
@@ -129,4 +128,7 @@ func renderPrompt(io) {
 
 # Not entirely sure why this is necessary… maybe it's some non-obvious way to
 # make history opt-in that you have to set it?
-setvar ENV['YSH_HISTFILE'] = __defaults__.YSH_HISTFILE
+
+if (-1 === ENV => first() => keys() => indexOf('YSH_HISTFILE')) {
+  setvar ENV['YSH_HISTFILE'] = __defaults__.YSH_HISTFILE
+}
