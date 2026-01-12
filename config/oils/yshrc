@@ -45,15 +45,21 @@ func currentlyInGitRepo() {
 }
 
 func isGitDirty() {
-  try { git diff-index --quiet --cached HEAD -- }; if failed { return (true) }
-  try { bkt --ttl 10s --stale 3s --cwd -- git diff-index --quiet HEAD -- }; if failed { return (true) }
+  try {
+    # First check cached (much faster, great if we can short circuit out here)
+    git diff-index --quiet --cached HEAD --
 
+    # Then check disk (much slower on large repos)
+    bkt --ttl 10s --stale 3s --cwd -- git diff-index --quiet HEAD --
+  }
+  if failed { return (true) }
+
+  # Lastly, check for untracked files
   var any_untracked = [] !== (
     $(bkt --ttl 10s --stale 3s --cwd -- git ls-files --other --directory --exclude-standard | head -n1) => lines()
   )
-  if (any_untracked) { return (true) }
 
-  return (false)
+  return (any_untracked)
 }
 
 func renderPrompt(io) {
