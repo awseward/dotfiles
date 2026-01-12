@@ -40,16 +40,11 @@ func ansiStr (str, codes=null) {
 }
 
 func currentlyInGitRepo() {
-  try {
-    redir >/dev/null { redir 2>&1 { git rev-parse --git-dir } }
-  }
-  if failed { return (false) }
-
-  return (true)
+  try { redir >/dev/null 2>&1 { git rev-parse --git-dir } }
+  return (_error.code === 0)
 }
 
 func isGitDirty() {
-  # FIXME: Add bkt for caching (for larger repos this takes 2-3s…)
   try { git diff-index --quiet --cached HEAD -- }; if failed { return (true) }
   try { bkt --ttl 10s --stale 3s --cwd -- git diff-index --quiet HEAD -- }; if failed { return (true) }
 
