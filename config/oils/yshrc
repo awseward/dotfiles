@@ -53,10 +53,10 @@ func currentlyInGitRepo() {
 func isGitDirty() {
   # FIXME: Add bkt for caching (for larger repos this takes 2-3s…)
   try { git diff-index --quiet --cached HEAD -- }; if failed { return (true) }
-  try { git diff-index --quiet          HEAD -- }; if failed { return (true) }
+  try { bkt --ttl 10s --stale 3s --cwd -- git diff-index --quiet HEAD -- }; if failed { return (true) }
 
   var any_untracked = [] !== (
-    $(git ls-files --other --directory --exclude-standard | head -n1) => lines()
+    $(bkt --ttl 10s --stale 3s --cwd -- git ls-files --other --directory --exclude-standard | head -n1) => lines()
   )
   if (any_untracked) { return (true) }
 
