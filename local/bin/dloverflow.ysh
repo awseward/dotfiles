@@ -125,8 +125,9 @@ proc _hcio (...args) {
 # anyway.
 #
 func _collectPlan(mtime) {
-  _p                "find $[config.src] -maxdepth 1 -mindepth 1 -mtime $mtime"
-  var candidates = @(find $[config.src] -maxdepth 1 -mindepth 1 -mtime $mtime)
+  var find_cmd = "find $[config.src] -maxdepth 1 -mindepth 1 -mtime $mtime"
+  _p $find_cmd
+  var candidates = io.captureStdout(find_cmd => parseCommand()).lines()
   if (candidates === []) { return ({}) }
 
   var ts = $(date -u '+%Y%m%d%H%M%S')
