@@ -1,0 +1,9 @@
+#!/usr/bin/env ysh
+
+# https://oils.pub/release/0.37.0/doc/ref/chap-front-end.html#config
+#
+# > If the --rcdir flag is specified, files in that folder will be executed on startup. Otherwise:
+# >
+# > bin/osh runs everything in ~/.config/oils/oshrc.d/
+# > bin/ysh runs everything in ~/.config/oils/yshrc.d/
+#
