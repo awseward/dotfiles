@@ -73,6 +73,15 @@ func isGitDirty() {
   )
 }
 
+func withSplit(input, separator, cmd) {
+  return (
+    cmd
+    => evalExpr(vars={_it: input.split(separator)})
+    => join(separator)
+  )
+}
+# = withSplit("a/b/c/d", "/", ^[ it[-2:] ]) # ===> "c/d"
+
 func renderPrompt(io) {
   var sh_exit = int($?)
 
@@ -93,7 +102,7 @@ func renderPrompt(io) {
   call extend([
     "@$[io.promptVal('h')]" => ansiStr([color_codes.fg.green]),
     ':',
-    $(pwd).split('/')[-2:] => join('/') => ansiStr([color_codes.fg.blue])
+    $(pwd) => withSplit('/', ^[ _it[-2:] ]) => ansiStr([color_codes.fg.blue])
   ])
 
   # Git info
