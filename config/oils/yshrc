@@ -25,7 +25,7 @@ const color_codes = {
         default: 49, }
 }
 
-func ansiStr (str, codes=null) {
+func ansiStr(str, codes=null) {
   setvar codes = codes or []
   if ([] === codes) { return (str) }
 
@@ -50,16 +50,27 @@ func isGitDirty() {
     git diff-index --quiet --cached HEAD --
 
     # Then check disk (much slower on large repos)
-    bkt --ttl 10s --stale 3s --cwd -- git diff-index --quiet HEAD --
+    ... bkt
+        --ttl 10s
+        --stale 3s
+        --cwd
+        -- git diff-index --quiet HEAD --
+    ;
   }
   if failed { return (true) }
 
   # Lastly, check for untracked files
-  var any_untracked = [] !== (
-    $(bkt --ttl 10s --stale 3s --cwd -- git ls-files --other --directory --exclude-standard | head -n1) => lines()
+  return (
+    '' !== $(
+      ... bkt
+          --ttl   10s
+          --stale  3s
+          --cwd
+          -- git ls-files --other --directory --exclude-standard
+          | head -n1
+      ;
+    )
   )
-
-  return (any_untracked)
 }
 
 func renderPrompt(io) {
