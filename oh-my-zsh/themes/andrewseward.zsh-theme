@@ -4,7 +4,7 @@
 # https://github.com/ohmyzsh/ohmyzsh/wiki/Themes#jispwoso
 #
 
-PROMPT='%{$fg[green]%}@%m:%{$reset_color%}%{$fg[blue]%}%2~%{$reset_color%} $(git_prompt_info) %(?..%{$fg[yellow]%}%{$bg[red]%}%?%{$reset_color%})
+PROMPT='%{$fg[green]%}@%m:%{$reset_color%}%{$fg[blue]%}%2~%{$reset_color%} $(git_prompt_info) %(?..%{$bg[red]%} err:%{$fg_bold[yellow]%}%? %{$reset_color%})
 ; '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[magenta]%}"
