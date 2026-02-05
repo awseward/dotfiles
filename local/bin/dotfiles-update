@@ -73,8 +73,6 @@
     # shellcheck disable=SC2016
     if _prompt_yn 'Run `write_timestamp_file` now' 'n'; then
       write_timestamp_file
-    else
-      return 1
     fi
   }
 
