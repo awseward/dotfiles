@@ -71,7 +71,7 @@
     2>&1 echo '---'
 
     # shellcheck disable=SC2016
-    if _prompt_yn 'Run `write_timestamp_file` now' 'n'; then
+    if _prompt_yn 'Run `write_timestamp_file` now' 'y'; then
       write_timestamp_file
     fi
   }
