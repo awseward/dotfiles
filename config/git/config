@@ -9,7 +9,7 @@
   back             = checkout -
   blame-short      = blame -c
   chart            = !git diff --stat="$(tput cols)"
-  fetch-all        = !git remote -v | awk '{print $1}' | sort -u | xargs -L1 git fetch -v --progress
+  fetch-all        = !git remote -v | awk '{print $1}' | sort -u | xargs -t -L1 git fetch --progress --
   files            = diff --name-only
   gh-log           = !git --no-pager prettylog --reverse
   info-pane        = !clear && git status && git stash list
@@ -34,6 +34,7 @@
   co   = checkout
   dc   = diff --cached
   fa   = fetch-all
+  fo   = fetch origin --progress
   ghl  = gh-log
   l10  = gh-log -n10
   l5   = gh-log -n5
