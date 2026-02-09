@@ -28,7 +28,7 @@ _main() {
     fi
   done
 
-  echo "$branches" | xargs -L 100 -t git branch --delete || true && git remote prune "$r_name"
+  echo "$branches" | xargs -L 10 -t git branch --delete -- || true && git remote prune "$r_name"
 }
 
 _main "$@"
