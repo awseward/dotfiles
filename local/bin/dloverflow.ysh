@@ -166,6 +166,8 @@ case (ARGV) {
   (['help']) | (['--help']) | (['h']) | (['-h']) | ([]) { help }
 
   (else) {
+    date
+
     const config = _init_config(ENV)
 
     runproc @ARGV
