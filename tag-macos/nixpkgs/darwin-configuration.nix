@@ -119,7 +119,6 @@ in {
     mosquitto
     # ncdu
     neofetch
-    neovim
     nmap
     pwgen
     rcm
@@ -144,6 +143,7 @@ in {
     unstable.curl
     unstable.fzf
     unstable.git
+    unstable.neovim
 
     # Not updated, can uncomment once nixpkgs gets a fresher version…
     #
