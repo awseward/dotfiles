@@ -117,7 +117,6 @@ in {
     mdp
     moreutils
     mosquitto
-    # ncdu
     neofetch
     nmap
     pwgen
@@ -144,6 +143,7 @@ in {
     unstable.fzf
     unstable.git
     unstable.neovim
+    unstable.ncdu
 
     # Not updated, can uncomment once nixpkgs gets a fresher version…
     #
