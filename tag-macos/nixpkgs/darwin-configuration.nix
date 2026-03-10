@@ -6,9 +6,11 @@ in {
   system.defaults.NSGlobalDomain = {
     AppleEnableMouseSwipeNavigateWithScrolls = false;
     AppleEnableSwipeNavigateWithScrolls = false;
+    AppleICUForce24HourTime = true;
     AppleInterfaceStyleSwitchesAutomatically = true;
     AppleKeyboardUIMode = 3;
     ApplePressAndHoldEnabled = true;
+    AppleShowAllExtensions = true;
     AppleShowScrollBars = "Always";
     InitialKeyRepeat = 11;
     KeyRepeat = 2;
@@ -17,6 +19,8 @@ in {
     NSAutomaticPeriodSubstitutionEnabled = false;
     NSAutomaticQuoteSubstitutionEnabled = false;
     NSAutomaticSpellingCorrectionEnabled = false;
+    NSAutomaticWindowAnimationsEnabled = false;
+    NSDocumentSaveNewDocumentsToCloud = false;
     NSNavPanelExpandedStateForSaveMode = true;
     NSNavPanelExpandedStateForSaveMode2 = true;
     NSTableViewDefaultSizeMode = 1;
@@ -24,13 +28,20 @@ in {
     NSWindowResizeTime = 0.01;
     PMPrintingExpandedStateForPrint = true;
     PMPrintingExpandedStateForPrint2 = true;
+
+    "com.apple.sound.beep.feedback" = 1;
   };
 
-  system.defaults.alf.stealthenabled = 1;
+  system.defaults.alf = {
+    globalstate = 1;
+    loggingenabled = 1;
+    stealthenabled = 1;
+  };
 
   system.defaults.dock = {
     autohide = false;
     enable-spring-load-actions-on-all-items = true;
+    largesize = 128;
     launchanim = false;
     mouse-over-hilite-stack = true;
     mru-spaces = false;
@@ -41,13 +52,25 @@ in {
 
   system.defaults.finder = {
     _FXShowPosixPathInTitle = true;
+    _FXSortFoldersFirst = true;
+    _FXSortFoldersFirstOnDesktop = true;
     AppleShowAllExtensions = true;
     AppleShowAllFiles = true;
     FXDefaultSearchScope = "SCcf"; # Current folder
     FXEnableExtensionChangeWarning = false;
     FXPreferredViewStyle = "Nlsv"; # List view
+    FXRemoveOldTrashItems = true;
     QuitMenuItem = true;
+    ShowMountedServersOnDesktop = true;
     ShowPathbar = true;
+  };
+
+  system.defaults.menuExtraClock = {
+    Show24Hour = true;
+    ShowDate = 1;
+    ShowDayOfMonth = true;
+    ShowDayOfWeek = true;
+    ShowSeconds = true;
   };
 
   system.defaults.trackpad.Clicking = true;
@@ -64,6 +87,7 @@ in {
     #
     "com.apple.controlcenter.plist" = { "BatteryShowPercentage" = false; };
   };
+  system.defaults.controlcenter.BatteryShowPercentage = true;
 
   # TODO: Something like this:
   # defaults write com.apple.menuextra.battery ShowTime -string "YES"
