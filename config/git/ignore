@@ -4,3 +4,5 @@
 # Stuff I use but don't ever want to commit
 .envrc
 .local/
+
+**/.claude/settings.local.json
