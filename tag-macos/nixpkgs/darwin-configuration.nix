@@ -154,7 +154,6 @@ in {
     mdp
     moreutils
     mosquitto
-    neofetch
     nmap
     pwgen
     rcm
@@ -167,7 +166,7 @@ in {
     sox
     speedtest-cli
     sqlite
-    tmate
+    # tmate # There are no upstream releases since 2019-11
     tree
     visidata
     wakeonlan

@@ -3,6 +3,6 @@
 # them at root level (preferably just migrate onto flakes, but that's a
 # different story)
 
-https://github.com/LnL7/nix-darwin/archive/nix-darwin-25.11.tar.gz darwin
-https://nixos.org/channels/nixos-25.11 nixpkgs
+https://github.com/nix-darwin/nix-darwin/archive/nix-darwin-26.05.tar.gz darwin
+https://nixos.org/channels/nixos-26.05 nixpkgs
 https://nixos.org/channels/nixos-unstable nixos-unstable
