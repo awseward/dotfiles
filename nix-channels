@@ -1,3 +1,8 @@
-https://github.com/LnL7/nix-darwin/archive/nix-darwin-24.11.tar.gz darwin
-https://nixos.org/channels/nixos-24.11 nixpkgs
+# NOTE: These are now managed by root, so this file is mostly just
+# instructive; you'll have to run some nix channel commands as root to apply
+# them at root level (preferably just migrate onto flakes, but that's a
+# different story)
+
+https://github.com/LnL7/nix-darwin/archive/nix-darwin-25.11.tar.gz darwin
+https://nixos.org/channels/nixos-25.11 nixpkgs
 https://nixos.org/channels/nixos-unstable nixos-unstable

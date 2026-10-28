@@ -3,6 +3,13 @@
 let
   unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
 in {
+  # nix-darwin 25.11: system activation now runs as root; per-user options
+  # (defaults, redis, darwinConfig, …) apply to system.primaryUser instead.
+  # The username lives in a git-ignored local file (see .gitignore) so this
+  # shared config carries no machine-specific username. Each machine must
+  # create its own ./primary-user.nix; a missing file fails eval loudly.
+  system.primaryUser = import ./primary-user.nix;
+
   system.defaults.NSGlobalDomain = {
     AppleEnableMouseSwipeNavigateWithScrolls = false;
     AppleEnableSwipeNavigateWithScrolls = false;
@@ -32,10 +39,10 @@ in {
     "com.apple.sound.beep.feedback" = 1;
   };
 
-  system.defaults.alf = {
-    globalstate = 1;
-    loggingenabled = 1;
-    stealthenabled = 1;
+  networking.applicationFirewall = {
+    enable = true;
+    blockAllIncoming = false;
+    enableStealthMode = true;
   };
 
   system.defaults.dock = {
@@ -166,7 +173,7 @@ in {
     wakeonlan
     watch
     wget
-    xsv
+    qsv # drop-in successor to xsv (removed from nixpkgs); same subcommands
     yq-go
 
     unstable.curl
@@ -183,7 +190,7 @@ in {
   ];
 
   # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
+  # nix-darwin now manages nix-daemon unconditionally when nix.enable is on.
   nix.package = pkgs.nix;
 
   services.redis = {
