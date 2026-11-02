@@ -39,6 +39,14 @@ in {
     "com.apple.sound.beep.feedback" = 1;
   };
 
+  # The old `system.defaults.alf` options were removed in nix-darwin 26.05;
+  # `networking.applicationFirewall` is the only way to manage the firewall now.
+  # On MDM-managed Macs the firewall is owned by the MDM profile, so each
+  # socketfilterfw call during activation prints "Firewall settings cannot be
+  # modified from command line on managed Mac computers". That message is
+  # harmless noise: socketfilterfw still exits 0, so the rebuild succeeds. On
+  # non-MDM machines (what this shared config is really for) it takes effect.
+  # (TODO: split MDM vs non-MDM config instead of tolerating the noise.)
   networking.applicationFirewall = {
     enable = true;
     blockAllIncoming = false;
@@ -99,28 +107,22 @@ in {
   # TODO: Something like this:
   # defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
-  # List packages installed in system profile. To search by name, run:
+  # Packages installed in the system profile. To find a package name, use
+  # https://search.nixos.org/packages and set the channel to 26.05 to match
+  # this system. It's instant and fuzzy, and it shows the exact attribute path
+  # to paste into the list below — e.g. `wget2`, or `python313Packages.wget`
+  # for a sub-package. No `nixpkgs.` prefix; paste the attribute as shown.
   #
-  #   $ nix-env -qaP | fzf
+  # From the terminal (needs the experimental features enabled further down):
   #
-  # It's pretty slow, so it will appear to hang, but you'll eventually get
-  # results back which will look something like this:
+  #   $ nix search nixpkgs/nixos-26.05 <query>
   #
-  #   nixpkgs.python310Packages.wget    python3.10-wget-3.2
-  #   nixpkgs.python39Packages.wget     python3.9-wget-3.2
-  #   nixpkgs.wget                      wget-1.21.3
-  #   nixpkgs.wget2                     wget2-2.0.0
-  #   nixpkgs.wgetpaste                 wgetpaste-2.32
-  #
-  # The list of packages below takes values relative to `nixpkgs.` in that
-  # first column. I.e.:
-  #
-  #   • if you want `nixpkgs.wget2`, add just `wget2`
-  #
-  #   • if you want `nixpkgs.python310Packages.wget`, add just
-  #     `python310Packages.wget`
-  #
-  #   … etc.
+  # Pin the channel as above — a bare `nixpkgs` ref resolves to unstable, a
+  # different package set than what this system installs. The first run is slow
+  # (~30s) while it builds the eval cache; later runs are fast. The
+  # `unstable.*` entries below come from the nixos-unstable channel instead;
+  # search those with `nix search nixpkgs <query>` or the unstable channel on
+  # the web.
 
   environment.systemPackages = with pkgs; [
     bat
@@ -186,6 +188,11 @@ in {
   # Auto upgrade nix package and the daemon service.
   # nix-darwin now manages nix-daemon unconditionally when nix.enable is on.
   nix.package = pkgs.nix;
+
+  # Enable the modern `nix` CLI (`nix search`, `nix shell`, …) and flakes, so
+  # package search works flagless. Also a prerequisite for a future
+  # flakes-based setup.
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   services.redis = {
     enable = true;
