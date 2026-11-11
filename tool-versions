@@ -6,3 +6,4 @@ rust stable
 tmux 3.5a
 ruby 3.4.3
 nodejs 24.14.0
+jq 1.8.2
