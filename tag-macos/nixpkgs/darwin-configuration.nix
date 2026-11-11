@@ -1,8 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, unstable, ... }:
 
-let
-  unstable = import <nixos-unstable> { config = { allowUnfree = true; }; };
-in {
+{
   # nix-darwin 25.11: system activation now runs as root; per-user options
   # (defaults, redis, darwinConfig, …) apply to system.primaryUser instead.
   # The username lives in a git-ignored local file (see .gitignore) so this
