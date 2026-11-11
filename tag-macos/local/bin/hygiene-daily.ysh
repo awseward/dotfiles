@@ -9,8 +9,11 @@ proc upgrade {
 
   var darwin_config = "$[ENV.HOME]/.nixpkgs/darwin-configuration.nix"
 
-  _p "sudo nix-channel --update --verbose && sudo darwin-rebuild switch -I darwin-config=$[darwin_config]"
-      sudo nix-channel --update --verbose && sudo darwin-rebuild switch -I "darwin-config=$[darwin_config]"
+  _p "nix-channel --update --verbose && darwin-rebuild switch -I darwin-config=$[darwin_config] # (root)"
+  sudo ysh -c '
+    nix-channel --update --verbose
+    darwin-rebuild switch -I darwin-config=$1
+  ' -- $darwin_config
 
   _p  'brew-outgrade'
   exec brew-outgrade
