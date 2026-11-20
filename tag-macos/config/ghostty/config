@@ -6,6 +6,6 @@ macos-titlebar-style = hidden
 bold-is-bright = true
 
 font-family = "PT Mono"
-font-size = 14
+font-size = 15
 
 config-file = colors
