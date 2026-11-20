@@ -1,27 +1,25 @@
 [general]
-import = [
-  "~/.config/alacritty/colors.toml"
-]
+import = ["~/.config/alacritty/colors.toml"]
 
 [window]
-  decorations = "None"
-  # level = "AlwaysOnTop"
-  startup_mode = "Maximized"
+decorations = "None"
+# level = "AlwaysOnTop"
+startup_mode = "Maximized"
 
 [font]
-  normal = { family = "PT Mono" }
-  size = 16
+normal = { family = "PT Mono" }
+size = 16
 
 [cursor]
-  blink_interval = 150
+blink_interval = 150
 
 [bell]
-  animation = "Linear"
-  duration  = 20
-  color     = "#550000"
+animation = "Linear"
+color = "#550000"
+duration = 20
 
 [colors]
-  draw_bold_text_with_bright_colors = true
+draw_bold_text_with_bright_colors = true
 
 [terminal]
 osc52 = "Disabled"
