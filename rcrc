@@ -1,0 +1,15 @@
+# rcm config, symlinked to ~/.rcrc. Sourced as shell by rcm.
+# shellcheck disable=SC2034,SC1090,SC1091
+
+# Repo scaffolding that must never be symlinked into $HOME. Union across layers
+# (down.sh only exists in the other overlay; harmless to list here).
+EXCLUDES="README.md up.sh down.sh"
+
+# Per-machine layer composition lives OUTSIDE every repo. ~/.rcrc.local (tracked
+# nowhere, hand-made per machine) sets the stack AND the active tags, e.g.:
+#   DOTFILES_DIRS="$HOME/.dotfiles $HOME/.dotfiles-other"     # later wins
+#   TAGS="macos"                                              # else tag-* dirs are skipped
+# This base repo names no overlays and stays ignorant of them; the machine
+# decides what to compose. On a base-only machine just omit ~/.rcrc.local and
+# rcm falls back to its defaults (~/.dotfiles, no tags).
+[ -f "$HOME/.rcrc.local" ] && . "$HOME/.rcrc.local"
