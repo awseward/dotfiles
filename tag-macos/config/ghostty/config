@@ -1,0 +1,8 @@
+macos-titlebar-style = hidden
+
+# Match alacritty's draw_bold_text_with_bright_colors: bold renders in the
+# bright palette variant, so e.g. `black bold` becomes bright-black (#505050)
+# rather than near-invisible #151515 on the dark background.
+bold-is-bright = true
+
+config-file = colors

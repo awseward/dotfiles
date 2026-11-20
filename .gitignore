@@ -1,5 +1,7 @@
 .DS_Store
 tag-macos/nixpkgs/primary-user.nix
+# Per-machine firewall override slot (see tag-macos/nixpkgs/firewall.nix).
+tag-macos/nixpkgs/firewall.local.nix
 # nix build out-links. NB: this only keeps git clean — a `path:` flake copies
 # whatever is physically in the dir regardless of .gitignore, so never leave a
 # `result` symlink in tag-macos/nixpkgs or it gets slurped into the flake source.
