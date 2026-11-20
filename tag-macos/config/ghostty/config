@@ -8,4 +8,10 @@ bold-is-bright = true
 font-family = "PT Mono"
 font-size = 15
 
+# Match Alacritty's heavier stroke weight: Alacritty renders PT Mono Regular
+# noticeably thicker on macOS than Ghostty's default (font-thicken = false +
+# light autohinting). This thickens strokes to match. Dial back via
+# font-thicken-strength (0–255, default 255) if it's too heavy.
+font-thicken = true
+
 config-file = colors
