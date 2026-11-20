@@ -7,22 +7,35 @@ proc upgrade {
     mscp.sh
   }
 
-  var darwin_config = "$[ENV.HOME]/.nixpkgs/darwin-configuration.nix"
+  var flake_dir = "$[ENV.HOME]/.dotfiles/tag-macos/nixpkgs"
+  var flake = "path:$[flake_dir]#macos"
 
-  _p "nix-channel --update --verbose && darwin-rebuild switch -I darwin-config=$[darwin_config] # (root)"
-  sudo ysh -c '
-    nix-channel --update --verbose
-    darwin-rebuild switch -I darwin-config=$1
-  ' -- $darwin_config
+  # Updating the lock is the new `nix-channel --update`; it runs as the user so
+  # the lock stays owned by us (and git-tracked in the dotfiles repo). Only the
+  # activation step still needs root.
+  _p "nix flake update # (in $[flake_dir])"
+  cd $flake_dir {
+    nix flake update
+  }
+
+  _p "sudo darwin-rebuild switch --flake $[flake]"
+  sudo darwin-rebuild switch --flake $flake
 
   _p  'brew-outgrade'
   exec brew-outgrade
 }
 
-proc prune {
-  _p 'nix-collect-garbage --delete-older-than 30d'
-      nix-collect-garbage --delete-older-than 30d
+proc prune (older_than='30d') {
+  # Elevate ONLY this call, so it reaches the root-owned darwin system
+  # generations (where the disk really accumulates). brew cleanup below must stay
+  # user-level, so run the script as yourself -- never `sudo hygiene-daily.ysh
+  # prune`, which would run brew as root. Window defaults to 30d; override as
+  # e.g. `$f_ prune 7d`.
+  _p "sudo nix-collect-garbage --delete-older-than $[older_than]"
+      sudo nix-collect-garbage --delete-older-than $[older_than]
 
+  # NB: OLDER_THAN governs only the nix GC above; brew cleanup uses its own
+  # defaults (version removal isn't age-based anyway).
   _p  'brew cleanup'
   exec brew cleanup
 }
@@ -47,9 +60,10 @@ proc help {
 
         Upgrade dependencies.
 
-      • $f_ prune
+      • $f_ prune [OLDER_THAN]
 
-        Clean up leftover cruft from dependency tools.
+        Clean up leftover cruft from dependency tools. OLDER_THAN sets the
+        nix-collect-garbage window and defaults to 30d (e.g. $f_ prune 7d).
     """
   }
 }
