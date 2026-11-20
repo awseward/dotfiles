@@ -5,4 +5,7 @@ macos-titlebar-style = hidden
 # rather than near-invisible #151515 on the dark background.
 bold-is-bright = true
 
+font-family = "PT Mono"
+font-size = 14
+
 config-file = colors
