@@ -30,6 +30,23 @@ Activate the `macos` configuration using the committed `flake.lock`. Once
 sudo darwin-rebuild switch --flake "path:$HOME/.config/nix-darwin#macos"
 ```
 
+#### Optional: contextual completion for Git commit messages
+
+Install Bun (1.4.4 or newer) and use npm to install OMP's pinned native
+predictor into Neovim's cache, not into the dotfiles checkout:
+
+```sh
+npm install --prefix "${XDG_CACHE_HOME:-$HOME/.cache}/nvim/omp-predict" \
+  --ignore-scripts @oh-my-pi/pi-natives@19.0.1
+```
+
+If you use a custom `NVIM_APPNAME`, use the path from `:echo stdpath('cache')`
+with `/omp-predict` appended. Run `rcup` to link the helper. In a commit
+message try `Improve error handl` and accept with Tab. Blink still offers
+buffer words if the helper isn't installed. Suggestions run locally, use
+only the current line before the cursor, and don't learn from your commits or
+read the diff.
+
 #### Quirks/Issues
 
 These are all things probably worth "fixing", but at the same time I so rarely

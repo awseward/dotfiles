@@ -10,7 +10,6 @@ Plug 'awseward/colors.vim'
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'junegunn/vim-easy-align'
 if has('nvim')
-  Plug 'Kaiser-Yang/blink-cmp-dictionary', { 'tag': 'v3.1.0' }
   Plug 'saghen/blink.cmp', { 'tag': 'v1.10.2' }
 endif
 Plug 'neovim/nvim-lspconfig'
