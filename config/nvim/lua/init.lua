@@ -22,8 +22,6 @@ for _, server in ipairs({ 'gleam', 'bashls' }) do
   vim.lsp.enable(server)
 end
 
--- lua vim.print(vim.lsp.get_clients({ bufnr = 0, name = 'bashls' }))
-
 -- -- https://github.com/nvim-treesitter/nvim-treesitter?tab=readme-ov-file#modules
 -- require('nvim-treesitter.configs').setup {
 --   highlight = {
