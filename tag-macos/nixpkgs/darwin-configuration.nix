@@ -88,22 +88,7 @@
 
   system.defaults.trackpad.Clicking = true;
 
-  # Added in https://github.com/LnL7/nix-darwin/pull/557
-  system.defaults.CustomUserPreferences = {
-    # Based on https://github.com/mathiasbynens/dotfiles/issues/701#issuecomment-1205951860
-    #
-    # > defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool true
-    # > defaults -currentHost write com.apple.controlcenter.plist BatteryShowPercentage -bool false
-    #
-    # TODO: Figure out why this doesn't work; might have something to do with
-    # https://github.com/nix-community/home-manager/commit/572f348a10826b2207caaf394e9ad2e9ffc6ffa7
-    #
-    "com.apple.controlcenter.plist" = { "BatteryShowPercentage" = false; };
-  };
   system.defaults.controlcenter.BatteryShowPercentage = true;
-
-  # TODO: Something like this:
-  # defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
   # Packages installed in the system profile. To find a package name, use
   # https://search.nixos.org/packages and set the channel to 26.05 to match
