@@ -15,3 +15,5 @@ font-size = 15
 font-thicken = true
 
 config-file = colors
+
+macos-option-as-alt = false
