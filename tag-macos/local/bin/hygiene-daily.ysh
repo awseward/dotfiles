@@ -7,15 +7,17 @@ proc upgrade {
     mscp.sh
   }
 
-  var flake_dir = "$[ENV.HOME]/.dotfiles/tag-macos/nixpkgs"
+  var flake_file = $(realpath "$[ENV.HOME]/.nixpkgs/flake.nix")
+  var flake_dir = $(dirname "$flake_file")
   var flake = "path:$[flake_dir]#macos"
 
   # Updating the lock is the new `nix-channel --update`; it runs as the user so
   # the lock stays owned by us (and git-tracked in the dotfiles repo). Only the
   # activation step still needs root.
-  _p "nix flake update # (in $[flake_dir])"
+  _p "nix flake update --flake path:$[flake_dir]"
+  # This cd is redundant but I'm leaving it here for now.
   cd $flake_dir {
-    nix flake update
+    nix flake update --flake "path:$[flake_dir]"
   }
 
   _p "sudo darwin-rebuild switch --flake $[flake]"
