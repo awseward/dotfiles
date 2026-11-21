@@ -292,10 +292,6 @@ let g:ftplugin_sql_omni_key = '<Plug>DisableSqlOmni'
 " https://vi.stackexchange.com/a/2956
 let g:syntastic_mode_map = { 'passive_filetypes': ['python'] }
 
-" https://github.com/frazrepo/vim-rainbow#simple-configuration
-let g:rainbow_active = 1
-au FileType diff call rainbow#clear()
-
 " Adapted from https://web.archive.org/save/https://vim.fandom.com/wiki/Copy_filename_to_clipboard
 " also with some help from https://stackoverflow.com/a/36501915 as well...
 nnor ,cf :let @*=expand("%p")<CR>    " Copy file path      (relative)
