@@ -3,6 +3,7 @@
 # rather than near-invisible #151515 on the dark background.
 bold-is-bright = true
 config-file = colors
+copy-on-select = true
 font-family = "PT Mono"
 font-size = 15
 # Match Alacritty's heavier stroke weight: Alacritty renders PT Mono Regular
