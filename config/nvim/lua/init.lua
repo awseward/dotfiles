@@ -2,6 +2,21 @@
 local ok, blink = pcall(require, 'blink.cmp')
 if ok then
   vim.o.autocomplete = false
+
+  local wordlist = '/usr/share/dict/words'
+  local commit_sources = { 'buffer' }
+  local providers = {}
+  if vim.fn.filereadable(wordlist) == 1
+      and #vim.api.nvim_get_runtime_file('lua/blink-cmp-dictionary/init.lua', false) > 0 then
+    commit_sources[#commit_sources + 1] = 'dictionary'
+    providers.dictionary = {
+      name = 'Dictionary',
+      module = 'blink-cmp-dictionary',
+      min_keyword_length = 3,
+      opts = { dictionary_files = { wordlist } },
+    }
+  end
+
   blink.setup({
     keymap = {
       preset = 'default',
@@ -11,6 +26,10 @@ if ok then
       list = { selection = { preselect = true, auto_insert = false } },
     },
     fuzzy = { implementation = 'lua' },
+    sources = {
+      per_filetype = { gitcommit = commit_sources },
+      providers = providers,
+    },
   })
 end
 
