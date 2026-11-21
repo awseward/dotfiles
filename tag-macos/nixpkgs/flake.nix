@@ -1,9 +1,6 @@
 {
   description = "awseward nix-darwin system";
 
-  # Replaces the old nix-channel setup (see ../../nix-channels). Each channel
-  # becomes a flake input pinned in flake.lock; `nix flake update` is the new
-  # `nix-channel --update`.
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -19,16 +16,15 @@
       # x86_64-darwin machine ever shares this config.
       system = "aarch64-darwin";
 
-      # The `unstable.*` packages used in darwin-configuration.nix. Replaces the
-      # old `import <nixos-unstable> { ... }` channel lookup.
+      # The package set for `unstable.*` in darwin-configuration.nix.
       unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
       };
     in {
-      # Named `macos` (not by hostname) so one config is shared across machines,
-      # matching the pre-flake channel setup. The per-machine username still
-      # comes from the git-ignored ./primary-user.nix. Switch with:
+      # Named `macos` (not by hostname) so one config is shared across machines.
+      # The per-machine username comes from the git-ignored ./primary-user.nix.
+      # Switch with:
       #   sudo darwin-rebuild switch --flake path:$HOME/.nixpkgs#macos
       darwinConfigurations.macos = nix-darwin.lib.darwinSystem {
         inherit system;

@@ -10,13 +10,24 @@ On MacOS Sonoma, completely brand new machine, set the following up in order
 1. Clone dotfiles (this repo)
 1. Install Homebrew
 1. Run brew bundle install
-1. Run rcup
+1. Enable the `macos` tag in `~/.rcrc.local` and run `rcup`
 1. Create ~/projects
 1. Install asdf-vm
-1. Setup nix-darwin
+1. Install Nix and set up nix-darwin from the flake (see below)
 1. Setup vim-plug
 1. Setup MOTU driver(s)
 1. Setup ElGato Camera Hub
+
+#### nix-darwin
+
+Create `primary-user.nix` next to the source `flake.nix` that rcm exposes at
+`~/.nixpkgs/flake.nix`. The file should contain your macOS short username as a
+Nix string (for example, `"andrew"`). Activate the `macos` configuration using
+the committed `flake.lock`. Once `darwin-rebuild` is available, run:
+
+```sh
+sudo darwin-rebuild switch --flake "path:$HOME/.nixpkgs#macos"
+```
 
 #### Quirks/Issues
 
@@ -26,8 +37,6 @@ end up doing.
 
 Getting tmux setup was a bit rocky, but I ended up manually editing the asdf-vm
 plugin's install script to add the right lib & include paths for utf8proc.
-
-I had to populate ~/.nix-channels to get nix-darwin fully up
 
 Installing vim-plug by instructions in its README worked, but I forgot to
 symlink my vimrc to the location nvim wants to look in for init.vim when

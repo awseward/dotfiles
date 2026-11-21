@@ -90,22 +90,13 @@
 
   system.defaults.controlcenter.BatteryShowPercentage = true;
 
-  # Packages installed in the system profile. To find a package name, use
-  # https://search.nixos.org/packages and set the channel to 26.05 to match
-  # this system. It's instant and fuzzy, and it shows the exact attribute path
-  # to paste into the list below — e.g. `wget2`, or `python313Packages.wget`
-  # for a sub-package. No `nixpkgs.` prefix; paste the attribute as shown.
+  # To discover package attributes, select 26.05 at https://search.nixos.org/packages
+  # or search the release branch from the terminal:
   #
-  # From the terminal (needs the experimental features enabled further down):
+  #   nix search github:NixOS/nixpkgs/nixos-26.05 <query>
   #
-  #   $ nix search nixpkgs/nixos-26.05 <query>
-  #
-  # Pin the channel as above — a bare `nixpkgs` ref resolves to unstable, a
-  # different package set than what this system installs. The first run is slow
-  # (~30s) while it builds the eval cache; later runs are fast. The
-  # `unstable.*` entries below come from the nixos-unstable channel instead;
-  # search those with `nix search nixpkgs <query>` or the unstable channel on
-  # the web.
+  # For `unstable.*` packages, search github:NixOS/nixpkgs/nixos-unstable instead.
+  # These searches use branch tips, not the exact revisions in flake.lock.
 
   environment.systemPackages = with pkgs; [
     bat
@@ -172,9 +163,7 @@
   # nix-darwin now manages nix-daemon unconditionally when nix.enable is on.
   nix.package = pkgs.nix;
 
-  # Enable the modern `nix` CLI (`nix search`, `nix shell`, …) and flakes, so
-  # package search works flagless. Also a prerequisite for a future
-  # flakes-based setup.
+  # Enable the modern `nix` CLI and flake support.
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   services.redis = {

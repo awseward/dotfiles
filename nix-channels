@@ -1,8 +1,0 @@
-# NOTE: These are now managed by root, so this file is mostly just
-# instructive; you'll have to run some nix channel commands as root to apply
-# them at root level (preferably just migrate onto flakes, but that's a
-# different story)
-
-https://github.com/nix-darwin/nix-darwin/archive/nix-darwin-26.05.tar.gz darwin
-https://nixos.org/channels/nixos-26.05 nixpkgs
-https://nixos.org/channels/nixos-unstable nixos-unstable
