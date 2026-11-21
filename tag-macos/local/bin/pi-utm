@@ -8,6 +8,10 @@ case $profile in
   *) printf 'Usage: pi-utm {ro|rw} [guest-directory]\n' >&2; exit 2 ;;
 esac
 shift
+# Pi in the guest already runs with --no-session; accept it from callers too.
+if [[ ${1:-} == --no-session ]]; then
+  shift
+fi
 if [[ ${1:-} == --help ]]; then
   printf 'Usage: pi-%s [guest-directory]\nStarts Pi on pi-vm; defaults to the guest home directory.\n' "$profile"
   exit 0
