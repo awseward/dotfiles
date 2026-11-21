@@ -47,6 +47,53 @@ buffer words if the helper isn't installed. Suggestions run locally, use
 only the current line before the cursor, and don't learn from your commits or
 read the diff.
 
+#### Pi in UTM
+
+With the `macos` rcm tag enabled, `pi` delegates to `pi-ro`; `pi-rw` is
+an explicit opt-in to edits and shell commands. Put `~/.local/bin` ahead
+of a host Pi installation on `PATH` (`command -v pi` should point there).
+
+On the Mac, add this to `~/.ssh/config` above wildcard defaults:
+
+```sshconfig
+Host pi-vm
+    HostName 192.168.64.10
+    User pi-runner
+    IdentityFile ~/.ssh/pi-utm-ed25519
+    IdentitiesOnly yes
+    PreferredAuthentications publickey
+    StrictHostKeyChecking yes
+    UserKnownHostsFile ~/.ssh/known_hosts_pi_utm
+    ForwardAgent no
+    ForwardX11 no
+    ClearAllForwardings yes
+    ControlPath none
+```
+
+Use the guest's actual IP and a dedicated SSH key. From the UTM console,
+run `ssh-keygen -lf /etc/ssh/ssh_host_ed25519_key.pub` and compare with the
+key collected via `ssh-keyscan -t ed25519 <guest-ip>` on the Mac before
+adding it to `~/.ssh/known_hosts_pi_utm`. Verify `ssh -o BatchMode=yes pi-vm true`
+works. If the key is passphrase-protected, load it into your Mac's SSH agent;
+the launchers never forward that agent.
+
+Use a Linux guest with no shared host folders and a dedicated, unprivileged
+account. The launcher starts Pi through interactive Bash in the guest. Verify
+that `ssh -t pi-vm 'bash -ic "command -v pi"'` finds a Pi binary that supports
+the launcher's CLI flags. Set up model access and outbound restrictions
+separately.
+
+```sh
+pi                   # or pi-ro; starts in the guest's home directory
+pi-ro projects/repo  # guest path, relative to the guest's home directory
+pi-rw projects/repo  # same guest path, with edits and shell commands enabled
+```
+
+The launchers only connect over SSH and start Pi. Keep copying files in
+and out manually. `pi-ro` restricts Pi's tools, not guest filesystem
+permissions. `pi-rw` edits the guest files in place. Both profiles skip
+project trust, context files, extensions, and session persistence.
+
 #### Quirks/Issues
 
 These are all things probably worth "fixing", but at the same time I so rarely

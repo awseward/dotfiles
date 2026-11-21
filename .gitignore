@@ -5,3 +5,4 @@ tag-macos/config/nix-darwin/primary-user.nix
 # `result` symlink in tag-macos/config/nix-darwin or it gets slurped into the flake source.
 result
 result-*
+*.patch

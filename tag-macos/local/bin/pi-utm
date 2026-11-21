@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+profile=${1:-}
+case $profile in
+  ro) tools=read,grep,find,ls ;;
+  rw) tools=read,bash,edit,write ;;
+  *) printf 'Usage: pi-utm {ro|rw} [guest-directory]\n' >&2; exit 2 ;;
+esac
+shift
+if [[ ${1:-} == --help ]]; then
+  printf 'Usage: pi-%s [guest-directory]\nStarts Pi on pi-vm; defaults to the guest home directory.\n' "$profile"
+  exit 0
+fi
+if (( $# > 1 )); then
+  printf 'Usage: pi-%s [guest-directory]\n' "$profile" >&2
+  exit 2
+fi
+
+remote="bash -ic \"exec pi --tools '$tools' --no-approve --no-context-files --no-extensions --no-mcp --no-skills --no-prompt-templates --no-themes --no-session\""
+if (( $# )); then
+  # SSH sends a shell command, not an argv array. Quote the guest path for sh.
+  dir=${1//\'/\'\\\'\'}
+  remote="CDPATH= cd -- '$dir' && $remote"
+fi
+
+exec ssh -t \
+  -o BatchMode=yes \
+  -o StrictHostKeyChecking=yes \
+  -o ForwardAgent=no \
+  -o ForwardX11=no \
+  -o ClearAllForwardings=yes \
+  -o ControlPath=none \
+  pi-vm "$remote"
