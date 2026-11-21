@@ -1,19 +1,14 @@
-macos-titlebar-style = hidden
-
 # Match alacritty's draw_bold_text_with_bright_colors: bold renders in the
 # bright palette variant, so e.g. `black bold` becomes bright-black (#505050)
 # rather than near-invisible #151515 on the dark background.
 bold-is-bright = true
-
+config-file = colors
 font-family = "PT Mono"
 font-size = 15
-
 # Match Alacritty's heavier stroke weight: Alacritty renders PT Mono Regular
 # noticeably thicker on macOS than Ghostty's default (font-thicken = false +
 # light autohinting). This thickens strokes to match. Dial back via
 # font-thicken-strength (0–255, default 255) if it's too heavy.
 font-thicken = true
-
-config-file = colors
-
 macos-option-as-alt = false
+macos-titlebar-style = hidden
