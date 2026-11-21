@@ -32,3 +32,5 @@ end
 vim.keymap.set('n', '<leader>d', function()
   vim.diagnostic.open_float({ scope = 'line' })
 end, { desc = 'Show diagnostics for current line' })
+
+vim.keymap.set('n', '<leader>l', require('lsp_shortcuts').toggle, { desc = 'Toggle LSP shortcut card' })
