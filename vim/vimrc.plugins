@@ -9,6 +9,9 @@ Plug 'awseward/colors.vim'
 " Editor Utils
 Plug 'bronson/vim-trailing-whitespace'
 Plug 'junegunn/vim-easy-align'
+if has('nvim')
+  Plug 'saghen/blink.cmp', { 'tag': 'v1.10.2' }
+endif
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'tpope/vim-abolish'

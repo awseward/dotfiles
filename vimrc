@@ -320,7 +320,7 @@ set guicursor=n-v-c:block,o:hor50,i-ci:hor15,r-cr:hor30,sm:block
 :let g:ruby_indent_hanging_elements = 0
 :let g:ruby_indent_assignment_style = 'variable'
 
-let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'bash', 'shell', 'sh']
+let g:markdown_fenced_languages = ['html', 'python', 'ruby', 'vim', 'bash', 'shell=sh', 'sh']
 set shiftround
 
 " " Move lines around (https://vimtricks.com/p/vimtrick-moving-lines/)
