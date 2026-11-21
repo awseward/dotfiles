@@ -181,11 +181,7 @@
   #
   #       https://github.com/LnL7/nix-darwin/blob/master/modules/services/redis/default.nix
   #
-  # > error: The option `services.mosquitto' does not exist. Definition values:
-  # > - In `/Users/andrew/.nixpkgs/darwin-configuration.nix':
-  # >   {
-  # >     enable = true;
-  # >   }
+  # > error: The option `services.mosquitto' does not exist.
   #
   # services.mosquitto.enable = true;
 

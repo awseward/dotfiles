@@ -25,7 +25,7 @@
       # Named `macos` (not by hostname) so one config is shared across machines.
       # The per-machine username comes from the git-ignored ./primary-user.nix.
       # Switch with:
-      #   sudo darwin-rebuild switch --flake path:$HOME/.nixpkgs#macos
+      #   sudo darwin-rebuild switch --flake "path:$HOME/.config/nix-darwin#macos"
       darwinConfigurations.macos = nix-darwin.lib.darwinSystem {
         inherit system;
         specialArgs = { inherit unstable; };

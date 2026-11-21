@@ -1,7 +1,7 @@
 .DS_Store
-tag-macos/nixpkgs/primary-user.nix
+tag-macos/config/nix-darwin/primary-user.nix
 # nix build out-links. NB: this only keeps git clean — a `path:` flake copies
 # whatever is physically in the dir regardless of .gitignore, so never leave a
-# `result` symlink in tag-macos/nixpkgs or it gets slurped into the flake source.
+# `result` symlink in tag-macos/config/nix-darwin or it gets slurped into the flake source.
 result
 result-*

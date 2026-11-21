@@ -7,7 +7,7 @@ proc upgrade {
     mscp.sh
   }
 
-  var flake_file = $(realpath "$[ENV.HOME]/.nixpkgs/flake.nix")
+  var flake_file = $(realpath "$[ENV.HOME]/.config/nix-darwin/flake.nix")
   var flake_dir = $(dirname "$flake_file")
   var flake = "path:$[flake_dir]#macos"
 

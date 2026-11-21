@@ -20,13 +20,14 @@ On MacOS Sonoma, completely brand new machine, set the following up in order
 
 #### nix-darwin
 
-Create `primary-user.nix` next to the source `flake.nix` that rcm exposes at
-`~/.nixpkgs/flake.nix`. The file should contain your macOS short username as a
-Nix string (for example, `"andrew"`). Activate the `macos` configuration using
-the committed `flake.lock`. Once `darwin-rebuild` is available, run:
+The system flake lives in `tag-macos/config/nix-darwin/`; rcm exposes it at
+`~/.config/nix-darwin/`. Create `primary-user.nix` next to the source `flake.nix`
+with your macOS short username as a Nix string (for example, `"andrew"`).
+Activate the `macos` configuration using the committed `flake.lock`. Once
+`darwin-rebuild` is available, run:
 
 ```sh
-sudo darwin-rebuild switch --flake "path:$HOME/.nixpkgs#macos"
+sudo darwin-rebuild switch --flake "path:$HOME/.config/nix-darwin#macos"
 ```
 
 #### Quirks/Issues
